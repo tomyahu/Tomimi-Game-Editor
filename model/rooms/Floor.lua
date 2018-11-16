@@ -1,6 +1,6 @@
 require "class"
 --------------------------------------------------------------------------------------------------------
--- Floor: None -> Floor
+-- Floor: Floor str -> Floor
 -- Creates a new floor
 Floor = class(function(fl, path)
     fl.image = love.graphics.newImage(path)

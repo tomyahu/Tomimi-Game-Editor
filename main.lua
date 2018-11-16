@@ -1,4 +1,6 @@
-require "model.Rooms.Room"
+require "ctrl.GameController"
+
+ctrl = GameControler()
 
 displayString = "Hello World"
 function love.draw()

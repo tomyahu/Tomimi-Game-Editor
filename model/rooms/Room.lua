@@ -1,5 +1,5 @@
 require "class"
-require "model.Rooms.Floor"
+require "model.rooms.Floor"
 --------------------------------------------------------------------------------------------------------
 -- Room: int, int -> Room
 -- Creates a new room with set width and height
@@ -20,27 +20,6 @@ end
 -- addObject: Object -> None
 -- Adds an object to the object list
 function Room:addObject(o)
+    -- Cambiar tabla de objetos por arbol AVL
     table.insert(self.objects, o)
-end
-
--- drawObjects: None -> None
--- Draws all objects in the room
-function Room:drawObjects()
-    for object in self.objects do
-        object:draw()
-    end
-end
-
--- drawAboveObjects: None -> None
--- Draws all objects above the room
-function Room:drawAboveObjects()
-    for object in self.aboveObjects do
-        object:draw()
-    end
-end
-
--- drawFloor: None -> None
--- Draws the floor of the current room
-function Room:drawFloor()
-    self.floor:draw()
 end
