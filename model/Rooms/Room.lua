@@ -1,11 +1,12 @@
 require "class"
+require "model.Rooms.Floor"
 --------------------------------------------------------------------------------------------------------
 -- Room: int, int -> Room
 -- Creates a new room with set width and height
 Room = class(function(room, width, height)
     room.width = width
     room.height = height
-    room.floor = nil
+    room.floor = NullFloor()
     room.objects = {}
     room.aboveObjects = {}
 end)
