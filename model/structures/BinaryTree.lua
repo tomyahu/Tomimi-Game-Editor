@@ -69,6 +69,7 @@ function Node:propagate()
             self.der = nil
         else
             self.der:propagate()
+        end
     end
 end
 --------------------------------------------------------------------------------------------------------
