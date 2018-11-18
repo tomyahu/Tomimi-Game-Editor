@@ -19,8 +19,8 @@ end
 
 function Node:insert(key, val)
     if key < self.key then
-        if self.izq == nil then
-            self.izq = Node(key,val)
+        if self.izq:isLeaf() then
+            self.izq = Node(key, val)
         else
             self.izq:insert(val)
         end
@@ -72,6 +72,35 @@ function Node:propagate()
         end
     end
 end
+
+function Node:height()
+    local aux = 1
+    if not self.izq == nil then
+        aux = aux + self.izq:height()
+    end
+    if not self.der == nil then
+        aux = aux + self.der:height()
+    end
+    return aux
+end
+
+function Node:toArray()
+    local aux = {}
+    if not (self.izq == nil) then
+        aux = self.izq:toArray()
+    end
+
+    aux[#aux + 1] = self.val
+
+    if not (self.der == nil) then
+        local aux2 = self.der:toArray()
+        for i=1,#aux2 do
+            aux[#aux+1] = aux2[i]
+        end
+    end
+
+    return aux
+end
 --------------------------------------------------------------------------------------------------------
 BinaryTree = class(function(bt)
     bt.tree = nil
@@ -107,3 +136,10 @@ function BinaryTree:remove(key, val)
     end
 end
 
+function BinaryTree:height()
+    return self.tree:height()
+end
+
+function BinaryTree:toArray()
+    return self.tree:toArray()
+end
