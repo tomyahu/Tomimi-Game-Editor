@@ -6,20 +6,19 @@ require "model.rooms.Floor"
 Room = class(function(room, width, height)
     room.width = width
     room.height = height
-    room.floor = NullFloor()
     room.objects = {}
-    room.aboveObjects = {}
 end)
-
--- setFloor: Object -> None
--- Sets the current floor image
-function Room:setFloor(image)
-    self.floor = image
-end
 
 -- addObject: Object -> None
 -- Adds an object to the object list
 function Room:addObject(o)
     -- Cambiar tabla de objetos por arbol AVL
     table.insert(self.objects, o)
+end
+
+-- removeObject: Object -> None
+-- Adds an object to the object list
+function Room:removeObject(o)
+    -- Cambiar tabla de objetos por arbol AVL
+    table.remove(self.objects, o)
 end
