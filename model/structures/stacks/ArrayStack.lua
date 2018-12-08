@@ -6,7 +6,7 @@ ArrayStack = class(function (stack)
 end)
 
 function ArrayStack:isEmpty()
-    return stack.size == 0
+    return self.size == 0
 end
 
 function ArrayStack:top()
@@ -18,7 +18,7 @@ function ArrayStack:top()
 end
 
 function ArrayStack:pop()
-    fin = self.top()
+    local fin = self.top()
     if not fin == nil then
         self.array[self.size - 1] = nil
         self.size = self.size - 1
