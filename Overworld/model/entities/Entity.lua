@@ -1,5 +1,5 @@
 require "class"
-require "structures.util.Pair"
+require "util.structures.util.Pair"
 --------------------------------------------------------------------------------------------------------
 -- Entity: Entity -> Entity
 -- Creates a new floor

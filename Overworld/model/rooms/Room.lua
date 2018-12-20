@@ -1,5 +1,5 @@
 require "class"
-require "model.rooms.Floor"
+require "Overworld.model.rooms.Floor"
 --------------------------------------------------------------------------------------------------------
 -- Room: int, int -> Room
 -- Creates a new room with set width and height

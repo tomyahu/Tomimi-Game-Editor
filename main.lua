@@ -1,4 +1,4 @@
-require "ctrl.GameController"
+require "Overworld.ctrl.GameController"
 
 displayString = "Hello World"
 function love.draw()
