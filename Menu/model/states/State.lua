@@ -6,15 +6,23 @@ State = class(function(s)
     s.transitions = {}
 end)
 
--- addTransition: str -> State
+-- addTransition: int -> None
 -- Adds a transition to the state
 function State:addTransition(key, state)
     self.transitions[key] = state
 end
 
--- getState: str
+-- getState: int -> State
 -- Obtains an state associated to a key
--- Returns nil if it doesn't exist
+-- Returns itself if it doesn't exist
 function State:getState(key)
-    return self.transitions[key]
+    local aux = self.transitions[key]
+    if aux == nil then
+        aux = self
+    end
+    return aux
 end
+
+-- doAction: None -> None
+-- Activates the current state action
+function State:doAction() end
