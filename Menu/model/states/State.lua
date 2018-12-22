@@ -8,7 +8,7 @@ end)
 
 -- addTransition: int -> None
 -- Adds a transition to the state
-function State:addTransition(key, state)
+function State:setTransition(key, state)
     self.transitions[key] = state
 end
 

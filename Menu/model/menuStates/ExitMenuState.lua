@@ -1,9 +1,8 @@
-require "class"
-require "Menu.model.states.State"
+require "Menu.model.menuStates.MenuState"
 --------------------------------------------------------------------------------------------------------
--- ExitState: ExitState
--- Creates new ExitState
-ExitState = class(State)
+-- ExitMenuState: ExitMenuState str
+-- Creates new ExitMenuState
+ExitMenuState = class(MenuState)
 
 -- doAction: None -> None
 -- Ends the game
