@@ -1,11 +1,10 @@
-require "class"
 require "Menu.model.states.State"
 require "Menu.model.automaton.Automaton"
 --------------------------------------------------------------------------------------------------------
 -- AutomatonBuilder: AutomatonBuilder
 -- Creates new AutomatonBuilder
 AutomatonBuilder = class(function(ab)
-    ab.automaton = Automaton(State())
+    ab.automaton = Automaton()
     ab.states = {}
     ab.stateNumber = 0
 end)

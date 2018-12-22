@@ -1,4 +1,3 @@
-require "class"
 require "Menu.model.states.State"
 --------------------------------------------------------------------------------------------------------
 -- Automaton: Automaton

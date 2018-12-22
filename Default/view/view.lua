@@ -5,6 +5,4 @@ require "class"
 View = class(function(view)
 end)
 
-function View:draw()
-
-end
+function View:draw() end

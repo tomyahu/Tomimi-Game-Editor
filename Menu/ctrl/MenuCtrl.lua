@@ -1,9 +1,9 @@
-require "class"
-require "Menu.model.states.State"
 require "Menu.model.automaton.Automaton"
+require "Default.ctrl.ctrl"
 --------------------------------------------------------------------------------------------------------
--- Menu: Menu
--- Creates new Menu
-Menu = class(Automaton, function(m)
-    m.current_state = first_state
+-- MenuCtrl: MenuCtrl
+-- Creates new MenuCtrl
+MenuCtrl = class(Ctrl, function(mc)
+    Ctrl.init(mc)
+    mc.current_state = first_state
 end)
