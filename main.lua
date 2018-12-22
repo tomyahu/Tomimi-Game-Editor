@@ -1,12 +1,15 @@
 require "Overworld.ctrl.GameController"
+require "Menu.ctrl.MenuCtrl"
+require "Menu.view.MenuView"
+
+CurrentCtrl = MenuCtrl()
+CurrentView = MenuView()
 
 displayString = "Hello World"
 function love.draw()
-    love.graphics.print(displayString, 400, 300)
+    CurrentView.draw()
 end
 
 function love.keypressed(key)
-    if key == "escape" then
-        love.event.quit()
-    end
+    CurrentCtrl.callbackPressedKey(key)
 end
