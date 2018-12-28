@@ -2,7 +2,7 @@ require "Menu.mode.menues.Menu"
 require "Menu.model.menues.MenuBuilder"
 --------------------------------------------------------------------------------------------------------
 -- DefaultMenuBuilder: DefaultMenuBuilder
--- Creates new DefaultMenuBuilder23
+-- Creates new DefaultMenuBuilder
 DefaultMenuBuilder = class(function(dmb)
     dmb.menubuild = MenuBuilder()
     dmb.optionNumber = 0
