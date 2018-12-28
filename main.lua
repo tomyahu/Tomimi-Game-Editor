@@ -6,8 +6,13 @@ CurrentCtrl = MenuCtrl()
 CurrentView = MenuView()
 
 displayString = "Hello World"
+
+function love.load()
+    context = CurrentView.getContextVars()
+end
+
 function love.draw()
-    CurrentView.draw()
+    CurrentView.draw(context)
 end
 
 function love.keypressed(key)
