@@ -1,12 +1,18 @@
-require "class"
 require "util.structures.util.Pair"
 --------------------------------------------------------------------------------------------------------
+Entity = {}
+Entity.__index = Entity
+
 -- Entity: Entity -> Entity
 -- Creates a new floor
-Entity = class(function(e)
-    e.pos = Pair(0,0)
-end)
+function Entity.new()
+    local o = {}
+    local self = setmetatable(o, Entity)
+    self.__index = self
+    self.pos = Pair.new(0,0)
+    return self
+end
 
-function Entity:getPos()
-    return e.pos
+function Entity.getPos(self)
+    return self.pos
 end

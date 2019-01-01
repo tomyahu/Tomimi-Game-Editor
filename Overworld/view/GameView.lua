@@ -1,36 +1,13 @@
-require "class"
+require "Default.view.view"
 --------------------------------------------------------------------------------------------------------
+GameView = View.new()
+GameView.__index = GameView
+
 -- GameView: GameView
 -- Creates a new GameView
-GameView = class(function(v)
-end)
-
--- drawObjects: None -> None
--- Draws all entities in the room and the player
-function GameView:drawEntities(room, player)
-    for object in room.objects do
-        object:draw()
-    end
-end
-
--- drawAboveObjects: None -> None
--- Draws all objects above the room
-function GameView:drawRoomAboveObjects(room)
-    for object in room.aboveObjects do
-        object:draw()
-    end
-end
-
--- drawFloor: None -> None
--- Draws the floor of the current room
-function GameView:drawRoomFloor(room)
-    room.floor:draw()
-end
-
--- draw: Room -> None
--- Draws all props and the player
-function GameView:draw(room, player)
-    self:drawRoomFloor(room)
-    self:drawEntities(room, player)
-    self:drawRoomAboveObjects(room)
+function GameView.new()
+    local o = Ctrl.new()
+    local self = setmetatable(o, GameController)
+    self.__index = self
+    return self
 end
