@@ -1,8 +1,18 @@
 require "Menu.model.states.State"
 --------------------------------------------------------------------------------------------------------
+MenuState = State.new()
+MenuState.__index = MenuState
+
 -- MenuState: MenuState str
 -- Creates new MenuState
-MenuState = class(State, function(st, name)
-    State.init(st)
-    st.name = name
-end)
+function MenuState.new(name)
+    local o = State.new()
+    local self = setmetatable(o, MenuState)
+    self.__index = self
+    self.name = name
+    return self
+end
+
+function MenuState.getName(self)
+    return self.name
+end

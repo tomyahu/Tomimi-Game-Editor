@@ -1,23 +1,29 @@
-require "Menu.mode.menues.Menu"
 require "Menu.model.menues.MenuBuilder"
 --------------------------------------------------------------------------------------------------------
+DefaultMenuBuilder = {}
+DefaultMenuBuilder.__index = DefaultMenuBuilder
+
 -- DefaultMenuBuilder: DefaultMenuBuilder
 -- Creates new DefaultMenuBuilder
-DefaultMenuBuilder = class(function(dmb)
-    dmb.menubuild = MenuBuilder()
-    dmb.optionNumber = 0
-end)
+function DefaultMenuBuilder.new()
+    local o = {}
+    local self = setmetatable(o, DefaultMenuBuilder)
+    self.__index = self
+    self.menubuild = MenuBuilder.new()
+    self.optionNumber = 0
+    return self
+end
 
 -- addOption: MenuState -> self
 -- Adds an option to the menu
-function DefaultMenuBuilder:addState(state)
-    self.menubuild.addState(state)
+function DefaultMenuBuilder.addState(self,state)
+    self.menubuild:addState(state)
 
     if self.optionNumber == 0 then
-        self.menubuild.setCurrentState(0)
+        self.menubuild:setCurrentState(0)
     else
-        self.menubuild.addTransition(self.optionNumber, self.optionNumber+1, "down")
-        self.menubuild.addTransition(self.optionNumber+1, self.optionNumber, "up")
+        self.menubuild:addTransition(self.optionNumber-1, self.optionNumber, "down")
+        self.menubuild:addTransition(self.optionNumber, self.optionNumber-1, "up")
     end
 
     self.optionNumber = self.optionNumber+1
@@ -27,6 +33,7 @@ end
 
 -- getMenu: None -> Menu
 -- Gets the builder's menu
-function DefaultMenuBuilder:getMenu()
-    return self.menubuild.getMenu()
+function DefaultMenuBuilder.getMenu(self)
+    return self.menubuild:getMenu()
 end
+

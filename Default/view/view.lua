@@ -1,10 +1,16 @@
-require "class"
 --------------------------------------------------------------------------------------------------------
+View = {}
+View.__index = View
+
 -- View: View
 -- Creates a View
-View = class(function(view)
-end)
+function View.new()
+    local o = {}
+    local self = setmetatable(o, View)
+    self.__index = self
+    return self
+end
 
-function View:draw(context) end
+function View.draw(self,context) end
 
-function View:getContextVars() end
+function View.getContextVars(self) end

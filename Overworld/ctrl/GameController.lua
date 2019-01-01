@@ -1,11 +1,13 @@
-require "class"
+require "Default.ctrl.ctrl"
 --------------------------------------------------------------------------------------------------------
-Controller = class(function(ctrl, model, view)
-    ctrl.model = model
-    ctrl.view = view
-end)
+GameController = Ctrl:new()
 
-function Controller:updateView()
-    ctrl.view:draw()
+-- GameController: GameController
+-- Creates a new GameController
+function GameController:new()
+    local o = Ctrl:new()
+    setmetatable(o, self)
+    self.__index = self
+    return o
 end
 

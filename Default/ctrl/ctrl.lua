@@ -1,17 +1,18 @@
-require "class"
-require "Default.ctrl.Manager"
 --------------------------------------------------------------------------------------------------------
+Ctrl = {}
+Ctrl.__index = Ctrl
+
 -- Ctrl: Ctrl
 -- Creates a Ctrl
-Ctrl = class(function(ctrl)
-    ctrl.managers = {}
-end)
+function Ctrl.new()
+    local o = {}
+    local self = setmetatable(o, Ctrl)
+    self.__index = self
+    return self
+end
 
 -- callbackPressedKey: str -> None
 -- Function called when user presses a key
-function Ctrl:callbackPressedKey(key)
-    local aux = self.managers[key]
-    if not (aux == nil) then
-        aux.doAction()
-    end
+function Ctrl.callbackPressedKey(self, key)
+
 end

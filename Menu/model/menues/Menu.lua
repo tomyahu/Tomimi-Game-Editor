@@ -1,12 +1,24 @@
 require "Menu.model.automaton.Automaton"
 --------------------------------------------------------------------------------------------------------
+Menu = Automaton.new()
+Menu.__index = Menu
+
 -- Menu: Menu
 -- Creates new Menu
-Menu = class(Automaton, function(m)
-    Automaton.init(m)
-    m.options = {}
-end)
+function Menu.new()
+    local o = Automaton.new()
+    local self = setmetatable(o, Menu)
+    self.__index = self
+    self.options = {}
+    return self
+end
 
-function Menu:activateCurrentOption()
-    self.getCurrentState().doAction()
+-- activateCurrentOption: None -> None
+-- activates the effect of the currently selected option
+function Menu.activateCurrentOption(self)
+    self:getCurrentState():doAction()
+end
+
+function Menu.getOptions(self)
+    return self.options
 end
