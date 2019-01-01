@@ -1,26 +1,32 @@
-require "class"
 --------------------------------------------------------------------------------------------------------
+Pair = {}
+Pair.__index = Pair
+
 -- Pair: Pair void void -> Pair
 -- Crea un nuevo par
-Pair = class(function(pair, first, second)
-    pair.first = first
-    pair.second = second
-end)
+function Pair.new(first, second)
+    local o = {}
+    local self = setmetatable(o, Pair)
+    self.__index = self
+    self.first = first
+    self.second = second
+    return self
+end
 
 -- getters
-function Pair:getFirst()
+function Pair.getFirst(self)
     return self.first
 end
 
-function Pair:getSecond()
+function Pair.getSecond(self)
     return self.second
 end
 
 -- setters
-function Pair:setFirst(newFirst)
+function Pair.setFirst(self, newFirst)
     self.first = newFirst
 end
 
-function Pair:setFirst(newSecond)
+function Pair.setFirst(self, newSecond)
     self.second = newSecond
 end
