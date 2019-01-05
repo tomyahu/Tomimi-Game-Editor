@@ -15,7 +15,7 @@ function MenuCtrl.new(menu)
 end
 
 function Ctrl.callbackPressedKey(self,key)
-    if key == "z" then
+    if key == "return" then
         self.menu:activateCurrentOption()
     else
         self.menu:makeTransition(key)

@@ -1,20 +1,7 @@
-require "Overworld.ctrl.GameController"
-require "Menu.ctrl.MenuCtrl"
-require "Menu.view.MenuView"
-require "Menu.model.menues.DefaultMenuBuilder"
-require "Menu.model.menuStates.ExitMenuState"
-require "Menu.model.menues.DefaultMenuBuilder"
+require "Menu._init"
 
-
-mBuild = DefaultMenuBuilder.new()
-mBuild:addState(MenuState.new("Start"))
-mBuild:addState(MenuState.new("Load"))
-mBuild:addState(ExitMenuState.new("Exit"))
-
-theMenu = mBuild:getMenu()
-
-CurrentCtrl = MenuCtrl.new(theMenu)
-CurrentView = MenuView.new("Resources/Menu/background.png", theMenu)
+CurrentCtrl = titleScreenMenuCtrl
+CurrentView = titleScreenMenuView
 
 function love.load()
     context = CurrentView:getContextVars()
@@ -26,4 +13,10 @@ end
 
 function love.keypressed(key)
     CurrentCtrl:callbackPressedKey(key)
+    print(key)
+    if key == "escape" then
+        love.event.quit()
+    elseif key == "p" then
+        love.window.setFullscreen( true )
+    end
 end

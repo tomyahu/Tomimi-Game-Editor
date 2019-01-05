@@ -1,3 +1,5 @@
+require "Default.consts"
+
 function love.conf(t)
     t.identity = nil                    -- The name of the save directory (string)
     t.appendidentity = false            -- Search files in source directory before save directory (boolean)
@@ -5,15 +7,15 @@ function love.conf(t)
     t.console = true                   -- Attach a console (boolean, Windows only)
     t.gammacorrect = false              -- Enable gamma-correct rendering, when supported by the system (boolean)
 
-    t.window.title = "Legend of the Runemaster"         -- The window title (string)
+    t.window.title = GAME_TITLE         -- The window title (string)
     t.window.icon = nil                 -- Filepath to an image to use as the window's icon (string)
-    t.window.width = 800                -- The window width (number)
-    t.window.height = 600               -- The window height (number)
+    t.window.width = WINDOW_WIDTH       -- The window width (number)
+    t.window.height = WINDOW_HEIGHT     -- The window height (number)
     t.window.borderless = false         -- Remove all border visuals from the window (boolean)
     t.window.resizable = false          -- Let the window be user-resizable (boolean)
     t.window.minwidth = 1               -- Minimum window width if the window is resizable (number)
     t.window.minheight = 1              -- Minimum window height if the window is resizable (number)
-    t.window.fullscreen = false         -- Enable fullscreen (boolean)
+    t.window.fullscreen = FULL_SCREEN   -- Enable fullscreen (boolean)
     t.window.msaa = 0                   -- The number of samples to use with multi-sampled antialiasing (number)
     t.window.depth = nil                -- The number of bits per sample in the depth buffer
     t.window.stencil = nil              -- The number of bits per sample in the stencil buffer

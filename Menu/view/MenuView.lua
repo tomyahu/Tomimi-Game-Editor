@@ -18,7 +18,13 @@ function View.draw(self, context)
     local background = context['background']
     local backgroundpixelwidth, backgroundpixelheight = background:getPixelDimensions()
     love.graphics.draw(background,0,0,0, 800 / backgroundpixelwidth, 600 / backgroundpixelheight)
-    print(self.menu:getCurrentState():getName())
+    for index, option in pairs(self.menu.options) do
+        if self.menu:getCurrentState():getName() == option:getName() then
+            love.graphics.print( option:getName(), getRelativePosX(300 + 10), getRelativePosY(350 + index*50), 0, 2*getScale(), 2*getScale())
+        else
+            love.graphics.print( option:getName(), getRelativePosX(300), getRelativePosY(350 + index*50), 0, 2*getScale(), 2*getScale())
+        end
+    end
 end
 
 function View.getContextVars(self)
