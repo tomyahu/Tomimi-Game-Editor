@@ -14,7 +14,11 @@ function MenuView.new(background_image_path, menu)
     return self
 end
 
-function View.draw(self, context)
+function MenuView.setMenu(self, new_menu)
+    self.menu = new_menu
+end
+
+function MenuView.draw(self, context)
     local background = context['background']
     local backgroundpixelwidth, backgroundpixelheight = background:getPixelDimensions()
     love.graphics.draw(background,0,0,0, 800 / backgroundpixelwidth, 600 / backgroundpixelheight)
@@ -27,7 +31,7 @@ function View.draw(self, context)
     end
 end
 
-function View.getContextVars(self)
+function MenuView.getContextVars(self)
     context = {}
     context['background'] = love.graphics.newImage(self.background_path)
     return context

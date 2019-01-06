@@ -28,5 +28,6 @@ end
 -- makeTransition: int
 -- Makes a transition of state of the automaton
 function Automaton.makeTransition(self, key)
+    self.currentState:doTransitionAction(key)
     self.currentState = self.currentState:getState(key)
 end

@@ -14,10 +14,10 @@ function MenuCtrl.new(menu)
     return self
 end
 
-function Ctrl.callbackPressedKey(self,key)
-    if key == "return" then
-        self.menu:activateCurrentOption()
-    else
-        self.menu:makeTransition(key)
-    end
+function MenuCtrl.callbackPressedKey(self,key)
+    self.menu:makeTransition(key)
+end
+
+function MenuCtrl.setMenu(self, new_menu)
+    self.menu = new_menu
 end
