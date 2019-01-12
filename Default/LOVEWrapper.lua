@@ -1,6 +1,8 @@
 require "Default.consts"
 require "Default.application.App"
 
+-- getRelativePos(x,y): num, num -> num, num
+-- returns the position given on the game coordinate system.
 function getRelativePos(x, y)
     local width_ratio = love.graphics.getWidth() / GAME_WIDTH
     local height_ratio = love.graphics.getHeight() / GAME_HEIGHT

@@ -1,13 +1,15 @@
 require "Default.view.view"
 require "Default.LOVEWrapper"
+require "Default.consts"
+require "Menu.view.BasicMenuView"
 --------------------------------------------------------------------------------------------------------
-LotRMTitleMenuView = View.new()
+LotRMTitleMenuView = BasicMenuView.new()
 LotRMTitleMenuView.__index = LotRMTitleMenuView
 
 -- MenuView: MenuView
 -- Creates new MenuView
 function LotRMTitleMenuView.new(background_image_path, menu, font)
-    local o = View.new()
+    local o = BasicMenuView.new()
     local self = setmetatable(o, LotRMTitleMenuView)
     self.__index = self
     self.background_path = background_image_path
@@ -16,15 +18,11 @@ function LotRMTitleMenuView.new(background_image_path, menu, font)
     return self
 end
 
-function LotRMTitleMenuView.setMenu(self, new_menu)
-    self.menu = new_menu
-end
-
 function LotRMTitleMenuView.draw(self, context)
     love.graphics.setFont( self.font )
     local background = context['background']
     local backgroundpixelwidth, backgroundpixelheight = background:getPixelDimensions()
-    love.graphics.draw(background,0,0,0, getScale(), getScale())
+    love.graphics.draw(background,0,0,0, getScale()/backgroundpixelwidth*GAME_WIDTH, getScale()/backgroundpixelheight*GAME_HEIGHT)
     for index, option in pairs(self.menu.options) do
         if self.menu:getCurrentState():getName() == option:getName() then
             love.graphics.print( option:getName(), getRelativePosX(300 + 10), getRelativePosY(300 + index*50), 0, getScale(), getScale())
@@ -32,11 +30,5 @@ function LotRMTitleMenuView.draw(self, context)
             love.graphics.print( option:getName(), getRelativePosX(300), getRelativePosY(300 + index*50), 0, getScale(), getScale())
         end
     end
-end
-
-function LotRMTitleMenuView.getContextVars(self)
-    local context = {}
-    context['background'] = love.graphics.newImage(self.background_path)
-    return context
 end
 

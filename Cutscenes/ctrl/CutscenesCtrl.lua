@@ -20,7 +20,6 @@ function CutscenesCtrl.callbackPressedKey(self,key)
             appChange(self.next_app)
         end
     end
-    print(key)
 end
 
 function CutscenesCtrl.setNextApp(self, appName)

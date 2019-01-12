@@ -15,4 +15,6 @@ testCutscene = cutBuild:getCutscene()
 cutsceneCtrl = CutscenesCtrl.new(testCutscene)
 cutsceneView = CutscenesView.new(testCutscene, cutscene_screen_font)
 
+cutsceneCtrl:setNextApp("MainMenu")
+
 registerApp("Cutscenes", cutsceneView, cutsceneCtrl)

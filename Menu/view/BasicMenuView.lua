@@ -1,4 +1,5 @@
 require "Default.view.view"
+require "Default.consts"
 --------------------------------------------------------------------------------------------------------
 BasicMenuView = View.new()
 BasicMenuView.__index = BasicMenuView
@@ -21,7 +22,7 @@ end
 function BasicMenuView.draw(self, context)
     local background = context['background']
     local backgroundpixelwidth, backgroundpixelheight = background:getPixelDimensions()
-    love.graphics.draw(background,0,0,0, 800 / backgroundpixelwidth, 600 / backgroundpixelheight)
+    love.graphics.draw(background,0,0,0, getScale() * GAME_WIDTH / backgroundpixelwidth, getScale()* GAME_HEIGHT / backgroundpixelheight)
     for index, option in pairs(self.menu.options) do
         if self.menu:getCurrentState():getName() == option:getName() then
             love.graphics.print( option:getName(), getRelativePosX(300 + 10), getRelativePosY(300 + index*50), 0, 2*getScale(), 2*getScale())
@@ -32,7 +33,7 @@ function BasicMenuView.draw(self, context)
 end
 
 function BasicMenuView.getContextVars(self)
-    context = {}
+    local context = {}
     context['background'] = love.graphics.newImage(self.background_path)
     return context
 end

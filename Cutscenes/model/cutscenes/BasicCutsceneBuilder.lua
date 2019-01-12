@@ -15,6 +15,8 @@ function BasicCutsceneBuilder.new()
     return self
 end
 
+-- addScene: str, str -> None
+-- add a new scene to the cutscene
 function BasicCutsceneBuilder.addScene(self, text, image_path)
     self.scenes[self.scene_number] = BasicScene.new(text, image_path)
     self.scene_number = self.scene_number + 1

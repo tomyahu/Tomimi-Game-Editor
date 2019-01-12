@@ -19,6 +19,8 @@ function Menu.activateCurrentOption(self)
     self:getCurrentState():doAction()
 end
 
+-- getOptions: None -> dict
+-- gets this menu's options
 function Menu.getOptions(self)
     return self.options
 end
