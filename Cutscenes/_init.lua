@@ -1,3 +1,4 @@
+require "Cutscenes.model.cutscene_admin.BasicCutsceneAdmin"
 require "Cutscenes.model.cutscenes.BasicCutsceneBuilder"
 require "Cutscenes.ctrl.CutscenesCtrl"
 require "Cutscenes.view.CutscenesView"
@@ -12,8 +13,13 @@ cutBuild:addScene("yes good", "Resources/Cutscenes/Test/test2.png")
 
 testCutscene = cutBuild:getCutscene()
 
-cutsceneCtrl = CutscenesCtrl.new(testCutscene)
-cutsceneView = CutscenesView.new(testCutscene, cutscene_screen_font)
+testCutsceneAdmin = BasicCutsceneAdmin.new()
+testCutsceneAdmin:addCutscene(0, testCutscene)
+testCutsceneAdmin:setCurrentCutscene(0)
+
+
+cutsceneCtrl = CutscenesCtrl.new(testCutsceneAdmin)
+cutsceneView = CutscenesView.new(testCutsceneAdmin, cutscene_screen_font)
 
 cutsceneCtrl:setNextApp("MainMenu")
 
