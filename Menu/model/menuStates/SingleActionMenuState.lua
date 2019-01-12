@@ -3,8 +3,8 @@ require "Menu.model.menuStates.MenuState"
 SingleActionMenuState = MenuState.new()
 SingleActionMenuState.__index = SingleActionMenuState
 
--- SingleActionMenuState.lua: SingleActionMenuState.lua
--- Creates a SingleActionMenuState.lua
+-- SingleActionMenuState: SingleActionMenuState
+-- Creates a SingleActionMenuState
 function SingleActionMenuState.new(name, key, action)
     local o = MenuState.new(name)
     o:addTransitionAction(key,action)

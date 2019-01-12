@@ -1,4 +1,5 @@
 require "Default.consts"
+require "Default.application.App"
 
 function getRelativePos(x, y)
     local width_ratio = love.graphics.getWidth() / GAME_WIDTH
@@ -9,8 +10,6 @@ function getRelativePos(x, y)
     else
         return x*width_ratio , y*(width_ratio + (height_ratio - width_ratio) / 2)
     end
-
-
 end
 
 function getScale()

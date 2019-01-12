@@ -5,3 +5,7 @@ FULL_SCREEN = false
 
 GAME_WIDTH = 800
 GAME_HEIGHT = 600
+
+RESOURCES_PATH = "Resources"
+
+APPS = {}

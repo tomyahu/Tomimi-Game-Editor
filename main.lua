@@ -1,14 +1,16 @@
+require "Default.consts"
 require "Menu._init"
+require "Cutscenes._init"
 
-CurrentCtrl = titleScreenMenuCtrl
-CurrentView = titleScreenMenuView
+setCtrl(titleScreenMenuCtrl)
+setView(titleScreenMenuView)
 
 function love.load()
-    context = CurrentView:getContextVars()
+    setContext(CurrentView:getContextVars())
 end
 
 function love.draw()
-    CurrentView:draw(context)
+    CurrentView:draw(Context)
 end
 
 function love.keypressed(key)

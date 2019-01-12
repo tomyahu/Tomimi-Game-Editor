@@ -1,16 +1,21 @@
 require "Menu.ctrl.MenuCtrl"
-require "Menu.view.MenuView"
+require "Menu.view.LotRMTitleMenuView"
 require "Menu.model.menues.DefaultMenuBuilder"
 require "Menu.model.menues.DefaultMenuBuilder"
 require "Menu.model.menuStates.SingleActionMenuState"
+
+require "Menu.resources.FontBank"
+
+require "Default.application.application"
 
 local mBuild = DefaultMenuBuilder.new()
 
 -- Title Menu --------------------------------------------------
 local conf_state = MenuState.new("Configuration")
+local new_game_state = MenuState.new("New game")
 
-mBuild:addState(MenuState.new("Start"))
-mBuild:addState(MenuState.new("Load"))
+mBuild:addState(new_game_state)
+mBuild:addState(MenuState.new("Continue"))
 mBuild:addState(conf_state)
 mBuild:addState(
     SingleActionMenuState.new("Exit","return", function (state)
@@ -48,6 +53,7 @@ local fullscreen_state = SingleActionMenuState.new("Toggle Fullscreen: OFF", "re
     if state.is_fullscreen == nil then
         state.is_fullscreen = false
     end
+
     state.is_fullscreen = not state.is_fullscreen
     love.window.setFullscreen( state.is_fullscreen, "desktop" )
 
@@ -68,9 +74,13 @@ mBuild:addState(back_state)
 confScreenMenu = mBuild:getMenu()
 ----------------------------------------------------------------
 
-titleScreenMenuCtrl = MenuCtrl.new(titleScreenMenu)
-titleScreenMenuView = MenuView.new("Resources/Menu/background.png", titleScreenMenu)
 
+titleScreenMenuCtrl = MenuCtrl.new(titleScreenMenu)
+titleScreenMenuView = LotRMTitleMenuView.new("Resources/Menu/background.png", titleScreenMenu, title_screen_font)
+
+new_game_state:addTransitionAction("return", function (state)
+    appChange("Cutscenes")
+end)
 
 conf_state:addTransitionAction("return", function (state)
     titleScreenMenuCtrl:setMenu(confScreenMenu)
@@ -81,3 +91,5 @@ back_state:addTransitionAction("return", function (state)
     titleScreenMenuCtrl:setMenu(titleScreenMenu)
     titleScreenMenuView:setMenu(titleScreenMenu)
 end)
+
+registerApp("MainMenu", titleScreenMenuView, titleScreenMenuCtrl)

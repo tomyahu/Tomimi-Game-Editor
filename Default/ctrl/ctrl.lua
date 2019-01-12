@@ -13,6 +13,4 @@ end
 
 -- callbackPressedKey: str -> None
 -- Function called when user presses a key
-function Ctrl.callbackPressedKey(self, key)
-
-end
+function Ctrl.callbackPressedKey(self, key) end
