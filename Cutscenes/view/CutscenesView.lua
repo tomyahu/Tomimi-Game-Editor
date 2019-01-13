@@ -1,5 +1,5 @@
 require "Default.consts"
-require "Default.LOVEWrapper"
+require "Default.LOVEWrapper.LOVEWrapper"
 -------------------------------------------------------------------------------------------------------
 CutscenesView = {}
 CutscenesView.__index = CutscenesView
@@ -19,7 +19,7 @@ function CutscenesView.draw(self,context)
     love.graphics.setFont( self.font )
     local scene = self.cutscene_admin:getCurrentCutscene():getCurrentScene()
     local scene_image = context[scene:getImagePath()]
-    local scenepixelwidth, scenepixelheight = scene_image:getPixelDimensions()
+    local scenepixelwidth, _ = scene_image:getPixelDimensions()
 
     local x_transition = getRelativePosX(getScale()*(GAME_WIDTH - 500)/2)
     love.graphics.draw(scene_image,x_transition,0,0, getScale()/scenepixelwidth*500)
@@ -29,7 +29,7 @@ end
 function CutscenesView.getContextVars(self)
     local context = {}
     local cutscene = self.cutscene_admin:getCurrentCutscene()
-    for num, scene in pairs(cutscene:getScenes()) do
+    for _, scene in pairs(cutscene:getScenes()) do
         context[scene:getImagePath()] = love.graphics.newImage(scene:getImagePath())
     end
     return context

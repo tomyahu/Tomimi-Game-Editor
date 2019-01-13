@@ -7,11 +7,11 @@ application:setCtrl(titleScreenMenuCtrl)
 application:setView(titleScreenMenuView)
 
 function love.load()
-    application:setContext(CurrentView:getContextVars())
+    application:setLocalContext(CurrentView:getContextVars())
 end
 
 function love.draw()
-    CurrentView:draw(application:getCurrentContext())
+    CurrentView:draw(application:getCurrentLocalContext())
 end
 
 function love.keypressed(key)
@@ -22,4 +22,8 @@ function love.keypressed(key)
     elseif key == "p" then
         love.window.setFullscreen( true )
     end
+end
+
+function love.update( dt )
+    GLOBAL_CONTEXT.dt = dt
 end

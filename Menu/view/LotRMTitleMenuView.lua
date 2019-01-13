@@ -1,5 +1,5 @@
 require "Default.view.view"
-require "Default.LOVEWrapper"
+require "Default.LOVEWrapper.LOVEWrapper"
 require "Default.consts"
 require "Menu.view.BasicMenuView"
 --------------------------------------------------------------------------------------------------------

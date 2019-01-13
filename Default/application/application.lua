@@ -5,7 +5,7 @@ application = {}
 
 CurrentCtrl = nil
 CurrentView = nil
-localContext = {}
+LocalContext = {}
 
 function application.setView(self,newView)
     CurrentView = newView
@@ -15,8 +15,8 @@ function application.setCtrl(self,newCtrl)
     CurrentCtrl = newCtrl
 end
 
-function application.setContext(self,newContext)
-    localContext = newContext
+function application.setLocalContext(self,newContext)
+    LocalContext = newContext
 end
 
 function application.getCurrentView(self)
@@ -27,15 +27,15 @@ function application.getCurrentCtrl(self)
     return CurrentCtrl
 end
 
-function application.getCurrentContext(self)
-    return localContext
+function application.getCurrentLocalContext(self)
+    return LocalContext
 end
 
 function application.appChange(self,appName)
     local nextApp = APPS[appName]
     application:setView(nextApp:getView())
     application:setCtrl(nextApp:getCtrl())
-    application:setContext(nextApp:getView():getContextVars())
+    application:setLocalContext(nextApp:getView():getContextVars())
 end
 
 function application:registerApp(appName, appView, appCtrl)

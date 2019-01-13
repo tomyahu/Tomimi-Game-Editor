@@ -1,4 +1,4 @@
-require "Default.LOVEWrapper"
+require "Default.LOVEWrapper.LOVEWrapper"
 --------------------------------------------------------------------------------------------------------
 CutscenesCtrl = {}
 CutscenesCtrl.__index = CutscenesCtrl
