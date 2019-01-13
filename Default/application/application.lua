@@ -1,41 +1,43 @@
 require "Default.application.App"
 require "Default.consts"
 --------------------------------------------------------------------------------------------------------
+application = {}
+
 CurrentCtrl = nil
 CurrentView = nil
-Context = {}
+localContext = {}
 
-function setView(newView)
+function application.setView(self,newView)
     CurrentView = newView
 end
 
-function setCtrl(newCtrl)
+function application.setCtrl(self,newCtrl)
     CurrentCtrl = newCtrl
 end
 
-function setContext(newContext)
-    Context = newContext
+function application.setContext(self,newContext)
+    localContext = newContext
 end
 
-function getCurrentView()
+function application.getCurrentView(self)
     return CurrentView
 end
 
-function getCurrentCtrl()
+function application.getCurrentCtrl(self)
     return CurrentCtrl
 end
 
-function getCurrentContext()
-    return Context
+function application.getCurrentContext(self)
+    return localContext
 end
 
-function appChange(appName)
+function application.appChange(self,appName)
     local nextApp = APPS[appName]
-    setView(nextApp:getView())
-    setCtrl(nextApp:getCtrl())
-    setContext(nextApp:getView():getContextVars())
+    application:setView(nextApp:getView())
+    application:setCtrl(nextApp:getCtrl())
+    application:setContext(nextApp:getView():getContextVars())
 end
 
-function registerApp(appName, appView, appCtrl)
+function application:registerApp(appName, appView, appCtrl)
     APPS[appName] = App.new(appName, appView, appCtrl)
 end

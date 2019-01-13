@@ -17,7 +17,7 @@ function CutscenesCtrl.callbackPressedKey(self,key)
     if key == "return" then
         local bool = self.cutscene_admin:getCurrentCutscene():advanceScene()
         if not bool then
-            appChange(self.next_app)
+            application:appChange(self.next_app)
         end
     end
 end

@@ -79,7 +79,7 @@ titleScreenMenuCtrl = MenuCtrl.new(titleScreenMenu)
 titleScreenMenuView = LotRMTitleMenuView.new("Resources/Menu/background.png", titleScreenMenu, title_screen_font)
 
 new_game_state:addTransitionAction("return", function (state)
-    appChange("Cutscenes")
+    application:appChange("Cutscenes")
 end)
 
 conf_state:addTransitionAction("return", function (state)
@@ -92,4 +92,4 @@ back_state:addTransitionAction("return", function (state)
     titleScreenMenuView:setMenu(titleScreenMenu)
 end)
 
-registerApp("MainMenu", titleScreenMenuView, titleScreenMenuCtrl)
+application:registerApp("MainMenu", titleScreenMenuView, titleScreenMenuCtrl)

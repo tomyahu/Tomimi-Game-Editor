@@ -23,4 +23,4 @@ cutsceneView = CutscenesView.new(testCutsceneAdmin, cutscene_screen_font)
 
 cutsceneCtrl:setNextApp("MainMenu")
 
-registerApp("Cutscenes", cutsceneView, cutsceneCtrl)
+application:registerApp("Cutscenes", cutsceneView, cutsceneCtrl)
