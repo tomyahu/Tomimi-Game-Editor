@@ -1,4 +1,4 @@
-require "Default.consts"
+require "Global.consts"
 
 function love.conf(t)
     t.identity = nil                    -- The name of the save directory (string)

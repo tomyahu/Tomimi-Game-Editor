@@ -1,5 +1,5 @@
-require "Default.application.App"
-require "Default.consts"
+require "Global.application.App"
+require "Global.consts"
 --------------------------------------------------------------------------------------------------------
 application = {}
 

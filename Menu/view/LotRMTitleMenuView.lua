@@ -1,6 +1,6 @@
-require "Default.view.view"
-require "Default.LOVEWrapper.LOVEWrapper"
-require "Default.consts"
+require "Global.view.view"
+require "Global.LOVEWrapper.LOVEWrapper"
+require "Global.consts"
 require "Menu.view.BasicMenuView"
 --------------------------------------------------------------------------------------------------------
 LotRMTitleMenuView = BasicMenuView.new()

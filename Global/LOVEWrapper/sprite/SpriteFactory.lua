@@ -1,5 +1,5 @@
-require "Default.LOVEWrapper.sprite.Sprite"
-require "Default.LOVEWrapper.sprite.RectFrame"
+require "Global.LOVEWrapper.sprite.Sprite"
+require "Global.LOVEWrapper.sprite.RectFrame"
 --------------------------------------------------------------------------------------------------------
 SpriteFactory = {};
 SpriteFactory.__index = SpriteFactory

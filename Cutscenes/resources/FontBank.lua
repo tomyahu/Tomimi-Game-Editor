@@ -1,4 +1,4 @@
-require "Default.consts"
+require "Global.consts"
 
 -- title_screen_font = love.graphics.newImageFont(RESOURCES_PATH .. "/Fonts/ImageFonts/Resource-Imagefont.png",
 --     " abcdefghijklmnopqrstuvwxyz" ..

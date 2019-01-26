@@ -1,5 +1,5 @@
-require "Default.view.view"
-require "Default.consts"
+require "Global.view.view"
+require "Global.consts"
 --------------------------------------------------------------------------------------------------------
 BasicMenuView = View.new()
 BasicMenuView.__index = BasicMenuView

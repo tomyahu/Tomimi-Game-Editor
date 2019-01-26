@@ -1,4 +1,4 @@
-require "Default.ctrl.ctrl"
+require "Global.ctrl.ctrl"
 --------------------------------------------------------------------------------------------------------
 OverworldCtrl = Ctrl:new()
 OverworldCtrl.__index = OverworldCtrl

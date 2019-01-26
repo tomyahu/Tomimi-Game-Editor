@@ -1,5 +1,5 @@
-require "Default.consts"
-require "Default.LOVEWrapper.LOVEWrapper"
+require "Global.consts"
+require "Global.LOVEWrapper.LOVEWrapper"
 -------------------------------------------------------------------------------------------------------
 CutscenesView = {}
 CutscenesView.__index = CutscenesView

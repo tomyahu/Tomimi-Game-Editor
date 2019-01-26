@@ -1,5 +1,5 @@
 require "Menu.model.automaton.Automaton"
-require "Default.ctrl.ctrl"
+require "Global.ctrl.ctrl"
 --------------------------------------------------------------------------------------------------------
 MenuCtrl = Ctrl.new()
 MenuCtrl.__index = MenuCtrl

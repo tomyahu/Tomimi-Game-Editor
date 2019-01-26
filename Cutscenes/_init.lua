@@ -1,11 +1,11 @@
 require "Cutscenes.model.cutscene_admin.BasicCutsceneAdmin"
-require "Cutscenes.model.cutscenes.BasicCutsceneBuilder"
+require "Cutscenes.model.cutscenes.TimedCutsceneBuilder"
 require "Cutscenes.ctrl.CutscenesCtrl"
 require "Cutscenes.view.CutscenesView"
 require "Cutscenes.resources.FontBank"
-require "Default.application.application"
+require "Global.application.application"
 --------------------------------------------------------------------------------------------------------
-cutBuild = BasicCutsceneBuilder.new()
+cutBuild = TimedCutsceneBuilder.new(10)
 
 cutBuild:addScene("hola, soy mike", "Resources/Cutscenes/Test/test0.png")
 cutBuild:addScene("mira un perrro", "Resources/Cutscenes/Test/test1.png")

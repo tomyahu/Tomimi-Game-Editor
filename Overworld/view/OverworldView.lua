@@ -1,4 +1,4 @@
-require "Default.view.view"
+require "Global.view.view"
 --------------------------------------------------------------------------------------------------------
 OverworldView = View.new()
 OverworldView.__index = OverworldView

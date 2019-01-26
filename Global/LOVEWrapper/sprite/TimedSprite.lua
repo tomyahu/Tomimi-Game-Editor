@@ -1,4 +1,4 @@
-require "Default.LOVEWrapper.sprite.Sprite"
+require "Global.LOVEWrapper.sprite.Sprite"
 --------------------------------------------------------------------------------------------------------
 TimedSprite = Sprite.new();
 TimedSprite.__index = TimedSprite

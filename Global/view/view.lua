@@ -1,4 +1,4 @@
-require "Default.LOVEWrapper.LOVEWrapper"
+require "Global.LOVEWrapper.LOVEWrapper"
 --------------------------------------------------------------------------------------------------------
 View = {}
 View.__index = View

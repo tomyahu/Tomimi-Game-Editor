@@ -1,4 +1,4 @@
-require "Default.application.application"
+require "Global.application.application"
 require "Overworld.view.OverworldView"
 require "Overworld.ctrl.OverworldCtrl"
 --------------------------------------------------------------------------------------------------------

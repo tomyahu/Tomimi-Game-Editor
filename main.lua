@@ -1,7 +1,9 @@
-require "Default.consts"
-require "Default.application.application"
+require "Global.consts"
+require "Global.application.application"
 require "Menu._init"
 require "Cutscenes._init"
+
+require "util.algorithm.test.algorithmTests"
 
 application:setCtrl(titleScreenMenuCtrl)
 application:setView(titleScreenMenuView)

@@ -6,7 +6,7 @@ require "Menu.model.menuStates.SingleActionMenuState"
 
 require "Menu.resources.FontBank"
 
-require "Default.application.application"
+require "Global.application.application"
 
 local mBuild = DefaultMenuBuilder.new()
 

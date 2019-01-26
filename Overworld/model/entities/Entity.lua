@@ -15,5 +15,5 @@ function Entity.new(sprite)
 end
 
 function Entity.getPos(self)
-    return self.pos
+    return self.pos:getFirst(), self.pos:getSecond()
 end
