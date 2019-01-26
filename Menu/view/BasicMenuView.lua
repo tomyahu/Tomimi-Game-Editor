@@ -32,9 +32,8 @@ function BasicMenuView.draw(self, context)
     end
 end
 
-function BasicMenuView.getContextVars(self)
+function BasicMenuView.getContextVars(self, previous_context)
     local context = {}
     context['background'] = love.graphics.newImage(self.background_path)
     return context
 end
-

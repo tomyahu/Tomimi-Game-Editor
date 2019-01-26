@@ -5,8 +5,8 @@ Player.__index = Player
 
 -- Player: Player
 -- Creates a Player
-function Player.new(speed)
-    local o = Entity.new();
+function Player.new(sprite, speed)
+    local o = Entity.new(sprite);
     local self = setmetatable(o, Player)
     self.__index = self
     self.speed = speed

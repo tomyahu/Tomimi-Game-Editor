@@ -12,3 +12,8 @@ function OverworldView.new(entities)
     self.entities = entities
     return self
 end
+
+function BasicMenuView.getContextVars(self, previous_context)
+    local context = {}
+    return context
+end

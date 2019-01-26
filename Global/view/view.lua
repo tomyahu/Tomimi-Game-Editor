@@ -14,4 +14,4 @@ end
 
 function View.draw(self,context) end
 
-function View.getContextVars(self) end
+function View.getContextVars(self, previous_context) end

@@ -35,7 +35,7 @@ function application.appChange(self,appName)
     local nextApp = APPS[appName]
     application:setView(nextApp:getView())
     application:setCtrl(nextApp:getCtrl())
-    application:setLocalContext(nextApp:getView():getContextVars())
+    application:setLocalContext(nextApp:getView():getContextVars(self:getCurrentLocalContext()))
 end
 
 function application:registerApp(appName, appView, appCtrl)
