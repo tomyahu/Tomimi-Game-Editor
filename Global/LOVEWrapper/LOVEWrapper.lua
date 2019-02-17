@@ -22,11 +22,11 @@ function getScale()
 end
 
 function getRelativePosX(x)
-    local newx, newy = getRelativePos(x,0)
+    local newx, _ = getRelativePos(x,0)
     return newx
 end
 
 function getRelativePosY(y)
-    local newx, newy = getRelativePos(0,y)
+    local _, newy = getRelativePos(0,y)
     return newy
 end

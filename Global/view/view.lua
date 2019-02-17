@@ -12,6 +12,6 @@ function View.new()
     return self
 end
 
-function View.draw(self,context) end
+function View.draw(_,_) end
 
-function View.getContextVars(self, previous_context) end
+function View.getContextVars(_, _) end

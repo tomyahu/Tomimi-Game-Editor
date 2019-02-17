@@ -7,27 +7,27 @@ CurrentCtrl = nil
 CurrentView = nil
 LocalContext = {}
 
-function application.setView(self,newView)
+function application.setView(_,newView)
     CurrentView = newView
 end
 
-function application.setCtrl(self,newCtrl)
+function application.setCtrl(_,newCtrl)
     CurrentCtrl = newCtrl
 end
 
-function application.getCurrentView(self)
+function application.getCurrentView(_)
     return CurrentView
 end
 
-function application.getCurrentCtrl(self)
+function application.getCurrentCtrl(_)
     return CurrentCtrl
 end
 
-function application.getCurrentLocalContext(self)
+function application.getCurrentLocalContext(_)
     return LocalContext
 end
 
-function application.setLocalContext(self, newContext)
+function application.setLocalContext(_, newContext)
     if newContext == nil then
         LocalContext = {}
     else
