@@ -14,11 +14,11 @@ function Player.new(sprite, speed, hitboxes)
 end
 
 function Player.moveUp(self)
-    local player_x, player_y = self:getPos()
-    self:setPos(player_x, player_y - self.speed)
-
     local old_vx, _ = self.solid_object:getSpeed()
     self.solid_object:setSpeed(old_vx, - self.speed)
+
+    local player_x, player_y = self:getPos()
+    self:setPos(player_x, player_y - self.speed)
 end
 
 function Player.moveDown(self)

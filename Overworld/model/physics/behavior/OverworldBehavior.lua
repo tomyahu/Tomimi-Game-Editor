@@ -34,6 +34,8 @@ function OverworldBehavior.AllObjectsInteract(self)
             end
         end
     end
+    self.player_object:setSpeed(0, 0)
+
 end
 
 return OverworldBehavior
