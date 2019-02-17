@@ -1,6 +1,6 @@
-require "Overworld.model.rooms.Room"
+local Room = require "Overworld.model.rooms.Room"
 --------------------------------------------------------------------------------------------------------
-RoomView = {};
+local RoomView = {};
 RoomView.__index = RoomView
 
 -- RoomView: RoomView
@@ -64,3 +64,5 @@ function RoomView.returnSortedObjectArray(self)
     end
     return finalArray
 end
+
+return RoomView

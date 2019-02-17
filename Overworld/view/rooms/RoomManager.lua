@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------------------------------
-RoomManager = {};
+local RoomManager = {};
 RoomManager.__index = RoomManager
 
 -- RoomManager: RoomManager
@@ -24,3 +24,5 @@ end
 function RoomManager.getCurrentRoom(self)
     return self.rooms[self.current_room]
 end
+
+return RoomManager

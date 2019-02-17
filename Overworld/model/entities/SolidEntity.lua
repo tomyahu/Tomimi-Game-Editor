@@ -1,7 +1,7 @@
-require "Overworld.model.entities.Entity"
+local Entity = require "Overworld.model.entities.Entity"
 require "lib.physics.objects.SolidObject"
 --------------------------------------------------------------------------------------------------------
-SolidEntity = Entity.new();
+local SolidEntity = Entity.new();
 SolidEntity.__index = SolidEntity
 
 -- SolidEntity: SolidEntity
@@ -29,5 +29,6 @@ end
 function SolidEntity.registerAsSolidObject(self)
     self.solid_object:registerObject("SolidObjects")
     local local_context = application:getCurrentLocalContext()
-    print("registered", # local_context["SolidObjects"])
 end
+
+return SolidEntity

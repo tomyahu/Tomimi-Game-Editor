@@ -7,6 +7,7 @@ require "lib.algorithm.test.algorithmTests"
 -- Apps Registered
 application:registerApp("TitleMenu", "Menu._init")
 application:registerApp("Cutscenes", "Cutscenes._init")
+application:registerApp("Overworld", "Overworld._init")
 
 application:setCtrl(initial_app["ctrl"])
 application:setView(initial_app["view"])

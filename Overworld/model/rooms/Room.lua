@@ -1,7 +1,7 @@
 require "lib.algorithm.Arrays"
 require "lib.structures.util.Pair"
 --------------------------------------------------------------------------------------------------------
-Room = {}
+local Room = {}
 Room.__index = Room
 
 -- Room: int, int -> Room
@@ -48,3 +48,5 @@ function Room.registerSolidObjects(self)
         object:registerAsSolidObject()
     end
 end
+
+return Room

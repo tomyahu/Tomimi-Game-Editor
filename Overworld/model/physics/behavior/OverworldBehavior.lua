@@ -1,7 +1,7 @@
 require "lib.physics.behaviors.NullBehavior"
 require "Global.application.application"
 --------------------------------------------------------------------------------------------------------
-OverworldBehavior = NullBehavior.new();
+local OverworldBehavior = NullBehavior.new();
 OverworldBehavior.__index = OverworldBehavior
 
 -- OverworldBehavior: OverworldBehavior
@@ -35,3 +35,5 @@ function OverworldBehavior.AllObjectsInteract(self)
         end
     end
 end
+
+return OverworldBehavior

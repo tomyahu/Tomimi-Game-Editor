@@ -1,6 +1,6 @@
 require "lib.structures.util.Pair"
 --------------------------------------------------------------------------------------------------------
-Entity = {}
+local Entity = {}
 Entity.__index = Entity
 
 -- Entity: Entity -> Entity
@@ -27,3 +27,5 @@ end
 function Entity.getSprite(self)
     return self.sprite
 end
+
+return Entity

@@ -21,6 +21,6 @@ testCutsceneAdmin:setCurrentCutscene(0)
 local cutsceneCtrl = CutscenesCtrl.new(testCutsceneAdmin)
 local cutsceneView = CutscenesView.new(testCutsceneAdmin, cutscene_screen_font)
 
-cutsceneCtrl:setNextApp("TitleMenu")
+cutsceneCtrl:setNextApp("Overworld")
 
 return {["ctrl"] = cutsceneCtrl, ["view"] = cutsceneView}

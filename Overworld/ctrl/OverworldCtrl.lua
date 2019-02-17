@@ -1,7 +1,7 @@
 require "Global.ctrl.ctrl"
-require "Overworld.model.physics.behavior.OverworldBehavior"
+local OverworldBehavior = require "Overworld.model.physics.behavior.OverworldBehavior"
 --------------------------------------------------------------------------------------------------------
-OverworldCtrl = Ctrl:new()
+local OverworldCtrl = Ctrl:new()
 OverworldCtrl.__index = OverworldCtrl
 
 -- OverworldCtrl: OverworldCtrl
@@ -39,3 +39,4 @@ function OverworldCtrl.update(self,dt)
 
 end
 
+return OverworldCtrl

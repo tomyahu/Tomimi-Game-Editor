@@ -1,6 +1,6 @@
-require "Overworld.model.entities.SolidEntity"
+local SolidEntity = require "Overworld.model.entities.SolidEntity"
 --------------------------------------------------------------------------------------------------------
-Player = SolidEntity.new();
+local Player = SolidEntity.new();
 Player.__index = Player
 
 -- Player: Player
@@ -58,3 +58,5 @@ end
 function Player.registerAsSolidObject(self)
     return
 end
+
+return Player

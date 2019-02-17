@@ -1,13 +1,13 @@
 require "Global.application.application"
 require "Global.LOVEWrapper.sprite.Sprite"
 require "Global.LOVEWrapper.sprite.RectFrame"
-require "Overworld.view.OverworldView"
-require "Overworld.view.rooms.RoomView"
-require "Overworld.view.rooms.RoomManager"
-require "Overworld.ctrl.OverworldCtrl"
-require "Overworld.model.entities.SolidEntity"
-require "Overworld.model.entities.Player"
-require "Overworld.model.rooms.Room"
+local OverworldView =  require "Overworld.view.OverworldView"
+local RoomView = require "Overworld.view.rooms.RoomView"
+local RoomManager = require "Overworld.view.rooms.RoomManager"
+local OverworldCtrl = require "Overworld.ctrl.OverworldCtrl"
+local SolidEntity = require "Overworld.model.entities.SolidEntity"
+local Player = require "Overworld.model.entities.Player"
+local Room = require "Overworld.model.rooms.Room"
 require "Overworld.init.hitboxes"
 --------------------------------------------------------------------------------------------------------
 
@@ -37,4 +37,4 @@ room_manager:addRoom(room_view)
 local thisView = OverworldView.new(room_manager)
 local thisCtrl = OverworldCtrl.new(player)
 
-application:registerApp("Overworld", thisView, thisCtrl)
+return {["ctrl"] = thisCtrl, ["view"] = thisView}
