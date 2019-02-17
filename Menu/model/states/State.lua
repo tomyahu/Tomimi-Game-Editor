@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------------------------------
-State = {}
+local State = {}
 State.__index = State
 
 -- State: State
@@ -44,3 +44,5 @@ function State.doTransitionAction(self, key)
         aux(self)
     end
 end
+
+return State

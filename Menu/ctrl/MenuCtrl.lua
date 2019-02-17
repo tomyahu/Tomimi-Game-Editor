@@ -1,7 +1,7 @@
 require "Menu.model.automaton.Automaton"
 require "Global.ctrl.ctrl"
 --------------------------------------------------------------------------------------------------------
-MenuCtrl = Ctrl.new()
+local MenuCtrl = Ctrl.new()
 MenuCtrl.__index = MenuCtrl
 
 -- MenuCtrl: MenuCtrl
@@ -21,3 +21,5 @@ end
 function MenuCtrl.setMenu(self, new_menu)
     self.menu = new_menu
 end
+
+return MenuCtrl

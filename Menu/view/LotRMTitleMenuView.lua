@@ -1,9 +1,9 @@
 require "Global.view.view"
 require "Global.LOVEWrapper.LOVEWrapper"
 require "Global.consts"
-require "Menu.view.BasicMenuView"
+local BasicMenuView = require "Menu.view.BasicMenuView"
 --------------------------------------------------------------------------------------------------------
-LotRMTitleMenuView = BasicMenuView.new()
+local LotRMTitleMenuView = BasicMenuView.new()
 LotRMTitleMenuView.__index = LotRMTitleMenuView
 
 -- MenuView: MenuView
@@ -32,3 +32,4 @@ function LotRMTitleMenuView.draw(self, context)
     end
 end
 
+return LotRMTitleMenuView

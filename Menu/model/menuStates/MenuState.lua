@@ -1,6 +1,6 @@
-require "Menu.model.states.State"
+local State = require "Menu.model.states.State"
 --------------------------------------------------------------------------------------------------------
-MenuState = State.new()
+local MenuState = State.new()
 MenuState.__index = MenuState
 
 -- MenuState: MenuState str
@@ -16,3 +16,5 @@ end
 function MenuState.getName(self)
     return self.name
 end
+
+return MenuState

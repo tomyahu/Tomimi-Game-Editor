@@ -1,6 +1,6 @@
-require "Menu.model.states.State"
+local State = require "Menu.model.states.State"
 --------------------------------------------------------------------------------------------------------
-Automaton = {}
+local Automaton = {}
 Automaton.__index = Automaton
 
 -- Automaton: Automaton
@@ -31,3 +31,5 @@ function Automaton.makeTransition(self, key)
     self.currentState:doTransitionAction(key)
     self.currentState = self.currentState:getState(key)
 end
+
+return Automaton

@@ -1,7 +1,7 @@
 require "Global.view.view"
 require "Global.consts"
 --------------------------------------------------------------------------------------------------------
-BasicMenuView = View.new()
+local BasicMenuView = View.new()
 BasicMenuView.__index = BasicMenuView
 
 -- MenuView: MenuView
@@ -37,3 +37,5 @@ function BasicMenuView.getContextVars(self, previous_context)
     context['background'] = love.graphics.newImage(self.background_path)
     return context
 end
+
+return BasicMenuView

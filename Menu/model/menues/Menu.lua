@@ -1,6 +1,6 @@
-require "Menu.model.automaton.Automaton"
+local Automaton = require "Menu.model.automaton.Automaton"
 --------------------------------------------------------------------------------------------------------
-Menu = Automaton.new()
+local Menu = Automaton.new()
 Menu.__index = Menu
 
 -- Menu: Menu
@@ -24,3 +24,5 @@ end
 function Menu.getOptions(self)
     return self.options
 end
+
+return Menu

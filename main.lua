@@ -1,13 +1,11 @@
 require "Global.consts"
 require "Global.application.application"
-require "Menu._init"
-require "Cutscenes._init"
-require "Overworld._init"
+local initial_app = require "Menu._init"
 
 require "lib.algorithm.test.algorithmTests"
 
-application:setCtrl(titleScreenMenuCtrl)
-application:setView(titleScreenMenuView)
+application:setCtrl(initial_app["ctrl"])
+application:setView(initial_app["view"])
 
 function love.load()
     application:setLocalContext(CurrentView:getContextVars())

@@ -1,6 +1,6 @@
-require "Menu.model.menuStates.MenuState"
+local MenuState = require "Menu.model.menuStates.MenuState"
 --------------------------------------------------------------------------------------------------------
-SingleActionMenuState = MenuState.new()
+local SingleActionMenuState = MenuState.new()
 SingleActionMenuState.__index = SingleActionMenuState
 
 -- SingleActionMenuState: SingleActionMenuState
@@ -18,3 +18,5 @@ end
 function SingleActionMenuState.addTransitionAction(self, key, fun)
     error("Can't add a new transition action to a SingleActionMenuState")
 end
+
+return SingleActionMenuState

@@ -1,6 +1,6 @@
-require "Menu.model.menues.MenuBuilder"
+local MenuBuilder = require "Menu.model.menues.MenuBuilder"
 --------------------------------------------------------------------------------------------------------
-DefaultMenuBuilder = {}
+local DefaultMenuBuilder = {}
 DefaultMenuBuilder.__index = DefaultMenuBuilder
 
 -- DefaultMenuBuilder: DefaultMenuBuilder
@@ -37,3 +37,4 @@ function DefaultMenuBuilder.getMenu(self)
     return self.menubuild:getMenu()
 end
 
+return DefaultMenuBuilder

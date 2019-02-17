@@ -1,7 +1,7 @@
-require "Menu.model.states.State"
-require "Menu.model.automaton.Automaton"
+local State = require "Menu.model.states.State"
+local Automaton = require "Menu.model.automaton.Automaton"
 --------------------------------------------------------------------------------------------------------
-AutomatonBuilder = {}
+local AutomatonBuilder = {}
 AutomatonBuilder.__index = AutomatonBuilder
 
 -- AutomatonBuilder: AutomatonBuilder
@@ -43,3 +43,5 @@ end
 function AutomatonBuilder.getAutomaton(self)
     return self.automaton
 end
+
+return AutomatonBuilder

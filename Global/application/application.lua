@@ -42,6 +42,6 @@ function application.appChange(self,appName)
     application:setCtrl(nextApp:getCtrl())
 end
 
-function application:registerApp(appName, appView, appCtrl)
-    APPS[appName] = App.new(appName, appView, appCtrl)
+function application:registerApp(appName, appPath)
+    APPS[appName] = App.new(appName, appPath)
 end

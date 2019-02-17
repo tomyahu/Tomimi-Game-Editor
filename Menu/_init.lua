@@ -1,8 +1,8 @@
-require "Menu.ctrl.MenuCtrl"
-require "Menu.view.LotRMTitleMenuView"
-require "Menu.model.menues.DefaultMenuBuilder"
-require "Menu.model.menues.DefaultMenuBuilder"
-require "Menu.model.menuStates.SingleActionMenuState"
+local MenuCtrl = require "Menu.ctrl.MenuCtrl"
+local LotRMTitleMenuView = require "Menu.view.LotRMTitleMenuView"
+local MenuState = require "Menu.model.menuStates.MenuState"
+local DefaultMenuBuilder = require "Menu.model.menues.DefaultMenuBuilder"
+local SingleActionMenuState = require "Menu.model.menuStates.SingleActionMenuState"
 
 require "Menu.resources.FontBank"
 
@@ -22,7 +22,7 @@ mBuild:addState(
         love.event.quit()
     end))
 
-titleScreenMenu = mBuild:getMenu()
+local titleScreenMenu = mBuild:getMenu()
 
 -- Configuration Menu --------------------------------------------------
 local volume_state = MenuState.new("Volume: 100%")
@@ -66,22 +66,22 @@ local fullscreen_state = SingleActionMenuState.new("Toggle Fullscreen: OFF", "re
 end)
 local back_state = MenuState.new("Back")
 
-mBuild = DefaultMenuBuilder.new()
+local mBuild = DefaultMenuBuilder.new()
 mBuild:addState(volume_state)
 mBuild:addState(fullscreen_state)
 mBuild:addState(back_state)
 
-confScreenMenu = mBuild:getMenu()
+local confScreenMenu = mBuild:getMenu()
 ----------------------------------------------------------------
 
+local titleScreenMenuCtrl = MenuCtrl.new(titleScreenMenu)
+local titleScreenMenuView = LotRMTitleMenuView.new("Resources/Menu/background.png", titleScreenMenu, title_screen_font)
 
-titleScreenMenuCtrl = MenuCtrl.new(titleScreenMenu)
-titleScreenMenuView = LotRMTitleMenuView.new("Resources/Menu/background.png", titleScreenMenu, title_screen_font)
-
+--[[
 new_game_state:addTransitionAction("return", function (state)
     application:appChange("Cutscenes")
 end)
-
+]]
 conf_state:addTransitionAction("return", function (state)
     titleScreenMenuCtrl:setMenu(confScreenMenu)
     titleScreenMenuView:setMenu(confScreenMenu)
@@ -92,4 +92,4 @@ back_state:addTransitionAction("return", function (state)
     titleScreenMenuView:setMenu(titleScreenMenu)
 end)
 
-application:registerApp("MainMenu", titleScreenMenuView, titleScreenMenuCtrl)
+return {["ctrl"] = titleScreenMenuCtrl, ["view"] = titleScreenMenuView}

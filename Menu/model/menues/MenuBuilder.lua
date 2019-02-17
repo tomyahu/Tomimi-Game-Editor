@@ -1,6 +1,6 @@
-require "Menu.model.menues.Menu"
+local Menu = require "Menu.model.menues.Menu"
 --------------------------------------------------------------------------------------------------------
-MenuBuilder = {}
+local MenuBuilder = {}
 MenuBuilder.__index = MenuBuilder
 
 -- MenuBuilder: MenuBuilder
@@ -41,3 +41,5 @@ end
 function MenuBuilder.getMenu(self)
     return self.menu
 end
+
+return MenuBuilder

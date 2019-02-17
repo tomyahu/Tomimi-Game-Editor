@@ -4,13 +4,12 @@ App.__index = App
 
 -- App: App
 -- Creates a App
-function App.new(name, view, ctrl)
+function App.new(name, path)
     local o = {}
     local self = setmetatable(o, App)
     self.__index = self
     self.name = name
-    self.view = view
-    self.ctrl = ctrl
+    self.path = path
     return self
 end
 
@@ -19,9 +18,11 @@ function App.getName(self)
 end
 
 function App.getView(self)
-    return self.view
+    local view = require(self.path)["view"]
+    return view
 end
 
 function App.getCtrl(self)
-    return self.ctrl
+    local ctrl = require(self.path)["ctrl"]
+    return ctrl
 end
