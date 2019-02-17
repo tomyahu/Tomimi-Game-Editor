@@ -14,7 +14,7 @@ function OverworldView.new(room_manager)
     return self
 end
 
-function OverworldView.getContextVars(self, previous_context)
+function OverworldView.getContextVars(self, _)
     local context = {}
     local local_context = application:getCurrentLocalContext()
     context['current_room'] = self.room_manager:getCurrentRoom()
@@ -24,7 +24,7 @@ function OverworldView.getContextVars(self, previous_context)
     return context
 end
 
-function OverworldView.draw(self, context)
+function OverworldView.draw(_, context)
     context['current_room']:draw()
 end
 

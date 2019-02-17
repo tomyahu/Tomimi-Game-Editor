@@ -55,7 +55,7 @@ function Player.stopY(self)
     self.solid_object:setSpeed(old_vx, 0)
 end
 
-function Player.registerAsSolidObject(self)
+function Player.registerAsSolidObject(_)
     return
 end
 

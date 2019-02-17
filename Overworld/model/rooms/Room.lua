@@ -44,7 +44,7 @@ function Room.getBackgroundPath(self)
 end
 
 function Room.registerSolidObjects(self)
-    for i, object in pairs(self.objects) do
+    for _, object in pairs(self.objects) do
         object:registerAsSolidObject()
     end
 end

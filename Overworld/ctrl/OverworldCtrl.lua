@@ -15,7 +15,7 @@ function OverworldCtrl.new(player)
     return self
 end
 
-function OverworldCtrl.update(self,dt)
+function OverworldCtrl.update(self,_)
     if love.keyboard.isDown("up") and love.keyboard.isDown("down") then
     elseif love.keyboard.isDown("up") then
         self.player:moveUp()

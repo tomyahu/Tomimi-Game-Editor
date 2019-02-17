@@ -1,4 +1,3 @@
-local Room = require "Overworld.model.rooms.Room"
 --------------------------------------------------------------------------------------------------------
 local RoomView = {};
 RoomView.__index = RoomView
@@ -17,7 +16,7 @@ end
 function RoomView.initialize(self)
     self.background = love.graphics.newImage(self.room:getBackgroundPath())
     local objectArray = self.room:getObjects()
-    for i, object in pairs(objectArray) do
+    for _, object in pairs(objectArray) do
         object:getSprite():initialize()
     end
 
@@ -27,7 +26,7 @@ end
 function RoomView.finalize(self)
     self.background = nil
     local objectArray = self.room:getObjects()
-    for i, object in pairs(objectArray) do
+    for _, object in pairs(objectArray) do
         object:getSprite():finalize()
     end
 end
@@ -35,7 +34,7 @@ end
 function RoomView.draw(self)
     love.graphics.draw(self.background,0,0,0, getScale())
     local objectArray = self:returnSortedObjectArray()
-    for i, object in pairs(objectArray) do
+    for _, object in pairs(objectArray) do
         local x, y = object:getPos()
         object:getSprite():draw(x, y, 1, 1)
     end
@@ -48,7 +47,6 @@ function RoomView.returnSortedObjectArray(self)
     local i = 0
     local x,y
     for _, object in pairs(self.room:getObjects()) do
-        local info = {}
         x, y = object:getPos()
         objectArray[i] = Pair.new(-y, object)
         i = i+1
@@ -58,7 +56,6 @@ function RoomView.returnSortedObjectArray(self)
     local finalArray = {}
     i = 0
     for _, pair in pairs(objectArray) do
-        local info = {}
         finalArray[i] = pair:getSecond()
         i = i+1
     end

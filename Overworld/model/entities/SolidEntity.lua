@@ -28,7 +28,6 @@ end
 
 function SolidEntity.registerAsSolidObject(self)
     self.solid_object:registerObject("SolidObjects")
-    local local_context = application:getCurrentLocalContext()
 end
 
 return SolidEntity

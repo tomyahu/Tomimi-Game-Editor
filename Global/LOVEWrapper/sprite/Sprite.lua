@@ -12,7 +12,7 @@ function Sprite.new(frames, image_path)
     self.image_path = image_path
     self.__index = self
     self.frames = frames
-    self.current_frame = 0
+    self.current_frame = 1
     return self
 end
 
