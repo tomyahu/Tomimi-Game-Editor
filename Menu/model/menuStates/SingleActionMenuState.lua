@@ -15,7 +15,7 @@ end
 
 -- addTransitionAction: int, function(state) -> None
 -- Adds an action to do with a transition
-function SingleActionMenuState.addTransitionAction(self, key, fun)
+function SingleActionMenuState.addTransitionAction(_, _, _)
     error("Can't add a new transition action to a SingleActionMenuState")
 end
 

@@ -18,7 +18,7 @@ mBuild:addState(new_game_state)
 mBuild:addState(MenuState.new("Continue"))
 mBuild:addState(conf_state)
 mBuild:addState(
-    SingleActionMenuState.new("Exit","return", function (state)
+    SingleActionMenuState.new("Exit","return", function (_)
         love.event.quit()
     end))
 
@@ -78,16 +78,16 @@ local titleScreenMenuCtrl = MenuCtrl.new(titleScreenMenu)
 local titleScreenMenuView = LotRMTitleMenuView.new("Resources/Menu/background.png", titleScreenMenu, title_screen_font)
 
 --[[
-new_game_state:addTransitionAction("return", function (state)
+new_game_state:addTransitionAction("return", function (_)
     application:appChange("Cutscenes")
 end)
 ]]
-conf_state:addTransitionAction("return", function (state)
+conf_state:addTransitionAction("return", function (_)
     titleScreenMenuCtrl:setMenu(confScreenMenu)
     titleScreenMenuView:setMenu(confScreenMenu)
 end)
 
-back_state:addTransitionAction("return", function (state)
+back_state:addTransitionAction("return", function (_)
     titleScreenMenuCtrl:setMenu(titleScreenMenu)
     titleScreenMenuView:setMenu(titleScreenMenu)
 end)

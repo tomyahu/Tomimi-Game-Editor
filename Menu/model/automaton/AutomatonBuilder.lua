@@ -1,4 +1,3 @@
-local State = require "Menu.model.states.State"
 local Automaton = require "Menu.model.automaton.Automaton"
 --------------------------------------------------------------------------------------------------------
 local AutomatonBuilder = {}
