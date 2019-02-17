@@ -15,10 +15,6 @@ function application.setCtrl(self,newCtrl)
     CurrentCtrl = newCtrl
 end
 
-function application.setLocalContext(self,newContext)
-    LocalContext = newContext
-end
-
 function application.getCurrentView(self)
     return CurrentView
 end
@@ -31,11 +27,19 @@ function application.getCurrentLocalContext(self)
     return LocalContext
 end
 
+function application.setLocalContext(self, newContext)
+    if newContext == nil then
+        LocalContext = {}
+    else
+        LocalContext = newContext
+    end
+end
+
 function application.appChange(self,appName)
     local nextApp = APPS[appName]
+    application:setLocalContext(nextApp:getView():getContextVars(self:getCurrentLocalContext()))
     application:setView(nextApp:getView())
     application:setCtrl(nextApp:getCtrl())
-    application:setLocalContext(nextApp:getView():getContextVars(self:getCurrentLocalContext()))
 end
 
 function application:registerApp(appName, appView, appCtrl)

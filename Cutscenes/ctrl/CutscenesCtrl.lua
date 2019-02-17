@@ -1,12 +1,13 @@
 require "Global.LOVEWrapper.LOVEWrapper"
+require "Global.ctrl.ctrl"
 --------------------------------------------------------------------------------------------------------
-CutscenesCtrl = {}
+CutscenesCtrl = Ctrl.new()
 CutscenesCtrl.__index = CutscenesCtrl
 
 -- CutscenesCtrl: CutscenesCtrl
 -- Creates a CutscenesCtrl
 function CutscenesCtrl.new(cutsceneAdmin)
-    local o = {}
+    local o = Ctrl.new()
     local self = setmetatable(o, CutscenesCtrl)
     self.__index = self
     self.cutscene_admin = cutsceneAdmin

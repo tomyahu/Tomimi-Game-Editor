@@ -21,6 +21,6 @@ testCutsceneAdmin:setCurrentCutscene(0)
 cutsceneCtrl = CutscenesCtrl.new(testCutsceneAdmin)
 cutsceneView = CutscenesView.new(testCutsceneAdmin, cutscene_screen_font)
 
-cutsceneCtrl:setNextApp("MainMenu")
+cutsceneCtrl:setNextApp("Overworld")
 
 application:registerApp("Cutscenes", cutsceneView, cutsceneCtrl)

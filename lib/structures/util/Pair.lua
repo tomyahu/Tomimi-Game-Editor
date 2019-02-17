@@ -27,6 +27,6 @@ function Pair.setFirst(self, newFirst)
     self.first = newFirst
 end
 
-function Pair.setFirst(self, newSecond)
+function Pair.setSecond(self, newSecond)
     self.second = newSecond
 end

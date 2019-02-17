@@ -1,12 +1,12 @@
-require "Overworld.model.entities.Entity"
+require "Overworld.model.entities.SolidEntity"
 --------------------------------------------------------------------------------------------------------
-Player = Entity.new();
+Player = SolidEntity.new();
 Player.__index = Player
 
 -- Player: Player
 -- Creates a Player
-function Player.new(sprite, speed)
-    local o = Entity.new(sprite);
+function Player.new(sprite, speed, hitboxes)
+    local o = SolidEntity.new(sprite, hitboxes);
     local self = setmetatable(o, Player)
     self.__index = self
     self.speed = speed
@@ -14,17 +14,47 @@ function Player.new(sprite, speed)
 end
 
 function Player.moveUp(self)
-    self.pos:setSecond(self.pos:getSecond() - self.speed)
+    local player_x, player_y = self:getPos()
+    self:setPos(player_x, player_y - self.speed)
+
+    local old_vx, _ = self.solid_object:getSpeed()
+    self.solid_object:setSpeed(old_vx, - self.speed)
 end
 
 function Player.moveDown(self)
-    self.pos:setSecond(self.pos:getSecond() + self.speed)
+    local player_x, player_y = self:getPos()
+    self:setPos(player_x, player_y + self.speed)
+
+    local old_vx, _ = self.solid_object:getSpeed()
+    self.solid_object:setSpeed(old_vx, self.speed)
 end
 
 function Player.moveLeft(self)
-    self.pos:setFirst(self.pos:getFirst() - self.speed)
+    local player_x, player_y = self:getPos()
+    self:setPos(player_x - self.speed, player_y)
+
+    local _, old_vy = self.solid_object:getSpeed()
+    self.solid_object:setSpeed(- self.speed, old_vy)
 end
 
 function Player.moveRight(self)
-    self.pos:setFirst(self.pos:getFirst() + self.speed)
+    local player_x, player_y = self:getPos()
+    self:setPos(player_x + self.speed, player_y)
+
+    local _, old_vy = self.solid_object:getSpeed()
+    self.solid_object:setSpeed(self.speed, old_vy)
+end
+
+function Player.stopX(self)
+    local _, old_vy = self.solid_object:getSpeed()
+    self.solid_object:setSpeed(0, old_vy)
+end
+
+function Player.stopY(self)
+    local old_vx, _ = self.solid_object:getSpeed()
+    self.solid_object:setSpeed(old_vx, 0)
+end
+
+function Player.registerAsSolidObject(self)
+    return
 end

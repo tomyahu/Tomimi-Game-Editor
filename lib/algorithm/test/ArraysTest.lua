@@ -1,6 +1,6 @@
-require "util.test"
-require "util.algorithm.Arrays"
-require "util.structures.util.Pair"
+require "lib.test"
+require "lib.algorithm.Arrays"
+require "lib.structures.util.Pair"
 
 -- Quicksort
 a = {}

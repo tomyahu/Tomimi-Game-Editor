@@ -1,7 +1,5 @@
-require "class"
-require "Overworld.model.rooms.Floor"
-require "util.algorithm.Arrays"
-require "util.structures.util.Pair"
+require "lib.algorithm.Arrays"
+require "lib.structures.util.Pair"
 --------------------------------------------------------------------------------------------------------
 Room = {}
 Room.__index = Room
@@ -37,4 +35,16 @@ end
 -- Returns the room's objects
 function Room.getObjects(self)
     return self.objects
+end
+
+-- getBackgroundPath: none -> str
+-- Returns the room background path
+function Room.getBackgroundPath(self)
+    return self.background_path
+end
+
+function Room.registerSolidObjects(self)
+    for i, object in pairs(self.objects) do
+        object:registerAsSolidObject()
+    end
 end
