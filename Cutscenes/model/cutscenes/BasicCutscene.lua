@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------------------------------
-BasicCutscene = {}
+local BasicCutscene = {}
 BasicCutscene.__index = BasicCutscene
 
 -- BasicCutscene: BasicCutscene
@@ -38,3 +38,5 @@ end
 function BasicCutscene.getScenes(self)
     return self.scenes
 end
+
+return BasicCutscene

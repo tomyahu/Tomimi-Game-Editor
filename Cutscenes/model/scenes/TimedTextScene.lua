@@ -1,7 +1,7 @@
 require "Global.consts"
-require "Cutscenes.model.scenes.TimedScene"
+local TimedScene = require "Cutscenes.model.scenes.TimedScene"
 --------------------------------------------------------------------------------------------------------
-TimedTextScene = TimedScene.new();
+local TimedTextScene = TimedScene.new();
 TimedTextScene.__index = TimedTextScene
 
 -- TimedTextScene: TimedTextScene
@@ -19,3 +19,4 @@ function TimedTextScene.getText(self)
     return string.sub(self.text, 0,math.floor(self.elapsed_time / self.dt))
 end
 
+return TimedTextScene

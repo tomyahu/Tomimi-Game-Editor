@@ -1,7 +1,7 @@
 require "Global.consts"
 require "Global.LOVEWrapper.LOVEWrapper"
 -------------------------------------------------------------------------------------------------------
-CutscenesView = {}
+local CutscenesView = {}
 CutscenesView.__index = CutscenesView
 
 -- CutscenesView: CutscenesView
@@ -34,3 +34,5 @@ function CutscenesView.getContextVars(self, previous_context)
     end
     return context
 end
+
+return CutscenesView

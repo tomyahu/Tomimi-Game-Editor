@@ -1,6 +1,6 @@
-require "Cutscenes.model.cutscenes.BasicCutscene"
+local BasicCutscene = require "Cutscenes.model.cutscenes.BasicCutscene"
 --------------------------------------------------------------------------------------------------------
-TimedCutscene = BasicCutscene.new();
+local TimedCutscene = BasicCutscene.new();
 TimedCutscene.__index = TimedCutscene
 
 -- TimedCutscene: TimedCutscene
@@ -20,3 +20,5 @@ function TimedCutscene.resetCutscene(self)
         scene:resetElapsedTime()
     end
 end
+
+return TimedCutscene

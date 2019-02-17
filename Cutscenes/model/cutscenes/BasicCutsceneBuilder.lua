@@ -1,7 +1,7 @@
-require "Cutscenes.model.cutscenes.BasicCutscene"
-require "Cutscenes.model.scenes.BasicScene"
+local BasicCutscene = require "Cutscenes.model.cutscenes.BasicCutscene"
+local BasicScene = require "Cutscenes.model.scenes.BasicScene"
 --------------------------------------------------------------------------------------------------------
-BasicCutsceneBuilder = {}
+local BasicCutsceneBuilder = {}
 BasicCutsceneBuilder.__index = BasicCutsceneBuilder
 
 -- BasicCutsceneBuilder: BasicCutsceneBuilder
@@ -25,3 +25,5 @@ end
 function BasicCutsceneBuilder.getCutscene(self)
     return BasicCutscene.new(self.scenes)
 end
+
+return BasicCutsceneBuilder

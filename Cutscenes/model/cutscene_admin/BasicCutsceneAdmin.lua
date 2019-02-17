@@ -1,6 +1,6 @@
-require "Cutscenes.model.cutscenes.BasicCutscene"
+local BasicCutscene = require "Cutscenes.model.cutscenes.BasicCutscene"
 --------------------------------------------------------------------------------------------------------
-BasicCutsceneAdmin = {};
+local BasicCutsceneAdmin = {};
 BasicCutsceneAdmin.__index = BasicCutsceneAdmin
 
 -- BasicCutsceneAdmin: BasicCutsceneAdmin
@@ -29,3 +29,5 @@ end
 function BasicCutsceneAdmin.setCurrentCutscene(self, key)
     self.current_cutscene = self.cutscenes[key]
 end
+
+return BasicCutsceneAdmin

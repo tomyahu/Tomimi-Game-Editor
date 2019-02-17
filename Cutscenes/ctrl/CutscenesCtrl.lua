@@ -1,7 +1,7 @@
 require "Global.LOVEWrapper.LOVEWrapper"
 require "Global.ctrl.ctrl"
 --------------------------------------------------------------------------------------------------------
-CutscenesCtrl = Ctrl.new()
+local CutscenesCtrl = Ctrl.new()
 CutscenesCtrl.__index = CutscenesCtrl
 
 -- CutscenesCtrl: CutscenesCtrl
@@ -26,3 +26,5 @@ end
 function CutscenesCtrl.setNextApp(self, appName)
     self.next_app = appName
 end
+
+return CutscenesCtrl

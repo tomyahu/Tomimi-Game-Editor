@@ -1,8 +1,8 @@
-require "Cutscenes.model.cutscenes.BasicCutsceneBuilder"
-require "Cutscenes.model.cutscenes.TimedCutscene"
-require "Cutscenes.model.scenes.TimedTextScene"
+local BasicCutsceneBuilder = require "Cutscenes.model.cutscenes.BasicCutsceneBuilder"
+local TimedCutscene = require "Cutscenes.model.cutscenes.TimedCutscene"
+local TimedTextScene = require "Cutscenes.model.scenes.TimedTextScene"
 --------------------------------------------------------------------------------------------------------
-TimedCutsceneBuilder = BasicCutsceneBuilder.new();
+local TimedCutsceneBuilder = BasicCutsceneBuilder.new();
 TimedCutsceneBuilder.__index = TimedCutsceneBuilder
 
 -- TimedCutsceneBuilder: TimedCutsceneBuilder
@@ -25,3 +25,5 @@ end
 function TimedCutsceneBuilder.getCutscene(self)
     return TimedCutscene.new(self.scenes)
 end
+
+return TimedCutsceneBuilder

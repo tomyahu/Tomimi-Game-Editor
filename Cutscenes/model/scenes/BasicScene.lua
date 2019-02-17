@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------------------------------
-BasicScene = {}
+local BasicScene = {}
 BasicScene.__index = BasicScene
 
 -- BasicScene: BasicScene
@@ -20,3 +20,5 @@ end
 function BasicScene.getImagePath(self)
     return self.image_path
 end
+
+return BasicScene

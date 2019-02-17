@@ -77,11 +77,11 @@ local confScreenMenu = mBuild:getMenu()
 local titleScreenMenuCtrl = MenuCtrl.new(titleScreenMenu)
 local titleScreenMenuView = LotRMTitleMenuView.new("Resources/Menu/background.png", titleScreenMenu, title_screen_font)
 
---[[
+
 new_game_state:addTransitionAction("return", function (_)
     application:appChange("Cutscenes")
 end)
-]]
+
 conf_state:addTransitionAction("return", function (_)
     titleScreenMenuCtrl:setMenu(confScreenMenu)
     titleScreenMenuView:setMenu(confScreenMenu)
