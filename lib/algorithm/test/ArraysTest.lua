@@ -1,6 +1,6 @@
 require "lib.test"
 require "lib.algorithm.Arrays"
-require "lib.structures.util.Pair"
+local Pair = require "lib.structures.util.Pair"
 
 -- Quicksort
 a = {}

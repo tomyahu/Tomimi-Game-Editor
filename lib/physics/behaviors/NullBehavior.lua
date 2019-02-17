@@ -1,6 +1,6 @@
 require "Global.application.application"
 --------------------------------------------------------------------------------------------------------
-NullBehavior = {};
+local NullBehavior = {};
 NullBehavior.__index = NullBehavior
 
 -- NullBehavior: NullBehavior
@@ -20,3 +20,5 @@ function NullBehavior.new(group)
 end
 
 function NullBehavior.AllObjectsInteract(self) end
+
+return NullBehavior

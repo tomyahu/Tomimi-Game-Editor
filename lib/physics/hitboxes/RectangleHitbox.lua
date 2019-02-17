@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------------------------------
-RectangleHitbox = {};
+local RectangleHitbox = {};
 RectangleHitbox.__index = RectangleHitbox
 
 -- RectangleHitbox: RectangleHitbox
@@ -50,3 +50,5 @@ end
 function RectangleHitbox.getPosition(self)
     return self.x1, self.x2, self.y1, self.y2
 end
+
+return RectangleHitbox

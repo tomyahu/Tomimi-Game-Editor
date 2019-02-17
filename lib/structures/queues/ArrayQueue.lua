@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------------------------------
-ArrayQueue = {}
+local ArrayQueue = {}
 ArrayQueue.__index = ArrayQueue
 
 function ArrayQueue.new()
@@ -43,3 +43,5 @@ end
 function ArrayQueue:getEnd(self)
     return (self.start + self.size - 1) % self.capacity
 end
+
+return ArrayQueue

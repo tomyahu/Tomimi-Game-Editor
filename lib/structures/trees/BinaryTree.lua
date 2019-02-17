@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------------------------------
-Node = {}
+local Node = {}
 Node.__index = {}
 
 function Node.new(key, val)
@@ -108,7 +108,7 @@ function Node.toArray(self)
     return aux
 end
 --------------------------------------------------------------------------------------------------------
-BinaryTree = {}
+local BinaryTree = {}
 BinaryTree.__index = BinaryTree
 
 function BinaryTree.new()
@@ -156,3 +156,5 @@ end
 function BinaryTree.toArray(self)
     return self.tree:toArray()
 end
+
+return BinaryTree

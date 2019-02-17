@@ -1,6 +1,6 @@
 require "Global.application.application"
 --------------------------------------------------------------------------------------------------------
-SolidObject = {};
+local SolidObject = {};
 SolidObject.__index = SolidObject
 
 -- SolidRectangleObject: SolidRectangleObject
@@ -78,3 +78,5 @@ function SolidObject.movePosition(self)
         hitbox:movePosition(self.vx, self.vy)
     end
 end
+
+return SolidObject

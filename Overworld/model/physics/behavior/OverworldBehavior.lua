@@ -1,4 +1,4 @@
-require "lib.physics.behaviors.NullBehavior"
+local NullBehavior = require "lib.physics.behaviors.NullBehavior"
 require "Global.application.application"
 --------------------------------------------------------------------------------------------------------
 local OverworldBehavior = NullBehavior.new();

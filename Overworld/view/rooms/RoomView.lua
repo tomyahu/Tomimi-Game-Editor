@@ -1,3 +1,4 @@
+local Pair = require "lib.structures.util.Pair"
 --------------------------------------------------------------------------------------------------------
 local RoomView = {};
 RoomView.__index = RoomView

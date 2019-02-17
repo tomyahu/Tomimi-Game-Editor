@@ -1,7 +1,7 @@
-require "lib.physics.behaviors.NullBehavior"
+local NullBehavior = require "lib.physics.behaviors.NullBehavior"
 require "Global.application.application"
 --------------------------------------------------------------------------------------------------------
-StaticBehavior = NullBehavior.new();
+local StaticBehavior = NullBehavior.new();
 StaticBehavior.__index = StaticBehavior
 
 -- StaticBehavior: StaticBehavior
@@ -45,3 +45,5 @@ function StaticBehavior.AllObjectsInteract(self)
     end
 
 end
+
+return StaticBehavior

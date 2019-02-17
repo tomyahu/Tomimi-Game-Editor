@@ -1,4 +1,4 @@
-require "lib.physics.hitboxes.RectangleHitbox"
+local RectangleHitbox = require "lib.physics.hitboxes.RectangleHitbox"
 --------------------------------------------------------------------------------------------------------
 
 function newPlayerHitboxes()

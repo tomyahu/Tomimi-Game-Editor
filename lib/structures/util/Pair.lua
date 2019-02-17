@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------------------------------
-Pair = {}
+local Pair = {}
 Pair.__index = Pair
 
 -- Pair: Pair void void -> Pair
@@ -30,3 +30,5 @@ end
 function Pair.setSecond(self, newSecond)
     self.second = newSecond
 end
+
+return Pair

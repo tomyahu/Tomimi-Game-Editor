@@ -1,5 +1,5 @@
 local Entity = require "Overworld.model.entities.Entity"
-require "lib.physics.objects.SolidObject"
+local SolidObject = require "lib.physics.objects.SolidObject"
 --------------------------------------------------------------------------------------------------------
 local SolidEntity = Entity.new();
 SolidEntity.__index = SolidEntity

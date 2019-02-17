@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------------------------------
-ArrayStack = {}
+local ArrayStack = {}
 ArrayStack.__index = ArrayStack
 
 function ArrayStack.new()
@@ -36,3 +36,5 @@ function ArrayStack.push(self, o)
     self.array[self.size] = o
     self.size = self.size + 1
 end
+
+return ArrayStack

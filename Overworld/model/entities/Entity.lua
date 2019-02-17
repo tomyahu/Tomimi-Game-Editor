@@ -1,4 +1,4 @@
-require "lib.structures.util.Pair"
+local Pair = require "lib.structures.util.Pair"
 --------------------------------------------------------------------------------------------------------
 local Entity = {}
 Entity.__index = Entity
