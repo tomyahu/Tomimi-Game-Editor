@@ -19,6 +19,6 @@ function NullBehavior.new(group)
     return self
 end
 
-function NullBehavior.AllObjectsInteract(self) end
+function NullBehavior.AllObjectsInteract(_) end
 
 return NullBehavior

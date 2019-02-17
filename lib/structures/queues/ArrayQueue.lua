@@ -40,7 +40,7 @@ function ArrayQueue.enqueue(self, o)
     self.array[self.getEnd()] = o
 end
 
-function ArrayQueue:getEnd(self)
+function ArrayQueue.getEnd(self)
     return (self.start + self.size - 1) % self.capacity
 end
 
