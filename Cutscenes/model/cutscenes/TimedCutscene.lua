@@ -16,7 +16,7 @@ end
 -- resets the current cutscene to the first scene
 function TimedCutscene.resetCutscene(self)
     self.current_scene = 0
-    for i,scene in pairs(self.scenes) do
+    for _,scene in pairs(self.scenes) do
         scene:resetElapsedTime()
     end
 end

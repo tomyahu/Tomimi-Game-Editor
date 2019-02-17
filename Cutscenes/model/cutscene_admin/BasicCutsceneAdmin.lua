@@ -1,4 +1,3 @@
-local BasicCutscene = require "Cutscenes.model.cutscenes.BasicCutscene"
 --------------------------------------------------------------------------------------------------------
 local BasicCutsceneAdmin = {};
 BasicCutsceneAdmin.__index = BasicCutsceneAdmin

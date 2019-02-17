@@ -26,7 +26,7 @@ function CutscenesView.draw(self,context)
     love.graphics.print( scene:getText(), getRelativePosX(50), getRelativePosY(550), 0, getScale(), getScale())
 end
 
-function CutscenesView.getContextVars(self, previous_context)
+function CutscenesView.getContextVars(self, _)
     local context = {}
     local cutscene = self.cutscene_admin:getCurrentCutscene()
     for _, scene in pairs(cutscene:getScenes()) do
