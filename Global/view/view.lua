@@ -1,7 +1,7 @@
+require "lib.classes.class"
 require "Global.LOVEWrapper.LOVEWrapper"
 --------------------------------------------------------------------------------------------------------
-View = {}
-View.__index = View
+local View = class(function(self) end)
 
 -- View: View
 -- Creates a View
@@ -15,3 +15,5 @@ end
 function View.draw(_,_) end
 
 function View.getContextVars(_, _) end
+
+return View
