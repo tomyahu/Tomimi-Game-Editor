@@ -1,5 +1,5 @@
 require "Global.LOVEWrapper.LOVEWrapper"
-require "Global.ctrl.ctrl"
+local Ctrl = require "Global.ctrl.ctrl"
 --------------------------------------------------------------------------------------------------------
 local CutscenesCtrl = Ctrl.new()
 CutscenesCtrl.__index = CutscenesCtrl

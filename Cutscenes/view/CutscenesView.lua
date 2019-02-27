@@ -1,13 +1,14 @@
 require "Global.consts"
+local View = require "Global.view.view"
 require "Global.LOVEWrapper.LOVEWrapper"
 -------------------------------------------------------------------------------------------------------
-local CutscenesView = {}
+local CutscenesView = View:new()
 CutscenesView.__index = CutscenesView
 
 -- CutscenesView: CutscenesView
 -- Creates a CutscenesView
 function CutscenesView.new(cutsceneAdmin, font)
-    local o = {}
+    local o = View:new()
     local self = setmetatable(o, CutscenesView)
     self.__index = self
     self.cutscene_admin = cutsceneAdmin

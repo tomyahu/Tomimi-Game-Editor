@@ -1,4 +1,4 @@
-require "Global.view.view"
+local View = require "Global.view.view"
 require "Global.application.application"
 --------------------------------------------------------------------------------------------------------
 local OverworldView = View.new()

@@ -1,4 +1,4 @@
-require "Global.ctrl.ctrl"
+local Ctrl = require "Global.ctrl.ctrl"
 local OverworldBehavior = require "Overworld.model.physics.behavior.OverworldBehavior"
 --------------------------------------------------------------------------------------------------------
 local OverworldCtrl = Ctrl:new()
