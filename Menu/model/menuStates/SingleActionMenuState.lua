@@ -1,3 +1,4 @@
+require "lib.classes.class"
 local MenuState = require "Menu.model.menuStates.MenuState"
 --------------------------------------------------------------------------------------------------------
 local SingleActionMenuState = MenuState.new()

@@ -1,16 +1,9 @@
+require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
-local Automaton = {}
-Automaton.__index = Automaton
 
--- Automaton: Automaton
--- Creates new Automaton
-function Automaton.new()
-    local o = {}
-    local self = setmetatable(o, Automaton)
-    self.__index = self
+local Automaton = class(function(self)
     self.currentState = nil
-    return self
-end
+end)
 
 -- setCurrentState: State -> None
 -- Sets the current state of the automaton

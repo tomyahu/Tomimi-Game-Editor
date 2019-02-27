@@ -1,17 +1,10 @@
+require "lib.classes.class"
 local Automaton = require "Menu.model.automaton.Automaton"
 --------------------------------------------------------------------------------------------------------
-local Menu = Automaton.new()
-Menu.__index = Menu
 
--- Menu: Menu
--- Creates new Menu
-function Menu.new()
-    local o = Automaton.new()
-    local self = setmetatable(o, Menu)
-    self.__index = self
+local Menu = extend(Automaton, function(self)
     self.options = {}
-    return self
-end
+end)
 
 -- activateCurrentOption: None -> None
 -- activates the effect of the currently selected option

@@ -1,19 +1,12 @@
+require "lib.classes.class"
 local Automaton = require "Menu.model.automaton.Automaton"
 --------------------------------------------------------------------------------------------------------
-local AutomatonBuilder = {}
-AutomatonBuilder.__index = AutomatonBuilder
 
--- AutomatonBuilder: AutomatonBuilder
--- Creates new AutomatonBuilder
-function AutomatonBuilder.new()
-    local o = {}
-    local self = setmetatable(o, AutomatonBuilder)
-    self.__index = self
-    self.automaton = Automaton.new()
+local AutomatonBuilder = class(function(self)
+    self.automaton = Automaton:new()
     self.states = {}
     self.stateNumber = 0
-    return self
-end
+end)
 
 -- addState: State -> self
 -- Adds a state to the automaton

@@ -1,18 +1,11 @@
+require "lib.classes.class"
 local Menu = require "Menu.model.menues.Menu"
 --------------------------------------------------------------------------------------------------------
-local MenuBuilder = {}
-MenuBuilder.__index = MenuBuilder
 
--- MenuBuilder: MenuBuilder
--- Creates new MenuBuilder
-function MenuBuilder.new()
-    local o = {}
-    local self = setmetatable(o, MenuBuilder)
-    self.__index = self
-    self.menu = Menu.new()
+local MenuBuilder = class(function(self)
+    self.menu = Menu:new()
     self.stateNumber = 0
-    return self
-end
+end)
 
 -- addState: MenuState -> self
 -- Adds a menu state to the menu

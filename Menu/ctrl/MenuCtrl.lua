@@ -1,18 +1,14 @@
-require "Menu.model.automaton.Automaton"
-require "Global.ctrl.ctrl"
+require "lib.classes.class"
+local Ctrl = require "Global.ctrl.ctrl"
 --------------------------------------------------------------------------------------------------------
-local MenuCtrl = Ctrl.new()
-MenuCtrl.__index = MenuCtrl
 
--- MenuCtrl: MenuCtrl
--- Creates new MenuCtrl
-function MenuCtrl.new(menu)
-    local o = Ctrl.new()
-    local self = setmetatable(o, MenuCtrl)
-    self.__index = self
+local MenuCtrl = extend(Ctrl, function(self, menu)
     self.menu = menu
-    return self
-end
+end,
+
+function(menu)
+    return Ctrl:new()
+end)
 
 function MenuCtrl.callbackPressedKey(self,key)
     self.menu:makeTransition(key)

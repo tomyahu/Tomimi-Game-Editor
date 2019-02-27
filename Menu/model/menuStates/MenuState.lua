@@ -1,17 +1,14 @@
+require "lib.classes.class"
 local State = require "Menu.model.states.State"
 --------------------------------------------------------------------------------------------------------
-local MenuState = State.new()
-MenuState.__index = MenuState
 
--- MenuState: MenuState str
--- Creates new MenuState
-function MenuState.new(name)
-    local o = State.new()
-    local self = setmetatable(o, MenuState)
-    self.__index = self
+local MenuState = extend(State, function(self, name)
     self.name = name
-    return self
-end
+end,
+
+function(name)
+    return State:new()
+end)
 
 function MenuState.getName(self)
     return self.name

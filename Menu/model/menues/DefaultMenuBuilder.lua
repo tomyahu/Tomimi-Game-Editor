@@ -1,18 +1,11 @@
+require "lib.classes.class"
 local MenuBuilder = require "Menu.model.menues.MenuBuilder"
 --------------------------------------------------------------------------------------------------------
-local DefaultMenuBuilder = {}
-DefaultMenuBuilder.__index = DefaultMenuBuilder
 
--- DefaultMenuBuilder: DefaultMenuBuilder
--- Creates new DefaultMenuBuilder
-function DefaultMenuBuilder.new()
-    local o = {}
-    local self = setmetatable(o, DefaultMenuBuilder)
-    self.__index = self
-    self.menubuild = MenuBuilder.new()
+local DefaultMenuBuilder = class(function(self)
+    self.menubuild = MenuBuilder:new()
     self.optionNumber = 0
-    return self
-end
+end)
 
 -- addOption: MenuState -> self
 -- Adds an option to the menu

@@ -1,17 +1,10 @@
+require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
-local State = {}
-State.__index = State
 
--- State: State
--- Creates new State
-function State.new()
-    local o = {}
-    local self = setmetatable(o, State)
-    self.__index = self
+local State = class(function(self)
     self.transitions = {}
     self.transition_actions = {}
-    return self
-end
+end)
 
 -- addTransition: int, state -> None
 -- Adds a transition to the state

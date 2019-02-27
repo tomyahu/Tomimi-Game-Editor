@@ -1,19 +1,16 @@
-require "Global.view.view"
+require "lib.classes.class"
+local View = require "Global.view.view"
 require "Global.consts"
 --------------------------------------------------------------------------------------------------------
-local BasicMenuView = View.new()
-BasicMenuView.__index = BasicMenuView
 
--- MenuView: MenuView
--- Creates new MenuView
-function BasicMenuView.new(background_image_path, menu)
-    local o = View.new()
-    local self = setmetatable(o, BasicMenuView)
-    self.__index = self
+local BasicMenuView = extend(View, function(self, background_image_path, menu)
     self.background_path = background_image_path
     self.menu = menu
-    return self
-end
+end,
+
+function(background_image_path, menu)
+    return View:new()
+end)
 
 function BasicMenuView.setMenu(self, new_menu)
     self.menu = new_menu

@@ -1,22 +1,18 @@
-require "Global.view.view"
+require "lib.classes.class"
 require "Global.LOVEWrapper.LOVEWrapper"
 require "Global.consts"
 local BasicMenuView = require "Menu.view.BasicMenuView"
 --------------------------------------------------------------------------------------------------------
-local LotRMTitleMenuView = BasicMenuView.new()
-LotRMTitleMenuView.__index = LotRMTitleMenuView
 
--- MenuView: MenuView
--- Creates new MenuView
-function LotRMTitleMenuView.new(background_image_path, menu, font)
-    local o = BasicMenuView.new()
-    local self = setmetatable(o, LotRMTitleMenuView)
-    self.__index = self
+local LotRMTitleMenuView = extend(BasicMenuView, function(self, background_image_path, menu, font)
     self.background_path = background_image_path
     self.menu = menu
     self.font = font
-    return self
-end
+end,
+
+function(background_image_path, menu, font)
+    return BasicMenuView:new()
+end)
 
 function LotRMTitleMenuView.draw(self, context)
     love.graphics.setFont( self.font )
