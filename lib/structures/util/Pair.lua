@@ -1,6 +1,12 @@
+require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
 local Pair = {}
 Pair.__index = Pair
+
+local Pair = class(function(self, first, second)
+    self.first = first
+    self.second = second
+end)
 
 -- Pair: Pair void void -> Pair
 -- Crea un nuevo par

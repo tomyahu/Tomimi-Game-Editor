@@ -1,17 +1,12 @@
+require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
-local ArrayQueue = {}
-ArrayQueue.__index = ArrayQueue
 
-function ArrayQueue.new()
-    local o = {}
-    local self = setmetatable(o, ArrayQueue)
-    self.__index = self
+local ArrayQueue = class(function(self)
     self.size = 0
     self.capacity = 0
     self.start = 0
     self.array = {}
-    return self
-end
+end)
 
 function ArrayQueue.isEmpty(self)
     return self.size == 0

@@ -1,15 +1,10 @@
+require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
-local ArrayStack = {}
-ArrayStack.__index = ArrayStack
 
-function ArrayStack.new()
-    local o = {}
-    local self = setmetatable(o, ArrayStack)
-    self.__index = self
+local ArrayStack = class(function(self)
     self.size = 0
     self.array = {}
-    return self
-end
+end)
 
 function ArrayStack.isEmpty(self)
     return self.size == 0

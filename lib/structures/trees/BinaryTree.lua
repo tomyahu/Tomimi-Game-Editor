@@ -1,17 +1,12 @@
+require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
-local Node = {}
-Node.__index = {}
 
-function Node.new(key, val)
-    local o = {}
-    local self = setmetatable(o, Node)
-    self.__index = self
+local Node = class(function(self, key, val)
     self.val = val
     self.key = key
     self.izq = nil
     self.der = nil
-    return self
-end
+end)
 
 function Node.search(self, key)
     if key < self.key and (not (self.izq == nil))then
@@ -108,16 +103,9 @@ function Node.toArray(self)
     return aux
 end
 --------------------------------------------------------------------------------------------------------
-local BinaryTree = {}
-BinaryTree.__index = BinaryTree
-
-function BinaryTree.new()
-    local o = {}
-    local self = setmetatable(o, BinaryTree)
-    self.__index = self
+local BinaryTree = class(function(self)
     self.tree = nil
-    return self
-end
+end)
 
 function BinaryTree.search(self,key)
     if self.tree == nil then
