@@ -1,17 +1,10 @@
+require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
-local BasicScene = {}
-BasicScene.__index = BasicScene
 
--- BasicScene: BasicScene
--- Creates a BasicScene
-function BasicScene.new(text, image_path)
-    local o = {}
-    local self = setmetatable(o, BasicScene)
-    self.__index = self
+local BasicScene = class(function(self, text, image_path)
     self.text = text
     self.image_path = image_path
-    return self
-end
+end)
 
 function BasicScene.getText(self)
     return self.text

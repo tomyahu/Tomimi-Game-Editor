@@ -1,16 +1,9 @@
+require "lib.classes.class"
 local BasicCutscene = require "Cutscenes.model.cutscenes.BasicCutscene"
 --------------------------------------------------------------------------------------------------------
-local TimedCutscene = BasicCutscene.new();
-TimedCutscene.__index = TimedCutscene
 
--- TimedCutscene: TimedCutscene
--- Creates a TimedCutscene
-function TimedCutscene.new(scenes)
-    local o = BasicCutscene.new(scenes);
-    local self = setmetatable(o, TimedCutscene)
-    self.__index = self
-    return self
-end
+local TimedCutscene = extend(BasicCutscene, function(self, scenes)
+end)
 
 -- resetCutscene: None -> None
 -- resets the current cutscene to the first scene

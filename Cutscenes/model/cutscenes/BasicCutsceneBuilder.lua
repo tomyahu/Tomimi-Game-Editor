@@ -1,19 +1,12 @@
+require "lib.classes.class"
 local BasicCutscene = require "Cutscenes.model.cutscenes.BasicCutscene"
 local BasicScene = require "Cutscenes.model.scenes.BasicScene"
 --------------------------------------------------------------------------------------------------------
-local BasicCutsceneBuilder = {}
-BasicCutsceneBuilder.__index = BasicCutsceneBuilder
 
--- BasicCutsceneBuilder: BasicCutsceneBuilder
--- Creates a BasicCutsceneBuilder
-function BasicCutsceneBuilder.new()
-    local o = {}
-    local self = setmetatable(o, BasicCutsceneBuilder)
-    self.__index = self
+local BasicCutsceneBuilder = class(function(self)
     self.scenes = {}
     self.scene_number = 0
-    return self
-end
+end)
 
 -- addScene: str, str -> None
 -- add a new scene to the cutscene

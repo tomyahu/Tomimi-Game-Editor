@@ -1,17 +1,10 @@
+require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
-local BasicCutscene = {}
-BasicCutscene.__index = BasicCutscene
 
--- BasicCutscene: BasicCutscene
--- Creates a BasicCutscene
-function BasicCutscene.new(scenes)
-    local o = {}
-    local self = setmetatable(o, BasicCutscene)
-    self.__index = self
+local BasicCutscene = class(function(self, scenes)
     self.scenes = scenes
     self.current_scene = 0
-    return self
-end
+end)
 
 -- advanceScene: None -> bool
 -- advances to the next scene

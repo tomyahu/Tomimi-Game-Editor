@@ -1,19 +1,16 @@
+require "lib.classes.class"
 local BasicCutsceneBuilder = require "Cutscenes.model.cutscenes.BasicCutsceneBuilder"
 local TimedCutscene = require "Cutscenes.model.cutscenes.TimedCutscene"
 local TimedTextScene = require "Cutscenes.model.scenes.TimedTextScene"
 --------------------------------------------------------------------------------------------------------
-local TimedCutsceneBuilder = BasicCutsceneBuilder.new();
-TimedCutsceneBuilder.__index = TimedCutsceneBuilder
 
--- TimedCutsceneBuilder: TimedCutsceneBuilder
--- Creates a TimedCutsceneBuilder
-function TimedCutsceneBuilder.new(speed)
-    local o = BasicCutsceneBuilder.new();
-    local self = setmetatable(o, TimedCutsceneBuilder)
-    self.__index = self
+local TimedCutsceneBuilder = extend(BasicCutsceneBuilder, function(self, speed)
     self.speed = speed
-    return self
-end
+end,
+
+function(speed)
+    return BasicCutsceneBuilder:new()
+end)
 
 -- addScene: str, str -> None
 -- add a new scene to the cutscene

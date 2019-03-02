@@ -1,17 +1,10 @@
+require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
-local BasicCutsceneAdmin = {};
-BasicCutsceneAdmin.__index = BasicCutsceneAdmin
 
--- BasicCutsceneAdmin: BasicCutsceneAdmin
--- Creates a BasicCutsceneAdmin
-function BasicCutsceneAdmin.new()
-    local o = {}
-    local self = setmetatable(o, BasicCutsceneAdmin)
-    self.__index = self
+local BasicCutsceneAdmin = class(function(self)
     self.cutscenes = {}
     self.current_cutscene = nil
-    return self
-end
+end)
 
 function BasicCutsceneAdmin.getCurrentCutscene(self)
     return self.current_cutscene

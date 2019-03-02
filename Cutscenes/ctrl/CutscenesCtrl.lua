@@ -1,18 +1,15 @@
+require "lib.classes.class"
 require "Global.LOVEWrapper.LOVEWrapper"
 local Ctrl = require "Global.ctrl.ctrl"
 --------------------------------------------------------------------------------------------------------
-local CutscenesCtrl = Ctrl.new()
-CutscenesCtrl.__index = CutscenesCtrl
 
--- CutscenesCtrl: CutscenesCtrl
--- Creates a CutscenesCtrl
-function CutscenesCtrl.new(cutsceneAdmin)
-    local o = Ctrl.new()
-    local self = setmetatable(o, CutscenesCtrl)
-    self.__index = self
+local CutscenesCtrl = extend(Ctrl, function(self, cutsceneAdmin)
     self.cutscene_admin = cutsceneAdmin
-    return self
-end
+end,
+
+function(cutsceneAdmin)
+    return Ctrl:new()
+end)
 
 function CutscenesCtrl.callbackPressedKey(self,key)
     if key == "return" then

@@ -1,20 +1,18 @@
+require "lib.classes.class"
 require "Global.consts"
 local View = require "Global.view.view"
 require "Global.LOVEWrapper.LOVEWrapper"
 -------------------------------------------------------------------------------------------------------
-local CutscenesView = View:new()
-CutscenesView.__index = CutscenesView
 
--- CutscenesView: CutscenesView
--- Creates a CutscenesView
-function CutscenesView.new(cutsceneAdmin, font)
-    local o = View:new()
-    local self = setmetatable(o, CutscenesView)
-    self.__index = self
-    self.cutscene_admin = cutsceneAdmin
+local CutscenesView = extend(View, function(self, cutscene_admin, font)
+    self.cutscene_admin = cutscene_admin
     self.font = font
-    return self
-end
+end,
+
+function(cutscene_admin, font)
+    return View:new()
+end)
+
 
 function CutscenesView.draw(self,context)
     love.graphics.setFont( self.font )
