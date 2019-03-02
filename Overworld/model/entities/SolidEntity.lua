@@ -1,18 +1,15 @@
+require "lib.classes.class"
 local Entity = require "Overworld.model.entities.Entity"
 local SolidObject = require "lib.physics.objects.SolidObject"
 --------------------------------------------------------------------------------------------------------
-local SolidEntity = Entity.new();
-SolidEntity.__index = SolidEntity
 
--- SolidEntity: SolidEntity
--- Creates a SolidEntity
-function SolidEntity.new(sprite, hitboxes)
-    local o = Entity.new(sprite);
-    local self = setmetatable(o, SolidEntity)
-    self.__index = self
+local SolidEntity = extend(Entity, function(self, sprite, hitboxes)
     self.solid_object = SolidObject.new(hitboxes)
-    return self
-end
+end,
+
+function(sprite, hitboxes)
+    return Entity.new(sprite)
+end)
 
 function SolidEntity.setPos(self, x, y)
     self.solid_object:setPosition(x, y)

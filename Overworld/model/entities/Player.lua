@@ -1,17 +1,14 @@
+require "lib.classes.class"
 local SolidEntity = require "Overworld.model.entities.SolidEntity"
 --------------------------------------------------------------------------------------------------------
-local Player = SolidEntity.new();
-Player.__index = Player
 
--- Player: Player
--- Creates a Player
-function Player.new(sprite, speed, hitboxes)
-    local o = SolidEntity.new(sprite, hitboxes);
-    local self = setmetatable(o, Player)
-    self.__index = self
+local Player = extend(SolidEntity, function(self, sprite, speed, hitboxes)
     self.speed = speed
-    return self
-end
+end,
+
+function(sprite, speed, hitboxes)
+    return SolidEntity.new(sprite, hitboxes)
+end)
 
 function Player.moveUp(self)
     local old_vx, _ = self.solid_object:getSpeed()

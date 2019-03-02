@@ -1,19 +1,16 @@
+require "lib.classes.class"
 local NullBehavior = require "lib.physics.behaviors.NullBehavior"
 require "Global.application.application"
 --------------------------------------------------------------------------------------------------------
-local OverworldBehavior = NullBehavior.new();
-OverworldBehavior.__index = OverworldBehavior
 
--- OverworldBehavior: OverworldBehavior
--- Creates a OverworldBehavior
-function OverworldBehavior.new(group, player)
-    local o = NullBehavior.new(group);
-    local self = setmetatable(o, OverworldBehavior)
-    self.__index = self
+local OverworldBehavior = extend(NullBehavior, function(self, group, player)
     self.player_object = player:getSolidObject()
     self.group = group
-    return self
-end
+end,
+
+function(group, player)
+    return NullBehavior.new(group)
+end)
 
 function OverworldBehavior.AllObjectsInteract(self)
     local local_context = application:getCurrentLocalContext()

@@ -1,18 +1,11 @@
+require "lib.classes.class"
 local Pair = require "lib.structures.util.Pair"
 --------------------------------------------------------------------------------------------------------
-local RoomView = {};
-RoomView.__index = RoomView
 
--- RoomView: RoomView
--- Creates a RoomView
-function RoomView.new(room)
-    local o = {};
-    local self = setmetatable(o, RoomView)
-    self.__index = self
+local RoomView = class(function(self, room)
     self.room = room
     self.background = nil
-    return self
-end
+end)
 
 function RoomView.initialize(self)
     self.background = love.graphics.newImage(self.room:getBackgroundPath())

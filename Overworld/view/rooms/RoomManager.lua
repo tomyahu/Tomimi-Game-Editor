@@ -1,17 +1,10 @@
+require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
-local RoomManager = {};
-RoomManager.__index = RoomManager
 
--- RoomManager: RoomManager
--- Creates a RoomManager
-function RoomManager.new()
-    local o = {};
-    local self = setmetatable(o, RoomManager)
-    self.__index = self
+local RoomManager = class(function(self)
     self.rooms = {}
     self.current_room = 0
-    return self
-end
+end)
 
 function RoomManager.addRoom(self, room)
     self.rooms[# self.rooms] = room

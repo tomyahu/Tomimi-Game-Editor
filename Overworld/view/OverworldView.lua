@@ -1,18 +1,15 @@
+require "lib.classes.class"
 local View = require "Global.view.view"
 require "Global.application.application"
 --------------------------------------------------------------------------------------------------------
-local OverworldView = View.new()
-OverworldView.__index = OverworldView
 
--- OverworldView: OverworldView
--- Creates a new OverworldView
-function OverworldView.new(room_manager)
-    local o = View.new()
-    local self = setmetatable(o, OverworldView)
-    self.__index = self
+local OverworldView = extend(View, function(self, room_manager)
     self.room_manager = room_manager
-    return self
-end
+end,
+
+function(room_manager)
+    return View.new()
+end)
 
 function OverworldView.getContextVars(self, _)
     local context = {}

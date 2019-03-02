@@ -1,19 +1,16 @@
+require "lib.classes.class"
 local Ctrl = require "Global.ctrl.ctrl"
 local OverworldBehavior = require "Overworld.model.physics.behavior.OverworldBehavior"
 --------------------------------------------------------------------------------------------------------
-local OverworldCtrl = Ctrl:new()
-OverworldCtrl.__index = OverworldCtrl
 
--- OverworldCtrl: OverworldCtrl
--- Creates a new OverworldCtrl
-function OverworldCtrl.new(player)
-    local o = Ctrl.new()
-    local self = setmetatable(o, OverworldCtrl)
-    self.__index = self
+local OverworldCtrl = extend(Ctrl, function(self, player)
     self.player = player
     self.behavior = OverworldBehavior.new("SolidObjects", player)
-    return self
-end
+end,
+
+function(player)
+    return Ctrl.new()
+end)
 
 function OverworldCtrl.update(self,_)
     if love.keyboard.isDown("up") and love.keyboard.isDown("down") then

@@ -1,21 +1,14 @@
+require "lib.classes.class"
 require "lib.algorithm.Arrays"
 require "lib.structures.util.Pair"
 --------------------------------------------------------------------------------------------------------
-local Room = {}
-Room.__index = Room
 
--- Room: int, int -> Room
--- Creates a new room with set width and height
-function Room.new(background, width, height)
-    local o = {}
-    local self = setmetatable(o, Room)
-    self.__index = self
+local Room = class(function(self, background, width, height)
     self.background_path = background
     self.width = width
     self.height = height
     self.objects = {}
-    return self
-end
+end)
 
 -- addObject: Object -> None
 -- Adds an object to the object list
