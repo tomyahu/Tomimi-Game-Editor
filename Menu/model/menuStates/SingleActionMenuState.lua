@@ -1,18 +1,14 @@
 require "lib.classes.class"
 local MenuState = require "Menu.model.menuStates.MenuState"
 --------------------------------------------------------------------------------------------------------
-local SingleActionMenuState = MenuState.new()
-SingleActionMenuState.__index = SingleActionMenuState
 
--- SingleActionMenuState: SingleActionMenuState
--- Creates a SingleActionMenuState
-function SingleActionMenuState.new(name, key, action)
-    local o = MenuState.new(name)
-    o:addTransitionAction(key,action)
-    local self = setmetatable(o, SingleActionMenuState)
-    self.__index = self
-    return self
-end
+local SingleActionMenuState = extend(MenuState, function(self, name, key, action) end,
+
+function(name, key, action)
+    local menu_state = MenuState.new(name)
+    menu_state:addTransitionAction(key,action)
+    return menu_state
+end)
 
 -- addTransitionAction: int, function(state) -> None
 -- Adds an action to do with a transition

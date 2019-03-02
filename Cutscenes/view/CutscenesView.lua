@@ -10,7 +10,7 @@ local CutscenesView = extend(View, function(self, cutscene_admin, font)
 end,
 
 function(cutscene_admin, font)
-    return View:new()
+    return View.new()
 end)
 
 

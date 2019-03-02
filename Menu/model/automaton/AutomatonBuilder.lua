@@ -3,7 +3,7 @@ local Automaton = require "Menu.model.automaton.Automaton"
 --------------------------------------------------------------------------------------------------------
 
 local AutomatonBuilder = class(function(self)
-    self.automaton = Automaton:new()
+    self.automaton = Automaton.new()
     self.states = {}
     self.stateNumber = 0
 end)

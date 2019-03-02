@@ -7,7 +7,7 @@ local MenuCtrl = extend(Ctrl, function(self, menu)
 end,
 
 function(menu)
-    return Ctrl:new()
+    return Ctrl.new()
 end)
 
 function MenuCtrl.callbackPressedKey(self,key)

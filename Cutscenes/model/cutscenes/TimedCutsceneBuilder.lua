@@ -9,7 +9,7 @@ local TimedCutsceneBuilder = extend(BasicCutsceneBuilder, function(self, speed)
 end,
 
 function(speed)
-    return BasicCutsceneBuilder:new()
+    return BasicCutsceneBuilder.new()
 end)
 
 -- addScene: str, str -> None

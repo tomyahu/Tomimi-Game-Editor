@@ -7,7 +7,7 @@ local MenuState = extend(State, function(self, name)
 end,
 
 function(name)
-    return State:new()
+    return State.new()
 end)
 
 function MenuState.getName(self)

@@ -8,7 +8,7 @@ local CutscenesCtrl = extend(Ctrl, function(self, cutsceneAdmin)
 end,
 
 function(cutsceneAdmin)
-    return Ctrl:new()
+    return Ctrl.new()
 end)
 
 function CutscenesCtrl.callbackPressedKey(self,key)

@@ -3,7 +3,7 @@ local MenuBuilder = require "Menu.model.menues.MenuBuilder"
 --------------------------------------------------------------------------------------------------------
 
 local DefaultMenuBuilder = class(function(self)
-    self.menubuild = MenuBuilder:new()
+    self.menubuild = MenuBuilder.new()
     self.optionNumber = 0
 end)
 
