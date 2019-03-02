@@ -28,7 +28,7 @@ function extend(parent, constructor, superFun)
     function TheClass.new(...)
         local o
         if superFun == nil then
-            o = parent:new(...)
+            o = parent.new(...)
         else
             o = superFun(...)
         end
