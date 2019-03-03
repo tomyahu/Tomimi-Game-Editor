@@ -31,7 +31,7 @@ function extend(parent, constructor, superFun)
             o = parent.new(...)
         else
             o = superFun(...)
-            if o == nil then
+            if not (type(o) == "table") then
                 error("Function superFun must return a new parent object.")
             end
         end
