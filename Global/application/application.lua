@@ -1,4 +1,4 @@
-require "Global.application.App"
+local App = require "Global.application.App"
 require "Global.consts"
 --------------------------------------------------------------------------------------------------------
 application = {}

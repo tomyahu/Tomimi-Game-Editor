@@ -1,5 +1,5 @@
 require "Global.consts"
-require "Global.application.App"
+local App = require "Global.application.App"
 
 -- getRelativePos(x,y): num, num -> num, num
 -- returns the position given on the game coordinate system.

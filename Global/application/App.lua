@@ -1,17 +1,9 @@
+require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
-App = {}
-App.__index = App
-
--- App: App
--- Creates a App
-function App.new(name, path)
-    local o = {}
-    local self = setmetatable(o, App)
-    self.__index = self
+local App = class(function(self, name, path)
     self.name = name
     self.path = path
-    return self
-end
+end)
 
 function App.getName(self)
     return self.name
@@ -26,3 +18,5 @@ function App.getCtrl(self)
     local ctrl = require(self.path)["ctrl"]
     return ctrl
 end
+
+return App
