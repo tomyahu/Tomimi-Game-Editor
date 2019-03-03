@@ -1,17 +1,9 @@
+require "lib.classes.class"
 local NullBehavior = require "lib.physics.behaviors.NullBehavior"
 require "Global.application.application"
 --------------------------------------------------------------------------------------------------------
-local StaticBehavior = NullBehavior.new();
-StaticBehavior.__index = StaticBehavior
 
--- StaticBehavior: StaticBehavior
--- Creates a StaticBehavior
-function StaticBehavior.new(group)
-    local o = NullBehavior.new(group);
-    local self = setmetatable(o, StaticBehavior)
-    self.__index = self
-    return self
-end
+local StaticBehavior = extend(NullBehavior, function(self, group) end)
 
 function StaticBehavior.AllObjectsInteract(self)
     local local_context = application:getCurrentLocalContext()

@@ -1,19 +1,12 @@
+require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
-local RectangleHitbox = {};
-RectangleHitbox.__index = RectangleHitbox
 
--- RectangleHitbox: RectangleHitbox
--- Creates a RectangleHitbox
-function RectangleHitbox.new(x1, y1, x2, y2)
-    local o = {};
-    local self = setmetatable(o, RectangleHitbox)
-    self.__index = self
+local RectangleHitbox = class(function(self, x1, y1, x2, y2)
     self.x1 = x1
     self.x2 = x2
     self.y1 = y1
     self.y2 = y2
-    return self
-end
+end)
 
 function RectangleHitbox.checkCollision(self, hitbox)
     return hitbox:checkRectangleCollision(self)

@@ -1,21 +1,14 @@
+require "lib.classes.class"
 require "Global.application.application"
 --------------------------------------------------------------------------------------------------------
-local SolidObject = {};
-SolidObject.__index = SolidObject
 
--- SolidRectangleObject: SolidRectangleObject
--- Creates a SolidRectangleObject
-function SolidObject.new(hitboxes)
-    local o = {};
-    local self = setmetatable(o, SolidObject)
-    self.__index = self
+local SolidObject = class(function(self, hitboxes)
     self.hitboxes = hitboxes
     self.x = 0
     self.y = 0
     self.vx = 0
     self.vy = 0
-    return self
-end
+end)
 
 function SolidObject.registerObject(self, group)
     local local_context = application:getCurrentLocalContext()
