@@ -1,16 +1,14 @@
 require "Global.consts"
 require "Global.application.application"
+
+----------------------------------------------------------------------------------
+-- import your initial app here
 local initial_app = require "Menu._init"
-
-require "lib.algorithm.test.algorithmTests"
-
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+-- Register your Apps here
 -- Apps Registered
-application:registerApp("TitleMenu", "Menu._init")
-application:registerApp("Cutscenes", "Cutscenes._init")
-application:registerApp("Overworld", "Overworld._init")
-
-application:setCtrl(initial_app["ctrl"])
-application:setView(initial_app["view"])
+----------------------------------------------------------------------------------
 
 function love.load()
     application:setLocalContext(CurrentView:getContextVars())
