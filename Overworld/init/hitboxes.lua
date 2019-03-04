@@ -2,7 +2,7 @@ local RectangleHitbox = require "lib.physics.hitboxes.RectangleHitbox"
 --------------------------------------------------------------------------------------------------------
 
 function newPlayerHitboxes()
-    return {RectangleHitbox.new(4, 4, 28, 28)}
+    return {RectangleHitbox.new(8, 8, 24, 24)}
 end
 
 function newPersonHitboxes()

@@ -37,23 +37,26 @@ end
 -- returnSortedObjectArray: None -> array(entity)
 -- Sorts the sprites in the room by y position
 function RoomView.returnSortedObjectArray(self)
-    local objectArray = {}
-    local i = 0
-    local x,y
-    for _, object in pairs(self.room:getObjects()) do
-        x, y = object:getPos()
-        objectArray[i] = Pair.new(-y, object)
-        i = i+1
-    end
-    quicksortPairs(objectArray)
+    local objectArray = self.room:getObjectsWithData()
 
-    local finalArray = {}
-    i = 0
-    for _, pair in pairs(objectArray) do
-        finalArray[i] = pair:getSecond()
-        i = i+1
+    local compare = function(a,b)
+        local _, y1 = a:getFirst():getPos()
+        local _, y2 = b:getFirst():getPos()
+        if (a:getSecond() == b:getSecond()) then
+            return (y1 > y2)
+        else
+            return a:getSecond() < b:getSecond()
+        end
     end
-    return finalArray
+
+    table.sort(objectArray, compare)
+    local sortedObjectArray = {}
+
+    for _, objectPair in pairs(objectArray) do
+        table.insert(sortedObjectArray, objectPair:getFirst())
+    end
+
+    return sortedObjectArray
 end
 
 return RoomView

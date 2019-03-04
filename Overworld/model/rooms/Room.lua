@@ -1,6 +1,6 @@
 require "lib.classes.class"
 require "lib.algorithm.Arrays"
-require "lib.structures.util.Pair"
+local Pair = require "lib.structures.util.Pair"
 --------------------------------------------------------------------------------------------------------
 
 local Room = class(function(self, background, width, height)
@@ -12,21 +12,27 @@ end)
 
 -- addObject: Object -> None
 -- Adds an object to the object list
-function Room.addObject(self,o)
-    -- Cambiar tabla de objetos por arbol AVL
-    table.insert(self.objects, o)
-end
-
--- removeObject: Object -> None
--- Adds an object to the object list
-function Room.removeObject(self, o)
-    -- Cambiar tabla de objetos por arbol AVL
-    table.remove(self.objects, o)
+function Room.addObject(self, o, layer)
+    if layer == nil then
+        table.insert(self.objects, Pair.new(o, 0))
+    else
+        table.insert(self.objects, Pair.new(o, layer))
+    end
 end
 
 -- getObjects: Object -> None
 -- Returns the room's objects
 function Room.getObjects(self)
+    local object_array = {}
+    for _, objectPair in pairs(self.objects) do
+        table.insert(object_array, objectPair:getFirst())
+    end
+    return object_array
+end
+
+-- getObjects: Object -> None
+-- Returns the room's objects
+function Room.getObjectsWithData(self)
     return self.objects
 end
 
@@ -37,8 +43,8 @@ function Room.getBackgroundPath(self)
 end
 
 function Room.registerSolidObjects(self)
-    for _, object in pairs(self.objects) do
-        object:registerAsSolidObject()
+    for _, objectPair in pairs(self.objects) do
+        objectPair:getFirst():registerAsSolidObject()
     end
 end
 
