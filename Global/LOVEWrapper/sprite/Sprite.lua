@@ -1,20 +1,13 @@
+require "lib.classes.class"
 require "Global.LOVEWrapper.LOVEWrapper"
 --------------------------------------------------------------------------------------------------------
-Sprite = {};
-Sprite.__index = Sprite
 
--- Sprite: Sprite
--- Creates a Sprite
-function Sprite.new(frames, image_path)
-    local o = {};
-    local self = setmetatable(o, Sprite)
+local Sprite = class(function(self, frames, image_path)
     self.loveSprite = nil
     self.image_path = image_path
-    self.__index = self
     self.frames = frames
     self.current_frame = 1
-    return self
-end
+end)
 
 function Sprite.initialize(self)
     self.loveSprite = love.graphics.newImage(self.image_path)
@@ -43,3 +36,5 @@ end
 function Sprite.advanceFrame(self)
     self.current_frame = (self.current_frame + 1) % (# self.frames)
 end
+
+return Sprite

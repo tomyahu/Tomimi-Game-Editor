@@ -1,18 +1,15 @@
-require "Global.LOVEWrapper.sprite.Sprite"
+require "lib.classes.class"
+local Sprite = require "Global.LOVEWrapper.sprite.Sprite"
 --------------------------------------------------------------------------------------------------------
-TimedSprite = Sprite.new();
-TimedSprite.__index = TimedSprite
 
--- TimedSprite: TimedSprite
--- Creates a TimedSprite
-function TimedSprite.new(frames, dt)
-    local o = Sprite.new(frames);
-    local self = setmetatable(o, TimedSprite)
-    self.__index = self
+local TimedSprite = extend(Sprite, function(self, frames, dt)
     self.dt = dt
     self.current_time = 0
-    return self
-end
+end,
+
+function(frames, dt)
+    return Sprite.new(frames)
+end)
 
 function TimedSprite.advanceFrame(self, dt)
     self.current_time = self.current_time + dt
@@ -24,3 +21,5 @@ function TimedSprite.advanceFrame(self)
     self.current_frame = self.current_frame % (# self.frames)
     self.current_time = dt*self.current_frame
 end
+
+return TimedSprite

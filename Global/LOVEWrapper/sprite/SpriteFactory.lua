@@ -1,17 +1,9 @@
+require "lib.classes.class"
 require "Global.LOVEWrapper.sprite.Sprite"
 require "Global.LOVEWrapper.sprite.RectFrame"
 --------------------------------------------------------------------------------------------------------
-SpriteFactory = {};
-SpriteFactory.__index = SpriteFactory
 
--- SpriteFactory: SpriteFactory
--- Creates a SpriteFactory
-function SpriteFactory.new()
-    local o = {};
-    local self = setmetatable(o, SpriteFactory)
-    self.__index = self
-    return self
-end
+local SpriteFactory = class(function(self) end)
 
 function SpriteFactory.getRegularRectSprite(image_path, width, height, frame_num)
     local width_per_frame = width/frame_num
@@ -21,3 +13,5 @@ function SpriteFactory.getRegularRectSprite(image_path, width, height, frame_num
     end
     return Sprite.new(frames, image_path)
 end
+
+return SpriteFactory

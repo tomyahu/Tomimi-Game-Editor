@@ -1,6 +1,6 @@
 require "Global.application.application"
-require "Global.LOVEWrapper.sprite.Sprite"
-require "Global.LOVEWrapper.sprite.RectFrame"
+local Sprite = require "Global.LOVEWrapper.sprite.Sprite"
+local RectFrame = require "Global.LOVEWrapper.sprite.RectFrame"
 local OverworldView =  require "Overworld.view.OverworldView"
 local RoomView = require "Overworld.view.rooms.RoomView"
 local RoomManager = require "Overworld.view.rooms.RoomManager"

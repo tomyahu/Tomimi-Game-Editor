@@ -1,19 +1,12 @@
+require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
-RectFrame = {};
-RectFrame.__index = RectFrame
 
--- RectFrame: RectFrame
--- Creates a RectFrame
-function RectFrame.new(x, y, width, height)
-    local o = {};
-    local self = setmetatable(o, RectFrame)
-    self.__index = self
+local RectFrame = class(function(self, x, y, width, height)
     self.x = x
     self.y = y
     self.width = width
     self.height = height
-    return self
-end
+end)
 
 function RectFrame.getX(self)
     return self.x
@@ -30,3 +23,5 @@ end
 function RectFrame.getHeight(self)
     return self.height
 end
+
+return RectFrame

@@ -2,6 +2,10 @@
 -- Takes the constructor of the class, the constructor must be in the form function(self, ...) where
 -- self refers to the same object being created.
 function class(constructor)
+    if not (type(constructor) == "function") then
+        error("Parameter constructor must be a function.")
+    end
+
     local TheClass = {}
     TheClass.__index = TheClass
 
@@ -22,6 +26,14 @@ end
 --
 -- When the function takes 2 arguments it does the same as if superFun was function(...) return parent:new(...) end
 function extend(parent, constructor, superFun)
+    if not (type(parent) == "table") then
+        error("Parameter parent must be a table")
+    elseif not (type(constructor) == "function") then
+        error("Parameter constructor must be a function.")
+    elseif not ((type(superFun) == "function") or (superFun == nil))then
+        error("Parameter superFun must be a function.")
+    end
+
     local TheClass = parent:new();
     TheClass.__index = TheClass
 
