@@ -1,4 +1,4 @@
-GAME_TITLE = "Legend of the Runemaster"
+GAME_TITLE = ""
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 FULL_SCREEN = false
