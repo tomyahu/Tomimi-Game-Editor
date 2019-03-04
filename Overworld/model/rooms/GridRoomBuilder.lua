@@ -1,4 +1,5 @@
 require "lib.classes.class"
+require "Global.consts"
 local Room = require "Overworld.model.rooms.Room"
 local Pair = require "lib.structures.util.Pair"
 local RectFrame = require "Global.LOVEWrapper.sprite.RectFrame"
@@ -24,7 +25,7 @@ function GridRoomBuilder.addWall(self, wall_image, x, y)
 end
 
 function GridRoomBuilder.addInvisibleWall(self, x, y)
-    self:addWall("Resources/Overworld/Walls/InvisibleWall.png", x, y)
+    self:addWall(RESOURCES_PATH .. "/Overworld/Walls/InvisibleWall.png", x, y)
 end
 
 function GridRoomBuilder.addFloor(self, floor_image, x, y)
