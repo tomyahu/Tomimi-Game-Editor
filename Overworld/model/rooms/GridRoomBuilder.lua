@@ -16,7 +16,8 @@ end)
 
 function GridRoomBuilder.addWall(self, wall_image, x, y)
     local wall_frames = {}
-    wall_frames[1] = RectFrame.new(0,0,self.cell_size,self.cell_size)
+    wall_frames[1] = {}
+    wall_frames[1][1] = RectFrame.new(0,0,self.cell_size,self.cell_size)
 
     local wall_sprite = Sprite.new(wall_frames, wall_image)
     local wall = SolidEntity.new(wall_sprite, newWallHitboxes(self.cell_size, self.cell_size))
@@ -30,7 +31,8 @@ end
 
 function GridRoomBuilder.addFloor(self, floor_image, x, y)
     local floor_frames = {}
-    floor_frames[1] = RectFrame.new(0,0,self.cell_size,self.cell_size)
+    floor_frames[1] = {}
+    floor_frames[1][1] = RectFrame.new(0,0,self.cell_size,self.cell_size)
 
     local floor_sprite = Sprite.new(floor_frames, floor_image)
     local floor = SolidEntity.new(floor_sprite, {})

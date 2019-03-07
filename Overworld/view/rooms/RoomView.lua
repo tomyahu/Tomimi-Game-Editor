@@ -1,13 +1,16 @@
+require "Global.consts"
 require "lib.classes.class"
 local Pair = require "lib.structures.util.Pair"
+local Camera = require "lib.cameras.Camera"
 --------------------------------------------------------------------------------------------------------
 
 local RoomView = class(function(self, room)
     self.room = room
     self.background = nil
+    self.camera = Camera.new(GAME_WIDTH/2, GAME_HEIGHT/2, 1)
 end)
 
-function RoomView.initialize(self)
+function RoomView.initialize(self, context, camera)
     self.background = love.graphics.newImage(self.room:getBackgroundPath())
     local objectArray = self.room:getObjects()
     for _, object in pairs(objectArray) do
@@ -15,10 +18,17 @@ function RoomView.initialize(self)
     end
 
     self.room:registerSolidObjects()
+
+    if camera == nil then
+        self.camera = Camera.new(GAME_WIDTH/2, GAME_HEIGHT/2, 1)
+    else
+        self.camera = camera
+    end
 end
 
 function RoomView.finalize(self)
     self.background = nil
+    self.camera = nil
     local objectArray = self.room:getObjects()
     for _, object in pairs(objectArray) do
         object:getSprite():finalize()
@@ -30,7 +40,7 @@ function RoomView.draw(self)
     local objectArray = self:returnSortedObjectArray()
     for _, object in pairs(objectArray) do
         local x, y = object:getPos()
-        object:getSprite():draw(x, y, 1, 1)
+        self.camera:draw(object:getSprite(), x, y, 1, 1)
     end
 end
 
