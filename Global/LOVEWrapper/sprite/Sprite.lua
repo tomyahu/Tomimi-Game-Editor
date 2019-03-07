@@ -7,6 +7,7 @@ local Sprite = class(function(self, frames, image_path)
     self.image_path = image_path
     self.frames = frames
     self.current_frame = 1
+    self.current_frame_set = 1
 end)
 
 function Sprite.initialize(self)
@@ -29,12 +30,19 @@ function Sprite.getImagePath(self)
     return self.image_path
 end
 
+function Sprite.setFrameSet(self, frame_set)
+    self.current_frame_set = frame_set
+end
+
 function Sprite.getCurrentFrame(self)
-    return self.frames[self.current_frame]
+    return self.frames[self.current_frame_set][self.current_frame]
 end
 
 function Sprite.advanceFrame(self)
-    self.current_frame = (self.current_frame + 1) % (# self.frames)
+    self.current_frame = (self.current_frame + 1)
+    if self.current_frame > (# self.frames[self.current_frame_set]) then
+        self.current_frame = 1
+    end
 end
 
 return Sprite

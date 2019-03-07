@@ -2,24 +2,29 @@ require "lib.classes.class"
 local Sprite = require "Global.LOVEWrapper.sprite.Sprite"
 --------------------------------------------------------------------------------------------------------
 
-local TimedSprite = extend(Sprite, function(self, frames, dt)
-    self.dt = dt
+local TimedSprite = extend(Sprite, function(self, frames, image_path)
+    self.dt = 1
     self.current_time = 0
 end,
 
-function(frames, dt)
-    return Sprite.new(frames)
+function(frames, image_path)
+    return Sprite.new(frames, image_path)
 end)
 
-function TimedSprite.advanceFrame(self, dt)
+function TimedSprite.advanceTime(self, dt)
     self.current_time = self.current_time + dt
-    self.current_time = self.current_time - math.floor(self.current_time/(# self.frames))*self.dt
-    self.current_frame  = math.floor(self.current_time/self.dt)
+    if self.current_time >= (# self.frames[self.current_frame_set]) then
+        self.current_time = self.current_time - math.floor(self.current_time/self.dt)*self.dt
+    end
+    self.current_frame  = math.floor(self.current_time/self.dt) + 1
 end
 
 function TimedSprite.advanceFrame(self)
-    self.current_frame = self.current_frame % (# self.frames)
-    self.current_time = dt*self.current_frame
+    self.current_frame = (self.current_frame + 1)
+    if self.current_frame > (# self.frames[self.current_frame_set]) then
+        self.current_frame = 1
+    end
+    self.current_time = self.current_frame - 1
 end
 
 return TimedSprite
