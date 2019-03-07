@@ -29,7 +29,7 @@ function OverworldView.draw(self, context)
     self.player:getSprite():advanceTime(0.1)
 
     local px, py = self.player:getPos()
-    self.camera:setCenter(px, py)
+    self.camera:setCenter(px+32, py+32)
     context['current_room']:draw()
 end
 

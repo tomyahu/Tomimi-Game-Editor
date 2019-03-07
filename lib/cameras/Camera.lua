@@ -23,8 +23,8 @@ function Camera.draw(self, sprite, x, y, sx, sy)
 
     local zoom = getScale()
 
-    local newx = (x + (GAME_WIDTH/2) - self.centerx) * self.zoom
-    local newy = (y + (GAME_HEIGHT/2) - self.centery) * self.zoom
+    local newx = (x* self.zoom + (GAME_WIDTH/2) - self.centerx* self.zoom)
+    local newy = (y* self.zoom + (GAME_HEIGHT/2) - self.centery* self.zoom)
 
     local newx, newy = getRelativePos(newx, newy)
     sprite:draw(newx, newy, self.zoom * sx, self.zoom * sy)

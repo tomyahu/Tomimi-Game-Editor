@@ -8,9 +8,9 @@ function getRelativePos(x, y)
     local height_ratio = love.graphics.getHeight() / GAME_HEIGHT
 
     if width_ratio > height_ratio then
-        return x*height_ratio , y*height_ratio
+        return x*height_ratio + (width_ratio - height_ratio) * (GAME_WIDTH/2) , y*height_ratio
     else
-        return x*width_ratio , y*width_ratio
+        return x*width_ratio , y*width_ratio + (height_ratio - width_ratio) * (GAME_HEIGHT/2)
     end
 end
 
