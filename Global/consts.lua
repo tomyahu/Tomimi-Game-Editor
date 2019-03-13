@@ -13,3 +13,5 @@ INITIAL_APP = ""
 
 GLOBAL_CONTEXT = {}
 GLOBAL_CONTEXT.dt = 0
+
+TEST = true

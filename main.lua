@@ -1,6 +1,11 @@
 require "Global.consts"
 require "Global.application.application"
 ---------------------------------------------------------------------------
+if TEST then
+    require("test")
+    love.event.quit()
+end
+
 
 local initial_app = require( APPS[INITIAL_APP] )
 
