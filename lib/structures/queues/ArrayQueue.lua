@@ -12,7 +12,7 @@ function ArrayQueue.isEmpty(self)
     return self.size == 0
 end
 
-function ArrayQueue.dequeue(self)
+function ArrayQueue.pop(self)
     local fin
     if not self.isEmpty() then
         fin = self.array[queue.start]
@@ -23,7 +23,7 @@ function ArrayQueue.dequeue(self)
     return fin
 end
 
-function ArrayQueue.enqueue(self, o)
+function ArrayQueue.push(self, o)
     if self.size == self.capacity then
         for i = self.getEnd() + 1, self.capacity - 1 do
             self.array[i + self.capacity] = self.array[i]

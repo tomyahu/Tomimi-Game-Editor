@@ -3,9 +3,9 @@ function assertEquals(received, expected)
 end
 
 function assertFalse(received)
-    assert(received)
+    assert(not received)
 end
 
 function assertTrue(received)
-    assert(not received)
+    assert(received)
 end

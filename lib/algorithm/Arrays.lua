@@ -8,28 +8,31 @@ function partitionPairs(array, i, j)
 
         swap(array, i, piv)
 
-        local left = i
+        local left = i+1
         local right = j
 
         while(left < right) do
 
-            while (array[left]:getFirst() <= array[i]:getFirst() and left < j) do
+            while (array[left]:getFirst() < array[i]:getFirst() and left < right) do
                 left = left + 1
             end
 
-            while (array[right]:getFirst() > array[i]:getFirst() and right > i) do
+            while (array[right]:getFirst() >= array[i]:getFirst() and right > left) do
                 right = right - 1
             end
 
-            if (left < right) then
-                swap(array, left, right)
-            end
+            swap(array, left, right)
         end
 
-        swap(array, i, right)
+        if (array[right]:getFirst() < array[i]:getFirst()) then
+            swap(array, i, right)
+        else
+            swap(array, i, right - 1)
+            right = right - 1
+        end
 
-        partitionPairs(array, i, left - 1)
-        partitionPairs(array, left + 1, j)
+        partitionPairs(array, i, right - 1)
+        partitionPairs(array, right + 1, j)
     end
 end
 
