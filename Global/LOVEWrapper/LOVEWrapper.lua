@@ -14,6 +14,15 @@ function getRelativePos(x, y)
     end
 end
 
+-- getRelativeTransitionPos(x,y): num, num -> num, num
+-- returns the position given just making a transition on the relative coordinate system.
+function getRelativeTransitionPos(x, y)
+    local width_dif = love.graphics.getWidth() - GAME_WIDTH
+    local height_dif = love.graphics.getHeight() - GAME_HEIGHT
+
+    return x + width_dif/2, y + height_dif/2
+end
+
 function getScale()
     local width_ratio = love.graphics.getWidth() / GAME_WIDTH
     local height_ratio = love.graphics.getHeight() / GAME_HEIGHT

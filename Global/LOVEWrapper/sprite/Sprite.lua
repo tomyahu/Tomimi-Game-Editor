@@ -19,7 +19,7 @@ function Sprite.draw(self, x, y, sx, sy)
     local frame_y = self:getCurrentFrame():getY()
     local frame_width = self:getCurrentFrame():getWidth()
     local frame_height = self:getCurrentFrame():getHeight()
-    love.graphics.draw(self.loveSprite,love.graphics.newQuad(frame_x,frame_y,frame_width,frame_height,self.loveSprite:getDimensions()), x, y, 0, getScale()*sx, getScale()*sy)
+    love.graphics.draw(self.loveSprite,love.graphics.newQuad(frame_x,frame_y,frame_width,frame_height,self.loveSprite:getDimensions()), x, y, 0, sx, sy)
 end
 
 function Sprite.finalize(self)
