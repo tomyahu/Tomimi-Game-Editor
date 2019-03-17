@@ -9,32 +9,26 @@ local PlayerView = extend(EntityView, function(self, player)
 end)
 
 function PlayerView.moveUp(self)
-    self.entity:moveUp()
     self.state:moveUp()
 end
 
 function PlayerView.moveDown(self)
-    self.entity:moveDown()
     self.state:moveDown()
 end
 
 function PlayerView.moveLeft(self)
-    self.entity:moveLeft()
     self.state:moveLeft()
 end
 
 function PlayerView.moveRight(self)
-    self.entity:moveRight()
     self.state:moveRight()
 end
 
 function PlayerView.stopX(self)
-    self.entity:stopX()
     self.state:stopX()
 end
 
 function PlayerView.stopY(self)
-    self.entity:stopY()
     self.state:stopY()
 end
 
