@@ -1,9 +1,11 @@
 require "lib.classes.class"
 local SolidEntity = require "Overworld.model.entities.SolidEntity"
+local NormalPlayerState = require "Overworld.model.entities.playerStates.NormalPlayerState"
 --------------------------------------------------------------------------------------------------------
 
 local Player = extend(SolidEntity, function(self, sprite, speed, hitboxes)
     self.speed = speed
+    self.state = NormalPlayerState.new(self)
 end,
 
 function(sprite, speed, hitboxes)
@@ -11,45 +13,39 @@ function(sprite, speed, hitboxes)
 end)
 
 function Player.moveUp(self)
-    local old_vx, _ = self.solid_object:getSpeed()
-    self.solid_object:setSpeed(old_vx, - self.speed)
-
-    local player_x, player_y = self:getPos()
-    self:setPos(player_x, player_y - self.speed)
+    self.state:moveUp()
 end
 
 function Player.moveDown(self)
-    local player_x, player_y = self:getPos()
-    self:setPos(player_x, player_y + self.speed)
-
-    local old_vx, _ = self.solid_object:getSpeed()
-    self.solid_object:setSpeed(old_vx, self.speed)
+    self.state:moveDown()
 end
 
 function Player.moveLeft(self)
-    local player_x, player_y = self:getPos()
-    self:setPos(player_x - self.speed, player_y)
-
-    local _, old_vy = self.solid_object:getSpeed()
-    self.solid_object:setSpeed(- self.speed, old_vy)
+    self.state:moveLeft()
 end
 
 function Player.moveRight(self)
-    local player_x, player_y = self:getPos()
-    self:setPos(player_x + self.speed, player_y)
-
-    local _, old_vy = self.solid_object:getSpeed()
-    self.solid_object:setSpeed(self.speed, old_vy)
+    self.state:moveRight()
 end
 
 function Player.stopX(self)
-    local _, old_vy = self.solid_object:getSpeed()
-    self.solid_object:setSpeed(0, old_vy)
+    self.state:stopX()
 end
 
 function Player.stopY(self)
-    local old_vx, _ = self.solid_object:getSpeed()
-    self.solid_object:setSpeed(old_vx, 0)
+    self.state:stopY()
+end
+
+function Player.getSpeed(self)
+    return self.solid_object:getSpeed()
+end
+
+function Player.getBaseSpeed(self)
+    return self.speed
+end
+
+function Player.setState(self, new_state)
+    self.state = new_state
 end
 
 function Player.registerAsSolidObject(_)

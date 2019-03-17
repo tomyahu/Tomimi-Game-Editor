@@ -5,7 +5,7 @@ local OverworldBehavior = require "Overworld.model.physics.behavior.OverworldBeh
 
 local OverworldCtrl = extend(Ctrl, function(self, player)
     self.player = player
-    self.behavior = OverworldBehavior.new("SolidObjects", player)
+    self.behavior = OverworldBehavior.new("SolidObjects", player:getEntity())
 end,
 
 function(player)
@@ -14,19 +14,19 @@ end)
 
 function OverworldCtrl.update(self,_)
     if love.keyboard.isDown("up") and love.keyboard.isDown("down") then
+        self.player:moveBothY()
     elseif love.keyboard.isDown("up") then
         self.player:moveUp()
         self.behavior:AllObjectsInteract()
     elseif love.keyboard.isDown("down") then
         self.player:moveDown()
         self.behavior:AllObjectsInteract()
-        self.player:getSprite():setFrameSet(2)
     else
         self.player:stopY()
-        self.player:getSprite():setFrameSet(1)
     end
 
     if love.keyboard.isDown("left") and love.keyboard.isDown("right") then
+        self.player:moveBothX()
     elseif love.keyboard.isDown("left") then
         self.player:moveLeft()
         self.behavior:AllObjectsInteract()

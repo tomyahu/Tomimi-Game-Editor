@@ -1,5 +1,5 @@
 require "lib.classes.class"
-local CharacterMessage = require "Overworld.model.dialog.CharacterMessage"
+local CharacterMessage = require "Overworld.model.messages.CharacterMessage"
 --------------------------------------------------------------------------------------------------------
 local AvatarCharacterMessage = extend(CharacterMessage, function(self, message, character, avatar_path)
     self.avatar_path = avatar_path

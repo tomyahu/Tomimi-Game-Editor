@@ -36,7 +36,7 @@ function RoomView.finalize(self)
 end
 
 function RoomView.draw(self)
-    love.graphics.draw(self.background,0,0,0, getScale())
+    love.graphics.draw(self.background,0,0,0)
     local objectArray = self:returnSortedObjectArray()
     for _, object in pairs(objectArray) do
         local x, y = object:getPos()
