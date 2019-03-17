@@ -27,7 +27,7 @@ end
 -- When the function takes 2 arguments it does the same as if superFun was function(...) return parent:new(...) end
 function extend(parent, constructor, superFun)
     if not (type(parent) == "table") then
-        error("Parameter parent must be a table")
+        error("Parameter parent must be a table, not " .. type(parent))
     elseif not (type(constructor) == "function") then
         error("Parameter constructor must be a function.")
     elseif not ((type(superFun) == "function") or (superFun == nil))then
