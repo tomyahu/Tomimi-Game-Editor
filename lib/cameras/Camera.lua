@@ -26,7 +26,7 @@ function Camera.draw(self, sprite, x, y, sx, sy)
     local newx = (x* self.zoom + (GAME_WIDTH/2) - self.centerx* self.zoom)
     local newy = (y* self.zoom + (GAME_HEIGHT/2) - self.centery* self.zoom)
 
-    local newx, newy = getRelativePos(newx, newy)
+    local newx, newy = getRelativeTransitionPos(newx, newy)
     sprite:draw(newx, newy, self.zoom * sx, self.zoom * sy)
 end
 
