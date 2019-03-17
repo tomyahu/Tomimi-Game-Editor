@@ -1,5 +1,5 @@
 require "lib.classes.class"
-local Automaton = require "Menu.model.automaton.Automaton"
+local Automaton = require "lib.fsm.automaton.Automaton"
 --------------------------------------------------------------------------------------------------------
 
 local Menu = extend(Automaton, function(self)

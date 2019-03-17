@@ -1,5 +1,5 @@
 require "lib.classes.class"
-local State = require "Menu.model.states.State"
+local State = require "lib.fsm.states.State"
 --------------------------------------------------------------------------------------------------------
 
 local MenuState = extend(State, function(self, name)
