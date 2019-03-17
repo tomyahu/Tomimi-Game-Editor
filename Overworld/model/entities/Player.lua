@@ -2,6 +2,7 @@ require "lib.classes.class"
 local SolidEntity = require "Overworld.model.entities.SolidEntity"
 local NormalPlayerState = require "Overworld.model.entities.playerStates.NormalPlayerState"
 --------------------------------------------------------------------------------------------------------
+local STATE_PATH = "Overworld.model.entities.playerStates."
 
 local Player = extend(SolidEntity, function(self, sprite, speed, hitboxes)
     self.speed = speed
@@ -36,6 +37,14 @@ function Player.stopY(self)
     self.state:stopY()
 end
 
+function Player.moveBothX(self)
+    self.state:moveBothX()
+end
+
+function Player.moveBothY(self)
+    self.state:moveBothY()
+end
+
 function Player.getSpeed(self)
     return self.solid_object:getSpeed()
 end
@@ -44,8 +53,9 @@ function Player.getBaseSpeed(self)
     return self.speed
 end
 
-function Player.setState(self, new_state)
-    self.state = new_state
+function Player.setState(self, new_state_name)
+    local new_state_class = require(STATE_PATH .. new_state_name)
+    self.state = new_state_class.new(self)
 end
 
 function Player.registerAsSolidObject(_)

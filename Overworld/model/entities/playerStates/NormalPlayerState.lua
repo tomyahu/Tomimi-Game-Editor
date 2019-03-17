@@ -1,8 +1,7 @@
 require "lib.classes.class"
+local NullState = require "Overworld.model.entities.playerStates.NullState"
 --------------------------------------------------------------------------------------------------------
-local NormalPlayerState = class(function(self, player)
-    self.player = player
-end)
+local NormalPlayerState = extend(NullState, function(self, player) end)
 
 function NormalPlayerState.moveUp(self)
     local old_vx, _ = self.player.solid_object:getSpeed()
