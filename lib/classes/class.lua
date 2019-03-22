@@ -39,10 +39,13 @@ function extend(parent, constructor, superFun)
 
     function TheClass.new(...)
         local o
+        local super
         if superFun == nil then
             o = parent.new(...)
+            super = parent.new(...)
         else
             o = superFun(...)
+            super = parent.new(...)
             if not (type(o) == "table") then
                 error("Function superFun must return a new parent object.")
             end
@@ -50,6 +53,8 @@ function extend(parent, constructor, superFun)
         local self = setmetatable(o, TheClass)
         self.__index = self
         constructor(self, ...)
+
+        self.super = super
         return self
     end
 
