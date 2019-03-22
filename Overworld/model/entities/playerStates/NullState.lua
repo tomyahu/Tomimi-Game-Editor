@@ -34,4 +34,8 @@ end
 function NullState.back(self)
 end
 
+function NullState.toString(self)
+    return "NullState"
+end
+
 return NullState

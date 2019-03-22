@@ -1,20 +1,25 @@
 require "lib.classes.class"
-local NullState = require "Overworld.view.entities.playerStates.NullState"
+local NormalPlayerState = require "Overworld.model.entities.playerStates.NormalPlayerState"
 --------------------------------------------------------------------------------------------------------
-local WalkingLeftState = extend(NullState, function(self, player) end)
+local WalkingLeftState = extend(NormalPlayerState, function(self, player) end)
 
 function WalkingLeftState.moveRight(self)
-    self.player:getSprite():setFrameSet(1)
+    self.super.moveRight(self)
     self.player:setState("WalkingRightState")
 end
 
 function WalkingLeftState.stopX(self)
-    self.player:getSprite():setFrameSet(1)
+    self.super.stopX(self)
     self.player:setState("StillState")
 end
 
 function WalkingLeftState.moveBothX(self)
+    self.super.moveBothX(self)
     self.player:setState("MarchingLeftState")
+end
+
+function WalkingLeftState.toString(self)
+    return "WalkingLeftState"
 end
 
 return WalkingLeftState

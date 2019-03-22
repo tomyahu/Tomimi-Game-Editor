@@ -10,7 +10,7 @@ local RoomView = class(function(self, room)
     self.camera = Camera.new(GAME_WIDTH/2, GAME_HEIGHT/2, 1)
 end)
 
-function RoomView.initialize(self, context, camera)
+function RoomView.initialize(self, camera)
     self.background = love.graphics.newImage(self.room:getBackgroundPath())
     local objectArray = self.room:getObjects()
     for _, object in pairs(objectArray) do

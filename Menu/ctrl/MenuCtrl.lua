@@ -2,12 +2,12 @@ require "lib.classes.class"
 local Ctrl = require "Global.ctrl.ctrl"
 --------------------------------------------------------------------------------------------------------
 
-local MenuCtrl = extend(Ctrl, function(self, menu)
+local MenuCtrl = extend(Ctrl, function(self, view, menu)
     self.menu = menu
 end,
 
-function(menu)
-    return Ctrl.new()
+function(view, menu)
+    return Ctrl.new(view)
 end)
 
 function MenuCtrl.callbackPressedKey(self,key)
@@ -16,6 +16,7 @@ end
 
 function MenuCtrl.setMenu(self, new_menu)
     self.menu = new_menu
+    self.view:setMenu(new_menu)
 end
 
 return MenuCtrl

@@ -45,4 +45,8 @@ function NormalPlayerState.stopY(self)
     self.player.solid_object:setSpeed(old_vx, 0)
 end
 
+function NormalPlayerState.toString(self)
+    return "NormalPlayerState"
+end
+
 return NormalPlayerState

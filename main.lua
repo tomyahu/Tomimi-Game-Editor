@@ -17,7 +17,8 @@ application:setCtrl(initial_app["ctrl"])
 application:setView(initial_app["view"])
 
 function love.load()
-    application:setLocalContext(CurrentView:getContextVars())
+    application:setLocalContext(CurrentCtrl:getContextVars())
+    application:setLocalContext(CurrentView:getContextVars(application.getCurrentLocalContext()))
     --print(love.joystick.saveGamepadMappings( "helo.txt" ))
 end
 

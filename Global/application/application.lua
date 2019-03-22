@@ -37,6 +37,7 @@ end
 
 function application.appChange(self,appName)
     local nextApp = APPS[appName]
+    application:setLocalContext(nextApp:getCtrl():getContextVars(self:getCurrentLocalContext()))
     application:setLocalContext(nextApp:getView():getContextVars(self:getCurrentLocalContext()))
     application:setView(nextApp:getView())
     application:setCtrl(nextApp:getCtrl())

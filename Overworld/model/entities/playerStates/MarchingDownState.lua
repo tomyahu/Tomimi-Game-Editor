@@ -1,19 +1,25 @@
 require "lib.classes.class"
-local NullState = require "Overworld.view.entities.playerStates.NullState"
+local NormalPlayerState = require "Overworld.model.entities.playerStates.NormalPlayerState"
 --------------------------------------------------------------------------------------------------------
-local MarchingDownState = extend(NullState, function(self, player) end)
+local MarchingDownState = extend(NormalPlayerState, function(self, player) end)
 
 function MarchingDownState.moveUp(self)
+    self.super.moveUp(self)
     self.player:setState("MoonWalkingUpState")
 end
 
 function MarchingDownState.moveDown(self)
+    self.super.moveDown(self)
     self.player:setState("WalkingDownState")
 end
 
 function MarchingDownState.stopY(self)
-    self.player:getSprite():setFrameSet(1)
+    self.super.stopY(self)
     self.player:setState("StillState")
+end
+
+function MarchingDownState.toString(self)
+    return "MarchingDownState"
 end
 
 return MarchingDownState

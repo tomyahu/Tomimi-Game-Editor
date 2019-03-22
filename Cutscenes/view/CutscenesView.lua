@@ -4,8 +4,8 @@ local View = require "Global.view.view"
 require "Global.LOVEWrapper.LOVEWrapper"
 -------------------------------------------------------------------------------------------------------
 
-local CutscenesView = extend(View, function(self, cutscene_admin, font)
-    self.cutscene_admin = cutscene_admin
+local CutscenesView = extend(View, function(self, scene, font)
+    self.current_scene = scene
     self.font = font
 end,
 
@@ -13,10 +13,13 @@ function(cutscene_admin, font)
     return View.new()
 end)
 
+function CutscenesView.setCurrentCutscene(self, new_scene)
+    self.current_scene = new_scene
+end
 
 function CutscenesView.draw(self,context)
     love.graphics.setFont( self.font )
-    local scene = self.cutscene_admin:getCurrentCutscene():getCurrentScene()
+    local scene = self.current_scene
     local scene_image = context[scene:getImagePath()]
     local scenepixelwidth, _ = scene_image:getPixelDimensions()
 
@@ -25,12 +28,7 @@ function CutscenesView.draw(self,context)
     love.graphics.print( scene:getText(), getRelativePosX(50), getRelativePosY(550), 0, getScale(), getScale())
 end
 
-function CutscenesView.getContextVars(self, _)
-    local context = {}
-    local cutscene = self.cutscene_admin:getCurrentCutscene()
-    for _, scene in pairs(cutscene:getScenes()) do
-        context[scene:getImagePath()] = love.graphics.newImage(scene:getImagePath())
-    end
+function CutscenesView.getContextVars(self, context)
     return context
 end
 

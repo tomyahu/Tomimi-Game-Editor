@@ -32,6 +32,7 @@ end
 
 function Sprite.setFrameSet(self, frame_set)
     self.current_frame_set = frame_set
+    self.current_frame = 1
 end
 
 function Sprite.getCurrentFrame(self)

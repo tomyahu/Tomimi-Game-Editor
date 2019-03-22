@@ -1,12 +1,12 @@
 require "lib.classes.class"
 local SolidEntity = require "Overworld.model.entities.SolidEntity"
-local NormalPlayerState = require "Overworld.model.entities.playerStates.NormalPlayerState"
+local StillState = require "Overworld.model.entities.playerStates.StillState"
 --------------------------------------------------------------------------------------------------------
 local STATE_PATH = "Overworld.model.entities.playerStates."
 
 local Player = extend(SolidEntity, function(self, sprite, speed, hitboxes)
     self.speed = speed
-    self.state = NormalPlayerState.new(self)
+    self.state = StillState.new(self)
 end,
 
 function(sprite, speed, hitboxes)
@@ -56,6 +56,10 @@ end
 function Player.setState(self, new_state_name)
     local new_state_class = require(STATE_PATH .. new_state_name)
     self.state = new_state_class.new(self)
+end
+
+function Player.getState(self)
+    return self.state
 end
 
 function Player.registerAsSolidObject(_)
