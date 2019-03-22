@@ -1,4 +1,4 @@
-GAME_TITLE = "Legend of the Rune Master"
+GAME_TITLE = ""
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 FULL_SCREEN = false
@@ -9,11 +9,8 @@ GAME_HEIGHT = 600
 RESOURCES_PATH = "Resources"
 
 APPS = {
-    ["TitleMenu"] = "Menu._init",
-    ["Cutscenes"] = "Cutscenes._init",
-    ["Overworld"] = "Overworld._init"
 }
-INITIAL_APP = "TitleMenu"
+INITIAL_APP = ""
 
 GLOBAL_CONTEXT = {}
 GLOBAL_CONTEXT.dt = 0
