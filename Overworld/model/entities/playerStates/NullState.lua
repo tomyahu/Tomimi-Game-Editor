@@ -38,4 +38,8 @@ function NullState.toString(self)
     return "NullState"
 end
 
+function NullState.getInteractuableHitbox(self)
+    return nil
+end
+
 return NullState

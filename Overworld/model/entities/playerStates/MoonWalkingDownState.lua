@@ -22,4 +22,8 @@ function MoonWalkingDownState.toString(self)
     return "MoonWalkingDownState"
 end
 
+function MoonWalkingDownState.getInteractuableHitbox(self)
+    return self.player.interactuable_up
+end
+
 return MoonWalkingDownState

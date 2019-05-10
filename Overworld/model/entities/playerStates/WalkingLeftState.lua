@@ -22,4 +22,8 @@ function WalkingLeftState.toString(self)
     return "WalkingLeftState"
 end
 
+function WalkingLeftState.getInteractuableHitbox(self)
+    return self.player.interactuable_left
+end
+
 return WalkingLeftState

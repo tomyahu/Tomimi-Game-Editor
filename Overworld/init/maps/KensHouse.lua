@@ -1,5 +1,7 @@
 require "Global.consts"
 local GridRoomBuilder = require "Overworld.model.rooms.GridRoomBuilder"
+local EntityFactory = require "Overworld.init.EntityFactory"
+require "Overworld.init.hitboxes"
 --------------------------------------------------------------------------------------------------------
 
 local floors = {
@@ -35,6 +37,11 @@ for i, x in pairs(floors) do
         end
     end
 end
+
+local entity_factory = EntityFactory.new()
+
+--Add Plant
+roomBuild:addObject(5,5,entity_factory:createOneTileObject("/Overworld/Entities/Plant1.png", "Me encanta esta planta"))
 
 local room = roomBuild:getRoom()
 return room

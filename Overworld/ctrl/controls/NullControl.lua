@@ -1,5 +1,7 @@
 require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
-local NullDialogState = class(function(self) end)
+local NullControl = class(function(self) end)
 
-return NullDialogState
+function NullControl.update(self) end
+
+return NullControl

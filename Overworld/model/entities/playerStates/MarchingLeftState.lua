@@ -22,4 +22,8 @@ function MarchingLeftState.toString(self)
     return "MarchingLeftState"
 end
 
+function MarchingLeftState.getInteractuableHitbox(self)
+    return self.player.interactuable_left
+end
+
 return MarchingLeftState

@@ -4,11 +4,11 @@ local NullState = require "Overworld.model.entities.playerStates.NullState"
 local NormalPlayerState = extend(NullState, function(self, player) end)
 
 function NormalPlayerState.moveUp(self)
-    local old_vx, _ = self.player.solid_object:getSpeed()
-    self.player.solid_object:setSpeed(old_vx, - self.player.speed)
-
     local player_x, player_y = self.player:getPos()
     self.player:setPos(player_x, player_y - self.player.speed)
+
+    local old_vx, _ = self.player.solid_object:getSpeed()
+    self.player.solid_object:setSpeed(old_vx, - self.player.speed)
 end
 
 function NormalPlayerState.moveDown(self)
@@ -47,6 +47,10 @@ end
 
 function NormalPlayerState.toString(self)
     return "NormalPlayerState"
+end
+
+function NormalPlayerState.getInteractuableHitbox(self)
+    return self.player.interactuable_down
 end
 
 return NormalPlayerState

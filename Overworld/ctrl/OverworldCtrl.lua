@@ -1,12 +1,22 @@
 require "lib.classes.class"
 local Ctrl = require "Global.ctrl.ctrl"
 local OverworldBehavior = require "Overworld.model.physics.behavior.OverworldBehavior"
+local DialogManager = require "Overworld.ctrl.dialogs.DialogManager"
+local ControlManager = require "Overworld.ctrl.controls.ControlManager"
+local RegularControl = require "Overworld.ctrl.controls.RegularControl"
+local DialogControl = require "Overworld.ctrl.controls.DialogControl"
 --------------------------------------------------------------------------------------------------------
 
 local OverworldCtrl = extend(Ctrl, function(self, view, player, room_manager)
     self.player = player
     self.room_manager = room_manager
+    self.dialog_manager = DialogManager.new(view, self)
     self.behavior = OverworldBehavior.new("SolidObjects", self.player)
+    self.behavior = OverworldBehavior.new("SolidObjects", self.player)
+
+    self.controls_manager = ControlManager.new()
+    self.controls_manager:setControls(RegularControl.new(self))
+    self.view = view
 end,
 
 function(view, player_view, room_manager)
@@ -16,34 +26,21 @@ end)
 function OverworldCtrl.getContextVars(self, context)
     local new_context = {}
     new_context['SolidObjects'] = context['SolidObjects']
+    new_context['Interactuables'] = context['Interactuables']
     return new_context
 end
 
 function OverworldCtrl.update(self,_)
-    if love.keyboard.isDown("up") and love.keyboard.isDown("down") then
-        self.player:moveBothY()
-    elseif love.keyboard.isDown("up") then
-        self.player:moveUp()
-        self.behavior:AllObjectsInteract()
-    elseif love.keyboard.isDown("down") then
-        self.player:moveDown()
-        self.behavior:AllObjectsInteract()
-    else
-        self.player:stopY()
-    end
+    self.controls_manager:update()
+end
 
-    if love.keyboard.isDown("left") and love.keyboard.isDown("right") then
-        self.player:moveBothX()
-    elseif love.keyboard.isDown("left") then
-        self.player:moveLeft()
-        self.behavior:AllObjectsInteract()
-    elseif love.keyboard.isDown("right") then
-        self.player:moveRight()
-        self.behavior:AllObjectsInteract()
-    else
-        self.player:stopX()
-    end
+function OverworldCtrl.startDialog(self, dialog)
+    self.dialog_manager:setCurrentDialog(dialog)
+    self:setControls(DialogControl.new(self))
+end
 
+function OverworldCtrl.setControls(self, Controls)
+    self.controls_manager:setControls(Controls)
 end
 
 return OverworldCtrl

@@ -53,7 +53,7 @@ function RoomView.returnSortedObjectArray(self)
         local _, y1 = a:getFirst():getPos()
         local _, y2 = b:getFirst():getPos()
         if (a:getSecond() == b:getSecond()) then
-            return (y1 > y2)
+            return (y1 < y2)
         else
             return a:getSecond() < b:getSecond()
         end

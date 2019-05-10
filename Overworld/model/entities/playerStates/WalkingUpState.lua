@@ -22,4 +22,8 @@ function WalkingUpState.toString(self)
     return "WalkingUpState"
 end
 
+function WalkingUpState.getInteractuableHitbox(self)
+    return self.player.interactuable_up
+end
+
 return WalkingUpState
