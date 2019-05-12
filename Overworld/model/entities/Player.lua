@@ -22,7 +22,7 @@ function(sprite, speed, hitboxes)
 end)
 
 function Player.setPos(self, x, y)
-    self.super.setPos(self, x, y)
+    SolidEntity.setPos(self, x, y)
     self.interactuable_up:setPosition(x, y)
     self.interactuable_down:setPosition(x, y)
     self.interactuable_left:setPosition(x, y)

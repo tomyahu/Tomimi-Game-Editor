@@ -46,48 +46,15 @@ function extend(parent, constructor, superFun)
         local super
         if superFun == nil then
             o = parent.new(...)
-            --o = {}
-            super = parent.new(...)
         else
             o = superFun(...)
-            super = parent.new(...)
-            --o = {}
-            --super = superFun(...)
             if not (type(o) == "table") then
                 error("Function superFun must return a new parent object.")
             end
         end
         local self = setmetatable(o, TheClass)
 
-        --[[
-        local self = setmetatable(o, {
-            __index = function(s, key)
-                local current_obj = s
-                local class_methods = {}
-                local obj_vars = {}
-                for k,v in pairs(current_obj.class) do
-                    class_methods[k] = true
-                end
-
-                while (not (current_obj.super == nil)) and (class_methods[key] == nil) do
-                    current_obj = current_obj.super
-                    class_methods = {}
-                    for k,v in pairs(current_obj.class) do
-                        class_methods[k] = true
-                    end
-                end
-
-                if class_methods[key] then
-                    return function(self, ...) return current_obj.class[key](s, ...) end
-                else
-                    return table[key]
-                end
-            end
-        }) ]] --
-
         constructor(self, ...)
-
-        self.super = super
         self.class = TheClass
         return self
     end

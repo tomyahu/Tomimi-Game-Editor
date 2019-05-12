@@ -28,7 +28,7 @@ function TimedSprite.advanceFrame(self)
 end
 
 function TimedSprite.setFrameSet(self, frame_set)
-    self.super.setFrameSet(self, frame_set)
+    Sprite.setFrameSet(self, frame_set)
     self.current_time = 0
 end
 

@@ -4,17 +4,17 @@ local NormalPlayerState = require "Overworld.model.entities.playerStates.NormalP
 local WalkingDownState = extend(NormalPlayerState, function(self, player) end)
 
 function WalkingDownState.moveUp(self)
-    self.super.moveUp(self)
+    NormalPlayerState.moveUp(self)
     self.player:setState("WalkingUpState")
 end
 
 function WalkingDownState.stopY(self)
-    self.super.stopY(self)
+    NormalPlayerState.stopY(self)
     self.player:setState("StillState")
 end
 
 function WalkingDownState.moveBothY(self)
-    self.super.moveBothY(self)
+    NormalPlayerState.moveBothY(self)
     self.player:setState("MarchingDownState")
 end
 
