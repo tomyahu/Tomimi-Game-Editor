@@ -10,12 +10,12 @@ end
 
 function WalkingLeftState.stopX(self)
     NormalPlayerState.stopX(self)
-    self.player:setState("StillState")
+    self.player:setState("StillLeftState")
 end
 
 function WalkingLeftState.moveBothX(self)
     NormalPlayerState.moveBothX(self)
-    self.player:setState("MarchingLeftState")
+    self.player:setState("StillLeftState")
 end
 
 function WalkingLeftState.toString(self)

@@ -1,14 +1,14 @@
 require "lib.classes.class"
 local SolidObject = require "lib.physics.objects.SolidObject"
 local SolidEntity = require "Overworld.model.entities.SolidEntity"
-local StillState = require "Overworld.model.entities.playerStates.StillState"
+local StillDownState = require "Overworld.model.entities.playerStates.StillDownState"
 require "Global.application.application"
 --------------------------------------------------------------------------------------------------------
 local STATE_PATH = "Overworld.model.entities.playerStates."
 
 local Player = extend(SolidEntity, function(self, sprite, speed, hitboxes, interactuable_hitboxes)
     self.speed = speed
-    self.state = StillState.new(self)
+    self.state = StillDownState.new(self)
 
     local posx, posy = self:getPos()
     self.interactuable_up = SolidObject.new({interactuable_hitboxes[1]})

@@ -1,30 +1,34 @@
 require "lib.classes.class"
 local NormalPlayerState = require "Overworld.model.entities.playerStates.NormalPlayerState"
 --------------------------------------------------------------------------------------------------------
-local StillState = extend(NormalPlayerState, function(self, player) end)
+local StillRightState = extend(NormalPlayerState, function(self, player) end)
 
-function StillState.moveUp(self)
+function StillRightState.moveUp(self)
     NormalPlayerState.moveUp(self)
     self.player:setState("WalkingUpState")
 end
 
-function StillState.moveDown(self)
+function StillRightState.moveDown(self)
     NormalPlayerState.moveDown(self)
     self.player:setState("WalkingDownState")
 end
 
-function StillState.moveLeft(self)
+function StillRightState.moveLeft(self)
     NormalPlayerState.moveLeft(self)
     self.player:setState("WalkingLeftState")
 end
 
-function StillState.moveRight(self)
+function StillRightState.moveRight(self)
     NormalPlayerState.moveRight(self)
     self.player:setState("WalkingRightState")
 end
 
-function StillState.toString(self)
-    return "StillState"
+function StillRightState.getInteractuableHitbox(self)
+    return self.player.interactuable_right
 end
 
-return StillState
+function StillRightState.toString(self)
+    return "StillRightState"
+end
+
+return StillRightState

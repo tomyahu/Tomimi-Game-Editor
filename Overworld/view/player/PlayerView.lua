@@ -24,19 +24,14 @@ end
 
 function PlayerView.adjustAnimation(self)
     local action = {
-        ["StillState"] = function() self:getSprite():setFrameSet(1) end,
-        ["WalkingDownState"] = function() self:getSprite():setFrameSet(2) end,
-        ["MarchingDownState"] = function() self:getSprite():setFrameSet(2) end,
-        ["MoonWalkingUpState"] = function() self:getSprite():setFrameSet(2) end,
-        ["WalkingUpState"] = function() self:getSprite():setFrameSet(3) end,
-        ["MarchingUpState"] = function() self:getSprite():setFrameSet(3) end,
-        ["MoonWalkingDownState"] = function() self:getSprite():setFrameSet(3) end,
-        ["WalkingRightState"] = function() self:getSprite():setFrameSet(4) end,
-        ["MarchingRightState"] = function() self:getSprite():setFrameSet(4) end,
-        ["MoonWalkingLeftState"] = function() self:getSprite():setFrameSet(4) end,
-        ["WalkingLeftState"] = function() self:getSprite():setFrameSet(5) end,
-        ["MarchingLeftState"] = function() self:getSprite():setFrameSet(5) end,
-        ["MoonWalkingRightState"] = function() self:getSprite():setFrameSet(5) end
+        ["StillDownState"] = function() self:getSprite():setFrameSet(1) end,
+        ["StillUpState"] = function() self:getSprite():setFrameSet(2) end,
+        ["StillRightState"] = function() self:getSprite():setFrameSet(3) end,
+        ["StillLeftState"] = function() self:getSprite():setFrameSet(4) end,
+        ["WalkingDownState"] = function() self:getSprite():setFrameSet(5) end,
+        ["WalkingUpState"] = function() self:getSprite():setFrameSet(6) end,
+        ["WalkingRightState"] = function() self:getSprite():setFrameSet(7) end,
+        ["WalkingLeftState"] = function() self:getSprite():setFrameSet(8) end
     }
 
     if type(action[self.state]) == "function" then

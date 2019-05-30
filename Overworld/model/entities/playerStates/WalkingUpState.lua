@@ -10,12 +10,12 @@ end
 
 function WalkingUpState.stopY(self)
     NormalPlayerState.stopY(self)
-    self.player:setState("StillState")
+    self.player:setState("StillUpState")
 end
 
 function WalkingUpState.moveBothY(self)
     NormalPlayerState.moveBothY(self)
-    self.player:setState("MarchingUpState")
+    self.player:setState("StillUpState")
 end
 
 function WalkingUpState.toString(self)
