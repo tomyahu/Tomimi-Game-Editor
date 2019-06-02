@@ -2,7 +2,9 @@ require "Global.consts"
 require "lib.classes.class"
 local RectFrame = require "Global.LOVEWrapper.sprite.RectFrame"
 local TimedSprite = require "Global.LOVEWrapper.sprite.TimedSprite"
+local NullSprite = require "Global.LOVEWrapper.sprite.NullSprite"
 local InteractuableDialogEntity = require "Overworld.model.entities.InteractuableDialogEntity"
+local ChangeRoomPad = require "Overworld.model.entities.contact_entities.ChangeRoomPad"
 local DialogBuilder = require "Overworld.model.dialog.DialogBuilder"
 require "Overworld.init.hitboxes"
 --------------------------------------------------------------------------------------------------------
@@ -19,9 +21,13 @@ function EntityFactory.createOneTileObject(self, path, text)
     dialogBuild:addMessage(text)
 
     local entity = InteractuableDialogEntity.new(entity_sprite, newEntityHitboxes(), dialogBuild:getDialog())
-    entity:registerAsInteractuableObject()
 
     return entity
+end
+
+function EntityFactory.createIvisibleChangeRoomPad(self, room_index, newx, newy)
+    local pad = ChangeRoomPad.new(NullSprite.new(), newEntityHitboxes(), room_index, newx, newy)
+    return pad
 end
 
 return EntityFactory

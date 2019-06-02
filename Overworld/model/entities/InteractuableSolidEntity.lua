@@ -23,4 +23,9 @@ function InteractuableSolidEntity.registerAsInteractuableObject(self)
     application:setLocalContext(local_context)
 end
 
+function InteractuableSolidEntity.register(self)
+    self:registerAsSolidObject()
+    self:registerAsInteractuableObject()
+end
+
 return InteractuableSolidEntity

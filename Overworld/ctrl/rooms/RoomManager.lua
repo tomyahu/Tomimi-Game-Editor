@@ -3,11 +3,14 @@ require "lib.classes.class"
 
 local RoomManager = class(function(self)
     self.rooms = {}
-    self.current_room = 0
+    self.current_room = ""
 end)
 
-function RoomManager.addRoom(self, room)
-    self.rooms[# self.rooms] = room
+function RoomManager.addRoom(self, room, index)
+    if self.current_room == "" then
+        self:setCurrentRoom(index)
+    end
+    self.rooms[index] = room
 end
 
 function RoomManager.setCurrentRoom(self, index)
@@ -15,7 +18,7 @@ function RoomManager.setCurrentRoom(self, index)
 end
 
 function RoomManager.getCurrentRoom(self)
-    return self.rooms[self.current_room]
+    return require(self.rooms[self.current_room])
 end
 
 return RoomManager

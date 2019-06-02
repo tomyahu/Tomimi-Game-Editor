@@ -20,4 +20,7 @@ function Entity.getSprite(self)
     return self.sprite
 end
 
+function Entity.register(self)
+end
+
 return Entity

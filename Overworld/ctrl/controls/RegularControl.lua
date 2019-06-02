@@ -4,6 +4,7 @@ local NullControl = require "Overworld.ctrl.controls.NullControl"
 local RegularControl = extend(NullControl, function(self, ctrl)
     self.player = ctrl.player
     self.behavior = ctrl.behavior
+    self.interactuable_behavior = ctrl.interactuable_behavior
     self.ctrl = ctrl
     self.z_key_pressed = true
 end,
@@ -46,6 +47,8 @@ function RegularControl.update(self)
     else
         self.z_key_pressed = false
     end
+
+    self.interactuable_behavior:AllObjectsInteract()
 end
 
 return RegularControl

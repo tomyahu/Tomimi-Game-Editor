@@ -54,12 +54,9 @@ local player_sprite = TimedSprite.new(player_frames, RESOURCES_PATH .. "/Overwor
 local player = Player.new(player_sprite, 3, newPlayerHitboxes(), newPlayerInteractuableHitboxes())
 player:setPos(300,300)
 
-local room = require("Overworld.init.debug_rooms.Room1")
-
-room:addObject(player, 1)
-
 local room_manager = RoomManager.new()
-room_manager:addRoom(room)
+room_manager:addRoom("Overworld.init.debug_rooms.Room1", "Room1")
+room_manager:addRoom("Overworld.init.debug_rooms.Room2", "Room2")
 
 local thisView = OverworldView.new(room_manager:getCurrentRoom(), player)
 local thisCtrl = OverworldCtrl.new(thisView, player, room_manager)

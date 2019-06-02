@@ -17,8 +17,6 @@ function RoomView.initialize(self, camera)
         object:getSprite():initialize()
     end
 
-    self.room:registerSolidObjects()
-
     if camera == nil then
         self.camera = Camera.new(GAME_WIDTH/2, GAME_HEIGHT/2, 1)
     else

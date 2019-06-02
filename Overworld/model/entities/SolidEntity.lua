@@ -27,4 +27,8 @@ function SolidEntity.registerAsSolidObject(self)
     self.solid_object:registerObject("SolidObjects")
 end
 
+function SolidEntity.register(self)
+    self:registerAsSolidObject()
+end
+
 return SolidEntity

@@ -42,9 +42,9 @@ function Room.getBackgroundPath(self)
     return self.background_path
 end
 
-function Room.registerSolidObjects(self)
+function Room.registerObjects(self)
     for _, objectPair in pairs(self.objects) do
-        objectPair:getFirst():registerAsSolidObject()
+        objectPair:getFirst():register()
     end
 end
 
