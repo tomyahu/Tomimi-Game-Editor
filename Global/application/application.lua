@@ -60,21 +60,27 @@ end
 
 -- appChange: str -> None
 -- Changes the current application to the application appName
--- TODO: add exceptions to this part
--- TODO: manage memory better here
+-- TODO: Check if local context is still not cleaned
 function application.appChange(self,appName)
     -- Gets the new application from the global constants
     local nextApp = APPS[appName]
+    if nextApp == nil then
+        error("The application " .. appName .. " isn't registered or doesn't exists.")
+    end
+
+    local new_ctrl = nextApp:getCtrl()
+    local new_view = nextApp:getView()
 
     -- Manages the local context of the next application
-    application:setLocalContext(nextApp:getCtrl():getContextVars(self:getCurrentLocalContext()))
-    application:setLocalContext(nextApp:getView():getContextVars(self:getCurrentLocalContext()))
+    application:setLocalContext(new_ctrl:getContextVars(self:getCurrentLocalContext()))
+    application:setLocalContext(new_view:getContextVars(self:getCurrentLocalContext()))
 
     -- Sets the current view and controller to those of the next application
-    application:setView(nextApp:getView())
-    application:setCtrl(nextApp:getCtrl())
+    application:setView(new_view)
+    application:setCtrl(new_ctrl)
 end
 
+-- registerApp: str str -> None
 -- Registers a new application in the global APPS variable
 function application:registerApp(appName, appPath)
     APPS[appName] = App.new(appName, appPath)
