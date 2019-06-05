@@ -1,3 +1,5 @@
+-- Classes a-la python module --
+
 -- class: function -> class
 -- Takes the constructor of the class, the constructor must be in the form function(self, ...) where
 -- self refers to the same object being created.
@@ -34,9 +36,6 @@ function extend(parent, constructor, superFun)
     elseif not ((type(superFun) == "function") or (superFun == nil))then
         error("Parameter superFun must be a function.")
     end
-
-    -- otra opcion es editar el diccionario de setmetatable para que no sea TheClass, si no que sea una funcion que haga
-    -- el lookup y listo
 
     local TheClass = parent:new();
     TheClass.__index = TheClass
