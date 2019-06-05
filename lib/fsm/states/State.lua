@@ -1,6 +1,8 @@
 require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
 
+-- class: State
+-- The state of an automaton that executes functions when it makes a transition.
 local State = class(function(self)
     self.transitions = {}
     self.transition_actions = {}

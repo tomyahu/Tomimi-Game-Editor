@@ -1,6 +1,8 @@
 require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
 
+-- class: Automaton
+-- An automaton that manages a set of states
 local Automaton = class(function(self)
     self.currentState = nil
 end)

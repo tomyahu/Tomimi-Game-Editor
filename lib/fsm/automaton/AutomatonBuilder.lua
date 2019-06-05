@@ -2,6 +2,9 @@ require "lib.classes.class"
 local Automaton = require "Menu.model.automaton.Automaton"
 --------------------------------------------------------------------------------------------------------
 
+-- class: Automaton Builder
+-- A builder class to create automatons, its used to create a set of states and when we are done, set the current state
+-- of the automaton to our desired initial state
 local AutomatonBuilder = class(function(self)
     self.automaton = Automaton.new()
     self.states = {}
