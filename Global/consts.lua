@@ -1,3 +1,7 @@
+-- In this file resides the basic information of the initial configuration of the game. Its content may include the
+-- game title, the initial dimensions of the window, the dimensions of the game world, the apps, the initial app, the
+-- global context, the audio volume, etc.
+---------------------------------------------------------------
 GAME_TITLE = "Legend of the Rune Master"
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
