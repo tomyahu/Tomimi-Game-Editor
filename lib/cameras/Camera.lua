@@ -34,8 +34,6 @@ function Camera.draw(self, sprite, x, y, sx, sy)
     if sx == nil then sx = 1 end
     if sy == nil then sy = 1 end
 
-    local zoom = getScale()
-
     local newx = (x* self.zoom + (GAME_WIDTH/2) - self.centerx* self.zoom)
     local newy = (y* self.zoom + (GAME_HEIGHT/2) - self.centery* self.zoom)
 
