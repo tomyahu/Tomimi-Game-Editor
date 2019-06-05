@@ -1,6 +1,7 @@
 require "lib.classes.class"
 require "Global.consts"
 require "Global.LOVEWrapper.LOVEWrapper"
+-- TODO: Add camera with effects like zoom-in, zoom-out, spin, etc.
 --------------------------------------------------------------------------------------------------------
 
 -- class: Camera
