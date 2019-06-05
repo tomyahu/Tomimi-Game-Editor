@@ -1,4 +1,4 @@
-
+-- TODO: Create method to get min and max from an array
 -- Ordering -----------------------------------------------------------------------------------------------------
 -- Quicksort --
 
