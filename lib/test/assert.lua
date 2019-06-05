@@ -11,7 +11,7 @@ function assertFalse(received)
 end
 
 -- assertTrue: bool -> None/Error
--- Raises an error if received is fals
+-- Raises an error if received is false
 function assertTrue(received)
     assert(received)
 end
