@@ -3,8 +3,14 @@ local NullBehavior = require "lib.physics.behaviors.NullBehavior"
 require "Global.application.application"
 --------------------------------------------------------------------------------------------------------
 
+-- class: StaticBehavior
+-- param: group:str -> the common group of the objects to be tested with this behavior
+-- An object behavior that resets all positions of objects where there is a collition.
 local StaticBehavior = extend(NullBehavior, function(self, group) end)
 
+-- allObjectsInteract: None -> None
+-- Defines the interaction behavior followed by the group's objects. In this case all object are reseted to their
+-- previous positions if they collide.
 function StaticBehavior.AllObjectsInteract(self)
     local local_context = application:getCurrentLocalContext()
     local done = false

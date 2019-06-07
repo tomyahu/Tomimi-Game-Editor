@@ -1,6 +1,10 @@
 require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
 
+-- class: Node
+-- param: key:num -> the key of the node
+-- param: val:any -> the value of the node
+-- A node of a binary tree that contains a key, a value and two children node pointers
 local Node = class(function(self, key, val)
     self.val = val
     self.key = key
@@ -8,6 +12,8 @@ local Node = class(function(self, key, val)
     self.der = nil
 end)
 
+-- search: num -> Node
+-- Checks if the key given is the same as the current node's and searches its children otherwise.
 function Node.search(self, key)
     if key < self.key and (not (self.izq == nil))then
         return self.izq:search(key)
@@ -18,6 +24,8 @@ function Node.search(self, key)
     end
 end
 
+-- insert: num, any -> None
+-- Inserts a new node with a key and value in the node's children.
 function Node.insert(self, key, val)
     if key < self.key then
         if self.izq:isLeaf() then
@@ -34,6 +42,9 @@ function Node.insert(self, key, val)
     end
 end
 
+-- remove: num, any -> None
+-- Removes a node from the current node children.
+-- TODO: Check this function, its kinda weird, should be checking for key not val
 function Node.remove(self, key, val)
     if self.izq.val == val then
         if self.izq.izq == nil and self.izq.der == nil then
@@ -54,6 +65,8 @@ function Node.remove(self, key, val)
     end
 end
 
+-- propagate: None -> None
+-- After a node its removed this function is called to propagate the changes and leave the tree in a consistent form.
 function Node.propagate(self)
     if math.random(2) == 1 and (not (self.izq == nil)) then
         self.val = self.tree.izq.val
@@ -74,6 +87,8 @@ function Node.propagate(self)
     end
 end
 
+-- height: None -> int
+-- Returns the current height of the nodes subtree (includes the current node)
 function Node.height(self)
     local aux = 1
     if not self.izq == nil then
@@ -85,6 +100,8 @@ function Node.height(self)
     return aux
 end
 
+-- toArray: None -> array(any)
+-- Returns this subtree's values as an array
 function Node.toArray(self)
     local aux = {}
     if not (self.izq == nil) then
@@ -103,11 +120,17 @@ function Node.toArray(self)
     return aux
 end
 --------------------------------------------------------------------------------------------------------
+
+-- class: BinaryTree
+-- A Binary search tree
 local BinaryTree = class(function(self)
     self.tree = nil
 end)
 
-function BinaryTree.search(self,key)
+-- search: num -> Node | nil
+-- Returns nil if the binary tree is empty or if it doesn't find the key in the tree. It returns the Node associated to
+-- the key otherwise.
+function BinaryTree.search(self, key)
     if self.tree == nil then
         return nil
     else
@@ -115,10 +138,14 @@ function BinaryTree.search(self,key)
     end
 end
 
+-- isEmpty: None -> bool
+-- Returns true if the binary tree is empty and false otherwise.
 function BinaryTree.isEmpty(self)
     return self.tree == nil
 end
 
+-- insert: num, any -> None
+-- Inserts a new node with the given key and value in the tree.
 function BinaryTree.insert(self, key, val)
     if self.tree == nil then
         self.tree = Node.new(key, val)
@@ -127,6 +154,9 @@ function BinaryTree.insert(self, key, val)
     end
 end
 
+-- remove: num, any -> None
+-- Removes a node from the tree.
+-- TODO: Check this function, its kinda weird, should be checking for key not val
 function BinaryTree.remove(self, key, val)
     if self.tree.val == val and self.tree.izq == nil and self.tree.der == nil then
         self.tree = nil
@@ -137,12 +167,24 @@ function BinaryTree.remove(self, key, val)
     end
 end
 
+-- height: None -> int
+-- Returns the current tree's height.
 function BinaryTree.height(self)
-    return self.tree:height()
+    if self.tree == nil then
+        return 0
+    else
+        return self.tree:height()
+    end
 end
 
+-- toArray: None -> array(any)
+-- Creates an array with the binary tree's values ordered.
 function BinaryTree.toArray(self)
-    return self.tree:toArray()
+    if self.tree == nil then
+        return {}
+    else
+        self.tree:toArray()
+    end
 end
 
 return BinaryTree

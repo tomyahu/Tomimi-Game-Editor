@@ -2,6 +2,10 @@ require "lib.classes.class"
 require "Global.application.application"
 --------------------------------------------------------------------------------------------------------
 
+-- class: NullBehavior
+-- param: group:str -> the common group of the objects to be tested with this behavior
+-- An object behavior that does nothing
+-- Uses Null Pattern
 local NullBehavior = class(function(self, group)
     self.group = group
 
@@ -11,6 +15,9 @@ local NullBehavior = class(function(self, group)
     end
 end)
 
+-- allObjectsInteract: None -> None
+-- Defines the interaction behavior followed by the group's objects.
+-- TODO: Change this function name to camel-case
 function NullBehavior.AllObjectsInteract(_) end
 
 return NullBehavior
