@@ -1,6 +1,9 @@
 require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
 
+-- class: BasicCutscene
+-- param: scenes:BasicScene -> the scenes of the cutscene
+-- A cutscene class with scenes
 local BasicCutscene = class(function(self, scenes)
     self.scenes = scenes
     self.current_scene = 0
@@ -18,6 +21,8 @@ function BasicCutscene.advanceScene(self)
     end
 end
 
+-- getCurrentScene: None -> BasicScene
+-- Gets the cutscene's current scene
 function BasicCutscene.getCurrentScene(self)
     return self.scenes[self.current_scene]
 end
@@ -28,6 +33,7 @@ function BasicCutscene.resetCutscene(self)
     self.current_scene = 0
 end
 
+-- getter
 function BasicCutscene.getScenes(self)
     return self.scenes
 end

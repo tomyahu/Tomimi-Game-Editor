@@ -3,6 +3,10 @@ require "Global.LOVEWrapper.LOVEWrapper"
 local Ctrl = require "Global.ctrl.ctrl"
 --------------------------------------------------------------------------------------------------------
 
+-- class: CutscenesCtrl
+-- param: view:View -> the view of the menu app
+-- param: cutsceneAdmin:BasicCutsceneAdmin -> the administrator that changes cutscene
+-- The controller of the cutscene app
 local CutscenesCtrl = extend(Ctrl, function(self, view, cutsceneAdmin)
     self.cutscene_admin = cutsceneAdmin
 end,
@@ -22,10 +26,15 @@ function CutscenesCtrl.callbackPressedKey(self,key)
     end
 end
 
+-- setNextApp: str -> None
+-- sets the next app name
 function CutscenesCtrl.setNextApp(self, appName)
     self.next_app = appName
 end
 
+-- getContextVars: dict() -> dict()
+-- Takes the local context and creates a new context based on it
+-- Saves the images in the local context
 function CutscenesCtrl.getContextVars(self, _)
     local context = {}
     local cutscene = self.cutscene_admin:getCurrentCutscene()

@@ -1,11 +1,14 @@
 require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
 
+-- class: BasicCutsceneAdmin
+-- A basic cutscene administrator that manages the current shown cutscene
 local BasicCutsceneAdmin = class(function(self)
     self.cutscenes = {}
     self.current_cutscene = nil
 end)
 
+-- getter
 function BasicCutsceneAdmin.getCurrentCutscene(self)
     return self.current_cutscene
 end

@@ -3,6 +3,8 @@ local BasicCutscene = require "Cutscenes.model.cutscenes.BasicCutscene"
 local BasicScene = require "Cutscenes.model.scenes.BasicScene"
 --------------------------------------------------------------------------------------------------------
 
+-- class: BasicCutsceneBuilder
+-- Builder class to create basic cutscenes
 local BasicCutsceneBuilder = class(function(self)
     self.scenes = {}
     self.scene_number = 0
@@ -15,6 +17,8 @@ function BasicCutsceneBuilder.addScene(self, text, image_path)
     self.scene_number = self.scene_number + 1
 end
 
+-- getCutscene: None -> BasicCutscene
+-- Returns the built BasicCutscene
 function BasicCutsceneBuilder.getCutscene(self)
     return BasicCutscene.new(self.scenes)
 end

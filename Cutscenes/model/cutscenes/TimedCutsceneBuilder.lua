@@ -4,6 +4,9 @@ local TimedCutscene = require "Cutscenes.model.cutscenes.TimedCutscene"
 local TimedTextScene = require "Cutscenes.model.scenes.TimedTextScene"
 --------------------------------------------------------------------------------------------------------
 
+-- class: BasicCutsceneBuilder
+-- param: speed:num -> the speed at which the cutscene is progressing
+-- Builder class to create timed cutscenes
 local TimedCutsceneBuilder = extend(BasicCutsceneBuilder, function(self, speed)
     self.speed = speed
 end,
@@ -19,6 +22,8 @@ function TimedCutsceneBuilder.addScene(self, text, image_path)
     self.scene_number = self.scene_number + 1
 end
 
+-- getCutscene: None -> TimedCutscene
+-- Returns the built TimedCutscene
 function TimedCutsceneBuilder.getCutscene(self)
     return TimedCutscene.new(self.scenes)
 end
