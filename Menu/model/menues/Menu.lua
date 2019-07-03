@@ -2,6 +2,8 @@ require "lib.classes.class"
 local Automaton = require "lib.fsm.automaton.Automaton"
 --------------------------------------------------------------------------------------------------------
 
+-- class: Menu
+-- Creates a new Menu with empty options
 local Menu = extend(Automaton, function(self)
     self.options = {}
 end)

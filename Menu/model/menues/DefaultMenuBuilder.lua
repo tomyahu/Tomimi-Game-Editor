@@ -2,12 +2,14 @@ require "lib.classes.class"
 local MenuBuilder = require "Menu.model.menues.MenuBuilder"
 --------------------------------------------------------------------------------------------------------
 
+-- class: DefaultMenuBuilder
+-- Default builder for the menu
 local DefaultMenuBuilder = class(function(self)
     self.menubuild = MenuBuilder.new()
     self.optionNumber = 0
 end)
 
--- addOption: MenuState -> self
+-- addState: MenuState -> self
 -- Adds an option to the menu
 function DefaultMenuBuilder.addState(self,state)
     self.menubuild:addState(state)

@@ -3,6 +3,10 @@ local View = require "Global.view.view"
 require "Global.consts"
 --------------------------------------------------------------------------------------------------------
 
+-- class: BasicMenuView
+-- param: background_image_path:str -> the path of the image to display
+-- param: menu:Menu -> the menu to display
+-- The basic view of a menu
 local BasicMenuView = extend(View, function(self, background_image_path, menu)
     self.background_path = background_image_path
     self.menu = menu
@@ -12,10 +16,13 @@ function(background_image_path, menu)
     return View:new()
 end)
 
+-- menu setter
 function BasicMenuView.setMenu(self, new_menu)
     self.menu = new_menu
 end
 
+-- draw: context -> None
+-- Draws the menu options
 function BasicMenuView.draw(self, context)
     local background = context['background']
     local backgroundpixelwidth, backgroundpixelheight = background:getPixelDimensions()
@@ -29,6 +36,9 @@ function BasicMenuView.draw(self, context)
     end
 end
 
+-- getContextVars: dict() -> dict()
+-- Takes the local context and creates a new context based on it
+-- Saves the background path image in the context
 function BasicMenuView.getContextVars(self, _)
     local context = {}
     context['background'] = love.graphics.newImage(self.background_path)

@@ -2,6 +2,8 @@ require "lib.classes.class"
 local Menu = require "Menu.model.menues.Menu"
 --------------------------------------------------------------------------------------------------------
 
+-- class: MenuBuilder
+-- Builder class to create a menu
 local MenuBuilder = class(function(self)
     self.menu = Menu.new()
     self.stateNumber = 0
