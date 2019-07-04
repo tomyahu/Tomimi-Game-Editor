@@ -1,6 +1,10 @@
 require "lib.classes.class"
 local NullControl = require "Overworld.ctrl.controls.NullControl"
 --------------------------------------------------------------------------------------------------------
+
+-- class: RegularControl
+-- param: ctrl:Ctrl -> the controller of the overworld application
+-- The controls that are available by default in the overworld
 local RegularControl = extend(NullControl, function(self, ctrl)
     self.player = ctrl.player
     self.behavior = ctrl.behavior
@@ -13,7 +17,10 @@ function(ctrl)
     return NullControl.new()
 end)
 
+-- update: None -> None
+-- Interprets the input from the player and acts accordingly
 function RegularControl.update(self)
+    -- Puts itself in all combinations of up and down keys pressed
     if love.keyboard.isDown("up") and love.keyboard.isDown("down") then
         self.player:moveBothY()
     elseif love.keyboard.isDown("up") then
@@ -26,6 +33,7 @@ function RegularControl.update(self)
         self.player:stopY()
     end
 
+    -- Puts itself in all combinations of left and right keys pressed
     if love.keyboard.isDown("left") and love.keyboard.isDown("right") then
         self.player:moveBothX()
     elseif love.keyboard.isDown("left") then
@@ -38,16 +46,19 @@ function RegularControl.update(self)
         self.player:stopX()
     end
 
+    -- Interact with objects if the z key is pressed
     if love.keyboard.isDown("z") and (not self.z_key_pressed) then
         self.player:interact()
     end
 
+    -- This part is here to check if the z key was just pressed or not
     if love.keyboard.isDown("z") then
         self.z_key_pressed = true
     else
         self.z_key_pressed = false
     end
 
+    -- Make all interactuable objects interact
     self.interactuable_behavior:AllObjectsInteract()
 end
 
