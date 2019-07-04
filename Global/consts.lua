@@ -18,7 +18,4 @@ APPS = {
 }
 INITIAL_APP = "TitleMenu"
 
-GLOBAL_CONTEXT = {}
-GLOBAL_CONTEXT.dt = 0
-
 TEST = false

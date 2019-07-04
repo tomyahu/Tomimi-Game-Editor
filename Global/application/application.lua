@@ -54,8 +54,17 @@ function application.setLocalContext(_, newContext)
 end
 
 -- Gets the global context of the application
-function application.getGocalContext(_)
-    return LocalContext
+function application.getGlobalContext(_)
+    return GlobalContext
+end
+
+-- Replaces the old global context with newContext if it is not nil, otherwise it cleans the local context
+function application.setGlobalContext(_, newContext)
+    if newContext == nil then
+        GlobalContext = {}
+    else
+        GlobalContext = newContext
+    end
 end
 
 -- appChange: str -> None

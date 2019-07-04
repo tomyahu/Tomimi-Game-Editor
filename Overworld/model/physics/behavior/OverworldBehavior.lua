@@ -14,7 +14,15 @@ end)
 
 function OverworldBehavior.AllObjectsInteract(self)
     local local_context = application:getCurrentLocalContext()
-
+    
+    local global_context = application:getGlobalContext()
+    
+    self.player_object:setDt(global_context.dt)
+    
+    for _, object in pairs(local_context[self.group]) do
+        object:setDt(global_context.dt)
+    end
+    
     local reset_player = false
     for _, object in pairs(local_context[self.group]) do
         if object:checkCollision(self.player_object) then

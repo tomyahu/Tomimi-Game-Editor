@@ -6,6 +6,7 @@ local OverworldInteractuableObjectBehavior = require "Overworld.model.physics.be
 local DialogManager = require "Overworld.ctrl.dialogs.DialogManager"
 local ControlManager = require "Overworld.ctrl.controls.ControlManager"
 local RegularControl = require "Overworld.ctrl.controls.RegularControl"
+local PreRegularControl = require "Overworld.ctrl.controls.PreRegularControl"
 local DialogControl = require "Overworld.ctrl.controls.DialogControl"
 --------------------------------------------------------------------------------------------------------
 
@@ -52,10 +53,10 @@ function OverworldCtrl.getContextVars(self, context)
     return new_context
 end
 
--- update: int -> None
+-- update: num -> None
 -- Function called every frame
 -- updates the controls manager
-function OverworldCtrl.update(self,_)
+function OverworldCtrl.update(self, dt)
     self.controls_manager:update()
 end
 
@@ -87,6 +88,8 @@ function OverworldCtrl.changeRoom(self, index)
 
     new_room:registerObjects()
     self.view:setCurrentRoom(new_room)
+    
+    self:setControls(PreRegularControl.new(self))
 end
 
 return OverworldCtrl

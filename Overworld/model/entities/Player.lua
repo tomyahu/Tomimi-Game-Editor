@@ -61,12 +61,12 @@ function Player.moveBothY(self)
     self.state:moveBothY()
 end
 
-function Player.getSpeed(self)
-    return self.solid_object:getSpeed()
+function Player.getSolidObjectSpeed(self)
+    return self.solid_object:getSpeed()*self.speed
 end
 
-function Player.getBaseSpeed(self)
-    return self.speed
+function Player.getSpeed(self)
+    return self.speed * self.solid_object.dt
 end
 
 function Player.setState(self, new_state_name)

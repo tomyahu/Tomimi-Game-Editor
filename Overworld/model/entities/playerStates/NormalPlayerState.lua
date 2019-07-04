@@ -12,10 +12,10 @@ local NormalPlayerState = extend(NullState, function(self, player) end)
 -- In this case it modifies the player's speed so the player goes up
 function NormalPlayerState.moveUp(self)
     local player_x, player_y = self.player:getPos()
-    self.player:setPos(player_x, player_y - self.player.speed)
+    self.player:setPos(player_x, player_y - self.player:getSpeed())
 
     local old_vx, _ = self.player.solid_object:getSpeed()
-    self.player.solid_object:setSpeed(old_vx, - self.player.speed)
+    self.player.solid_object:setSpeed(old_vx, - self.player:getSpeed())
 end
 
 -- moveDown: None -> None
@@ -23,10 +23,10 @@ end
 -- In this case it modifies the player's speed so the player goes down
 function NormalPlayerState.moveDown(self)
     local player_x, player_y = self.player:getPos()
-    self.player:setPos(player_x, player_y + self.player.speed)
+    self.player:setPos(player_x, player_y + self.player:getSpeed())
 
     local old_vx, _ = self.player.solid_object:getSpeed()
-    self.player.solid_object:setSpeed(old_vx, self.player.speed)
+    self.player.solid_object:setSpeed(old_vx, self.player:getSpeed())
 end
 
 -- moveLeft: None -> None
@@ -34,10 +34,10 @@ end
 -- In this case it modifies the player's speed so the player goes left
 function NormalPlayerState.moveLeft(self)
     local player_x, player_y = self.player:getPos()
-    self.player:setPos(player_x - self.player.speed, player_y)
+    self.player:setPos(player_x - self.player:getSpeed(), player_y)
 
     local _, old_vy = self.player.solid_object:getSpeed()
-    self.player.solid_object:setSpeed(- self.player.speed, old_vy)
+    self.player.solid_object:setSpeed(- self.player:getSpeed(), old_vy)
 end
 
 -- moveRight: None -> None
@@ -45,10 +45,10 @@ end
 -- In this case it modifies the player's speed so the player goes right
 function NormalPlayerState.moveRight(self)
     local player_x, player_y = self.player:getPos()
-    self.player:setPos(player_x + self.player.speed, player_y)
+    self.player:setPos(player_x + self.player:getSpeed(), player_y)
 
     local _, old_vy = self.player.solid_object:getSpeed()
-    self.player.solid_object:setSpeed(self.player.speed, old_vy)
+    self.player.solid_object:setSpeed(self.player:getSpeed(), old_vy)
 end
 
 -- stopX: None -> None

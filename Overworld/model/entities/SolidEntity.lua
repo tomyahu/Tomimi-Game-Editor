@@ -11,6 +11,12 @@ function(sprite, hitboxes)
     return Entity.new(sprite)
 end)
 
+-- setDt: num -> None
+-- sets the current frame dt for the game
+function SolidEntity.setDt(self, dt)
+    self.solid_object:setDt(dt)
+end
+
 function SolidEntity.setPos(self, x, y)
     self.solid_object:setPosition(x, y)
 end
