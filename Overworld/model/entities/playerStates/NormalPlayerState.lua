@@ -52,7 +52,7 @@ function NormalPlayerState.moveRight(self)
 end
 
 -- stopX: None -> None
--- Action to perform when the player moves right
+-- Action to perform when the player stops horizontal movement
 -- In this case it modifies the player's speed so the player has no horizontal speed
 function NormalPlayerState.stopX(self)
     local _, old_vy = self.player.solid_object:getSpeed()
@@ -60,7 +60,7 @@ function NormalPlayerState.stopX(self)
 end
 
 -- stopY: None -> None
--- Action to perform when the player moves right
+-- Action to perform when the player stops vertical movement
 -- In this case it modifies the player's speed so the player has no vertical speed
 function NormalPlayerState.stopY(self)
     local old_vx, _ = self.player.solid_object:getSpeed()
