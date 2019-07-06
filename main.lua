@@ -41,6 +41,9 @@ end
 
 
 function love.update( dt )
-    GLOBAL_CONTEXT.dt = dt
+    local global_context = application:getGlobalContext()
+    global_context.dt = dt
+    application:setGlobalContext(global_context)
+    
     CurrentCtrl:update(dt)
 end

@@ -44,7 +44,7 @@ local entity_factory = EntityFactory.new()
 roomBuild:addObject(3,5,entity_factory:createOneTileObject("/Overworld/Entities/Plant1.png", "Me encanta esta planta"))
 
 --Add Path to room 1
-roomBuild:addObject(6,6,entity_factory:createIvisibleChangeRoomPad("Room1", 64*6, 64*3))
+roomBuild:addObject(6,6,entity_factory:createInvisibleChangeRoomPad("Room1", 64*6, 64*3))
 
 local room = roomBuild:getRoom()
 return room

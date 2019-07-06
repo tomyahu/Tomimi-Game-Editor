@@ -25,7 +25,7 @@ function EntityFactory.createOneTileObject(self, path, text)
     return entity
 end
 
-function EntityFactory.createIvisibleChangeRoomPad(self, room_index, newx, newy)
+function EntityFactory.createInvisibleChangeRoomPad(self, room_index, newx, newy)
     local pad = ChangeRoomPad.new(NullSprite.new(), newEntityHitboxes(), room_index, newx, newy)
     return pad
 end

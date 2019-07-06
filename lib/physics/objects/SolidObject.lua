@@ -7,6 +7,7 @@ require "Global.application.application"
 -- An object composed of hitboxes to detect collisions between it and other objects of the same type
 local SolidObject = class(function(self, hitboxes)
     self.hitboxes = hitboxes
+    self.dt = 0.0000000000001
     self.x = 0
     self.y = 0
     self.vx = 0
@@ -34,6 +35,14 @@ function SolidObject.checkCollision(self, object)
         end
     end
     return isColliding
+end
+
+-- setDt: num -> None
+-- sets the current frame dt for the game
+function SolidObject.setDt(self, dt)
+    self.vx = self.vx * self.dt / dt
+    self.vy = self.vy * self.dt / dt
+    self.dt = dt
 end
 
 -- isStill: None -> bool
