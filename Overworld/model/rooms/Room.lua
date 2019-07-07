@@ -16,8 +16,8 @@ local Room = class(function(self, background, width, height)
     self.objects = {}
 end)
 
--- addObject: Object -> None
--- Adds an object to the object list
+-- addObject: Object, int -> None
+-- Adds an object to the object list in the layer specified
 function Room.addObject(self, o, layer)
     if layer == nil then
         table.insert(self.objects, Pair.new(o, 0))
@@ -26,7 +26,7 @@ function Room.addObject(self, o, layer)
     end
 end
 
--- getObjects: Object -> None
+-- getObjects: None -> None
 -- Copies object array and returns it
 function Room.getObjects(self)
     local object_array = {}
@@ -36,7 +36,7 @@ function Room.getObjects(self)
     return object_array
 end
 
--- getObjectsWithData: Object -> None
+-- getObjectsWithData: None -> None
 -- Returns the room's objects
 function Room.getObjectsWithData(self)
     return self.objects
