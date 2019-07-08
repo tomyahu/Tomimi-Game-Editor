@@ -5,19 +5,22 @@ require "Global.consts"
 application = {}
 
 -- Current controller of the manager
-CurrentCtrl = nil
+local CurrentCtrl = nil
 
 -- Current view of the manager
-CurrentView = nil
+local CurrentView = nil
 
 -- Current local context of the manager, every time the appChange function is called the function getContextVars method
 -- from the controller of the next application is called to decide what to keep from the previous local context
 -- TODO: Check if this can be done by just using the global context and clean local context every app change
-LocalContext = {}
+local LocalContext = {}
 
 -- Current global context of the manager, is a global dictionary storage that is only accesed with the function
 -- getGlobalContext
-GlobalContext = {}
+local GlobalContext = {}
+
+-- Current Shader used
+local CurrentShader = love.graphics.newShader("/Global/Shaders/default_pixel_shader.glsl", "/Global/Shaders/default_vertex_shader.glsl")
 
 -- Sets the current view of the application manager
 function application.setView(_,newView)
@@ -39,6 +42,16 @@ function application.getCurrentCtrl(_)
     return CurrentCtrl
 end
 
+-- Sets the current pixel and vertex shader
+function application.setCurrentShader(_, new_pixel_shader, new_vertex_shader)
+    CurrentShader = love.graphics.newShader(new_pixel_shader, new_vertex_shader)
+end
+
+-- Gets the current shader
+function application.getCurrentShader(_)
+    return CurrentShader
+end
+
 -- Gets the local context of the application
 function application.getCurrentLocalContext(_)
     return LocalContext
@@ -57,6 +70,8 @@ end
 function application.getGlobalContext(_)
     return GlobalContext
 end
+
+
 
 -- Replaces the old global context with newContext if it is not nil, otherwise it cleans the local context
 function application.setGlobalContext(_, newContext)

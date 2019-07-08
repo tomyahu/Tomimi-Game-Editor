@@ -17,26 +17,26 @@ application:setCtrl(initial_app["ctrl"])
 application:setView(initial_app["view"])
 
 function love.load()
-    application:setLocalContext(CurrentCtrl:getContextVars())
-    application:setLocalContext(CurrentView:getContextVars(application.getCurrentLocalContext()))
+    application:setLocalContext(application:getCurrentCtrl():getContextVars())
+    application:setLocalContext(application:getCurrentView():getContextVars(application.getCurrentLocalContext()))
     --print(love.joystick.saveGamepadMappings( "helo.txt" ))
 end
 
 function love.draw()
-    CurrentView:draw(application:getCurrentLocalContext())
+    love.graphics.setShader(application.getCurrentShader())
+    love.graphics.setShader()
+    application:getCurrentView():draw(application:getCurrentLocalContext())
 end
 
 function love.keypressed(key)
-    CurrentCtrl:callbackPressedKey(key)
-    --print("Pressed: ",key)
+    application:getCurrentCtrl():callbackPressedKey(key)
     if key == "escape" then
         love.event.quit()
     end
 end
 
 function love.keyreleased(key)
-    CurrentCtrl:callbackReleasedKey(key)
-    --print("Released: ", key)
+    application:getCurrentCtrl():callbackReleasedKey(key)
 end
 
 
@@ -45,5 +45,5 @@ function love.update( dt )
     global_context.dt = dt
     application:setGlobalContext(global_context)
     
-    CurrentCtrl:update(dt)
+    application:getCurrentCtrl():update(dt)
 end
