@@ -6,8 +6,9 @@ if TEST then
     love.event.quit()
 end
 
-
 local initial_app = require( APPS[INITIAL_APP] )
+
+love.graphics.setDefaultFilter("nearest", "nearest")
 
 for appName, appInit in pairs(APPS) do
     application:registerApp(appName, appInit)
@@ -24,6 +25,7 @@ end
 
 function love.draw()
     love.graphics.setShader(application.getCurrentShader())
+    application:getCurrentView():shaderDraw(application:getCurrentLocalContext())
     love.graphics.setShader()
     application:getCurrentView():draw(application:getCurrentLocalContext())
 end
