@@ -1,18 +1,28 @@
 require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
+
+-- class: PlayerView
+-- param: player:Player -> the player object
+-- Object to display the player sprite on the screen
 local PlayerView = class(function(self, player)
     self.player = player
     self.state = player:getState():toString()
 end)
 
+-- getSprite: None -> Sprite
+-- Gets the player's sprite
 function PlayerView.getSprite(self)
     return self.player:getSprite()
 end
 
+-- getPos: None -> int, int
+-- Gets the player's x and y coordinates
 function PlayerView.getPos(self)
     return self.player:getPos()
 end
 
+-- checkState: None -> None
+-- Checks if the current state changed and if it did it adjusts the current player animation
 function PlayerView.checkState(self)
     local player_state_str = self.player:getState():toString()
 
@@ -22,6 +32,8 @@ function PlayerView.checkState(self)
     end
 end
 
+-- adjustAnimation: None -> None
+-- Sets the animation of the player according to the player's current state
 function PlayerView.adjustAnimation(self)
     local action = {
         ["StillDownState"] = function() self:getSprite():setFrameSet(1) end,

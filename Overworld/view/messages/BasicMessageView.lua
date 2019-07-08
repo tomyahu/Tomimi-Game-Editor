@@ -1,8 +1,18 @@
 require "lib.classes.class"
 local MessageView = require "Overworld.view.messages.MessageView"
 --------------------------------------------------------------------------------------------------------
-local BasicMessageView = extend(MessageView, function(self, message) end, function(message) return MessageView.new(message) end)
 
+-- class: BasicMessageView
+-- param: message:str -> The message to display in the dialog on the screen
+-- Object in charge of displaying the messages in the view
+local BasicMessageView = extend(MessageView, function(self, message) end,
+
+function(message)
+    return MessageView.new(message)
+end)
+
+-- draw: None -> None
+-- Draws the message with a simple background on the screen
 function BasicMessageView.draw(self)
     love.graphics.rectangle("fill", getRelativePosX(0), getRelativePosY(500), 800*getScale(), 100*getScale() )
     love.graphics.setColor(0,0,0)
