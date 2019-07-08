@@ -37,7 +37,9 @@ end
 -- Saves the images in the local context
 function CutscenesCtrl.getContextVars(self, _)
     local context = {}
+    self.cutscene_admin:resetCurrentCutscene()
     local cutscene = self.cutscene_admin:getCurrentCutscene()
+    
     for _, scene in pairs(cutscene:getScenes()) do
         context[scene:getImagePath()] = love.graphics.newImage(scene:getImagePath())
     end

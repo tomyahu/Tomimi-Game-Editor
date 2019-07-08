@@ -33,7 +33,7 @@ end
 function love.keypressed(key)
     application:getCurrentCtrl():callbackPressedKey(key)
     if key == "escape" then
-        love.event.quit()
+        application:appChange("TitleMenu")
     end
 end
 
@@ -46,6 +46,5 @@ function love.update( dt )
     local global_context = application:getGlobalContext()
     global_context.dt = dt
     application:setGlobalContext(global_context)
-    
     application:getCurrentCtrl():update(dt)
 end

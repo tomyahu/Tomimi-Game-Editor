@@ -21,11 +21,16 @@ end)
 -- Checks all objects that collide with the player interactuable hitbox and makes the player interact with them
 function OverworldInteractuableObjectBehavior.AllObjectsInteract(self)
     local local_context = application:getCurrentLocalContext()
-
-    for _, object in pairs(local_context[self.group]) do
-        if object:getSolidObject():checkCollision(self.player_object) then
-            object:interactWithPlayer(self.player)
-        end
+    
+    if not (local_context[self.group] == nil) then
+      
+      for _, object in pairs(local_context[self.group]) do
+          if object:getSolidObject():checkCollision(self.player_object) then
+              object:interactWithPlayer(self.player)
+              return
+          end
+      end
+    
     end
 
 end

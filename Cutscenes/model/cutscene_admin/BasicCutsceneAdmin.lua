@@ -13,6 +13,12 @@ function BasicCutsceneAdmin.getCurrentCutscene(self)
     return self.current_cutscene
 end
 
+-- resetCurrentCutscene: None -> None
+-- Resets the current cutscene
+function BasicCutsceneAdmin.resetCurrentCutscene(self)
+    self.current_cutscene:resetCutscene()
+end
+
 -- addCutscene: any, Cutscene -> None
 -- adds a cutscene to the current cutscene administrator with key as the key
 function BasicCutsceneAdmin.addCutscene(self, key, cutscene)

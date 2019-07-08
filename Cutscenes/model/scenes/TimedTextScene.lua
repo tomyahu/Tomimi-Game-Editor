@@ -1,5 +1,6 @@
 require "lib.classes.class"
 require "Global.consts"
+require "Global.application.application"
 local TimedScene = require "Cutscenes.model.scenes.TimedScene"
 --------------------------------------------------------------------------------------------------------
 
@@ -19,7 +20,8 @@ end)
 -- getText: None -> str
 -- Gets the current string of the scene
 function TimedTextScene.getText(self)
-    self:updateTime(GLOBAL_CONTEXT.dt)
+    local global_context = application:getGlobalContext()
+    self:updateTime(global_context.dt)
     return string.sub(self.text, 0,math.floor(self.elapsed_time / self.dt))
 end
 
