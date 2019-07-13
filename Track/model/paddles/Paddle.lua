@@ -15,4 +15,6 @@ function Paddle.setState(self, state_name)
     self.state = NewStateClass.new(self)
 end
 
+
+
 return Paddle

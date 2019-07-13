@@ -8,13 +8,19 @@ local NormalState = class(function(self, paddle)
     self.paddle = paddle
 end)
 
+-- pressAction1Button: None -> None
+-- Changes to the active state
 function NormalState.pressAction1Button(self)
     self.paddle:setState("ActiveState")
 end
 
+-- releaseAction1Button: None -> None
+-- Does nothing
 function NormalState.releaseAction1Button(self)
 end
 
+-- doNothing: None -> None
+-- Does nothing
 function NormalState.doNothing(self)
 end
 
