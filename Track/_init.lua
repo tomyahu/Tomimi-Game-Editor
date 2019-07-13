@@ -1,6 +1,12 @@
 require "Global.consts"
 require "Global.application.application"
 
+local Paddle = require("Track.model.paddles.Paddle")
+
+local NoteView = require("Track.view.notes.NoteView")
+local LaneView = require("Track.view.lanes.LaneView")
+local PaddleView = require("Track.view.paddles.PaddleView")
+
 local TrackCtrl = require "Track.ctrl.TrackCtrl"
 local TrackView = require "Track.view.TrackView"
 
@@ -9,15 +15,22 @@ local LaneBuilder = require "Track.model.lanes.LaneBuilder"
 
 local lane_build = LaneBuilder.new(100,100)
 
-lane_build:addNote(100)
-lane_build:addNote(200)
-lane_build:addNote(300)
-lane_build:addNote(400)
+lane_build:addNote(1100)
+lane_build:addNote(1200)
+lane_build:addNote(1300)
+lane_build:addNote(1400)
 
-local lane1 = lane_build:getLane()
+application:setInGlobalContext("lane1", lane_build:getLane())
+
+local paddle = Paddle.new()
+application:setInGlobalContext("paddle", paddle)
 
 
-local basicTrackView = TrackView.new(lane1)
-local basicTrackCtrl = TrackCtrl.new(basicTrackView, lane1)
+local note_view = NoteView.new()
+local lane_view = LaneView.new(note_view)
+local paddle_view = PaddleView.new()
+
+local basicTrackView = TrackView.new(lane_view, paddle_view)
+local basicTrackCtrl = TrackCtrl.new(basicTrackView)
 
 return {["ctrl"] = basicTrackCtrl, ["view"] = basicTrackView}

@@ -1,17 +1,13 @@
 require "lib.classes.class"
 local View = require "Global.view.view"
 require "Global.consts"
-local Note = require("Track.model.notes.Note")
-local NoteView = require("Track.view.notes.NoteView")
-local LaneView = require("Track.view.lanes.LaneView")
 --------------------------------------------------------------------------------------------------------
 
 -- class: TrackView
 -- The basic view of a track
-local TrackView = extend(View, function(self, lane)
-    self.current_note_view = NoteView.new()
-    self.current_lane_view = LaneView.new(self.current_note_view)
-    self.current_lane = lane
+local TrackView = extend(View, function(self, lane_view, paddle_view)
+    self.current_lane_view = lane_view
+    self.paddle_view = paddle_view
 end,
 
 function(background_image_path, menu)
@@ -19,17 +15,26 @@ function(background_image_path, menu)
 end)
 
 -- draw: context -> None
--- Draws the menu options
+-- Draws the paddle and notes from the lanes
 function TrackView.draw(self, context)
     love.graphics.setBackgroundColor( 74/255, 38/255, 99/255, 1 )
     self.current_lane_view:draw(self.current_lane)
+    self.paddle_view:draw(self.paddle)
 end
 
--- getContextVars: dict() -> dict()
--- Takes the local context and creates a new context based on it
-function TrackView.getContextVars(self, _)
-    local context = {}
-    return context
+-- setup: None -> None
+-- sets the golbal variables and plays the track music
+function TrackView.setup(self)
+    self.current_lane = application:getFromGlobalContext("lane1")
+    self.paddle = application:getFromGlobalContext("paddle")
+    local song_source = love.audio.newSource( "Resources/Track/music/Freesbe - Ahxello.mp3", "stream" )
+    love.audio.play(song_source)
+end
+
+-- stop: None -> None
+-- stops the track music
+function TrackView.stop(self)
+    love.audio.stop("Resources/Track/music/Freesbe - Ahxello.mp3")
 end
 
 return TrackView

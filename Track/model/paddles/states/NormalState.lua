@@ -19,11 +19,6 @@ end
 function NormalState.releaseAction1Button(self)
 end
 
--- doNothing: None -> None
--- Does nothing
-function NormalState.doNothing(self)
-end
-
 function NormalState.toString(self)
     return "NormalState"
 end

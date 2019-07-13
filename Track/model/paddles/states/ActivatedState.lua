@@ -19,11 +19,6 @@ function ActivatedState.releaseAction1Button(self)
     self.paddle:setState("NormalState")
 end
 
--- doNothing: None -> None
--- Does nothing
-function ActivatedState.doNothing(self)
-end
-
 function ActivatedState.toString(self)
     return "ActivatedState"
 end

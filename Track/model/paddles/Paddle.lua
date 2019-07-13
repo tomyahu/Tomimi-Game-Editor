@@ -15,6 +15,22 @@ function Paddle.setState(self, state_name)
     self.state = NewStateClass.new(self)
 end
 
+-- pressAction1Button: None -> None
+-- Calls the state to do an action when the action button is pressed
+function Paddle.pressAction1Button(self)
+    self.state:pressAction1Button()
+end
 
+-- releaseAction1Button: None -> None
+-- Calls the state to do an action when the action button is released
+function Paddle.releaseAction1Button(self)
+    self.state:releaseAction1Button()
+end
+
+-- getStateStr: None -> str
+-- Gets the string corresponding to the current paddle state
+function Paddle.getStateStr(self)
+    return self.state:toString()
+end
 
 return Paddle

@@ -9,20 +9,15 @@ local ActiveState = class(function(self, paddle)
 end)
 
 -- pressAction1Button: None -> None
--- Does nothing
+-- Changes the paddle to the activated state
 function ActiveState.pressAction1Button(self)
+    self.paddle:setState("ActivatedState")
 end
 
 -- releaseAction1Button: None -> None
 -- Changes the paddle to the normal state
 function ActiveState.releaseAction1Button(self)
     self.paddle:setState("NormalState")
-end
-
--- doNothing: None -> None
--- Changes the paddle to the activated state
-function ActiveState.doNothing(self)
-    self.paddle:setState("ActivatedState")
 end
 
 function ActiveState.toString(self)
