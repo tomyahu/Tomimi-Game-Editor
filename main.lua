@@ -20,13 +20,13 @@ application:setCtrl(initial_app["ctrl"])
 application:setView(initial_app["view"])
 
 function love.load()
-    application:setLocalContext(CurrentCtrl:getContextVars())
-    application:setLocalContext(CurrentView:getContextVars(application.getCurrentLocalContext()))
+    CurrentCtrl:setup()
+    CurrentView:setup()
     --print(love.joystick.saveGamepadMappings( "helo.txt" ))
 end
 
 function love.draw()
-    CurrentView:draw(application:getCurrentLocalContext())
+    CurrentView:draw(application:getLocalContext())
 end
 
 function love.keypressed(key)

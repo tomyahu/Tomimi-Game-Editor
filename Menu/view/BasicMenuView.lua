@@ -1,6 +1,7 @@
 require "lib.classes.class"
 local View = require "Global.view.view"
 require "Global.consts"
+require "Global.application.application"
 --------------------------------------------------------------------------------------------------------
 
 -- class: BasicMenuView
@@ -36,13 +37,10 @@ function BasicMenuView.draw(self, context)
     end
 end
 
--- getContextVars: dict() -> dict()
--- Takes the local context and creates a new context based on it
--- Saves the background path image in the context
-function BasicMenuView.getContextVars(self, _)
-    local context = {}
-    context['background'] = love.graphics.newImage(self.background_path)
-    return context
+-- setup: None -> None
+-- Saves the background path image in the local context
+function BasicMenuView.setup(self)
+    application:setInLocalContext('background', love.graphics.newImage(self.background_path))
 end
 
 return BasicMenuView

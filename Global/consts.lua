@@ -14,7 +14,8 @@ RESOURCES_PATH = "Resources"
 
 APPS = {
     ["TitleMenu"] = "Menu._init",
-    ["Track"] = "Track._init"
+    ["Track"] = "Track._init",
+    []
 }
 INITIAL_APP = "TitleMenu"
 

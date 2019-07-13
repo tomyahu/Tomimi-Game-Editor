@@ -10,8 +10,8 @@ local View = class(function(self) end)
 -- Takes the local context and from that it visualizes the current app objects on the screen
 function View.draw(self, context) end
 
--- getContextVars: dict() -> dict()
--- Takes the local context and creates a new context based on it
-function View.getContextVars(self, context) end
+-- setup: None -> None
+-- Function called at the begining of the execution of an application
+function View.setup(self) end
 
 return View

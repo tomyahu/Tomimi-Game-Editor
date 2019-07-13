@@ -40,8 +40,13 @@ function application.getCurrentCtrl(_)
 end
 
 -- Gets the local context of the application
-function application.getCurrentLocalContext(_)
+function application.getLocalContext(_)
     return LocalContext
+end
+
+-- Empties the local context
+function application.resetLocalContext(_)
+    LocalContext = {}
 end
 
 -- Replaces the old local context with newContext if it is not nil, otherwise it cleans the local context
@@ -51,6 +56,16 @@ function application.setLocalContext(_, newContext)
     else
         LocalContext = newContext
     end
+end
+
+-- Sets a key to a value in local context
+function application.setInLocalContext(_, key, val)
+    LocalContext[key] = val
+end
+
+-- Gets a value from the local context associated with key
+function application.getFromLocalContext(_, key)
+    return LocalContext[key]
 end
 
 -- Gets the global context of the application
@@ -81,8 +96,11 @@ function application.appChange(self,appName)
     local new_view = nextApp:getView()
 
     -- Manages the local context of the next application
-    application:setLocalContext(new_ctrl:getContextVars(self:getCurrentLocalContext()))
-    application:setLocalContext(new_view:getContextVars(self:getCurrentLocalContext()))
+    application:resetLocalContext()
+
+    -- Calls the setup functions of the next application
+    new_ctrl:setup()
+    new_view:setup()
 
     -- Sets the current view and controller to those of the next application
     application:setView(new_view)

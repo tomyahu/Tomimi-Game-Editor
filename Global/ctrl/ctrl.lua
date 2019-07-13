@@ -20,10 +20,8 @@ function Ctrl.callbackReleasedKey(_, _) end
 -- Function called every frame
 function Ctrl.update(_, _) end
 
--- getContextVars: table -> None
--- Function called every time the application is changed to this application. It takes the current local context and
--- returns a new local context that is setted in the application manager.
--- TODO: Check if the local context is still used
-function Ctrl.getContextVars(_, context) end
+-- setup: None -> None
+-- Function called at the begining of the execution of an application
+function Ctrl.setup(self) end
 
 return Ctrl

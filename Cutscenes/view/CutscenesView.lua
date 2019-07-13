@@ -35,10 +35,4 @@ function CutscenesView.draw(self,context)
     love.graphics.print( scene:getText(), getRelativePosX(50), getRelativePosY(550), 0, getScale(), getScale())
 end
 
--- getContextVars: dict() -> dict()
--- Takes the local context returns the same context
-function CutscenesView.getContextVars(self, context)
-    return context
-end
-
 return CutscenesView

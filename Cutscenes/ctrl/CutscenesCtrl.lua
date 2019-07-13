@@ -32,16 +32,13 @@ function CutscenesCtrl.setNextApp(self, appName)
     self.next_app = appName
 end
 
--- getContextVars: dict() -> dict()
--- Takes the local context and creates a new context based on it
+-- setup: None -> None
 -- Saves the images in the local context
-function CutscenesCtrl.getContextVars(self, _)
-    local context = {}
+function CutscenesCtrl.setup(self, _)
     local cutscene = self.cutscene_admin:getCurrentCutscene()
     for _, scene in pairs(cutscene:getScenes()) do
-        context[scene:getImagePath()] = love.graphics.newImage(scene:getImagePath())
+        application:setInLocalContext(scene:getImagePath(), love.graphics.newImage(scene:getImagePath()))
     end
-    return context
 end
 
 return CutscenesCtrl
