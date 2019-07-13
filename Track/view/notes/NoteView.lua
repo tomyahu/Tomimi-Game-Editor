@@ -9,7 +9,6 @@ local NoteView = class(function(self)
 end)
 
 function NoteView.drawBasicNote(self, note)
-    love.graphics.setBackgroundColor( 1, 1, 1, 1 )
     love.graphics.draw(self.note_image,note:getX(),note:getY(),0, 2*getScale())
 end
 

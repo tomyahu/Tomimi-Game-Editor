@@ -21,6 +21,7 @@ end)
 -- draw: context -> None
 -- Draws the menu options
 function TrackView.draw(self, context)
+    love.graphics.setBackgroundColor( 74/255, 38/255, 99/255, 1 )
     self.current_lane_view:draw(self.current_lane)
 end
 
