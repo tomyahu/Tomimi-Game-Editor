@@ -24,4 +24,8 @@ function Ctrl.update(_, _) end
 -- Function called at the begining of the execution of an application
 function Ctrl.setup(self) end
 
+-- stop: None -> None
+-- Function called at the end of the execution of an application
+function Ctrl.stop(self) end
+
 return Ctrl

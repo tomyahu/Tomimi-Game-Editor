@@ -14,4 +14,8 @@ function View.draw(self, context) end
 -- Function called at the begining of the execution of an application
 function View.setup(self) end
 
+-- stop: None -> None
+-- Function called at the end of the execution of an application
+function View.stop(self) end
+
 return View
