@@ -13,7 +13,7 @@ local mBuild = DefaultMenuBuilder.new()
 
 -- Title Menu --------------------------------------------------
 local conf_state = MenuState.new("Configuration")
-local debug_room_state = MenuState.new("Debug Room")
+local debug_room_state = MenuState.new("Start")
 
 mBuild:addState(debug_room_state)
 mBuild:addState(conf_state)
@@ -78,7 +78,7 @@ local titleScreenMenuView = LotRMTitleMenuView.new(RESOURCES_PATH .. "/Menu/back
 local titleScreenMenuCtrl = MenuCtrl.new(titleScreenMenuView, titleScreenMenu)
 
 debug_room_state:addTransitionAction("return", function (_)
-    application:appChange("Debug_Overworld")
+    application:appChange("Track")
 end)
 
 conf_state:addTransitionAction("return", function (_)

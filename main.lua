@@ -6,6 +6,9 @@ if TEST then
     love.event.quit()
 end
 
+-- Love Default Conf
+love.graphics.setDefaultFilter('nearest', 'nearest')
+
 
 local initial_app = require( APPS[INITIAL_APP] )
 
