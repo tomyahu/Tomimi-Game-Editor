@@ -82,6 +82,16 @@ function application.setGlobalContext(_, newContext)
     end
 end
 
+-- Sets a key to a value in global context
+function application.setInGlobalContext(_, key, val)
+    GlobalContext[key] = val
+end
+
+-- Gets a value from the global context associated with key
+function application.getFromGlobalContext(_, key)
+    return GlobalContext[key]
+end
+
 -- appChange: str -> None
 -- Changes the current application to the application appName
 -- TODO: Check if local context is still not cleaned
@@ -91,6 +101,13 @@ function application.appChange(self,appName)
     if nextApp == nil then
         error("The application " .. appName .. " isn't registered or doesn't exists.")
     end
+
+    local current_ctrl = application:getCurrentCtrl()
+    local current_view = application:getCurrentView()
+
+    -- Calls the stop functionsof the current application
+    current_ctrl:stop()
+    current_view:stop()
 
     local new_ctrl = nextApp:getCtrl()
     local new_view = nextApp:getView()
