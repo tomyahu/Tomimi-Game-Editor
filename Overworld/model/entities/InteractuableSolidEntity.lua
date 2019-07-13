@@ -24,12 +24,12 @@ end
 -- Registers the current object as an interactuable object
 function InteractuableSolidEntity.registerAsInteractuableObject(self)
     local group = 'Interactuables'
-    local local_context = application:getCurrentLocalContext()
-    if local_context[group] == nil then
-        local_context[group] = {}
+    local local_context_group = application:getFromLocalContext(group)
+    if local_context_group == nil then
+        local_context_group = {}
     end
-    table.insert(local_context[group], self)
-    application:setLocalContext(local_context)
+    table.insert(local_context_group, self)
+    application:setInLocalContext(group, local_context_group)
 end
 
 -- register: None -> None

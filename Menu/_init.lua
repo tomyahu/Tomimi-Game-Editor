@@ -78,7 +78,7 @@ local titleScreenMenuView = LotRMTitleMenuView.new(RESOURCES_PATH .. "/Menu/back
 local titleScreenMenuCtrl = MenuCtrl.new(titleScreenMenuView, titleScreenMenu)
 
 debug_room_state:addTransitionAction("return", function (_)
-    application:appChange("Track")
+    application:appChange("Debug_Overworld")
 end)
 
 conf_state:addTransitionAction("return", function (_)

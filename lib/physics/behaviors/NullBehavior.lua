@@ -9,9 +9,8 @@ require "Global.application.application"
 local NullBehavior = class(function(self, group)
     self.group = group
 
-    local local_context = application:getCurrentLocalContext()
-    if local_context[self.group] == nil and (not group == nil) then
-        local_context[self.group] = {}
+    if application:getFromLocalContext(self.group) == nil and (not group == nil) then
+        application:setInLocalContext(self.group, {})
     end
 end)
 

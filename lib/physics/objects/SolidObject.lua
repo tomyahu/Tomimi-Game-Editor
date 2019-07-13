@@ -17,12 +17,12 @@ end)
 -- registerObject: str -> None
 -- Registers the object in the group given in the local context.
 function SolidObject.registerObject(self, group)
-    local local_context = application:getCurrentLocalContext()
-    if local_context[group] == nil then
-        local_context[group] = {}
+    local group_set = application:getFromLocalContext(group)
+    if group_set == nil then
+        group_set = {}
     end
-    table.insert(local_context[group], self)
-    application:setLocalContext(local_context)
+    table.insert(group_set, self)
+    application:setInLocalContext(group, group_set)
 end
 
 -- checkCollision: SolidObject -> bool

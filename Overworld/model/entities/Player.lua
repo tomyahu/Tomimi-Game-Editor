@@ -117,10 +117,10 @@ end
 -- interact: None -> None
 -- Makes the player interact with all the objects in the room
 function Player.interact(self)
-    local local_context = application:getCurrentLocalContext()
+    local interactuable_objects = application:getFromLocalContext('Interactuables')
     local current_interactuable_object = self.state:getInteractuableHitbox()
 
-    for _, interactuable_entity in pairs(local_context['Interactuables']) do
+    for _, interactuable_entity in pairs(interactuable_objects) do
         if interactuable_entity:getSolidObject():checkCollision(current_interactuable_object) then
             interactuable_entity:interactWithPlayer()
             return

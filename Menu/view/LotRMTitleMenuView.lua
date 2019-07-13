@@ -2,6 +2,7 @@ require "lib.classes.class"
 require "Global.LOVEWrapper.LOVEWrapper"
 require "Global.consts"
 local BasicMenuView = require "Menu.view.BasicMenuView"
+require "Global.application.application"
 --------------------------------------------------------------------------------------------------------
 
 -- class: LotRMTitleMenuView
@@ -21,9 +22,9 @@ end)
 
 -- draw: context -> None
 -- Draws the menu options
-function LotRMTitleMenuView.draw(self, context)
+function LotRMTitleMenuView.draw(self)
     love.graphics.setFont( self.font )
-    local background = context['background']
+    local background = application:getFromLocalContext('background')
     local backgroundpixelwidth, backgroundpixelheight = background:getPixelDimensions()
     love.graphics.draw(background,0,0,0, getScale()/backgroundpixelwidth*GAME_WIDTH, getScale()/backgroundpixelheight*GAME_HEIGHT)
     for index, option in pairs(self.menu.options) do

@@ -20,21 +20,21 @@ end)
 -- Detects which objects collide with the player and if they collide it resets the position of the player and the
 -- object
 function OverworldBehavior.AllObjectsInteract(self)
-    local local_context = application:getCurrentLocalContext()
+    local local_context_group = application:getFromLocalContext(self.group)
     local global_context = application:getGlobalContext()
 
     -- Sets how much time has passed for the player to define its distance moved
     self.player_object:setDt(global_context.dt)
 
     -- Sets how much time has passed for each object to define its distance moved
-    for _, object in pairs(local_context[self.group]) do
+    for _, object in pairs(local_context_group) do
         object:setDt(global_context.dt)
     end
 
     -- Checks collisions with all objects, if an object is overlapping with the player it resets its position
     -- and sets the player to reset its position too
     local reset_player = false
-    for _, object in pairs(local_context[self.group]) do
+    for _, object in pairs(local_context_group) do
         if object:checkCollision(self.player_object) then
             object:resetPreviousPos()
             reset_player = true
@@ -46,7 +46,7 @@ function OverworldBehavior.AllObjectsInteract(self)
         self.player_object:resetPreviousPos()
 
         -- Resets the position every object that is colliding with the player's previous position
-        for _, object in pairs(local_context[self.group]) do
+        for _, object in pairs(local_context_group) do
             if object:checkCollision(self.player_object) then
                 object:resetPreviousPos()
             end

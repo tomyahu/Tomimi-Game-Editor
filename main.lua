@@ -26,7 +26,7 @@ function love.load()
 end
 
 function love.draw()
-    CurrentView:draw(application:getLocalContext())
+    CurrentView:draw()
 end
 
 function love.keypressed(key)

@@ -31,26 +31,14 @@ function(view, player_view, room_manager)
     return Ctrl.new(view)
 end)
 
--- getContextVars: dict() -> dict()
+-- setup: None -> None
 -- Takes the local context returns the same context
-function OverworldCtrl.getContextVars(self, context)
-    local l_context = application:getCurrentLocalContext()
-    l_context['SolidObjects'] = {}
-    l_context['Interactuables'] = {}
-    l_context['ContactInteractuables'] = {}
-
+function OverworldCtrl.setup(self)
     local new_room = self.room_manager:getCurrentRoom()
     new_room:addObject(self.player, 1)
 
     new_room:registerObjects()
     self.view:setCurrentRoom(new_room)
-
-    local new_context = {}
-    new_context['SolidObjects'] = context['SolidObjects']
-    new_context['Interactuables'] = context['Interactuables']
-    new_context['ContactInteractuables'] = context['ContactInteractuables']
-
-    return new_context
 end
 
 -- update: num -> None
@@ -78,10 +66,9 @@ end
 function OverworldCtrl.changeRoom(self, index)
     self.room_manager:setCurrentRoom(index)
 
-    local context = application:getCurrentLocalContext()
-    context['SolidObjects'] = {}
-    context['Interactuables'] = {}
-    context['ContactInteractuables'] = {}
+    application:setInLocalContext('SolidObjects', {})
+    application:setInLocalContext('Interactuables', {})
+    application:setInLocalContext('ContactInteractuables', {})
 
     local new_room = self.room_manager:getCurrentRoom()
     new_room:addObject(self.player, 1)

@@ -2,6 +2,7 @@ require "lib.classes.class"
 require "Global.consts"
 local View = require "Global.view.view"
 require "Global.LOVEWrapper.LOVEWrapper"
+require "Global.application.application"
 -------------------------------------------------------------------------------------------------------
 
 -- class: CutscenesView
@@ -24,10 +25,10 @@ end
 
 -- draw: context -> None
 -- Draws the current scene
-function CutscenesView.draw(self,context)
+function CutscenesView.draw(self)
     love.graphics.setFont( self.font )
     local scene = self.current_scene
-    local scene_image = context[scene:getImagePath()]
+    local scene_image = application:getFromLocalContext(scene:getImagePath())
     local scenepixelwidth, _ = scene_image:getPixelDimensions()
 
     local x_transition = getRelativePosX(getScale()*(GAME_WIDTH - 500)/2)

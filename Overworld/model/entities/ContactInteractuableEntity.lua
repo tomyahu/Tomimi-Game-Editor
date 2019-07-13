@@ -26,12 +26,12 @@ end
 -- Registers the current object as an interactuable object on contact
 function ContactInteractuableEntity.registerAsContactInteractuableObject(self)
     local group = 'ContactInteractuables'
-    local local_context = application:getCurrentLocalContext()
-    if local_context[group] == nil then
-        local_context[group] = {}
+    local local_context_group = application:getFromLocalContext(group)
+    if local_context_group == nil then
+        local_context_group = {}
     end
-    table.insert(local_context[group], self)
-    application:setLocalContext(local_context)
+    table.insert(local_context_group, self)
+    application:setInLocalContext(group, local_context_group)
 end
 
 -- register: None -> None
