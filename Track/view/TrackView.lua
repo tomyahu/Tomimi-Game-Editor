@@ -14,6 +14,12 @@ function(background_image_path, menu)
     return View:new()
 end)
 
+-- update: int -> None
+-- Function called every frame
+function View.update(self, dt)
+    self.current_lane_view:updateParticleSystem(dt)
+end
+
 -- draw: context -> None
 -- Draws the paddle and notes from the lanes
 function TrackView.draw(self, context)
@@ -27,14 +33,14 @@ end
 function TrackView.setup(self)
     self.current_lane = application:getFromGlobalContext("lane1")
     self.paddle = application:getFromGlobalContext("paddle")
-    local song_source = love.audio.newSource( "Resources/Track/music/Freesbe - Ahxello.mp3", "stream" )
+    local song_source = love.audio.newSource( "Resources/Track/music/Perros Salvajes Daddy Yankee.mp3", "stream" )
     love.audio.play(song_source)
 end
 
 -- stop: None -> None
 -- stops the track music
 function TrackView.stop(self)
-    love.audio.stop("Resources/Track/music/Freesbe - Ahxello.mp3")
+    love.audio.stop()
 end
 
 return TrackView

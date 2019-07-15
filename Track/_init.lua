@@ -13,7 +13,7 @@ local TrackView = require "Track.view.TrackView"
 local LaneBuilder = require "Track.model.lanes.LaneBuilder"
 ----------------------------------------------------------------------------------------
 
-local lane_build = LaneBuilder.new(100,100)
+local lane_build = LaneBuilder.new(228,200)
 
 lane_build:addNote(1100)
 lane_build:addNote(1200)
@@ -22,7 +22,7 @@ lane_build:addNote(1400)
 
 application:setInGlobalContext("lane1", lane_build:getLane())
 
-local paddle = Paddle.new()
+local paddle = Paddle.new(100, 100)
 application:setInGlobalContext("paddle", paddle)
 
 

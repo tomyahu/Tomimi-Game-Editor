@@ -13,22 +13,22 @@ end)
 -- draws the paddle sprite depending on its state
 function PaddleView.draw(self, paddle)
     if paddle:getStateStr() == "NormalState" then
-        self:drawPaddle()
+        self:drawPaddle(paddle)
     else
-        self:drawActivatedPaddle()
+        self:drawActivatedPaddle(paddle)
     end
 end
 
 -- drawPaddle: None -> None
 -- draws a normal paddle
-function PaddleView.drawPaddle(self)
-    love.graphics.draw(self.paddle_image,100,100,0, 2*getScale())
+function PaddleView.drawPaddle(self, paddle)
+    love.graphics.draw(self.paddle_image,paddle:getX(),paddle:getY(),0, 4*getScale())
 end
 
 -- drawActivatedPaddle: None -> None
 -- draws an activated paddle
-function PaddleView.drawActivatedPaddle(self)
-    love.graphics.draw(self.activated_paddle_image,100,100,0, 2*getScale())
+function PaddleView.drawActivatedPaddle(self, paddle)
+    love.graphics.draw(self.activated_paddle_image,paddle:getX(),paddle:getY(),0, 4*getScale())
 end
 
 return PaddleView

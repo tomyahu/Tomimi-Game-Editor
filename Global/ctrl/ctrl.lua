@@ -18,7 +18,7 @@ function Ctrl.callbackReleasedKey(_, _) end
 
 -- update: int -> None
 -- Function called every frame
-function Ctrl.update(_, _) end
+function Ctrl.update(self, dt) end
 
 -- setup: None -> None
 -- Function called at the begining of the execution of an application

@@ -6,6 +6,10 @@ require "Global.LOVEWrapper.LOVEWrapper"
 -- View is the view class of an App in the MVC model
 local View = class(function(self) end)
 
+-- update: int -> None
+-- Function called every frame
+function View.update(self, dt) end
+
 -- draw: dict() -> None
 -- Takes the local context and from that it visualizes the current app objects on the screen
 function View.draw(self, context) end

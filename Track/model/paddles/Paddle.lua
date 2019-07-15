@@ -1,11 +1,19 @@
 require "lib.classes.class"
+require "Track.init.hitboxes"
 local NormalState = require("Track.model.paddles.states.NormalState")
+local SolidObject = require "lib.physics.objects.SolidObject"
 --------------------------------------------------------------------------------------------------------
 
 -- class: Paddle
 -- The paddle that represents the player
-local Paddle = class(function(self)
+local Paddle = class(function(self, x, y)
     self.state = NormalState.new(self)
+
+    self.x = x
+    self.y = y
+
+    self.solid_object = SolidObject.new(paddleHitboxes())
+    self.solid_object:setPosition(self.x, self.y)
 end)
 
 -- setState: str -> None
@@ -31,6 +39,25 @@ end
 -- Gets the string corresponding to the current paddle state
 function Paddle.getStateStr(self)
     return self.state:toString()
+end
+
+-- getters
+function Paddle.getSolidObject(self)
+    return self.solid_object
+end
+
+function Paddle.getX(self)
+    return self.x
+end
+
+function Paddle.getY(self)
+    return self.y
+end
+
+-- register: None -> None
+-- Registers the current object as a solid object
+function Paddle.register(self)
+    self.solid_object:registerObject("SolidObjects")
 end
 
 return Paddle

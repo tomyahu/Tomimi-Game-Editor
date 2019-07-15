@@ -14,8 +14,14 @@ function LaneView.draw(self, lane)
     local notes = lane:getNotes()
 
     for _, note in pairs(notes) do
-        self.note_view:drawBasicNote(note)
+        self.note_view:draw(note)
     end
+end
+
+-- updateParticleSystem: None -> None
+-- updates the note view particle system
+function LaneView.updateParticleSystem(self, dt)
+    self.note_view:updateParticleSystem(dt)
 end
 
 return LaneView

@@ -21,6 +21,14 @@ function Lane.updateAllNotes(self, dt)
     end
 end
 
+-- registerAllNotes: None -> None
+-- goes through every note in the dictionary and registers it as a solid object
+function Lane.registerAllNotes(self)
+    for _, note in pairs(self.notes) do
+        note:register()
+    end
+end
+
 -- getter
 function Lane.getNotes(self)
     return self.notes

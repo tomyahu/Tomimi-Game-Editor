@@ -1,6 +1,7 @@
 require "lib.classes.class"
 local Ctrl = require "Global.ctrl.ctrl"
 local Paddle = require "Track.model.paddles.Paddle"
+local TrackBehavior = require "Track.model.physics.behavior.TrackBehavior"
 --------------------------------------------------------------------------------------------------------
 
 -- class: TrackCtrl
@@ -15,21 +16,26 @@ function(view, menu)
 end)
 
 function TrackCtrl.callbackPressedKey(self,key)
-    if key == "a" then
-        self.paddle:pressAction1Button()
-    end
+
 end
 
 function TrackCtrl.callbackReleasedKey(self,key)
-    if key == "a" then
-        self.paddle:releaseAction1Button()
-    end
+
 end
 
 -- update: num -> None
 -- Function called every frame
 function TrackCtrl.update(self, dt)
+
+    if love.keyboard.isDown( "a" ) then
+        self.paddle:pressAction1Button()
+    else
+        self.paddle:releaseAction1Button()
+    end
+
     self.lane:updateAllNotes(dt)
+
+    self.track_behavior:AllObjectsInteract()
 end
 
 -- setup: None -> None
@@ -37,6 +43,10 @@ end
 function TrackCtrl.setup(self)
     self.lane = application:getFromGlobalContext("lane1")
     self.paddle = application:getFromGlobalContext("paddle")
+
+    self.lane:registerAllNotes()
+
+    self.track_behavior = TrackBehavior.new(self.paddle)
 end
 
 -- stop: None -> None
