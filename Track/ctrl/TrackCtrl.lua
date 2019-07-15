@@ -27,7 +27,7 @@ end
 -- Function called every frame
 function TrackCtrl.update(self, dt)
 
-    if love.keyboard.isDown( "a" ) then
+    if love.keyboard.isDown( "j" ) or love.keyboard.isDown( "k" ) then
         self.paddle:pressAction1Button()
     else
         self.paddle:releaseAction1Button()

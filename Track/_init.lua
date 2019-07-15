@@ -10,15 +10,21 @@ local PaddleView = require("Track.view.paddles.PaddleView")
 local TrackCtrl = require "Track.ctrl.TrackCtrl"
 local TrackView = require "Track.view.TrackView"
 
-local LaneBuilder = require "Track.model.lanes.LaneBuilder"
+local BPMLaneBuilder = require "Track.model.lanes.BPMLaneBuilder"
 ----------------------------------------------------------------------------------------
 
-local lane_build = LaneBuilder.new(228,200)
+local lane_build = BPMLaneBuilder.new(228, 400, 88)
 
-lane_build:addNote(1100)
-lane_build:addNote(1200)
-lane_build:addNote(1300)
-lane_build:addNote(1400)
+-- Perros Salvajes cancion
+local checkpoint = 0
+lane_build:addTones(checkpoint+1,4)
+lane_build:addThirdTones(checkpoint+5,4)
+lane_build:addTones(checkpoint+7,2)
+
+checkpoint = 8
+lane_build:addSemiTones(checkpoint+1,8)
+lane_build:addThirdTones(checkpoint+5,4)
+lane_build:addSemiTones(checkpoint+6.5,5)
 
 application:setInGlobalContext("lane1", lane_build:getLane())
 
