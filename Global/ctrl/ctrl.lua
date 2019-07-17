@@ -10,6 +10,13 @@ end)
 
 -- callbackPressedKey: str -> None
 -- Function called when user presses a key
+--[[!
+@module Ctrl
+@func callbackPressedKey
+@scope local
+@param key string a string that represents the key activated
+@desc Function called when user presses a key
+!]]
 function Ctrl.callbackPressedKey(_, _) end
 
 -- callbackReleasedKey: str -> None
