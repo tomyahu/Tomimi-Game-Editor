@@ -26,6 +26,11 @@ lane_build:addSemiTones(checkpoint+1,8)
 lane_build:addThirdTones(checkpoint+5,4)
 lane_build:addSemiTones(checkpoint+6.5,5)
 
+checkpoint = 16
+lane_build:addSemiTones(checkpoint+1,8)
+lane_build:addThirdTones(checkpoint+5,4)
+lane_build:addSemiTones(checkpoint+6.5,5)
+
 application:setInGlobalContext("lane1", lane_build:getLane())
 
 local paddle = Paddle.new(100, 100)

@@ -1,4 +1,3 @@
 require "Global.consts"
 
-title_screen_font = love.graphics.newImageFont(RESOURCES_PATH .. "/Fonts/ImageFonts/LotRM-Imagefont.png",
-    " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890?!%")
+title_screen_font = love.graphics.newFont("Resources/Fonts/RegularFonts/ARCADE_I.TTF", 22)

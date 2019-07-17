@@ -74,7 +74,7 @@ mBuild:addState(back_state)
 local confScreenMenu = mBuild:getMenu()
 ----------------------------------------------------------------
 
-local titleScreenMenuView = LotRMTitleMenuView.new(RESOURCES_PATH .. "/Menu/background.png", titleScreenMenu, title_screen_font)
+local titleScreenMenuView = LotRMTitleMenuView.new(RESOURCES_PATH .. "/Menu/RhythmBopBackground.png", titleScreenMenu, title_screen_font)
 local titleScreenMenuCtrl = MenuCtrl.new(titleScreenMenuView, titleScreenMenu)
 
 debug_room_state:addTransitionAction("return", function (_)
