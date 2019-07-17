@@ -22,13 +22,13 @@ end
 -- drawPaddle: None -> None
 -- draws a normal paddle
 function PaddleView.drawPaddle(self, paddle)
-    love.graphics.draw(self.paddle_image,paddle:getX(),paddle:getY(),0, 4*getScale())
+    love.graphics.draw(self.paddle_image,getRelativePosX(paddle:getX()),getRelativePosY(paddle:getY()),0, 3*getScale())
 end
 
 -- drawActivatedPaddle: None -> None
 -- draws an activated paddle
 function PaddleView.drawActivatedPaddle(self, paddle)
-    love.graphics.draw(self.activated_paddle_image,paddle:getX(),paddle:getY(),0, 4*getScale())
+    love.graphics.draw(self.activated_paddle_image,getRelativePosX(paddle:getX()),getRelativePosY(paddle:getY()),0, 3*getScale())
 end
 
 return PaddleView

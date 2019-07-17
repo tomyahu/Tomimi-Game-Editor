@@ -33,16 +33,16 @@ function NoteView.draw(self, note)
         self.particles_sist:emit(20)
     else
         self:drawInactiveBasicNote(note)
-        love.graphics.draw(self.particles_sist, 100,260)
+        love.graphics.draw(self.particles_sist, getRelativePosX(100), getRelativePosY(260))
     end
 end
 
 function NoteView.drawBasicNote(self, note)
-    love.graphics.draw(self.note_image,note:getX(),note:getY(),0, 4*getScale())
+    love.graphics.draw(self.note_image,getRelativePosX(note:getX()), getRelativePosY(note:getY()),0, 3*getScale())
 end
 
 function NoteView.drawInactiveBasicNote(self, note)
-    love.graphics.draw(self.inactive_note_image,note:getX(),note:getY(),0, 4*getScale())
+    love.graphics.draw(self.inactive_note_image,getRelativePosX(note:getX()),getRelativePosY(note:getY()),0, 3*getScale())
 end
 
 return NoteView

@@ -13,7 +13,7 @@ local TrackView = require "Track.view.TrackView"
 local BPMLaneBuilder = require "Track.model.lanes.BPMLaneBuilder"
 ----------------------------------------------------------------------------------------
 
-local lane_build = BPMLaneBuilder.new(228, 400, 88)
+local lane_build = BPMLaneBuilder.new(196, 400, 88)
 
 -- Perros Salvajes cancion
 local checkpoint = 0
