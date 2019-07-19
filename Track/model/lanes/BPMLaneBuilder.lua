@@ -16,6 +16,14 @@ function BPMLaneBuilder.addNote(self, x)
     LaneBuilder.addNote(self, x_pos)
 end
 
+-- addDoubleTones: num, int -> None
+-- Adds a number of double tones to the lane starting in the position x
+function BPMLaneBuilder.addDoubleTones(self, x, number)
+    for i=0,number-1,1 do
+        self:addNote(x + 2*i)
+    end
+end
+
 -- addTones: num, int -> None
 -- Adds a number of tones to the lane starting in the position x
 function BPMLaneBuilder.addTones(self, x, number)

@@ -35,6 +35,18 @@ function Paddle.releaseAction1Button(self)
     self.state:releaseAction1Button()
 end
 
+-- activate: None -> None
+-- Calls the state to do an action when the paddle is activated
+function Paddle.activate(self)
+    self.state:activate()
+end
+
+-- deactivate: None -> None
+-- Calls the state to do an action when the paddle is deactivated
+function Paddle.deactivate(self)
+    self.state:deactivate()
+end
+
 -- getStateStr: None -> str
 -- Gets the string corresponding to the current paddle state
 function Paddle.getStateStr(self)

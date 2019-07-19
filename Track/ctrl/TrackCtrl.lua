@@ -9,6 +9,7 @@ local TrackBehavior = require "Track.model.physics.behavior.TrackBehavior"
 -- The controller of the track app
 local TrackCtrl = extend(Ctrl, function(self, view)
     self.view = view
+    self.current_paddle = 1
 end,
 
 function(view, menu)
@@ -16,6 +17,20 @@ function(view, menu)
 end)
 
 function TrackCtrl.callbackPressedKey(self,key)
+
+    if key == "s" or key == "w" then
+        self.paddles[self.current_paddle]:deactivate()
+
+        if key == "s" then
+            self.current_paddle = (self.current_paddle%3) + 1
+        else
+            self.current_paddle = ((self.current_paddle + 1) %3) + 1
+        end
+
+        self.paddles[self.current_paddle]:activate()
+        self.track_behavior:setPaddle(self.paddles[self.current_paddle])
+    end
+
 
 end
 
@@ -28,12 +43,14 @@ end
 function TrackCtrl.update(self, dt)
 
     if love.keyboard.isDown( "j" ) or love.keyboard.isDown( "k" ) then
-        self.paddle:pressAction1Button()
+        self.paddles[self.current_paddle]:pressAction1Button()
     else
-        self.paddle:releaseAction1Button()
+        self.paddles[self.current_paddle]:releaseAction1Button()
     end
 
-    self.lane:updateAllNotes(dt)
+    self.lanes[1]:updateAllNotes(dt)
+    self.lanes[2]:updateAllNotes(dt)
+    self.lanes[3]:updateAllNotes(dt)
 
     self.track_behavior:AllObjectsInteract()
 end
@@ -41,19 +58,37 @@ end
 -- setup: None -> None
 -- plays the track music
 function TrackCtrl.setup(self)
-    self.lane = application:getFromGlobalContext("lane1")
-    self.paddle = application:getFromGlobalContext("paddle")
+    self.lanes = {}
+    self.lanes[1] = application:getFromGlobalContext("lane1")
+    self.lanes[2] = application:getFromGlobalContext("lane2")
+    self.lanes[3] = application:getFromGlobalContext("lane3")
 
-    self.lane:registerAllNotes()
 
-    self.track_behavior = TrackBehavior.new(self.paddle)
+    self.paddles = {}
+    self.paddles[1] = application:getFromGlobalContext("paddle")
+    self.paddles[2] = application:getFromGlobalContext("paddle2")
+    self.paddles[3] = application:getFromGlobalContext("paddle3")
+
+    self.paddles[2]:deactivate()
+    self.paddles[3]:deactivate()
+
+    self.lanes[1]:registerAllNotes()
+    self.lanes[2]:registerAllNotes()
+    self.lanes[3]:registerAllNotes()
+
+    self.track_behavior = TrackBehavior.new(self.paddles[1])
 end
 
 -- stop: None -> None
--- stops the track music
+-- frees memory from the global context
 function TrackCtrl.stop(self)
     application:setInGlobalContext("lane1", nil)
-    application:setInGlobalContext("lane1", nil)
+    application:setInGlobalContext("lane2", nil)
+    application:setInGlobalContext("lane3", nil)
+
+    application:setInGlobalContext("paddle", nil)
+    application:setInGlobalContext("paddle2", nil)
+    application:setInGlobalContext("paddle3", nil)
 end
 
 return TrackCtrl

@@ -2,7 +2,7 @@ local RectangleHitbox = require "lib.physics.hitboxes.RectangleHitbox"
 --------------------------------------------------------------------------------------------------------
 
 function paddleHitboxes()
-    return {RectangleHitbox.new(6, 0, 18, 240)}
+    return {RectangleHitbox.new(6, 0, 18, 60)}
 end
 
 function noteHitboxes()

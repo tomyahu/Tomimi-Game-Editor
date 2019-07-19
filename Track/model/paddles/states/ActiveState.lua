@@ -20,6 +20,18 @@ function ActiveState.releaseAction1Button(self)
     self.paddle:setState("NormalState")
 end
 
+-- activate: None -> None
+-- Does nothing
+function ActiveState.activate(self)
+
+end
+
+-- deactivate: None -> None
+-- Deactivates the paddle
+function ActiveState.deactivate(self)
+    self.paddle:setState("InactiveState")
+end
+
 function ActiveState.toString(self)
     return "ActiveState"
 end

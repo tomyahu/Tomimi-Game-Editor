@@ -35,4 +35,10 @@ function TrackBehavior.AllObjectsInteract(self)
     end
 end
 
+function TrackBehavior.setPaddle(self, new_paddle)
+    self.paddle = new_paddle
+    self.paddle_object = new_paddle:getSolidObject()
+end
+
+
 return TrackBehavior

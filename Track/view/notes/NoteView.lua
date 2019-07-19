@@ -9,12 +9,13 @@ local NoteView = class(function(self)
     self.inactive_note_image = love.graphics.newImage("Resources/Track/cube2.png")
 
     self.particles_sist = love.graphics.newParticleSystem(self.note_image, 32)
-    self.particles_sist:setSizes(3)
+    self.particles_sist:setSizes(2* getScale())
     self.particles_sist:setColors(1,1,1,1,1,1,1,0)
     self.particles_sist:setParticleLifetime(0,0.5)
     self.particles_sist:setLinearAcceleration(-200, -200, 200, 200)
-    self.particles_sist:setSpeed( -5000, 5000 )
+    self.particles_sist:setSpeed( -2500, 2500 )
     self.particles_sist:setSpread( 3.14*2 )
+    self.particle_sist_y = 0
 end)
 
 -- updateParticleSystem: num -> None
@@ -30,11 +31,14 @@ function NoteView.draw(self, note)
         self:drawBasicNote(note)
     elseif note:getStateStr() == "NoteActivatedState" then
         self:drawBasicNote(note)
+        self.particle_sist_y = note:getY()
         self.particles_sist:emit(20)
+
     else
         self:drawInactiveBasicNote(note)
-        love.graphics.draw(self.particles_sist, getRelativePosX(100), getRelativePosY(260))
     end
+
+    love.graphics.draw(self.particles_sist, getRelativePosX(50), getRelativePosY(self.particle_sist_y + 32))
 end
 
 function NoteView.drawBasicNote(self, note)
