@@ -78,7 +78,7 @@ local titleScreenMenuView = RythmBopTitleMenuView.new(RESOURCES_PATH .. "/Menu/R
 local titleScreenMenuCtrl = MenuCtrl.new(titleScreenMenuView, titleScreenMenu)
 
 debug_room_state:addTransitionAction("return", function (_)
-    application:appChange("SongMenu")
+    application:appChange("Track")
 end)
 
 conf_state:addTransitionAction("return", function (_)
