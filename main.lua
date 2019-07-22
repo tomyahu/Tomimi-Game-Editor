@@ -22,7 +22,6 @@ application:setView(initial_app["view"])
 function love.load()
     CurrentCtrl:setup()
     CurrentView:setup()
-    --print(love.joystick.saveGamepadMappings( "helo.txt" ))
 end
 
 function love.draw()
@@ -31,7 +30,6 @@ end
 
 function love.keypressed(key)
     CurrentCtrl:callbackPressedKey(key)
-    --print("Pressed: ",key)
     if key == "escape" then
         love.event.quit()
     end
@@ -39,14 +37,11 @@ end
 
 function love.keyreleased(key)
     CurrentCtrl:callbackReleasedKey(key)
-    --print("Released: ", key)
 end
 
 
 function love.update( dt )
-    local global_context = application:getGlobalContext()
-    global_context.dt = dt
-    application:setGlobalContext(global_context)
+    local global_context = application:setInGlobalContext('dt', dt)
     
     CurrentCtrl:update(dt)
     CurrentView:update(dt)
