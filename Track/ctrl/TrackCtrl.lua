@@ -76,6 +76,8 @@ function TrackCtrl.setup(self)
     self.lanes[2]:registerAllNotes()
     self.lanes[3]:registerAllNotes()
 
+    application:setInLocalContext('score', 0)
+
     self.track_behavior = TrackBehavior.new(self.paddles[1])
 end
 

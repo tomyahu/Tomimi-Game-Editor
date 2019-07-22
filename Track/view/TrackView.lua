@@ -50,7 +50,8 @@ function TrackView.draw(self, context)
     love.graphics.print( "Song Name - Song Artist", getRelativePosX(48), getRelativePosY(38), 0, getScale(), getScale())
 
     -- Score
-    love.graphics.print( "Score: 10000", getRelativePosX(335), getRelativePosY(410), 0, getScale(), getScale())
+    local current_score = application:getFromLocalContext('score')
+    love.graphics.print( "Score: " .. tostring(current_score), getRelativePosX(335), getRelativePosY(410), 0, getScale(), getScale())
 end
 
 -- setup: None -> None

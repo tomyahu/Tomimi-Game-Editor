@@ -6,7 +6,9 @@ local SolidObject = require("lib.physics.objects.SolidObject")
 --------------------------------------------------------------------------------------------------------
 
 -- class: Note
--- param: time:num -> the time the note is going to be activatable
+-- param: x:num -> the initial x coordinate of the note
+-- param: y:num -> the initial y coordinate of the note
+-- param: speed:num -> the speed of the note
 -- Creates a new Basic Note
 local Note = class(function(self, x, y, speed)
     self.x = x
@@ -16,6 +18,7 @@ local Note = class(function(self, x, y, speed)
 
     self.solid_object = SolidObject.new(noteHitboxes())
     self.solid_object:setPosition(self.x, self.y)
+    self.points = 10
 end)
 
 -- updatePosition: num -> None
@@ -55,6 +58,10 @@ end
 
 function Note.getSpeed(self)
     return self.time
+end
+
+function Note.getPoints(self)
+    return self.points
 end
 
 function Note.toString(self)

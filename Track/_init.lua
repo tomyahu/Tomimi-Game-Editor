@@ -11,8 +11,9 @@ local TrackCtrl = require "Track.ctrl.TrackCtrl"
 local TrackView = require "Track.view.TrackView"
 
 local BPMLaneBuilder = require "Track.model.lanes.BPMLaneBuilder"
-----------------------------------------------------------------------------------------
 
+local JsonDictFile = require("lib.file.json.JsonDictFile")
+----------------------------------------------------------------------------------------
 local lane1_build = BPMLaneBuilder.new(126, 400, 88)
 local lane2_build = BPMLaneBuilder.new(206, 400, 88)
 local lane3_build = BPMLaneBuilder.new(286, 400, 88)
