@@ -2,13 +2,14 @@ require "Global.consts"
 require "Global.application.application"
 
 local MenuCtrl = require "Menu.ctrl.MenuCtrl"
-local RythmBopTitleMenuView = require "Menu.view.RythmBopTitleMenuView"
+local SimpleTitleMenuView = require "Menu.view.SimpleTitleMenuView"
 local MenuState = require "Menu.model.menuStates.MenuState"
 local DefaultMenuBuilder = require "Menu.model.menues.DefaultMenuBuilder"
 local SingleActionMenuState = require "Menu.model.menuStates.SingleActionMenuState"
-
-require "Menu.resources.FontBank"
 ----------------------------------------------------------------------------------------
+
+local title_screen_font = love.graphics.newFont("Resources/Fonts/RegularFonts/ARCADE_N.TTF", 18)
+
 local mBuild = DefaultMenuBuilder.new()
 
 -- Title Menu --------------------------------------------------
@@ -74,11 +75,11 @@ mBuild:addState(back_state)
 local confScreenMenu = mBuild:getMenu()
 ----------------------------------------------------------------
 
-local titleScreenMenuView = RythmBopTitleMenuView.new(RESOURCES_PATH .. "/Menu/RhythmBopBackground.png", titleScreenMenu, title_screen_font)
+local titleScreenMenuView = SimpleTitleMenuView.new(RESOURCES_PATH .. "/Menu/background.png", titleScreenMenu, title_screen_font)
 local titleScreenMenuCtrl = MenuCtrl.new(titleScreenMenuView, titleScreenMenu)
 
 debug_room_state:addTransitionAction("return", function (_)
-    application:appChange("SongMenu")
+    application:appChange("Debug_Overworld")
 end)
 
 conf_state:addTransitionAction("return", function (_)
