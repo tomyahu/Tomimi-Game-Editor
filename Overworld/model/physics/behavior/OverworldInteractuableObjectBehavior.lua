@@ -22,9 +22,11 @@ end)
 function OverworldInteractuableObjectBehavior.AllObjectsInteract(self)
     local local_context_group = application:getFromLocalContext(self.group)
 
-    for _, object in pairs(local_context_group) do
-        if object:getSolidObject():checkCollision(self.player_object) then
-            object:interactWithPlayer(self.player)
+    if not (local_context_group == nil) then
+        for _, object in pairs(local_context_group) do
+            if object:getSolidObject():checkCollision(self.player_object) then
+                object:interactWithPlayer(self.player)
+            end
         end
     end
 

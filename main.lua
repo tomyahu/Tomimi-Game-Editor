@@ -20,29 +20,29 @@ application:setCtrl(initial_app["ctrl"])
 application:setView(initial_app["view"])
 
 function love.load()
-    CurrentCtrl:setup()
-    CurrentView:setup()
+    application:getCurrentCtrl():setup()
+    application:getCurrentView():setup()
 end
 
 function love.draw()
-    CurrentView:draw()
+    application:getCurrentView():draw()
 end
 
 function love.keypressed(key)
-    CurrentCtrl:callbackPressedKey(key)
+    application:getCurrentCtrl():callbackPressedKey(key)
     if key == "escape" then
         love.event.quit()
     end
 end
 
 function love.keyreleased(key)
-    CurrentCtrl:callbackReleasedKey(key)
+    application:getCurrentCtrl():callbackReleasedKey(key)
 end
 
 
 function love.update( dt )
-    local global_context = application:setInGlobalContext('dt', dt)
+    application:setInGlobalContext('dt', dt)
 
-    CurrentCtrl:update(dt)
-    CurrentView:update(dt)
+    application:getCurrentCtrl():update(dt)
+    application:getCurrentView():update(dt)
 end
