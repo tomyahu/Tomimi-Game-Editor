@@ -31,7 +31,7 @@ function CutscenesView.draw(self)
     local scene_image = application:getFromLocalContext(scene:getImagePath())
     local scenepixelwidth, _ = scene_image:getPixelDimensions()
 
-    local x_transition = getRelativePosX(getScale()*(GAME_WIDTH - 500)/2)
+    local x_transition = getRelativePosX((GAME_WIDTH-500)/2)
     love.graphics.draw(scene_image,x_transition,0,0, getScale()/scenepixelwidth*500)
     love.graphics.print( scene:getText(), getRelativePosX(50), getRelativePosY(550), 0, getScale(), getScale())
 end

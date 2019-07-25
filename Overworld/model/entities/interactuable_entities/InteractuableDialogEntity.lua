@@ -1,5 +1,5 @@
 require "lib.classes.class"
-local InteractuableSolidEntity = require "Overworld.model.entities.InteractuableSolidEntity"
+local InteractuableSolidEntity = require "Overworld.model.entities.interactuable_entities.InteractuableSolidEntity"
 require "Global.application.application"
 --------------------------------------------------------------------------------------------------------
 

@@ -1,6 +1,6 @@
 require "lib.classes.class"
 require "Global.application.application"
-local ContactInteractuableEntity = require "Overworld.model.entities.ContactInteractuableEntity"
+local ContactInteractuableEntity = require "Overworld.model.entities.contact_entities.ContactInteractuableEntity"
 --------------------------------------------------------------------------------------------------------
 
 -- class: ChangeRoomPad

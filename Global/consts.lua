@@ -2,7 +2,7 @@
 -- game title, the initial dimensions of the window, the dimensions of the game world, the apps, the initial app, the
 -- global context, the audio volume, etc.
 ---------------------------------------------------------------
-GAME_TITLE = "Rhythm Bop"
+GAME_TITLE = "Debug Game"
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 FULL_SCREEN = false
@@ -14,9 +14,8 @@ RESOURCES_PATH = "Resources"
 
 APPS = {
     ["TitleMenu"] = "Menu._init",
-    ["SongMenu"] = "SongSelectMenu._init",
-    ["Track"] = "Track._init",
-    ["Debug_Overworld"] = "Overworld._debug_init"
+    ["Debug_Overworld"] = "Overworld._debug_init",
+    ["Movie"] = "Cutscenes.debug._debug_init"
 }
 INITIAL_APP = "TitleMenu"
 

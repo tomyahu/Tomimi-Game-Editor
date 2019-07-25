@@ -42,7 +42,7 @@ end
 
 function love.update( dt )
     local global_context = application:setInGlobalContext('dt', dt)
-    
+
     CurrentCtrl:update(dt)
     CurrentView:update(dt)
 end
