@@ -7,7 +7,7 @@ local BasicCutsceneBuilder =  require "Cutscenes.model.cutscenes.BasicCutsceneBu
 local TimedCutsceneBuilder =  require "Cutscenes.model.cutscenes.TimedCutsceneBuilder"
 --------------------------------------------------------------------------------------------------------
 
-local cutscene_build = TimedCutsceneBuilder.new(10)
+local cutscene_build = TimedCutsceneBuilder.new(30)
 
 cutscene_build:addScene("Habia una vez una naranja", "Resources/Cutscenes/naranja/naranja.jpg")
 cutscene_build:addScene("Que queria salir a bailar", "Resources/Cutscenes/naranja/naranja.jpg")
