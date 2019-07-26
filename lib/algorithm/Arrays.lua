@@ -1,19 +1,25 @@
+require "lib.classes.class"
+--------------------------------------------------------------------------------------------------------
+
 -- TODO: Create method to get min and max from an array
--- Ordering -----------------------------------------------------------------------------------------------------
+-- TODO: add assertions if array is an array
+-- Ordering --------------------------------------------------------------------------------------------
 -- Quicksort --
 
+local Arrays = class(function(self) end)
+
 -- Quicksort for pair based arrays (arrays of pairs)
-function quicksortPairs(array)
-    partitionPairs(array, 1, (# array))
+function Arrays.quicksortPairs(self, array)
+    self:partitionPairs(array, 1, (# array))
 end
 
-function partitionPairs(array, i, j)
+function Arrays.partitionPairs(self, array, i, j)
     if (i < j) then
         -- Choose piv as the element right in the middle (or middle left if it doesn't exists)
         local piv = (i + j) /2
 
         -- swaps pivs and i element
-        swap(array, i, piv)
+        self:swap(array, i, piv)
 
         local left = i+1
         local right = j
@@ -29,25 +35,56 @@ function partitionPairs(array, i, j)
                 right = right - 1
             end
 
-            swap(array, left, right)
+            self:swap(array, left, right)
         end
 
         -- Puts piv in the position it should be
         if (array[right]:getFirst() < array[i]:getFirst()) then
-            swap(array, i, right)
+            self:swap(array, i, right)
         else
-            swap(array, i, right - 1)
+            self:swap(array, i, right - 1)
             right = right - 1
         end
 
         -- Recurse
-        partitionPairs(array, i, right - 1)
-        partitionPairs(array, right + 1, j)
+        self:partitionPairs(array, i, right - 1)
+        self:partitionPairs(array, right + 1, j)
     end
 end
 
-function swap(array, i, j)
+function Arrays.swap(self, array, i, j)
     local aux = array[i]
     array[i] = array[j]
     array[j] = aux
 end
+
+
+function Arrays.max(self, array)
+    local acc = array[1]
+    local index = 1
+
+    for i=2, (# array) do
+        if acc < array[i] then
+            acc = array[i]
+            index = i
+        end
+    end
+
+    return index, acc
+end
+
+function Arrays.min(self, array)
+    local acc = array[1]
+    local index = 1
+
+    for i=2, (# array) do
+        if acc > array[i] then
+            acc = array[i]
+            index = i
+        end
+    end
+
+    return index, acc
+end
+
+return Arrays.new()
