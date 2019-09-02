@@ -23,9 +23,6 @@ function OverworldBehavior.AllObjectsInteract(self)
     local local_context_group = application:getFromLocalContext(self.group)
     local global_context = application:getGlobalContext()
 
-    -- Sets how much time has passed for the player to define its distance moved
-    self.player_object:setDt(global_context.dt)
-
     -- Sets how much time has passed for each object to define its distance moved
     for _, object in pairs(local_context_group) do
         object:setDt(global_context.dt)
@@ -55,6 +52,9 @@ function OverworldBehavior.AllObjectsInteract(self)
 
     -- Sets the speed of the player to 0 in both horizontal and vertical coordinates
     self.player_object:setSpeed(0, 0)
+
+    -- Sets how much time has passed for the player to define its distance moved
+    self.player_object:setDt(global_context.dt)
 
 end
 
