@@ -20,3 +20,5 @@ APPS = {
 INITIAL_APP = "TitleMenu"
 
 TEST = false
+
+GLOBAL_CONTEXT_PATH = "globals.json"

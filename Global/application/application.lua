@@ -1,4 +1,5 @@
 local App = require "Global.application.App"
+local GlobalContextClass = require "lib.file.json.JsonDictFile"
 require "Global.consts"
 --------------------------------------------------------------------------------------------------------
 -- The aplication manager
@@ -17,7 +18,7 @@ local LocalContext = {}
 
 -- Current global context of the manager, is a global dictionary storage that is only accesed with the function
 -- getGlobalContext
-local GlobalContext = {}
+local GlobalContext = GlobalContextClass.new(GLOBAL_CONTEXT_PATH)
 
 -- Current Shader used
 local CurrentShader = love.graphics.newShader("/Global/shaders/default_pixel_shader.glsl", "/Global/shaders/default_vertex_shader.glsl")
@@ -83,28 +84,17 @@ end
 
 -- Gets the global context of the application
 function application.getGlobalContext(_)
-    return GlobalContext
-end
-
-
-
--- Replaces the old global context with newContext if it is not nil, otherwise it cleans the local context
-function application.setGlobalContext(_, newContext)
-    if newContext == nil then
-        GlobalContext = {}
-    else
-        GlobalContext = newContext
-    end
+    return GlobalContext.dict
 end
 
 -- Sets a key to a value in global context
 function application.setInGlobalContext(_, key, val)
-    GlobalContext[key] = val
+    GlobalContext:set(key, val)
 end
 
 -- Gets a value from the global context associated with key
 function application.getFromGlobalContext(_, key)
-    return GlobalContext[key]
+    return GlobalContext:get(key)
 end
 
 -- appChange: str -> None
