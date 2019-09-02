@@ -7,7 +7,17 @@ local DictFile = require("lib.file.DictFile")
 -- param: path:str -> the path of the file serving as a dictionary
 -- An object to manage json files that contain dictionaries
 local JsonDictFile = extend(DictFile, function(self, path)
-    print(path)
+    -- Try opening the file
+    if pcall(function()
+        json.decode(love.filesystem.read(path))
+        end) then
+
+        -- If the file was opened load the file
+        self.dict = json.decode(love.filesystem.read(self.path))
+    else
+        -- Create a new file with an empty json dictionary otherwise
+        love.filesystem.write(path, "{}")
+    end
 end,
 
 function(path)
@@ -23,7 +33,7 @@ end
 -- save: None -> None
 -- saves the dictionary field in the file
 function JsonDictFile.save(self)
-    print(love.filesystem.write(self.path, json.encode(self.dict)))
+    love.filesystem.write(self.path, json.encode(self.dict))
 end
 
 return JsonDictFile
