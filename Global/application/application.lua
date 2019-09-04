@@ -97,6 +97,16 @@ function application.getFromGlobalContext(_, key)
     return GlobalContext:get(key)
 end
 
+-- Saves the global context in the file
+function application.saveGlobalContext(_)
+  GlobalContext:save()
+end
+
+-- Loads the global context from the file
+function application.loadGlobalContext(_)
+  GlobalContext:load()
+end
+
 -- appChange: str -> None
 -- Changes the current application to the application appName
 -- TODO: Check if local context is still not cleaned
