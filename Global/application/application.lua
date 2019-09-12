@@ -20,6 +20,12 @@ local LocalContext = {}
 -- getGlobalContext
 local GlobalContext = GlobalContextClass.new(GLOBAL_CONTEXT_PATH)
 
+-- If its empty the default global context is loaded and saved
+if next(GlobalContext.dict) == nil then
+   GlobalContext.dict = require("Global.default_globals")
+   GlobalContext:save()
+end
+
 -- Current Shader used
 local CurrentShader = love.graphics.newShader("/Global/shaders/default_pixel_shader.glsl", "/Global/shaders/default_vertex_shader.glsl")
 

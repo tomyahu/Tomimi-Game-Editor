@@ -30,9 +30,11 @@ end
 
 function love.keypressed(key)
     application:getCurrentCtrl():callbackPressedKey(key)
-    --[[if key == "escape" then
+    if key == "escape" then
         love.event.quit()
-    end]]--
+    elseif key == "s" then
+        application:saveGlobalContext()
+    end
 end
 
 function love.keyreleased(key)
