@@ -17,7 +17,7 @@ debug_save["Overworld"]["Position"]["x"] = 300
 debug_save["Overworld"]["Position"]["y"] = 300
 debug_save["General"]["Party"] = {}
 debug_save["General"]["Items"] = {}
-debug_save["Advancements"]{}
+debug_save["Advancements"] = {}
 
 
 -- Set the debug save in saves
