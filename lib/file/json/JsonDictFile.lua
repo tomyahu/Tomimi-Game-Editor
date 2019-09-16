@@ -17,6 +17,9 @@ local JsonDictFile = extend(DictFile, function(self, path)
     else
         -- Create a new file with an empty json dictionary otherwise
         love.filesystem.write(path, "{}")
+        
+        -- Assign the dictionary to a new empty dictionary
+        self.dict = {}
     end
 end,
 
