@@ -15,6 +15,7 @@ debug_save["Overworld"]["Room"] = "Room1"
 debug_save["Overworld"]["Position"] = {}
 debug_save["Overworld"]["Position"]["x"] = 300
 debug_save["Overworld"]["Position"]["y"] = 300
+debug_save["General"] = {}
 debug_save["General"]["Party"] = {}
 debug_save["General"]["Items"] = {}
 debug_save["Advancements"] = {}
@@ -70,7 +71,6 @@ player_frames[8][4] = RectFrame.new(192,448,64,64)
 
 local player_sprite = TimedSprite.new(player_frames, RESOURCES_PATH .. "/Overworld/Entities/[Chara]Mac.png")
 local player = Player.new(player_sprite, 200, newPlayerHitboxes(), newPlayerInteractuableHitboxes())
-player:setPos(300,300)
 
 local room_manager = RoomManager.new()
 room_manager:addRoom("Overworld.init.debug_rooms.Room1", "Room1")

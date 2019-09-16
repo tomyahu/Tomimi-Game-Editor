@@ -23,6 +23,12 @@ function RoomManager.setCurrentRoom(self, index)
     self.current_room = index
 end
 
+-- getCurrentRoomIndex: str -> None
+-- Gets the current room index
+function RoomManager.getCurrentRoomIndex(self)
+    return self.current_room
+end
+
 -- getCurrentRoom: None -> Room
 -- Imports the new room to memory and returns it
 function RoomManager.getCurrentRoom(self)

@@ -34,11 +34,36 @@ end)
 -- setup: None -> None
 -- Takes the local context returns the same context
 function OverworldCtrl.setup(self)
+    -- TODO: create a method to get current save
+    local save = application:getFromGlobalContext("SAVES")["Debug"]
+
+    self.room_manager:setCurrentRoom(save["Overworld"]["Room"])
+    self.player:setPos(save["Overworld"]["Position"]["x"], save["Overworld"]["Position"]["y"])
+
     local new_room = self.room_manager:getCurrentRoom()
     new_room:addObject(self.player, 1)
 
     new_room:registerObjects()
     self.view:setCurrentRoom(new_room)
+end
+
+-- stop: None -> None
+-- Function called at the end of the execution of an application
+function OverworldCtrl.stop(self)
+    -- TODO: create a method to get current save
+    local saves = application:getFromGlobalContext("SAVES")
+    local save = saves["Debug"]
+
+    local player_x, player_y = self.player:getPos()
+
+    save["Overworld"]["Position"]["x"] = player_x
+    save["Overworld"]["Position"]["y"] = player_y
+    save["Overworld"]["Room"] = self.room_manager:getCurrentRoomIndex()
+
+    saves["Debug"] = save
+
+    application:setInGlobalContext("SAVES", saves)
+
 end
 
 -- update: num -> None
