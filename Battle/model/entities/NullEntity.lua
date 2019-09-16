@@ -15,7 +15,8 @@ local NullEntity = class(function(self)
     self.strength = 0
     self.skill = 0
     self.agility = 0
-    self.stamina = 0
+    self.max_stamina = 1
+    self.stamina = 1
     self.speed = 0
     
     -- magic
@@ -39,6 +40,29 @@ local NullEntity = class(function(self)
     
     -- Constants
     self.natural_resistence = 0
+
+    -- Modifiers
+    self.armor = 0
+    self.temp_strength = 0
+    self.temp_skill = 0
+    self.temp_agility = 0
+    self.temp_speed = 0
+
+    self.temp_mana_strength = 0
+    self.temp_mana_control = 0
+
+    self.temp_fire_prof = 0
+    self.temp_cold_prof = 0
+    self.temp_wind_prof = 0
+    self.temp_lightning_prof = 0
+    self.temp_light_prof = 0
+    self.temp_dark_prof = 0
+    self.temp_health_prof = 0
+    self.temp_ether_prof = 0
+
+    self.temp_power_prof = 0
+
+    self.temp_resistence = 0
     
     -- Equipped Items
     self.equipped_items = {}
@@ -101,18 +125,19 @@ function NullEntity.getHp(self)
 end
 
 function NullEntity.getStrength(self)
-  -- TODO: Apply buff and equipped items modifiers
-  return self.strength
+  return self.strength + self.temp_strength
 end
 
 function NullEntity.getSkill(self)
-  -- TODO: Apply buff and equipped items modifiers
-  return self.skill
+  return self.skill + self.temp_skill
 end
 
 function NullEntity.getAgility(self)
-  -- TODO: Apply buff and equipped items modifiers
-  return self.agility
+  return self.agility + self.temp_agility
+end
+
+function NullEntity.getMaxStamina(self)
+    return self.max_stamina
 end
 
 function NullEntity.getStamina(self)
@@ -120,8 +145,7 @@ function NullEntity.getStamina(self)
 end
 
 function NullEntity.getSpeed(self)
-  -- TODO: Apply buff and equipped items modifiers
-  return self.speed
+  return self.speed + self.temp_speed
 end
 
 function NullEntity.getMp(self)
@@ -133,58 +157,48 @@ function NullEntity.getMaxMp(self)
 end
 
 function NullEntity.getManaStrength(self)
-  -- TODO: Apply buff and equipped items modifiers
-  return self.mana_strength
+  return self.mana_strength + self.temp_mana_strength
 end
 
 function NullEntity.getManaControl(self)
-  -- TODO: Apply buff and equipped items modifiers 
-  return self.mana_control
+  return self.mana_control + self.temp_mana_control
 end
 
 function NullEntity.getFireProficiency(self)
-  -- TODO: Apply buff and equipped items modifiers 
-  return self.fire_prof
+  return self.fire_prof + self.temp_fire_prof
 end
 
 function NullEntity.getColdProficiency(self)
-  -- TODO: Apply buff and equipped items modifiers 
-  return self.cold_prof
+  return self.cold_prof + self.temp_cold_prof
 end
 
 function NullEntity.getWindProficiency(self)
-  -- TODO: Apply buff and equipped items modifiers 
-  return self.wind_prof
+  return self.wind_prof + self.temp_wind_prof
 end
 
 function NullEntity.getLightningProficiency(self)
-  -- TODO: Apply buff and equipped items modifiers 
-  return self.lightning_prof
+  return self.lightning_prof + self.temp_lightning_prof
 end
 
 function NullEntity.getLightProficiency(self)
-  -- TODO: Apply buff and equipped items modifiers 
-  return self.light_prof
+  return self.light_prof + self.temp_light_prof
 end
 
 function NullEntity.getDarkProficiency(self)
-  -- TODO: Apply buff and equipped items modifiers 
-  return self.dark_prof
+  return self.dark_prof + self.temp_dark_prof
 end
 
 function NullEntity.getHealthProficiency(self)
   -- TODO: Apply buff and equipped items modifiers 
-  return self.health_prof
+  return self.health_prof + self.temp_health_prof
 end
 
 function NullEntity.getEtherProficiency(self)
-  -- TODO: Apply buff and equipped items modifiers 
-  return self.ether_prof
+  return self.ether_prof + self.temp_ether_prof
 end
 
 function NullEntity.getPowerProficiency(self)
-  -- TODO: Apply buff and equipped items modifiers 
-  return self.power_prof
+  return self.power_prof + self.temp_power_prof
 end
 
 function NullEntity.getNaturalResistance(self)
@@ -192,8 +206,7 @@ function NullEntity.getNaturalResistance(self)
 end
 
 function NullEntity.getResistance(self)
-  -- TODO: Apply buff and equipped items modifiers 
-  return self:getNaturalResistance()
+  return math.max(self:getNaturalResistance() + self.temp_resistance, self.armor)
 end
 
 function NullEntity.isAlive(self)
