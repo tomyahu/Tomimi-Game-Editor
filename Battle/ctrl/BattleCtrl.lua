@@ -19,7 +19,7 @@ end)
 
 -- setup: None -> None
 -- Function called at the begining of the execution of an application
-function Ctrl.setup(self)
+function BattleCtrl.setup(self)
     -- TODO: Set the players party entities
     -- TODO: Set the enemy party entities
     -- TODO: Set the ambient of the battle
@@ -29,7 +29,7 @@ end
 
 -- stop: None -> None
 -- Function called at the end of the execution of an application
-function Ctrl.stop(self)
+function BattleCtrl.stop(self)
     -- TODO: Give experience to the player based in what they did
     -- TODO: Update the player's items
 end
