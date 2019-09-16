@@ -42,14 +42,10 @@ end
 
 function SimpleTitleMenuView.setup(self)
     BasicMenuView.setup(self)
-    self.menu_music = love.audio.newSource("Resources/Menu/music/SHAP3S - Swell.mp3", "stream")
-    self.menu_music:setLooping(true)
-    love.audio.play(self.menu_music)
 end
 
 function SimpleTitleMenuView.stop(self)
     BasicMenuView.stop(self)
-    love.audio.stop()
 end
 
 return SimpleTitleMenuView
