@@ -8,7 +8,7 @@ local OverworldCtrl = require "Overworld.ctrl.OverworldCtrl"
 local Player = require "Overworld.model.entities.Player"
 require "Overworld.init.hitboxes"
 --------------------------------------------------------------------------------------------------------
-
+-- Player Sprite
 local player_frames = {}
 player_frames[1] = {}
 player_frames[1][1] = RectFrame.new(0,0,64,64)

@@ -9,6 +9,7 @@ local Player = require "Overworld.model.entities.Player"
 require "Overworld.init.hitboxes"
 --------------------------------------------------------------------------------------------------------
 
+-- Player Sprite Construction
 local player_frames = {}
 player_frames[1] = {}
 player_frames[1][1] = RectFrame.new(0,0,64,64)
@@ -40,6 +41,7 @@ player_frames[5][4] = RectFrame.new(192,256,64,64)
 
 local player_sprite = TimedSprite.new(player_frames, RESOURCES_PATH .. "/Overworld/Entities/[Chara]Mac.png")
 local player = Player.new(player_sprite, 3, newPlayerHitboxes(), newPlayerInteractuableHitboxes())
+
 player:setPos(200,200)
 
 local room_manager = RoomManager.new()
