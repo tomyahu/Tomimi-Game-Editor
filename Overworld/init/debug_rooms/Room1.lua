@@ -43,6 +43,9 @@ local entity_factory = EntityFactory.new()
 --Add Plant
 roomBuild:addObject(3,3,entity_factory:createOneTileDialogObject("/Overworld/Entities/Plant1.png", "Me encanta esta planta"))
 
+--Add Naranjarina
+roomBuild:addObject(8,5,entity_factory:createOneTileDialogObject("/Overworld/Entities/Naranjarina.png", "Te gusto mi pelicula?"))
+
 --Add Film
 roomBuild:addObject(8,3,entity_factory:createOneTileAppChangeObject("/Overworld/Entities/Film.png", "Movie"))
 
