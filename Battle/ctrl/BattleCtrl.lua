@@ -3,6 +3,7 @@ require "Global.LOVEWrapper.LOVEWrapper"
 require "Global.application.application"
 local Ctrl = require "Global.ctrl.ctrl"
 local Party = require("Battle.model.party.Party")
+local ambient_dictionary = "Battle.init.ambient_dictionary"
 --------------------------------------------------------------------------------------------------------
 
 -- class: BattleCtrl
@@ -23,7 +24,11 @@ function BattleCtrl.setup(self)
     -- TODO: Set the players party entities
     -- TODO: Set the enemy party entities
     -- TODO: Set the ambient of the battle
-    -- TODO: Set advantage/disadvantage condition
+    --local ambient = 
+    --self.ambient = require(ambient_dictionary[ambient])
+    
+    --self.ambient:affectPartyAndEnemies(self.player_party, self.enemy_party)
+    
     -- TODO: clean enemies, ambient and advantage/disadvantage condition from global context
 end
 

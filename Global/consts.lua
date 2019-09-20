@@ -15,7 +15,8 @@ RESOURCES_PATH = "Resources"
 APPS = {
     ["TitleMenu"] = "Menu._init",
     ["Debug_Overworld"] = "Overworld._debug_init",
-    ["Movie"] = "Cutscenes.debug._debug_init"
+    ["Movie"] = "Cutscenes.debug._debug_init",
+    ["Battle"] = "Battle.init._debug_init"
 }
 INITIAL_APP = "TitleMenu"
 
