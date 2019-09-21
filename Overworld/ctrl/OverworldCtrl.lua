@@ -52,7 +52,7 @@ end
 function OverworldCtrl.stop(self)
     -- TODO: create a method to get current save
     local saves = application:getFromGlobalContext("SAVES")
-    local save = saves["Debug"]
+    local save = saves[saves["current_save"]]
 
     local player_x, player_y = self.player:getPos()
 
