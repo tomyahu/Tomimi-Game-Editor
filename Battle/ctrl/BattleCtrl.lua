@@ -21,20 +21,17 @@ end)
 -- setup: None -> None
 -- Function called at the begining of the execution of an application
 function BattleCtrl.setup(self)
-    -- TODO: create a method to get current save
-    local saves = application:getFromGlobalContext("SAVES")
-    local save = saves[saves["current_save"]]
+    local save = application:getCurrentSave()
     -- TODO: Set the players party entities
-    --self.player_party = 
+    self.player_party = nil
     
     -- TODO: Set the enemy party entities
-    --self.enemy_party = 
+    self.enemy_party = nil
     
     -- TODO: Set the ambient of the battle
     local ambient = save["CurrentBattleAmbient"]
     self.ambient = require(ambient_dictionary[ambient])
-    
-    --self.ambient:affectPartyAndEnemies(self.player_party, self.enemy_party)
+    self.ambient:affectPartyAndEnemies(self.player_party, self.enemy_party)
     
     -- TODO: clean enemies, ambient and advantage/disadvantage condition from global context
 end

@@ -7,8 +7,6 @@ require "Global.consts"
 -- The aplication manager
 application = {}
 
--- TODO: create a method to get current save
-
 -- Current controller of the manager
 local CurrentCtrl = nil
 
