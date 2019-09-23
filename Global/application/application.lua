@@ -155,7 +155,8 @@ end
 --------------------------------------------------------------------------------------------------------------
 -- Game Specific Funtions
 
-
+-- getCurrentSave: None -> dict
+-- gets the dictionary that represents the current save used by the game
 function application.getCurrentSave(_)
     local saves = application:getFromGlobalContext("SAVES")
     nilError(saves, "No saves dictionary found in global context")
@@ -169,10 +170,14 @@ function application.getCurrentSave(_)
     return current_save
 end
 
+-- setCurrentSaveID: str -> None
+-- gets the ID of the current save file baing used by the game
 function application.setCurrentSaveID(_, save_id)
     application:setInGlobalContext("CURRENT_SAVE", save_id)
 end
 
+-- setCurrentSave: dict -> None
+-- sets the save as the current save of the game
 function application.setCurrentSave(_, save)
     local saves = application:getFromGlobalContext("SAVES")
     nilError(saves, "No saves dictionary found in global context")
