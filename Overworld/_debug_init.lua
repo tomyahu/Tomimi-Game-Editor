@@ -8,25 +8,6 @@ local OverworldCtrl = require "Overworld.ctrl.OverworldCtrl"
 local Player = require "Overworld.model.entities.Player"
 require "Overworld.init.hitboxes"
 --------------------------------------------------------------------------------------------------------
--- Global Context basic stuff
-local debug_save = {}
-debug_save["Overworld"] = {}
-debug_save["Overworld"]["Room"] = "Room1"
-debug_save["Overworld"]["Position"] = {}
-debug_save["Overworld"]["Position"]["x"] = 300
-debug_save["Overworld"]["Position"]["y"] = 300
-debug_save["General"] = {}
-debug_save["General"]["Party"] = {}
-debug_save["General"]["Items"] = {}
-debug_save["Advancements"] = {}
-
-
--- Set the debug save in saves
-local saves = application:getFromGlobalContext("SAVES")
-saves["Debug"] = debug_save
-application:setInGlobalContext("SAVES", saves)
-
-
 -- Player Sprite
 local player_frames = {}
 player_frames[1] = {}

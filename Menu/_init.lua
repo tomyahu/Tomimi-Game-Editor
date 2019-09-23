@@ -79,6 +79,19 @@ local titleScreenMenuView = SimpleTitleMenuView.new(RESOURCES_PATH .. "/Menu/bac
 local titleScreenMenuCtrl = MenuCtrl.new(titleScreenMenuView, titleScreenMenu)
 
 debug_room_state:addTransitionAction("return", function (_)
+    -- Create Debug Save
+    local save = {}
+    save["Overworld"] = {}
+    save["Overworld"]["Room"] = "Room1"
+    save["Overworld"]["Position"] = {}
+    save["Overworld"]["Position"]["x"] = 300
+    save["Overworld"]["Position"]["y"] = 300
+
+    -- Save Debug ID
+    application:setCurrentSaveID("Debug")
+
+    application:setCurrentSave(save)
+
     application:appChange("Debug_Overworld")
 end)
 
