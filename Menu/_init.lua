@@ -14,9 +14,11 @@ local mBuild = DefaultMenuBuilder.new()
 
 -- Title Menu --------------------------------------------------
 local conf_state = MenuState.new("Configuration")
-local debug_room_state = MenuState.new("Start")
+local debug_room_state = MenuState.new("Debug Room")
 
-mBuild:addState(debug_room_state)
+if application:getFromGlobalContext("DEBUG") then
+    mBuild:addState(debug_room_state)
+end
 mBuild:addState(conf_state)
 mBuild:addState(
     SingleActionMenuState.new("Exit","return", function (_)
