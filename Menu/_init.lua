@@ -16,7 +16,7 @@ local mBuild = DefaultMenuBuilder.new()
 local conf_state = MenuState.new("Configuration")
 local debug_room_state = MenuState.new("Debug Room")
 
-if application:getFromGlobalContext("DEBUG") then
+if application:getFromGlobalContext("DEBUG") or DEBUG then
     mBuild:addState(debug_room_state)
 end
 mBuild:addState(conf_state)

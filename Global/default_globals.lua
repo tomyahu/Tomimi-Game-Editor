@@ -22,4 +22,7 @@ default_globals["CONFIGURATION"]["VIDEO"]["FULLSCREEN"] = false
 -- Saves
 default_globals["SAVES"] = {}
 
+-- Debug state
+default_globals["DEBUG"] = false
+
 return default_globals
