@@ -30,8 +30,8 @@ function BattleCtrl.setup(self)
     
     -- TODO: Set the ambient of the battle
     local ambient = save["CurrentBattleAmbient"]
-    self.ambient = require(ambient_dictionary[ambient])
-    self.ambient:affectPartyAndEnemies(self.player_party, self.enemy_party)
+    --self.ambient = require(ambient_dictionary[ambient])
+    --self.ambient:affectPartyAndEnemies(self.player_party, self.enemy_party)
     
     -- TODO: clean enemies, ambient and advantage/disadvantage condition from global context
 end
