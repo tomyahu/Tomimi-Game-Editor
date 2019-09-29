@@ -67,4 +67,9 @@ function Sprite.advanceFrame(self)
     end
 end
 
+-- getter
+function Sprite.getWidth(self)
+    return self.loveSprite:getWidth()
+end
+
 return Sprite
