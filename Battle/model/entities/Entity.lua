@@ -1,5 +1,5 @@
 require "lib.classes.class"
-local NullEntity = "Battle.model.entities.NullEntity"
+local NullEntity = require("Battle.model.entities.NullEntity")
 --------------------------------------------------------------------------------------------------------
 
 -- ifNotNullAssign: Entity, dict, str -> None
@@ -73,7 +73,7 @@ function(self, stats, sprite_path)
     ifNotNullAssign(self, stats, "temp_resistence")
 
 end,
-function()
+function(stats, sprite_path)
     return NullEntity.new()
 end)
 
