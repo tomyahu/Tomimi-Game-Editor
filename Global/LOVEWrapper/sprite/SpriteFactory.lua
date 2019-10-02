@@ -13,10 +13,13 @@ local SpriteFactory = class(function(self) end)
 function SpriteFactory.getRegularRectSprite(self, image_path, width, height, frame_num)
     local width_per_frame = width/frame_num
     local frames = {}
-    for i = 0,(frame_num-1) do
-        frames[i] = RectFrame.new(i*width_per_frame, 0, width, height)
+    frames[1] = {}
+    for i = 1,(frame_num) do
+        frames[1][i] = RectFrame.new(i*width_per_frame, 0, width, height)
     end
-    return Sprite.new(frames, image_path)
+    local sprite = Sprite.new(frames, image_path)
+    sprite:initialize()
+    return sprite
 end
 
 -- getRegularRectTimedSprite: str, num, num, num -> Sprite
@@ -24,10 +27,13 @@ end
 function SpriteFactory.getRegularRectTimedSprite(self, image_path, width, height, frame_num)
     local width_per_frame = width/frame_num
     local frames = {}
-    for i = 0,(frame_num-1) do
-        frames[i] = TimedSprite.new(i*width_per_frame, 0, width, height)
+    frames[1] = {}
+    for i = 1,(frame_num) do
+        frames[1][i] = TimedSprite.new(i*width_per_frame, 0, width, height)
     end
-    return Sprite.new(frames, image_path)
+    local sprite = Sprite.new(frames, image_path)
+    sprite:initialize()
+    return sprite
 end
 
 -- TODO: Create functions to manage multi-animation sprites
