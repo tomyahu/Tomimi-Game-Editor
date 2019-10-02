@@ -19,10 +19,10 @@ end
 function EntityFactory.getEntity(self, entity_id)
     if pcall(function () self:getEntityGenerator(entity_id) end) then
         local entity_class = self:getEntityGenerator(entity_id)
-        return entity_id:generate()
+        return entity_class:generate()
     else
         error("The entity " .. entity_id .. " doesn't exists!")
     end
 end
 
-return EntityFactory
+return EntityFactory.new()
