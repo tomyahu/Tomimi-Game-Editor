@@ -16,10 +16,10 @@ for appName, appInit in pairs(APPS) do
     application:registerApp(appName, appInit)
 end
 
-application:setCtrl(initial_app["ctrl"])
-application:setView(initial_app["view"])
-
 function love.load()
+    application:setCtrl(initial_app["ctrl"])
+    application:setView(initial_app["view"])
+
     application:getCurrentCtrl():setup()
     application:getCurrentView():setup()
 end
