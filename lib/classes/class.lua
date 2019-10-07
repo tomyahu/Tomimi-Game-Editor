@@ -36,7 +36,6 @@ function extend(parent, constructor, superFun)
         error("Parameter superFun must be a function.")
     end
 
-    -- TODO: Reimplement extend function to stop using new here
     local TheClass = {}
     TheClass = setmetatable({}, parent)
 
