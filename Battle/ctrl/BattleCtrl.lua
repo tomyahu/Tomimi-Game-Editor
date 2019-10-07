@@ -10,8 +10,8 @@ local ambient_dictionary = "Battle.init.ambient_dictionary"
 -- param: view:View -> the view of the menu app
 -- The controller of the battle app
 local BattleCtrl = extend(Ctrl, function(self, view)
-    self.player_party = Party.new({})
-    self.enemy_party = Party.new({})
+    self.player_party = Party.new({}, 0)
+    self.enemy_party = Party.new({}, 0)
 end,
 
 function(view)

@@ -14,7 +14,6 @@ function class(constructor)
         local o = {}
         local self = setmetatable(o, TheClass)
         constructor(self, ...)
-        self.class = TheClass
         return self
     end
 
@@ -37,12 +36,11 @@ function extend(parent, constructor, superFun)
         error("Parameter superFun must be a function.")
     end
 
-    local TheClass = parent:new();
-    TheClass.__index = TheClass
+    -- TODO: Reimplement extend function to stop using new here
+    local TheClass = parent.new()
 
     function TheClass.new(...)
         local o
-        local super
         if superFun == nil then
             o = parent.new(...)
         else
@@ -54,9 +52,10 @@ function extend(parent, constructor, superFun)
         local self = setmetatable(o, TheClass)
 
         constructor(self, ...)
-        self.class = TheClass
         return self
     end
+
+    TheClass.__index = TheClass
 
     return TheClass
 end

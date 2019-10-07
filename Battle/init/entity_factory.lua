@@ -18,7 +18,7 @@ end
 -- generates an entity of a certain type
 function EntityFactory.getEntity(self, entity_id)
     if pcall(function () self:getEntityGenerator(entity_id) end) then
-        local entity_class = self:getEntityGenerator(entity_id)
+        local entity_class = self:getEntityGenerator(entity_id).new()
         return entity_class:generate()
     else
         error("The entity " .. entity_id .. " doesn't exists!")

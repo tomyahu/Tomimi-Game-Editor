@@ -15,7 +15,7 @@ local EntityView = class(function(self, entity, default_x, default_y)
     self.current_x = default_x
     self.current_y = default_y
     self.entity = entity
-    self.sprite = sprite_factory:getRegularRectSprite(entity:getSpritePath(), 64, 64, 1)
+    self.sprite = sprite_factory:getRegularRectSprite(entity:getSpritePath(), 128, 128, 1)
 end)
 
 -- draw: int, int -> None

@@ -16,6 +16,7 @@ for appName, appInit in pairs(APPS) do
     application:registerApp(appName, appInit)
 end
 
+-- TODO: add application initialization
 function love.load()
     application:setCtrl(initial_app["ctrl"])
     application:setView(initial_app["view"])
