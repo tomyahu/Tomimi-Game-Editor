@@ -37,7 +37,8 @@ function extend(parent, constructor, superFun)
     end
 
     -- TODO: Reimplement extend function to stop using new here
-    local TheClass = parent.new()
+    local TheClass = {}
+    TheClass = setmetatable({}, parent)
 
     function TheClass.new(...)
         local o
