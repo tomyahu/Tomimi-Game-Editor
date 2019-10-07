@@ -30,6 +30,14 @@ end
 -- Current Shader used
 local CurrentShader = love.graphics.newShader("/Global/shaders/default_pixel_shader.glsl", "/Global/shaders/default_vertex_shader.glsl")
 
+function application.init(_)
+  CurrentCtrl = nil
+  CurrentView = nil
+  LocalContext = {}
+  GlobalContext = GlobalContextClass.new(GLOBAL_CONTEXT_PATH)
+  CurrentShader = love.graphics.newShader("/Global/shaders/default_pixel_shader.glsl", "/Global/shaders/default_vertex_shader.glsl")
+end
+
 -- Sets the current view of the application manager
 function application.setView(_,newView)
     CurrentView = newView

@@ -19,10 +19,6 @@ local BattleView = extend(View, function(self)
     self.party_view = nil
     self.enemy_party_view = nil
     self.background_view = nil
-
-    self.hero_image = love.graphics.newImage(RESOURCES_PATH .. "/Battle/Party/MAC_IDLE.png")
-    self.enemy_image = love.graphics.newImage(RESOURCES_PATH .. "/Battle/Enemies/none.png")
-    self.background_image = love.graphics.newImage(RESOURCES_PATH .. "/Battle/Backgrounds/debug_background.png")
 end,
 
 function()
@@ -32,15 +28,15 @@ end)
 -- draw: context -> None
 -- Draws the current scene
 function BattleView.draw(self)
-    love.graphics.draw(self.background_image)
-    --self.background_view:draw()
+    self.background_view:draw()
     self.party_view:draw()
-    --self.enemy_party_view:draw()
+    self.enemy_party_view:draw()
 end
 
 -- setup: None -> None
 -- Sets up the local view vairables
 function BattleView.setup(self)
+    -- TODO: Move this to controller
     local party = {}
     local party_entity1 = entity_factory:getEntity("Naranjarina")
     local party_entity2 = entity_factory:getEntity("Naranjarina")
@@ -54,7 +50,7 @@ function BattleView.setup(self)
     table.insert(enemy_party, enemy_party_entity2)
 
     self.party_view = PartyView.new(Party.new(party, 3))
-    --self.enemy_party_view = EnemyPartyView.new(Party.new(enemy_party, 3))
+    self.enemy_party_view = EnemyPartyView.new(Party.new(enemy_party, 3))
     self.background_view = BackGroundView.new(RESOURCES_PATH .. "/Battle/Backgrounds/debug_background.png")
 end
 

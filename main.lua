@@ -18,6 +18,8 @@ end
 
 -- TODO: add application initialization
 function love.load()
+    application:init()
+  
     application:setCtrl(initial_app["ctrl"])
     application:setView(initial_app["view"])
 

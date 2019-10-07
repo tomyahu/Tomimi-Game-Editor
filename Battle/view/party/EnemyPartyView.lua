@@ -1,6 +1,6 @@
 require "lib.classes.class"
 local PartyView = require("Battle.view.party.PartyView")
-local EntityView = require("Battle.view.entity.EntityView")
+local EnemyEntityView = require("Battle.view.entity.EnemyEntityView")
 --------------------------------------------------------------------------------------------------------
 
 -- class: EnemyPartyView
@@ -8,8 +8,6 @@ local EntityView = require("Battle.view.entity.EntityView")
 -- The view class of the party's entities
 local EnemyPartyView = extend(PartyView,
 function(self, party)
-    print(party)
-
     self.position1 = {}
     self.position1.x = GAME_WIDTH - 60/800*GAME_WIDTH
     self.position1.y = 350/600*GAME_HEIGHT
@@ -30,18 +28,17 @@ function(self, party)
     end
 
     if not (party:getMember(1) == nil) then
-        self.entity_views[1] = EntityView.new(party:getMember(1), self.position1.x, self.position1.y)
+        self.entity_views[1] = EnemyEntityView.new(party:getMember(1), self.position1.x, self.position1.y)
     end
     if not (party:getMember(2) == nil) then
-        self.entity_views[2] = EntityView.new(party:getMember(2), self.position2.x, self.position2.y)
+        self.entity_views[2] = EnemyEntityView.new(party:getMember(2), self.position2.x, self.position2.y)
     end
     if not (party:getMember(3) == nil) then
-        self.entity_views[3] = EntityView.new(party:getMember(3), self.position3.x, self.position3.y)
+        self.entity_views[3] = EnemyEntityView.new(party:getMember(3), self.position3.x, self.position3.y)
     end
 end,
 
 function(party)
-    print(party)
     return PartyView.new(party)
 end)
 
