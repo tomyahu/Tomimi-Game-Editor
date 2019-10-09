@@ -6,7 +6,7 @@ require "lib.classes.class"
 local NullEntity = class(function(self)
     -- Data
     self.name = "???"
-    
+
     -- Stats
     self.max_hp = 1
     self.hp = 1
@@ -18,6 +18,9 @@ local NullEntity = class(function(self)
     self.max_stamina = 1
     self.stamina = 1
     self.speed = 0
+
+    -- In Combat
+    self.guard = 0
     
     -- magic
     self.max_mp = 0
@@ -207,6 +210,15 @@ end
 
 function NullEntity.getResistance(self)
   return math.max(self:getNaturalResistance() + self.temp_resistance, self.armor)
+end
+
+function NullEntity.getMaxGuard(self)
+    local stamina_modifier = (self.max_stamina - self.stamina)/self.max_stamina*0.8 + 0.2
+    local strength = self:getStrength()
+    local skill = self:getSkill()
+    local resistance = self:getResistance()
+    -- TODO: Graph this
+    return (strength/4 + resistance/2 + skill*skill + 5) * stamina_modifier
 end
 
 function NullEntity.isAlive(self)
