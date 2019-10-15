@@ -88,6 +88,12 @@ debug_room_state:addTransitionAction("return", function (_)
     save["Overworld"]["Position"] = {}
     save["Overworld"]["Position"]["x"] = 300
     save["Overworld"]["Position"]["y"] = 300
+    save["Overworld"]["Position"]["y"] = 300
+
+    save["Battle"] = {}
+    save["Battle"]["PlayerPartyMetadata"] = {}
+    save["Battle"]["EnemyPartyMetadata"] = {}
+    save["Battle"]["Ambient"] = "debug_ambient1"
 
     -- Save Debug ID
     application:setCurrentSaveID("Debug")
