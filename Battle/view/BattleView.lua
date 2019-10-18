@@ -4,7 +4,7 @@ require "Global.LOVEWrapper.LOVEWrapper"
 require "Global.application.application"
 
 local View = require "Global.view.view"
-local entity_factory = require("Battle.init.entity_factory")
+local Party = require("Battle.model.party.Party")
 
 local BackGroundView = require("Battle.view.background.BackgroundView")
 local PartyView = require("Battle.view.party.PartyView")
@@ -35,8 +35,6 @@ end
 -- setup: None -> None
 -- Sets up the local view vairables
 function BattleView.setup(self)
-    -- TODO: Move this to controller
-    self.background_view = BackGroundView.new(RESOURCES_PATH .. "/Battle/Backgrounds/debug_background.png")
 end
 
 -- setup: None -> None
@@ -44,12 +42,17 @@ end
 function BattleView.stop(self)
 end
 
+-- TODO: Document this methods
 function BattleView.setPlayerParty(self, party)
   self.party_view = PartyView.new(party)
 end
 
 function BattleView.setEnemyParty(self, party)
   self.enemy_party_view = EnemyPartyView.new(party)
+end
+
+function BattleView.setBackground(self, ambient)
+  self.background_view = BackGroundView.new(ambient:getSpritePath())
 end
 
 -- getter

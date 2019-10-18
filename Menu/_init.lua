@@ -102,7 +102,7 @@ debug_room_state:addTransitionAction("return", function (_)
     
     save["Battle"]["EnemyPartyMetadata"] = {}
     save["Battle"]["EnemyPartyMetadata"][1] = player1
-    save["Battle"]["EnemyPartyMetadata"][3] = player1
+    save["Battle"]["EnemyPartyMetadata"][2] = player1
     
     save["Battle"]["Ambient"] = "debug_ambient1"
 

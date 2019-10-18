@@ -5,7 +5,7 @@ local EntityGenerator = require("Battle.init.entities.EntityGenerator")
 
 local Naranjarina = extend(EntityGenerator,
 function(self)
-    self.sprite_path = RESOURCES_PATH .. "/Battle/Party/MAC_IDLE.png"
+    self.sprite_path = RESOURCES_PATH .. "/Battle/Enemies/Naranjarina.png"
 end,
 
 function()
