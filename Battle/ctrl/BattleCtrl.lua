@@ -28,7 +28,7 @@ function BattleCtrl.setup(self)
     local player_party_entities_metadata = save["Battle"]["PlayerPartyMetadata"]
     local player_party_entities = {}
 
-    for i = 1,(# player_party_entities_metadata) do
+    for i, _ in pairs(player_party_entities_metadata) do
         local id = player_party_entities_metadata[i]["id"]
         local meta = player_party_entities_metadata[i]["meta"]
         table.insert(player_party_entities, entity_factory:getEntity(id, meta))
@@ -39,10 +39,10 @@ function BattleCtrl.setup(self)
     -- Set the enemy party entities
     local enemy_party_entities_metadata = save["Battle"]["EnemyPartyMetadata"]
     local enemy_party_entities = {}
-
-    for i = 1,(# enemy_party_entities_metadata) do
-        local id = enemy_party_entities[i]["id"]
-        local meta = enemy_party_entities[i]["meta"]
+    
+    for i, _ in pairs(enemy_party_entities_metadata) do
+        local id = enemy_party_entities_metadata[i]["id"]
+        local meta = enemy_party_entities_metadata[i]["meta"]
         table.insert(enemy_party_entities, entity_factory:getEntity(id, meta))
     end
 
@@ -54,10 +54,14 @@ function BattleCtrl.setup(self)
     self.ambient = require(ambient_dictionary[ambient_id])
     self.ambient:affectPartyAndEnemies(self.player_party, self.enemy_party)
     
-    -- TODO: clean enemies and ambient from global context
+    self.view:setPlayerParty(self.player_party)
+    self.view:setEnemyParty(self.enemy_party)
+    
+    -- Clean enemies and ambient from global context
     save["Battle"]["EnemyPartyMetadata"] = nil
     save["Battle"]["Ambient"] = nil
     application:setCurrentSave(save)
+    application:saveGlobalContext()
 end
 
 -- stop: None -> None

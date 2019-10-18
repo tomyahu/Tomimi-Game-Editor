@@ -5,7 +5,6 @@ require "Global.application.application"
 
 local View = require "Global.view.view"
 local entity_factory = require("Battle.init.entity_factory")
-local Party = require("Battle.model.party.Party")
 
 local BackGroundView = require("Battle.view.background.BackgroundView")
 local PartyView = require("Battle.view.party.PartyView")
@@ -37,20 +36,6 @@ end
 -- Sets up the local view vairables
 function BattleView.setup(self)
     -- TODO: Move this to controller
-    local party = {}
-    local party_entity1 = entity_factory:getEntity("Naranjarina")
-    local party_entity2 = entity_factory:getEntity("Naranjarina")
-    party[1] = party_entity1
-    party[3] = party_entity2
-
-    local enemy_party = {}
-    local enemy_party_entity1 = entity_factory:getEntity("None")
-    local enemy_party_entity2 = entity_factory:getEntity("None")
-    table.insert(enemy_party, enemy_party_entity1)
-    table.insert(enemy_party, enemy_party_entity2)
-
-    self.party_view = PartyView.new(Party.new(party, 3))
-    self.enemy_party_view = EnemyPartyView.new(Party.new(enemy_party, 3))
     self.background_view = BackGroundView.new(RESOURCES_PATH .. "/Battle/Backgrounds/debug_background.png")
 end
 
@@ -59,8 +44,16 @@ end
 function BattleView.stop(self)
 end
 
+function BattleView.setPlayerParty(self, party)
+  self.party_view = PartyView.new(party)
+end
+
+function BattleView.setEnemyParty(self, party)
+  self.enemy_party_view = EnemyPartyView.new(party)
+end
+
 -- getter
-function BattleView.getPartyView(self)
+function BattleView.getPlayerPartyView(self)
     return self.party_view
 end
 

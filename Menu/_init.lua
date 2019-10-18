@@ -92,7 +92,18 @@ debug_room_state:addTransitionAction("return", function (_)
 
     save["Battle"] = {}
     save["Battle"]["PlayerPartyMetadata"] = {}
+    
+    local player1 = {}
+    player1["id"] = "Naranjarina"
+    player1["meta"] = {}
+    
+    save["Battle"]["PlayerPartyMetadata"][1] = player1
+    save["Battle"]["PlayerPartyMetadata"][3] = player1
+    
     save["Battle"]["EnemyPartyMetadata"] = {}
+    save["Battle"]["EnemyPartyMetadata"][1] = player1
+    save["Battle"]["EnemyPartyMetadata"][3] = player1
+    
     save["Battle"]["Ambient"] = "debug_ambient1"
 
     -- Save Debug ID
