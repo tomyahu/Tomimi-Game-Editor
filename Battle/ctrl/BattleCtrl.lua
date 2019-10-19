@@ -24,6 +24,7 @@ end)
 -- Function called at the begining of the execution of an application
 function BattleCtrl.setup(self)
     local save = application:getCurrentSave()
+    
     -- Set the players party entities
     local player_party_entities_metadata = save["Battle"]["PlayerPartyMetadata"]
     local player_party_entities = {}
@@ -54,6 +55,7 @@ function BattleCtrl.setup(self)
     self.ambient = require(ambient_dictionary[ambient_id])
     self.ambient:affectPartyAndEnemies(self.player_party, self.enemy_party)
     
+    -- set views
     self.view:setPlayerParty(self.player_party)
     self.view:setEnemyParty(self.enemy_party)
     self.view:setBackground(self.ambient)

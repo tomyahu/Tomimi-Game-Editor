@@ -2,19 +2,23 @@ require "lib.classes.class"
 local NullItem = require()
 -------------------------------------------------------------------------------------------------------
 
--- class: NullItem
+-- class: ConsumableItem
+-- param: name:str -> the name of the item
+-- param: description:str -> the description of what the item does
+-- param: effect:function -> the effect function to apply to the entity when its consumed
 -- A consumable item for a battle
-local ConsumableItem = extend(NullItem, function(self, effect)
+local ConsumableItem = extend(NullItem, function(self, name, description, effect)
     self.effect = effect
 end,
 
-function(effect)
-  return NullItem.new()
+function(name, description, effect)
+  return NullItem.new(name, description)
 end)
 
 -- applyEffect: Entity -> None
--- Aplica el efecto del objeto sobre la entidad
+-- applies the effect function to the entity
 function ConsumableItem.applyEffect(self, entity)
+  -- TODO: Delete self from entity's inventory
   self.effect(entity)
 end
 
