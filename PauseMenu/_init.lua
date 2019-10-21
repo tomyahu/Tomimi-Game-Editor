@@ -10,7 +10,7 @@ local font = love.graphics.newFont("Resources/Fonts/RegularFonts/PIXEARG_.TTF", 
 -- TODO: Definir Menu
 local menu = nil
 
-local pause_menu_view = PauseMenuView.new(RESOURCES_PATH .. "/PauseMenu/PauseMenuBackground.png", menu, font)
+local pause_menu_view = PauseMenuView.new(RESOURCES_PATH .. "/PauseMenu/PauseMenuBackground.png", menu, font, RESOURCES_PATH .. "/PauseMenu/MenuBorders.png")
 local pause_menu_ctrl = PauseMenuCtrl.new(PauseMenuView, titleScreenMenu)
 
 return {["ctrl"] = pause_menu_ctrl, ["view"] = pause_menu_view}

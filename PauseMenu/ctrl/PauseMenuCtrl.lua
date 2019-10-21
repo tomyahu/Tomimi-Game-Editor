@@ -13,8 +13,4 @@ function(view, menu)
     return MenuCtrl.new(view, menu)
 end)
 
-function PauseMenuCtrl.callbackPressedKey(self,key)
-    --self.menu:makeTransition(key)
-end
-
 return PauseMenuCtrl

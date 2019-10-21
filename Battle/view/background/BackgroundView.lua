@@ -1,4 +1,5 @@
 require "lib.classes.class"
+require "Global.consts"
 local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 --------------------------------------------------------------------------------------------------------
 
@@ -8,7 +9,7 @@ local sprite_factory = SpriteFactory.new()
 -- class: BackgroundView
 -- param: path:str -> The path of the image
 local BackgroundView = class(function(self, path)
-    self.sprite = sprite_factory:getRegularRectSprite(path, 800, 600, 1)
+    self.sprite = sprite_factory:getRegularRectSprite(path, GAME_WIDTH, GAME_HEIGHT, 1)
 end)
 
 -- draw: None -> None

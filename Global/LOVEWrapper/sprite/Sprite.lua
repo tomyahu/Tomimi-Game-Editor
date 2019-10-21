@@ -57,6 +57,11 @@ function Sprite.getCurrentFrame(self)
     return self.frames[self.current_frame_set][self.current_frame]
 end
 
+-- setter
+function Sprite.setCurrentFrame(self, new_current_frame)
+  self.current_frame = new_current_frame
+end
+
 -- advanceFrame: None -> nil
 -- Advances the frame in the current animation frame set by one (if the current frame is the final frame of the
 -- animation it resets to the first frame)

@@ -11,7 +11,7 @@ local SpriteFactory = class(function(self) end)
 -- getRegularRectSprite: str, num, num, num -> Sprite
 -- Creates a new single-animation sprite
 function SpriteFactory.getRegularRectSprite(self, image_path, width, height, frame_num)
-    local width_per_frame = width/frame_num
+    local width_per_frame = width
     local frames = {}
     frames[1] = {}
     for i = 1,(frame_num) do
