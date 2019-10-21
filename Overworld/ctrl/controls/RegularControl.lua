@@ -1,4 +1,5 @@
 require "lib.classes.class"
+require "Global.application.application"
 local NullControl = require "Overworld.ctrl.controls.NullControl"
 --------------------------------------------------------------------------------------------------------
 
@@ -57,6 +58,11 @@ function RegularControl.update(self)
     else
         self.z_key_pressed = false
     end
+    
+    if love.keyboard.isDown("p") then
+      application:appChange("PauseMenu")
+    end
+  
 
     -- Make all interactuable objects interact
     self.interactuable_behavior:AllObjectsInteract()
