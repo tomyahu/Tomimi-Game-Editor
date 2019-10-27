@@ -28,7 +28,10 @@ end)
 -- Draws the menu options
 function PauseMenuView.draw(self)
   self.background:draw()
+  
+  love.graphics.setFont(self.font)
   self.main_option_menu_view:draw()
+  
 end
 
 function PauseMenuView.setup(self)
