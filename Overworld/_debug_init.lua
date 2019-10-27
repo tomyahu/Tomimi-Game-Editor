@@ -8,6 +8,9 @@ local OverworldCtrl = require "Overworld.ctrl.OverworldCtrl"
 local Player = require "Overworld.model.entities.Player"
 require "Overworld.init.hitboxes"
 --------------------------------------------------------------------------------------------------------
+-- Set Font
+local font = love.graphics.newFont("Resources/Fonts/RegularFonts/PIXEAB__.TTF", 18)
+
 -- Player Sprite
 local player_frames = {}
 player_frames[1] = {}
@@ -57,7 +60,7 @@ local room_manager = RoomManager.new()
 room_manager:addRoom("Overworld.init.debug_rooms.Room1", "Room1")
 room_manager:addRoom("Overworld.init.debug_rooms.Room2", "Room2")
 
-local thisView = OverworldView.new(room_manager:getCurrentRoom(), player)
+local thisView = OverworldView.new(room_manager:getCurrentRoom(), player, font)
 local thisCtrl = OverworldCtrl.new(thisView, player, room_manager)
 
 return {["ctrl"] = thisCtrl, ["view"] = thisView}

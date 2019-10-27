@@ -14,11 +14,12 @@ local NullMessageView = require "Overworld.view.messages.NullMessageView"
 -- param: current_room:Room -> the current room object to display
 -- param: player:Player -> the player object
 -- The view of the overworld application
-local OverworldView = extend(View, function(self, current_room, player)
+local OverworldView = extend(View, function(self, current_room, player, font)
     self.current_room_view = RoomView.new(current_room)
     self.player = PlayerView.new(player)
     self.camera = Camera.new(GAME_WIDTH/2, GAME_HEIGHT/2, 1)
     self.current_message = NullMessageView.new()
+    self.font = font
 
     self.current_room_view:initialize(self.camera)
 end,
@@ -40,7 +41,7 @@ function OverworldView.setCurrentMessage(self, new_message)
     if new_message == nil then
         self.current_message = NullMessageView.new()
     else
-        self.current_message = BasicMessageView.new(new_message)
+        self.current_message = BasicMessageView.new(new_message, self.font)
     end
 end
 

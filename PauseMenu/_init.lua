@@ -8,13 +8,13 @@ local SingleActionMenuState = require "Menu.model.menuStates.SingleActionMenuSta
 local PauseMenuCtrl = require "PauseMenu.ctrl.PauseMenuCtrl"
 local PauseMenuView = require "PauseMenu.view.PauseMenuView"
 ----------------------------------------------------------------------------------------
+-- Set Font
+local font = love.graphics.newFont("Resources/Fonts/RegularFonts/PIXEAB__.TTF", 18)
 
-local font = love.graphics.newFont("Resources/Fonts/RegularFonts/PIXEARG_.TTF", 18)
-
--- Definir Menu
+-- Define Menu
 local mBuild = DefaultMenuBuilder.new()
 local save_state = SingleActionMenuState.new("Save", "return", function (_)
-        -- TODO: Play saved sound
+        -- TODO: Play *saved* sound
         application:saveGlobalContext()
     end)
 local back_state = SingleActionMenuState.new("Back", "return", function (_)

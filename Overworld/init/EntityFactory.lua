@@ -23,7 +23,7 @@ function EntityFactory.createOneTileAppChangeObject(self, path, app_name)
     return entity
 end
 
-function EntityFactory.createOneTileDialogObject(self, path, text)
+function EntityFactory.createOneTileDialogObject(self, path, texts)
     local entity_frames = {}
     entity_frames[1] = {}
     entity_frames[1][1] = RectFrame.new(0,0,64,64)
@@ -31,7 +31,15 @@ function EntityFactory.createOneTileDialogObject(self, path, text)
     local entity_sprite = TimedSprite.new(entity_frames, RESOURCES_PATH .. path)
 
     local dialogBuild = DialogBuilder.new()
-    dialogBuild:addMessage(text)
+    if type(texts) == "string" then
+      dialogBuild:addMessage(texts)
+    elseif type(texts) == "table" then
+      for _, text in pairs(texts) do
+        dialogBuild:addMessage(text)
+      end
+    else
+      error("Texts must be a string or a list of strings")
+    end
 
     local entity = InteractuableDialogEntity.new(entity_sprite, newEntityHitboxes(), dialogBuild:getDialog())
 
