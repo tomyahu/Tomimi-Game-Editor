@@ -57,4 +57,29 @@ function MenuBorderView.draw(self)
   self.background_view:draw()
 end
 
+-- getter
+function MenuBorderView.getOffsetX(self)
+  return self.offset_x
+end
+
+-- getter
+function MenuBorderView.getOffsetY(self)
+  return self.offset_y
+end
+
+-- getter
+function MenuBorderView.getWidth(self)
+  return self.width
+end
+
+-- getter
+function MenuBorderView.getHeight(self)
+  return self.height
+end
+
+-- getter
+function MenuBorderView.getDimension(self)
+  return self.dimension
+end
+
 return MenuBorderView
