@@ -1,9 +1,9 @@
 require "Global.consts"
+require "Global.fonts"
 local BasicCutsceneAdmin = require "Cutscenes.model.cutscene_admin.BasicCutsceneAdmin"
 local TimedCutsceneBuilder = require "Cutscenes.model.cutscenes.TimedCutsceneBuilder"
 local CutscenesCtrl = require "Cutscenes.ctrl.CutscenesCtrl"
 local CutscenesView = require "Cutscenes.view.CutscenesView"
-require "Cutscenes.resources.FontBank"
 require "Global.application.application"
 --------------------------------------------------------------------------------------------------------
 local cutBuild = TimedCutsceneBuilder.new(10)
@@ -18,7 +18,7 @@ local testCutsceneAdmin = BasicCutsceneAdmin.new()
 testCutsceneAdmin:addCutscene(0, testCutscene)
 testCutsceneAdmin:setCurrentCutscene(0)
 
-local cutsceneView = CutscenesView.new(testCutsceneAdmin:getCurrentCutscene():getCurrentScene(), cutscene_screen_font)
+local cutsceneView = CutscenesView.new(testCutsceneAdmin:getCurrentCutscene():getCurrentScene(), DIALOG_FONT)
 local cutsceneCtrl = CutscenesCtrl.new(cutsceneView, testCutsceneAdmin)
 
 cutsceneCtrl:setNextApp("Overworld")

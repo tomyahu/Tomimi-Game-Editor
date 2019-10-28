@@ -1,4 +1,6 @@
 require "Global.consts"
+require "Global.fonts"
+require "Global.controls"
 require "Global.application.application"
 
 local MenuCtrl = require "Menu.ctrl.MenuCtrl"
@@ -8,7 +10,7 @@ local DefaultMenuBuilder = require "Menu.model.menues.DefaultMenuBuilder"
 local SingleActionMenuState = require "Menu.model.menuStates.SingleActionMenuState"
 ----------------------------------------------------------------------------------------
 
-local title_screen_font = love.graphics.newFont("Resources/Fonts/RegularFonts/ARCADE_N.TTF", 18)
+local title_screen_font = DIALOG_FONT
 
 local mBuild = DefaultMenuBuilder.new()
 
@@ -21,7 +23,7 @@ if application:getFromGlobalContext("DEBUG") or DEBUG then
 end
 mBuild:addState(conf_state)
 mBuild:addState(
-    SingleActionMenuState.new("Exit","return", function (_)
+    SingleActionMenuState.new("Exit", ACTION_BUTTON_1, function (_)
         love.event.quit()
     end))
 
@@ -29,7 +31,7 @@ local titleScreenMenu = mBuild:getMenu()
 
 -- Configuration Menu --------------------------------------------------
 local volume_state = MenuState.new("Volume: 100%")
-volume_state:addTransitionAction("right", function (state)
+volume_state:addTransitionAction(RIGHT_BUTTON, function (state)
     if state.volume == nil then
         state.volume = 100
     end
@@ -40,7 +42,7 @@ volume_state:addTransitionAction("right", function (state)
 
     state.name = "Volume: " .. state.volume .. "%"
 end)
-volume_state:addTransitionAction("left", function (state)
+volume_state:addTransitionAction(LEFT_BUTTON, function (state)
     if state.volume == nil then
         state.volume = 100
     end
@@ -52,7 +54,7 @@ volume_state:addTransitionAction("left", function (state)
     state.name = "Volume: " .. state.volume .. "%"
 end)
 
-local fullscreen_state = SingleActionMenuState.new("Toggle Fullscreen: OFF", "return", function (state)
+local fullscreen_state = SingleActionMenuState.new("Toggle Fullscreen: OFF", ACTION_BUTTON_1, function (state)
     if state.is_fullscreen == nil then
         state.is_fullscreen = false
     end
@@ -80,7 +82,7 @@ local confScreenMenu = mBuild:getMenu()
 local titleScreenMenuView = SimpleTitleMenuView.new(RESOURCES_PATH .. "/Menu/background.png", titleScreenMenu, title_screen_font)
 local titleScreenMenuCtrl = MenuCtrl.new(titleScreenMenuView, titleScreenMenu)
 
-debug_room_state:addTransitionAction("return", function (_)
+debug_room_state:addTransitionAction(ACTION_BUTTON_1, function (_)
     -- Create Debug Save
     local save = {}
     save["Overworld"] = {}
@@ -105,7 +107,11 @@ debug_room_state:addTransitionAction("return", function (_)
     save["Battle"]["EnemyPartyMetadata"][2] = player1
     
     save["Battle"]["Ambient"] = "debug_ambient1"
-
+    
+    -- items
+    save["Items"] = {}
+    table.insert(save["Items"], 1)
+    
     -- Save Debug ID
     application:setCurrentSaveID("Debug")
 
@@ -114,11 +120,11 @@ debug_room_state:addTransitionAction("return", function (_)
     application:appChange("Debug_Overworld")
 end)
 
-conf_state:addTransitionAction("return", function (_)
+conf_state:addTransitionAction(ACTION_BUTTON_1, function (_)
     titleScreenMenuCtrl:setMenu(confScreenMenu)
 end)
 
-back_state:addTransitionAction("return", function (_)
+back_state:addTransitionAction(ACTION_BUTTON_1, function (_)
     titleScreenMenuCtrl:setMenu(titleScreenMenu)
 end)
 

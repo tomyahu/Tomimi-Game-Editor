@@ -8,10 +8,11 @@ local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 -- param: menu:Menu -> The menu to represent
 -- param: menu_border:MenuBorderView -> The border and background of the menu
 -- param: font:love.Font -> The font to use
-local RectangleMenuView = class(function(self, menu, menu_border, font)
+local RectangleMenuView = class(function(self, menu, menu_border, font, space_y)
     self.menu = menu
     self.menu_border = menu_border
     self.font = font
+    self.space_y = space_y
 end)
 
 -- draw: None -> None
@@ -25,7 +26,7 @@ function RectangleMenuView.draw(self)
   local start_x = self.menu_border:getOffsetX() + self.menu_border:getDimension()
   local start_y = self.menu_border:getOffsetY()
   
-  local space_y = 30
+  local space_y = self.space_y
   
   -- draws menu options
   for index, option in pairs(self.menu.options) do

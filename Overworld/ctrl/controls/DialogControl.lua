@@ -1,4 +1,5 @@
 require "lib.classes.class"
+require "Global.controls"
 local NullControl = require "Overworld.ctrl.controls.NullControl"
 --------------------------------------------------------------------------------------------------------
 
@@ -9,7 +10,7 @@ local DialogControl = extend(NullControl, function(self, ctrl)
     self.dialog_manager = ctrl.dialog_manager
     self.controls_manager = ctrl.controls_manager
     self.ctrl = ctrl
-    self.z_key_pressed = true
+    self.action_key_pressed = true
 end,
 
 function(ctrl)
@@ -26,20 +27,18 @@ function DialogControl.update(self)
     end
 
     -- If the z key is pressed advance the current dialog
-    if (love.keyboard.isDown("z")) and (not self.z_key_pressed) then
+    if (love.keyboard.isDown(ACTION_BUTTON_1)) and (not self.action_key_pressed) then
         if not self.dialog_manager:isFinished() then
             self.dialog_manager:advanceMessage()
         end
     end
 
     -- This part is here to check if the z key was just pressed or not
-    if love.keyboard.isDown("z") then
-        self.z_key_pressed = true
+    if love.keyboard.isDown(ACTION_BUTTON_1) then
+        self.action_key_pressed = true
     else
-        self.z_key_pressed = false
+        self.action_key_pressed = false
     end
-
 end
-
 
 return DialogControl

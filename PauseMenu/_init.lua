@@ -1,4 +1,6 @@
 require "Global.consts"
+require "Global.fonts"
+require "Global.controls"
 require "Global.application.application"
 
 local MenuState = require "Menu.model.menuStates.MenuState"
@@ -9,18 +11,22 @@ local PauseMenuCtrl = require "PauseMenu.ctrl.PauseMenuCtrl"
 local PauseMenuView = require "PauseMenu.view.PauseMenuView"
 ----------------------------------------------------------------------------------------
 -- Set Font
-local font = love.graphics.newFont("Resources/Fonts/RegularFonts/PIXEAB__.TTF", 18)
+local font = DIALOG_FONT
 
 -- Define Menu
 local mBuild = DefaultMenuBuilder.new()
-local save_state = SingleActionMenuState.new("Save", "return", function (_)
+local items_state = SingleActionMenuState.new("Items", ACTION_BUTTON_1, function (_)
+        -- TODO: Open Item Menu
+    end)
+local save_state = SingleActionMenuState.new("Save", ACTION_BUTTON_1, function (_)
         -- TODO: Play *saved* sound
         application:saveGlobalContext()
     end)
-local back_state = SingleActionMenuState.new("Back", "return", function (_)
+local back_state = SingleActionMenuState.new("Back", ACTION_BUTTON_1, function (_)
         application:appChange("Debug_Overworld")
     end)
 
+mBuild:addState(items_state)
 mBuild:addState(save_state)
 mBuild:addState(back_state)
 

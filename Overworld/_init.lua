@@ -1,4 +1,5 @@
 require "Global.consts"
+require "Global.fonts"
 require "Global.application.application"
 local TimedSprite = require "Global.LOVEWrapper.sprite.TimedSprite"
 local RectFrame = require "Global.LOVEWrapper.sprite.RectFrame"
@@ -9,7 +10,7 @@ local Player = require "Overworld.model.entities.Player"
 require "Overworld.init.hitboxes"
 --------------------------------------------------------------------------------------------------------
 -- Set Font
-local font = love.graphics.newFont("Resources/Fonts/RegularFonts/PIXEAB__.TTF", 18)
+local font = DIALOG_FONT
 
 -- Player Sprite Construction
 local player_frames = {}

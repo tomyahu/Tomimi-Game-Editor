@@ -1,0 +1,9 @@
+UP_BUTTON = "up"
+DOWN_BUTTON = "down"
+LEFT_BUTTON = "left"
+RIGHT_BUTTON = "right"
+
+ACTION_BUTTON_1 = "z"
+ACTION_BUTTON_2 = "x"
+
+PAUSE_BUTTON = "p"

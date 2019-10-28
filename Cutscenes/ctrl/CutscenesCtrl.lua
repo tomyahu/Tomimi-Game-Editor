@@ -1,3 +1,4 @@
+require "Global.controls"
 require "lib.classes.class"
 require "Global.LOVEWrapper.LOVEWrapper"
 local Ctrl = require "Global.ctrl.ctrl"
@@ -16,7 +17,7 @@ function(view, cutsceneAdmin)
 end)
 
 function CutscenesCtrl.callbackPressedKey(self,key)
-    if key == "return" then
+    if key == ACTION_BUTTON_1 then
         local bool = self.cutscene_admin:getCurrentCutscene():advanceScene()
         if not bool then
             application:appChange(self.next_app)

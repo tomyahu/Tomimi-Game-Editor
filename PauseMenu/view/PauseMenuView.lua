@@ -18,7 +18,8 @@ local PauseMenuView = extend(BasicMenuView, function(self, background_image_path
     self.menu_factory = MenuFactory.new(menu_sprite_sheet_path, font)
     self.background = BackgroundView.new(background_image_path)
     self.side_menu_view = self.menu_factory:getSideMenu(menu)
-    self.menu = menu
+    self.aux_menus_views = {}
+    self.aux_menus_views_visibility = {}
     self.font = font
 end,
 
@@ -34,6 +35,23 @@ function PauseMenuView.draw(self)
   love.graphics.setFont(self.font)
   self.side_menu_view:draw()
   
+  -- Draw all aux menus
+  for id, menu in pairs(self.aux_menus_views) do
+    if self.aux_menus_views_visibility[id] then
+      menu:draw()
+    end
+  end
+end
+
+-- TODO: Document this
+function PauseMenuView.addItemsView(self, menu)
+  self.aux_menus_views["items"] = self.menu_factory:getItemMenu(menu)
+  self.aux_menus_views_visibility["items"] = true
+end
+
+-- TODO: Document this
+function PauseMenuView.setItemsViewVisibility(self, visibility)
+  self.aux_menus_views_visibility["items"] = visibility
 end
 
 function PauseMenuView.setup(self)
