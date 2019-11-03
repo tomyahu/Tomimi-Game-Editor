@@ -34,7 +34,6 @@ end)
 -- setup: None -> None
 -- Takes the local context returns the same context
 function OverworldCtrl.setup(self)
-    application:saveGlobalContext(self)
     local save = application:getCurrentSave()
 
     self.room_manager:setCurrentRoom(save["Overworld"]["Room"])
