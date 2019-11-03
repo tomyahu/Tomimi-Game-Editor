@@ -33,6 +33,6 @@ mBuild:addState(back_state)
 local menu = mBuild:getMenu()
 
 local pause_menu_view = PauseMenuView.new(RESOURCES_PATH .. "/PauseMenu/PauseMenuBackground.png", menu, font, RESOURCES_PATH .. "/PauseMenu/MenuBorders.png")
-local pause_menu_ctrl = PauseMenuCtrl.new(PauseMenuView, menu)
+local pause_menu_ctrl = PauseMenuCtrl.new(pause_menu_view, menu)
 
 return {["ctrl"] = pause_menu_ctrl, ["view"] = pause_menu_view}
