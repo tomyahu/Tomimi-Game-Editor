@@ -1,5 +1,5 @@
 require "lib.classes.class"
-local Message = require "Overworld.model.messages.Message"
+local Message = require "Overworld.model.dialog.messages.Message"
 --------------------------------------------------------------------------------------------------------
 
 -- class: CharacterMessage
@@ -22,6 +22,11 @@ end
 -- getter
 function CharacterMessage.getCharacter(self)
     return self.character
+end
+
+-- getter
+function CharacterMessage.getClass(self)
+    return CharacterMessage
 end
 
 return CharacterMessage
