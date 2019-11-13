@@ -1,5 +1,6 @@
 require "Global.consts"
 require "lib.classes.class"
+require "Global.LOVEWrapper.LOVEWrapper"
 local MessageView = require "Overworld.view.messages.MessageView"
 local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 --------------------------------------------------------------------------------------------------------
