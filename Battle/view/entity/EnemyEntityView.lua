@@ -1,4 +1,5 @@
 require "lib.classes.class"
+require "Global.LOVEWrapper.LOVEWrapper"
 local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 local EntityView = require("Battle.view.entity.EntityView")
 --------------------------------------------------------------------------------------------------------
@@ -16,7 +17,7 @@ function(entity, default_x, default_y)
 end)
 
 function EnemyEntityView.draw(self)
-  self.sprite:draw(self.current_x, self.current_y, -1, 1)
+  self.sprite:draw(getRelativePosX(self.current_x), getRelativePosY(self.current_y), -getScale(), getScale())
 end
 
 return EnemyEntityView
