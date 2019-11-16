@@ -18,9 +18,10 @@ function MenuFactory.getSideMenu(self, menu)
 end
 
 -- getSideMenu
-function MenuFactory.getItemMenu(self, item_menu_dictionary)
+function MenuFactory.getItemMenu(self, menu)
   local item_menu_view = MenuBorderView.new(self.sprite, GAME_WIDTH/80 + 5*32, GAME_HEIGHT/60, 18, 17, 32)
-  return item_menu_view
+  local rectangle_menu_view = RectangleMenuView.new(menu, item_menu_view, self.font, 25)
+  return rectangle_menu_view
 end
 
 return MenuFactory

@@ -9,7 +9,7 @@ end)
 
 -- setCurrentState: State -> None
 -- Sets the current state of the automaton
-function Automaton.setCurrentState(self,state)
+function Automaton.setCurrentState(self, state)
     self.currentState = state
 end
 

@@ -20,4 +20,9 @@ function Menu.getOptions(self)
     return self.options
 end
 
+-- TODO: Document this
+function Menu.getOptionNumber(self)
+    return (# self.options)
+end
+
 return Menu
