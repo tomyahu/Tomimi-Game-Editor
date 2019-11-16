@@ -13,4 +13,14 @@ function Message.toString(self)
     return self.message
 end
 
+-- getter
+function Message.getMessage(self)
+    return self.message
+end
+
+-- getter
+function Message.getClass(self)
+    return Message
+end
+
 return Message

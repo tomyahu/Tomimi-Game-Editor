@@ -48,6 +48,17 @@ roomBuild:addObject(3,3,entity_factory:createOneTileDialogObject("/Overworld/Ent
       }
     ))
 
+--Add Plant with mac avatar
+local planta_conversation = {}
+planta_conversation[1] = {}
+planta_conversation[1].texts = {}
+planta_conversation[1].texts[1] = "Me encanta esta planta, es muy bella me recuerda a las \nalcachofas."
+planta_conversation[1].texts[2] = "Solo que odio las alcachofas."
+planta_conversation[1].character = "Mac"
+planta_conversation[1].avatar_img_path = RESOURCES_PATH .. "/Overworld/CharacterPortraits/MacPortrait.png"
+
+roomBuild:addObject(3, 4, entity_factory:createOneTileConversationObject("/Overworld/Entities/Plant1.png", planta_conversation))
+
 --Add Naranjarina
 roomBuild:addObject(8,5,entity_factory:createOneTileAppChangeObject("/Overworld/Entities/Naranjarina.png", "Battle"))
 

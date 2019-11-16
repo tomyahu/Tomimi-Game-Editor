@@ -6,7 +6,10 @@ local Camera = require "lib.cameras.Camera"
 local RoomView = require "Overworld.view.rooms.RoomView"
 local PlayerView = require "Overworld.view.player.PlayerView"
 local Message = require "Overworld.model.dialog.messages.Message"
+local CharacterMessage = require "Overworld.model.dialog.messages.CharacterMessage"
+local AvatarCharacterMessage = require "Overworld.model.dialog.messages.AvatarCharacterMessage"
 local BasicMessageView = require "Overworld.view.messages.BasicMessageView"
+local AvatarCharacterMessageView = require "Overworld.view.messages.AvatarCharacterMessageView"
 local NullMessageView = require "Overworld.view.messages.NullMessageView"
 --------------------------------------------------------------------------------------------------------
 
@@ -40,6 +43,8 @@ end
 function OverworldView.setCurrentMessage(self, new_message)
     if new_message == nil then
         self.current_message = NullMessageView.new()
+    elseif new_message:getClass() == AvatarCharacterMessage then
+        self.current_message = AvatarCharacterMessageView.new(new_message, self.font)
     else
         self.current_message = BasicMessageView.new(new_message, self.font)
     end

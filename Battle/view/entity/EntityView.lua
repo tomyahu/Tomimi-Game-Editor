@@ -1,4 +1,5 @@
 require "lib.classes.class"
+require "Global.LOVEWrapper.LOVEWrapper"
 local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 --------------------------------------------------------------------------------------------------------
 
@@ -21,7 +22,7 @@ end)
 -- draw: int, int -> None
 -- Draws the entity's sprite on the screen
 function EntityView.draw(self)
-    self.sprite:draw(self.current_x, self.current_y, 1, 1)
+    self.sprite:draw(getRelativePosX(self.current_x), getRelativePosY(self.current_y), getScale(), getScale())
 end
 
 -- getCurrentPosition: None -> dict(x:int, y:int)
