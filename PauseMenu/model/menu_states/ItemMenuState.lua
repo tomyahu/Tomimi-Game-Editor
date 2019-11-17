@@ -13,6 +13,7 @@ local ItemMenuState = extend(MenuState, function(self, item_data, item_count)
     self.item_description = item_data["description"]
     self.consumable = item_data["consumable"]
     self.abilities = item_data["abilities"]
+    self.icon_path = item_data["icon"]
     self.item_count = item_count
 end,
 
@@ -50,6 +51,10 @@ end
 
 function ItemMenuState.getAbilities(self)
     return self.abilities
+end
+
+function ItemMenuState.getIconPath(self)
+    return self.icon_path
 end
 
 function ItemMenuState.getItemCount(self)

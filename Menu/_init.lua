@@ -115,7 +115,17 @@ debug_room_state:addTransitionAction(ACTION_BUTTON_1, function (_)
     item_1["id"] = 1
     item_1["count"] = 1
 
+    local item_2 = {}
+    item_2["id"] = 2
+    item_2["count"] = 3
+
+    local item_3 = {}
+    item_3["id"] = 3
+    item_3["count"] = 1
+
     table.insert(save["Items"], item_1)
+    table.insert(save["Items"], item_2)
+    table.insert(save["Items"], item_3)
 
     -- Save Debug ID
     application:setCurrentSaveID("Debug")
