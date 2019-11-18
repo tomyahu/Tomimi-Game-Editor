@@ -2,6 +2,7 @@ require "Global.consts"
 require "Global.fonts"
 require "Global.controls"
 require "Global.application.application"
+local getNewSaveFile = require("Global.new_save_file")
 
 local MenuCtrl = require "Menu.ctrl.MenuCtrl"
 local SimpleTitleMenuView = require "Menu.view.SimpleTitleMenuView"
@@ -83,54 +84,10 @@ local titleScreenMenuView = SimpleTitleMenuView.new(RESOURCES_PATH .. "/Menu/bac
 local titleScreenMenuCtrl = MenuCtrl.new(titleScreenMenuView, titleScreenMenu)
 
 debug_room_state:addTransitionAction(ACTION_BUTTON_1, function (_)
-    -- Create Debug Save
-    local save = {}
-    save["Overworld"] = {}
-    save["Overworld"]["Room"] = "Room1"
-    save["Overworld"]["Position"] = {}
-    save["Overworld"]["Position"]["x"] = 300
-    save["Overworld"]["Position"]["y"] = 300
-    save["Overworld"]["Position"]["y"] = 300
-
-    save["Battle"] = {}
-    save["Battle"]["PlayerPartyMetadata"] = {}
-    
-    local player1 = {}
-    player1["id"] = "Naranjarina"
-    player1["meta"] = {}
-    
-    save["Battle"]["PlayerPartyMetadata"][1] = player1
-    save["Battle"]["PlayerPartyMetadata"][3] = player1
-    
-    save["Battle"]["EnemyPartyMetadata"] = {}
-    save["Battle"]["EnemyPartyMetadata"][1] = player1
-    save["Battle"]["EnemyPartyMetadata"][2] = player1
-    
-    save["Battle"]["Ambient"] = "debug_ambient1"
-    
-    -- items
-    save["Items"] = {}
-
-    local item_1 = {}
-    item_1["id"] = 1
-    item_1["count"] = 1
-
-    local item_2 = {}
-    item_2["id"] = 2
-    item_2["count"] = 3
-
-    local item_3 = {}
-    item_3["id"] = 3
-    item_3["count"] = 1
-
-    table.insert(save["Items"], item_1)
-    table.insert(save["Items"], item_2)
-    table.insert(save["Items"], item_3)
-
     -- Save Debug ID
     application:setCurrentSaveID("Debug")
 
-    application:setCurrentSave(save)
+    application:setCurrentSave(getNewSaveFile())
 
     application:appChange("Debug_Overworld")
 end)
