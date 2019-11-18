@@ -16,7 +16,6 @@ end)
 
 -- allObjectsInteract: None -> None
 -- Defines the interaction behavior followed by the group's objects.
--- TODO: Change this function name to camel-case
-function NullBehavior.AllObjectsInteract(_) end
+function NullBehavior.allObjectsInteract(_) end
 
 return NullBehavior

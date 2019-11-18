@@ -19,7 +19,7 @@ end)
 
 -- AllObjectsInteract: None -> None
 -- Checks all objects that collide with the player interactuable hitbox and makes the player interact with them
-function OverworldInteractuableObjectBehavior.AllObjectsInteract(self)
+function OverworldInteractuableObjectBehavior.allObjectsInteract(self)
     local local_context_group = application:getFromLocalContext(self.group)
 
     if not (local_context_group == nil) then
