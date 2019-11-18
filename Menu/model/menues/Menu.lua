@@ -20,7 +20,8 @@ function Menu.getOptions(self)
     return self.options
 end
 
--- TODO: Document this
+-- getOptionNumber: None -> int
+-- Gets the number of options the menu has
 function Menu.getOptionNumber(self)
     return (# self.options)
 end
