@@ -31,6 +31,10 @@ local save_state = SingleActionMenuState.new("Save", ACTION_BUTTON_1, function (
         
         -- Save game
         application:saveGlobalContext()
+        
+        -- Display "Game Saved" Notification
+        local view = application:getCurrentView()
+        view:displayNotification("Game Saved.")
     end)
 local back_state = SingleActionMenuState.new("Back", ACTION_BUTTON_1, function (_)
         application:appChange("Debug_Overworld")

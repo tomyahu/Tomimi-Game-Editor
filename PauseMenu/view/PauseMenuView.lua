@@ -6,6 +6,7 @@ require "Global.application.application"
 
 local BackgroundView = require("PauseMenu.view.background.BackgroundView")
 local MenuFactory = require("PauseMenu.view.menus.MenuFactory")
+local NotificationDisplayer = require("PauseMenu.view.notifications.NotificationDisplayer")
 --------------------------------------------------------------------------------------------------------
 
 -- class: PauseMenuView
@@ -21,6 +22,7 @@ local PauseMenuView = extend(BasicMenuView, function(self, background_image_path
     self.aux_menus_views = {}
     self.aux_menus_views_visibility = {}
     self.font = font
+    self.notification_displayer = NotificationDisplayer.new(font)
 end,
 
 function(background_image_path, menu, font)
@@ -41,6 +43,14 @@ function PauseMenuView.draw(self)
       menu:draw()
     end
   end
+  
+  self.notification_displayer:draw()
+end
+
+-- update: int -> None
+-- Updates the internal time of the view components
+function PauseMenuView.update(self, dt)
+    self.notification_displayer:updateLastMessageTime(dt)
 end
 
 -- TODO: Document this
@@ -58,6 +68,12 @@ function PauseMenuView.setup(self)
 end
 
 function PauseMenuView.stop(self)
+end
+
+-- displayNotification: str -> None
+-- displays the message passed in the bottom left corner of the screen
+function PauseMenuView.displayNotification(self, msg)
+    self.notification_displayer:displayMessage(msg)
 end
 
 return PauseMenuView
