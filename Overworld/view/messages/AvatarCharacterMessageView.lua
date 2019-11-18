@@ -23,12 +23,22 @@ end)
 -- Draws the message with a simple background on the screen
 function AvatarCharacterMessageView.draw(self)
     -- draw portrait
-    self.portrait_sprite:draw(getRelativePosX(10),getRelativePosY(362),2*getScale() ,2*getScale())
-    self.portrait_frame_sprite:draw(getRelativePosX(10),getRelativePosY(362),2*getScale() ,2*getScale())
+    self.portrait_sprite:draw(getRelativePosX(10),getRelativePosY(322),2*getScale() ,2*getScale())
+    self.portrait_frame_sprite:draw(getRelativePosX(10),getRelativePosY(322),2*getScale() ,2*getScale())
     
     -- set font
     love.graphics.setFont( self.font )
     
+    -- Character Name
+    love.graphics.setColor(255,255,255)
+    love.graphics.rectangle("fill", getRelativePosX(0), getRelativePosY(460), 200*getScale(), 40*getScale() )
+    love.graphics.setColor(0,0,0)
+    love.graphics.rectangle("fill", getRelativePosX(2), getRelativePosY(462), 196*getScale(), 38*getScale() )
+    love.graphics.setColor(255,255,255)
+    love.graphics.print(self.message:getCharacter(), getRelativePosX(10), getRelativePosY(470), 0, getScale(), getScale())
+    
+    
+    -- Dialog
     love.graphics.setColor(255,255,255)
     love.graphics.rectangle("fill", getRelativePosX(0), getRelativePosY(500), 800*getScale(), 100*getScale() )
     love.graphics.setColor(0,0,0)
