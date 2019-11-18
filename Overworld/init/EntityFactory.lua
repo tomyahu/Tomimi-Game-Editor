@@ -10,9 +10,13 @@ local DialogBuilder = require "Overworld.model.dialog.DialogBuilder"
 require "Overworld.init.hitboxes"
 --------------------------------------------------------------------------------------------------------
 
--- TODO: Document this
+-- class: EntityFactory
+-- A factory class to create overworld entities
 local EntityFactory = class(function(self) end)
 
+-- createOneTileAppChangeObject: str, str -> InteractuableAppChangeEntity
+-- Creates an interactuable entity that on contact it changes the current app. For this it takes the path of the sprite
+-- of the entity and the name of the app to change.
 function EntityFactory.createOneTileAppChangeObject(self, path, app_name)
     local entity_frames = {}
     entity_frames[1] = {}
@@ -25,6 +29,10 @@ function EntityFactory.createOneTileAppChangeObject(self, path, app_name)
     return entity
 end
 
+-- createOneTileDialogObject: str, str/list(str) -> InteractuableDialogEntity
+-- Takes a sprite path and a text (or list of texts like {'hello', 'how are you'}) and it creates an entity that upon
+-- interaction it displays the dialog used. If the texts are a list then every text will be in a text message, if it is
+-- a string only one message will be displayed.
 function EntityFactory.createOneTileDialogObject(self, path, texts)
     local entity_frames = {}
     entity_frames[1] = {}
@@ -48,6 +56,10 @@ function EntityFactory.createOneTileDialogObject(self, path, texts)
     return entity
 end
 
+-- createOneTileConversationObject: str, list({texts:list(str), character:str, avatar_img_path:str}) -> InteractuableDialogEntity
+-- Takes a sprite path and a table that represents a list of texts and it creates an entity that upon
+-- interaction it displays the dialog used. The table must be a list of tables, where each one represents a character
+-- speaking. Each element must be composed of a list of texts, the character name and the character icon sprite path.
 function EntityFactory.createOneTileConversationObject(self, path, dialog_table)
     local entity_frames = {}
     entity_frames[1] = {}
@@ -82,15 +94,15 @@ function EntityFactory.createOneTileConversationObject(self, path, dialog_table)
         end
         
     end
-    
-    
-    -- error("Dialog table must be a table of contents {<texts:list(str)>, <character:str>, <avatar_img_path:str>}")
 
     local entity = InteractuableDialogEntity.new(entity_sprite, newEntityHitboxes(), dialogBuild:getDialog())
 
     return entity
 end
 
+-- createInvisibleChangeRoomPad: int, num, num -> ChangeRoomPad
+-- Creates a new entity which upon contact it changes the current room. It takes the new room index, the new x of the
+-- character in the new room and the new y
 function EntityFactory.createInvisibleChangeRoomPad(self, room_index, newx, newy)
     local pad = ChangeRoomPad.new(NullSprite.new(), newEntityHitboxes(), room_index, newx, newy)
     return pad
