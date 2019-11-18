@@ -16,7 +16,6 @@ for appName, appInit in pairs(APPS) do
     application:registerApp(appName, appInit)
 end
 
--- TODO: add application initialization
 function love.load()
     application:init()
   

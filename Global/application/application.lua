@@ -124,7 +124,6 @@ end
 
 -- appChange: str -> None
 -- Changes the current application to the application appName
--- TODO: Check if local context is still not cleaned
 function application.appChange(self,appName)
     -- Gets the new application from the global constants
     local nextApp = APPS[appName]
