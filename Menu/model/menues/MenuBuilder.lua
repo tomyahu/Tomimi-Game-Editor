@@ -25,9 +25,9 @@ function MenuBuilder.addTransition(self,i, j, key)
 end
 
 -- setCurrentState: int -> self
--- Sets the current option of the menu
-function MenuBuilder.setCurrentState(self,i)
-    self.menu:setCurrentState(self.menu.options[i+1])
+-- Sets the current option of the menu (if the option number exceeds the amount of options y corrects to the last option)
+function MenuBuilder.setCurrentState(self, i)
+    self.menu:setCurrentState(self.menu.options[math.min(i+1, self.menu:getOptionNumber())])
     return self
 end
 

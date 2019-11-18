@@ -2,6 +2,7 @@ require "lib.classes.class"
 require "Global.consts"
 local MenuBorderView = require("PauseMenu.view.menu_borders.MenuBorderView")
 local RectangleMenuView = require("PauseMenu.view.menus.RectangleMenuView")
+local RectangleIconMenuView = require("PauseMenu.view.menus.RectangleIconMenuView")
 --------------------------------------------------------------------------------------------------------
 
 -- class: MenuFactory
@@ -18,9 +19,10 @@ function MenuFactory.getSideMenu(self, menu)
 end
 
 -- getSideMenu
-function MenuFactory.getItemMenu(self, item_menu_dictionary)
+function MenuFactory.getItemMenu(self, menu)
   local item_menu_view = MenuBorderView.new(self.sprite, GAME_WIDTH/80 + 5*32, GAME_HEIGHT/60, 18, 17, 32)
-  return item_menu_view
+  local rectangle_menu_view = RectangleIconMenuView.new(menu, item_menu_view, self.font, 25)
+  return rectangle_menu_view
 end
 
 return MenuFactory

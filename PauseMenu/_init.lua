@@ -16,7 +16,8 @@ local font = DIALOG_FONT
 -- Define Menu
 local mBuild = DefaultMenuBuilder.new()
 local items_state = SingleActionMenuState.new("Items", ACTION_BUTTON_1, function (_)
-        -- TODO: Open Item Menu
+        local ctrl = application:getCurrentCtrl()
+        ctrl:openItemMenu()
     end)
 local save_state = SingleActionMenuState.new("Save", ACTION_BUTTON_1, function (_)
         -- TODO: Play *saved* sound
