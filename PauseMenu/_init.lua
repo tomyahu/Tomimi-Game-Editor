@@ -20,7 +20,16 @@ local items_state = SingleActionMenuState.new("Items", ACTION_BUTTON_1, function
         ctrl:openItemMenu()
     end)
 local save_state = SingleActionMenuState.new("Save", ACTION_BUTTON_1, function (_)
-        -- TODO: Play *saved* sound
+        -- Create sound
+        local src1 = love.audio.newSource(RESOURCES_PATH .. "/sounds/LotRM-Save-Game.wav", "static")
+        
+        -- Get configuration and adjust volume
+        local configuration = application:getFromGlobalContext("CONFIGURATION")
+        src1:setVolume(configuration["SOUND"]["Effects"])
+        
+        src1:play()
+        
+        -- Save game
         application:saveGlobalContext()
     end)
 local back_state = SingleActionMenuState.new("Back", ACTION_BUTTON_1, function (_)
