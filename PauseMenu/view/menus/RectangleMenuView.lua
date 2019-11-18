@@ -16,7 +16,7 @@ local RectangleMenuView = class(function(self, menu, menu_border, font, space_y)
 end)
 
 -- draw: None -> None
--- TODO: Document this
+-- Draws the menu's rectangle, borders and options
 function RectangleMenuView.draw(self)
   self.menu_border:draw()
   

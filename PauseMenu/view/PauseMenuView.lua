@@ -14,7 +14,7 @@ local NotificationDisplayer = require("PauseMenu.view.notifications.Notification
 -- param: menu:Menu -> the menu to display
 -- param: font:Font -> the font of the leters in the menu
 -- The games view of the main menu
--- TODO: change menu variable
+-- TODO: change menu variable and add it in setup (might have to use controller for this)
 local PauseMenuView = extend(BasicMenuView, function(self, background_image_path, menu, font, menu_sprite_sheet_path)
     self.menu_factory = MenuFactory.new(menu_sprite_sheet_path, font)
     self.background = BackgroundView.new(background_image_path)
@@ -53,13 +53,15 @@ function PauseMenuView.update(self, dt)
     self.notification_displayer:updateLastMessageTime(dt)
 end
 
--- TODO: Document this
+-- addItemsView: Menu -> None
+-- Adds the item's view to teh auxiliary menues and visibility
 function PauseMenuView.addItemsView(self, menu)
   self.aux_menus_views["items"] = self.menu_factory:getItemMenu(menu)
   self.aux_menus_views_visibility["items"] = true
 end
 
--- TODO: Document this
+-- setItemsViewVisibility: bool -> None
+-- Sets the visibility of the items menu
 function PauseMenuView.setItemsViewVisibility(self, visibility)
   self.aux_menus_views_visibility["items"] = visibility
 end

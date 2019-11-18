@@ -18,8 +18,9 @@ function(view, menu)
     return MenuCtrl.new(view, menu)
 end)
 
--- TODO: Document this
-function PauseMenuCtrl.addItemMenu(self, item_dict)
+-- getItemMenu: list(table) -> Menu
+-- Gets the items given, creates an item menu and returns it
+function PauseMenuCtrl.getItemMenu(self, item_dict)
     local item_mbuild = ItemMenuBuilder.new()
 
     for i, item in pairs(item_dict) do
@@ -29,20 +30,22 @@ function PauseMenuCtrl.addItemMenu(self, item_dict)
     local item_menu = item_mbuild:getMenu()
     self.view:addItemsView(item_menu)
     self.view:setItemsViewVisibility(false)
-
-    self.menu_manager = MenuManager.new(self.menu_manager:getSideMenu(), item_menu)
+    return item_menu
 end
 
--- TODO: Document this
+-- setup: None -> None
+-- sets up the auxiliary menus and redefines the menu manager
 function PauseMenuCtrl.setup(self)
     -- Get items from global context
     local save = application:getCurrentSave()
     local item_dict = save["Items"]
 
-    self:addItemMenu(item_dict)
+    local item_menu = self:getItemMenu(item_dict)
+    self.menu_manager = MenuManager.new(self.menu_manager:getSideMenu(), item_menu)
 end
 
--- TODO: Document this
+-- openItemMenu: None -> None
+-- Sets the current menu to the item menu, if there are no items it doesn't change menus and plays an error sound
 function PauseMenuCtrl.openItemMenu(self)
     local item_menu = self.menu_manager:getItemMenu()
     local no_items = item_menu:getOptionNumber() == 0
@@ -56,13 +59,15 @@ function PauseMenuCtrl.openItemMenu(self)
     end
 end
 
--- TODO: Document this
+-- closeItemMenu: None -> None
+-- Turns off the visibility of the item menu and returns to the default menu
 function PauseMenuCtrl.closeItemMenu(self)
     self.view:setItemsViewVisibility(false)
     self.menu_manager:setSideMenuAsCurrent()
 end
 
--- TODO: Document this
+-- callbackPressedKey: str -> None
+-- Passes the pressed key to the menu manager
 function MenuCtrl.callbackPressedKey(self, key)
     self.menu_manager:callbackPressedKey(key)
 end

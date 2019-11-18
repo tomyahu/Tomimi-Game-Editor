@@ -8,6 +8,7 @@ local MenuState = require "Menu.model.menuStates.MenuState"
 -- param: item_data:dict -> a dictionary with the item's data
 -- param: item_count:int -> an integer with the item's count
 -- Creates a new Menu state
+-- TODO: Create a base class for this that extends MenuState called IconMenuState
 local ItemMenuState = extend(MenuState, function(self, item_data, item_count)
     self.item_name = item_data["name"]
     self.item_description = item_data["description"]
@@ -19,7 +20,7 @@ end,
 
 function(item_data, item_count)
     local menu_state = MenuState.new(item_data["name"])
-    -- TODO: Add transition action to change menu (calling the controller etc)
+    -- Adds transition action to change menu (calling the controller etc)
     local action = function(_)
         local ctrl = application:getCurrentCtrl()
         ctrl:closeItemMenu()

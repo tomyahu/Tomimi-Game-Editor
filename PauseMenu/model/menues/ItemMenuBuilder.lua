@@ -5,12 +5,14 @@ local DefaultMenuBuilder = require "Menu.model.menues.DefaultMenuBuilder"
 local ItemMenuState = require("PauseMenu.model.menu_states.ItemMenuState")
 --------------------------------------------------------------------------------------------------------
 
--- TODO: Document this
+-- class: ItemMenuBuilder
+-- The builder class for the item menu
 local ItemMenuBuilder = class(function(self)
     self.default_menu_builder = DefaultMenuBuilder.new()
 end)
 
--- TODO: Document this
+-- addItem: int, int -> None
+-- Adds an item to the menu using its id and count
 function ItemMenuBuilder.addItem(self, id, count)
     local item = items[id]
 

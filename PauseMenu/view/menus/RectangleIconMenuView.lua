@@ -7,7 +7,11 @@ local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 -- Sprite factory to generate the entity's sprite
 local sprite_factory = SpriteFactory.new()
 
--- TODO: Document this
+-- class: RectangleIconMenuView
+-- param: menu:Menu -> The menu to show in this rectangle Icon view
+-- param: menu_border:MenuBorderView -> The borders of the menu
+-- param: font:love.font -> The font of the menu options
+-- param: space_y:int -> The vertical space between the menu options
 local RectangleIconMenuView = extend(RectangleMenuView,
 function(self, menu, menu_border, font, space_y)
     self.icon_image_dict = {}
@@ -18,7 +22,7 @@ function(menu, menu_border, font, space_y)
 end)
 
 -- draw: None -> None
--- TODO: Document this
+-- Draws the menu's rectangle, borders, options and the icons associated
 function RectangleIconMenuView.draw(self)
     self.menu_border:draw()
 
