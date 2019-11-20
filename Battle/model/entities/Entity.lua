@@ -26,7 +26,6 @@ function(self, stats, sprite_path)
     ifNotNullAssign(self, stats, "is_alive")
 
     ifNotNullAssign(self, stats, "strength")
-    ifNotNullAssign(self, stats, "skill")
     ifNotNullAssign(self, stats, "agility")
     ifNotNullAssign(self, stats, "max_stamina")
     ifNotNullAssign(self, stats, "stamina")
@@ -46,7 +45,9 @@ function(self, stats, sprite_path)
     ifNotNullAssign(self, stats, "health_prof")
     ifNotNullAssign(self, stats, "ether_prof")
 
-    ifNotNullAssign(self, stats, "power_prof")
+    ifNotNullAssign(self, stats, "b_aura_prof")
+    ifNotNullAssign(self, stats, "b_spirit_prof")
+    ifNotNullAssign(self, stats, "b_instinct_prof")
 
     ifNotNullAssign(self, stats, "natural_resistence")
 
@@ -68,7 +69,9 @@ function(self, stats, sprite_path)
     ifNotNullAssign(self, stats, "temp_health_prof")
     ifNotNullAssign(self, stats, "temp_ether_prof")
 
-    ifNotNullAssign(self, stats, "temp_power_prof")
+    ifNotNullAssign(self, stats, "temp_b_aura_prof")
+    ifNotNullAssign(self, stats, "temp_b_spirit_prof")
+    ifNotNullAssign(self, stats, "temp_b_instinct_prof")
 
     ifNotNullAssign(self, stats, "temp_resistence")
 
