@@ -40,7 +40,7 @@ function RectangleIconMenuView.draw(self)
             self.icon_image_dict[option:toString()] = sprite_factory:getRegularRectSprite(option:getIconPath(), 16, 16, 1)
         end
 
-        if self.menu:getCurrentState():toString() == option:toString() then
+        if self.menu:getCurrentState() == option then
             love.graphics.print( option:toString(), getRelativePosX(start_x + 10), getRelativePosY(start_y + index*space_y), 0, getScale(), getScale())
             self.icon_image_dict[option:toString()]:draw(getRelativePosX(start_x - 22), getRelativePosY(start_y + index*space_y - 4), 2*getScale(), 2*getScale())
         else
