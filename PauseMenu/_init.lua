@@ -19,6 +19,9 @@ local items_state = SingleActionMenuState.new("Items", ACTION_BUTTON_1, function
         local ctrl = application:getCurrentCtrl()
         ctrl:openItemMenu()
     end)
+local party_state = SingleActionMenuState.new("Party", ACTION_BUTTON_1, function (_)
+
+end)
 local save_state = SingleActionMenuState.new("Save", ACTION_BUTTON_1, function (_)
         -- Create sound
         local src1 = love.audio.newSource(RESOURCES_PATH .. "/sounds/LotRM-Save-Game.wav", "static")
@@ -41,6 +44,7 @@ local back_state = SingleActionMenuState.new("Back", ACTION_BUTTON_1, function (
     end)
 
 mBuild:addState(items_state)
+mBuild:addState(party_state)
 mBuild:addState(save_state)
 mBuild:addState(back_state)
 
