@@ -51,7 +51,7 @@ function RectangleIconMenuView.draw(self)
     local space_y = self.space_y
 
     -- draws menu options
-    for i = 1, self.menu_capacity do
+    for i = 1, math.min(self.menu_capacity, (#self.menu.options)) do
         local index = i
         local option = self.menu.options[i+self.current_option_delta]
         if self.icon_image_dict[option:toString()] == nil then
