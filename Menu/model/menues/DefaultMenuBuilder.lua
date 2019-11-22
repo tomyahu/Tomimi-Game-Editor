@@ -6,6 +6,7 @@ local MenuBuilder = require "Menu.model.menues.MenuBuilder"
 -- Default builder for the menu
 local DefaultMenuBuilder = class(function(self)
     self.menubuild = MenuBuilder.new()
+    -- TODO: Pass this to snake_case
     self.optionNumber = 0
 end)
 
@@ -13,7 +14,7 @@ end)
 -- Adds an option to the menu
 function DefaultMenuBuilder.addState(self,state)
     self.menubuild:addState(state)
-    
+
     if self.optionNumber > 0 then
         self.menubuild:addTransition(self.optionNumber-1, self.optionNumber, "down")
         self.menubuild:addTransition(self.optionNumber, self.optionNumber-1, "up")
