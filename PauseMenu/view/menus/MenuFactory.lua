@@ -33,14 +33,14 @@ function MenuFactory.getPartyMenu(self, menu)
     local party_stats = menu:getContent()
 
     -- Create party menu background
-    local background_border = MenuBorderView.new(self.sprite, GAME_WIDTH/80 + 5*32, GAME_HEIGHT/60, 18, 15, 32)
+    local background_border = MenuBorderView.new(self.sprite, GAME_WIDTH/80 + 5*32, GAME_HEIGHT/60, 18, 16, 32)
 
     -- Creates the character cards
     local character_cards = {}
 
     -- Create character cards and add them to character_cards
     for index, character_stats in pairs(party_stats) do
-        local card_border = MenuBorderView.new(self.sprite, GAME_WIDTH/80 + (9*(index-1) + 5)*32, GAME_HEIGHT/60, 9, 15, 32)
+        local card_border = MenuBorderView.new(self.sprite, GAME_WIDTH/80 + (9*(index-1) + 5)*32, GAME_HEIGHT/60, 9, 16, 32)
         local card = CharacterInfoCard.new(card_border, character_stats, self.font)
         table.insert(character_cards, card)
     end

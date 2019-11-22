@@ -47,6 +47,11 @@ function CharacterInfoCard.draw(self)
     local text_offset_y = border_offset_y + 256 + 28 + 10
     local text_vertical_space = 32
 
+    -- Draw Name
+    local name = self:getStrFromStat(self.character_stats["name"])
+    love.graphics.print( name, getRelativePosX(text_offset_x_1), getRelativePosY(text_offset_y), 0, getScale(), getScale())
+
+
     -- Draw HP, MP and STA
     local max_hp = self:getStrFromStat(self.character_stats["max_hp"])
     local max_mp = self:getStrFromStat(self.character_stats["max_mp"])
@@ -56,9 +61,9 @@ function CharacterInfoCard.draw(self)
     local mp = self:getStrFromStat(self.character_stats["mp"])
     local sta = self:getStrFromStat(self.character_stats["stamina"])
 
-    love.graphics.print( "HP: " .. hp .. "/" .. max_hp, getRelativePosX(text_offset_x_1), getRelativePosY(text_offset_y), 0, getScale(), getScale())
-    love.graphics.print( "MP: " .. mp .. "/" .. max_mp, getRelativePosX(text_offset_x_2), getRelativePosY(text_offset_y), 0, getScale(), getScale())
-    love.graphics.print( "STA: " .. sta .. "/" .. max_sta, getRelativePosX(text_offset_x_1), getRelativePosY(text_offset_y + text_vertical_space), 0, getScale(), getScale())
+    love.graphics.print( "HP: " .. hp .. "/" .. max_hp, getRelativePosX(text_offset_x_1), getRelativePosY(text_offset_y + text_vertical_space), 0, getScale(), getScale())
+    love.graphics.print( "MP: " .. mp .. "/" .. max_mp, getRelativePosX(text_offset_x_2), getRelativePosY(text_offset_y + text_vertical_space), 0, getScale(), getScale())
+    love.graphics.print( "STA: " .. sta .. "/" .. max_sta, getRelativePosX(text_offset_x_1), getRelativePosY(text_offset_y + 2*text_vertical_space), 0, getScale(), getScale())
 
 
     -- Draw STR, RES, SPD and AGI
@@ -67,10 +72,10 @@ function CharacterInfoCard.draw(self)
     local spd = self:getStrFromStat(self.character_stats["speed"])
     local agi = self:getStrFromStat(self.character_stats["agility"])
 
-    love.graphics.print( "STR: " .. str, getRelativePosX(text_offset_x_1), getRelativePosY(text_offset_y + 2.5*text_vertical_space), 0, getScale(), getScale())
-    love.graphics.print( "RES: " .. res, getRelativePosX(text_offset_x_2), getRelativePosY(text_offset_y + 2.5*text_vertical_space), 0, getScale(), getScale())
-    love.graphics.print( "SPD: " .. spd, getRelativePosX(text_offset_x_1), getRelativePosY(text_offset_y + 3.5*text_vertical_space), 0, getScale(), getScale())
-    love.graphics.print( "AGI: " .. agi, getRelativePosX(text_offset_x_2), getRelativePosY(text_offset_y + 3.5*text_vertical_space), 0, getScale(), getScale())
+    love.graphics.print( "STR: " .. str, getRelativePosX(text_offset_x_1), getRelativePosY(text_offset_y + 3.5*text_vertical_space), 0, getScale(), getScale())
+    love.graphics.print( "RES: " .. res, getRelativePosX(text_offset_x_2), getRelativePosY(text_offset_y + 3.5*text_vertical_space), 0, getScale(), getScale())
+    love.graphics.print( "SPD: " .. spd, getRelativePosX(text_offset_x_1), getRelativePosY(text_offset_y + 4.5*text_vertical_space), 0, getScale(), getScale())
+    love.graphics.print( "AGI: " .. agi, getRelativePosX(text_offset_x_2), getRelativePosY(text_offset_y + 4.5*text_vertical_space), 0, getScale(), getScale())
 
     -- Check if weapon has changed Weapon
     -- TODO: Put this in its own method
@@ -82,8 +87,8 @@ function CharacterInfoCard.draw(self)
     end
 
     -- Draw Weapon
-    love.graphics.draw( self.weapon_name, getRelativePosX(text_offset_x_1), getRelativePosY(text_offset_y + 5*text_vertical_space), 0, getScale(), getScale())
-    self.weapon_sprite:draw(getRelativePosX(text_offset_x_1 + self.weapon_name:getWidth() + 5), getRelativePosY(text_offset_y + 5*text_vertical_space - 4), 2*getScale(), 2*getScale())
+    love.graphics.draw( self.weapon_name, getRelativePosX(text_offset_x_1), getRelativePosY(text_offset_y + 6*text_vertical_space), 0, getScale(), getScale())
+    self.weapon_sprite:draw(getRelativePosX(text_offset_x_1 + self.weapon_name:getWidth() + 5), getRelativePosY(text_offset_y + 6*text_vertical_space - 4), 2*getScale(), 2*getScale())
 
 
 end
