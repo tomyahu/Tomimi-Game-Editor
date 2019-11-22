@@ -3,6 +3,7 @@ require "Global.consts"
 local MenuBorderView = require("PauseMenu.view.menu_borders.MenuBorderView")
 local RectangleMenuView = require("PauseMenu.view.menus.RectangleMenuView")
 local RectangleIconMenuView = require("PauseMenu.view.menus.RectangleIconMenuView")
+local PartyMenuView = require("PauseMenu.view.menus.PartyMenuView")
 --------------------------------------------------------------------------------------------------------
 
 -- class: MenuFactory
@@ -27,13 +28,21 @@ end
 
 -- getPartyMenu
 function MenuFactory.getPartyMenu(self, party_stats)
-    -- TODO: Implement character view using one menu border like below
-    local party_menu_view_1 = MenuBorderView.new(self.sprite, GAME_WIDTH/80 + 5*32, GAME_HEIGHT/60, 9, 17, 32)
-    local party_menu_view_2 = MenuBorderView.new(self.sprite, GAME_WIDTH/80 + 14*32, GAME_HEIGHT/60, 9, 17, 32)
+    -- Create party menu background
+    local background_border = MenuBorderView.new(self.sprite, GAME_WIDTH/80 + 5*32, GAME_HEIGHT/60, 18, 17, 32)
+
+    -- Creates the character cards
+    local character_cards = {}
+
+    -- create character cards and add them to character_cards
+    for index, player in pairs(party_stats) do
+    end
 
     -- TODO: Create party menu as a set of both characters views
+    local party_menu_view = PartyMenuView.new(background_border, character_cards)
+
     -- TODO: Put in case there are two characters and one character
-    return party_menu_view_1
+    return party_menu_view
 end
 
 return MenuFactory
