@@ -29,7 +29,9 @@ function MenuFactory.getItemMenu(self, menu)
 end
 
 -- getPartyMenu
-function MenuFactory.getPartyMenu(self, menu, party_stats)
+function MenuFactory.getPartyMenu(self, menu)
+    local party_stats = menu:getContent()
+
     -- Create party menu background
     local background_border = MenuBorderView.new(self.sprite, GAME_WIDTH/80 + 5*32, GAME_HEIGHT/60, 18, 15, 32)
 

@@ -60,10 +60,10 @@ function PauseMenuView.addItemsView(self, menu)
   self.aux_menus_views_visibility["items"] = true
 end
 
--- addPartyView: Menu, table -> None
+-- addPartyView: Menu -> None
 -- Adds the party view to the auxiliary menues and visibility
-function PauseMenuView.addPartyView(self, menu, party_dict)
-    self.aux_menus_views["party"] = self.menu_factory:getPartyMenu(menu, party_dict)
+function PauseMenuView.addPartyView(self, menu)
+    self.aux_menus_views["party"] = self.menu_factory:getPartyMenu(menu)
     self.aux_menus_views_visibility["party"] = true
 end
 

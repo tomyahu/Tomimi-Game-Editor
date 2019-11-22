@@ -3,7 +3,7 @@ require "Global.application.application"
 require "Global.controls"
 
 local MenuCtrl = require "Menu.ctrl.MenuCtrl"
-local DefaultMenuBuilder = require "Menu.model.menues.DefaultMenuBuilder"
+local ContentMenuBuilder = require "Menu.model.menues.ContentMenuBuilder"
 local ItemMenuBuilder = require("PauseMenu.model.menues.ItemMenuBuilder")
 local SingleActionMenuState = require "Menu.model.menuStates.SingleActionMenuState"
 
@@ -40,17 +40,17 @@ end
 -- getPartyMenu: None -> Menu
 -- Gets the items given, creates an item menu and returns it
 function PauseMenuCtrl.getPartyMenu(self, party_dict)
-    local party_mbuild = DefaultMenuBuilder.new()
+    local party_mbuild = ContentMenuBuilder.new()
     party_mbuild:addState(
         SingleActionMenuState.new("Back", ACTION_BUTTON_2, function (_)
             local ctrl = application:getCurrentCtrl()
             ctrl:closePartyMenu()
         end))
 
+    party_mbuild:setContent(party_dict)
     local party_menu = party_mbuild:getMenu()
 
-    -- TODO: Change this method so the menu has te party dict
-    self.view:addPartyView(party_menu, party_dict)
+    self.view:addPartyView(party_menu)
     self.view:setPartyViewVisibility(false)
     return party_menu
 end
