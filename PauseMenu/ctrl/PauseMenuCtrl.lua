@@ -1,8 +1,12 @@
 require "lib.classes.class"
 require "Global.application.application"
+require "Global.controls"
 
 local MenuCtrl = require "Menu.ctrl.MenuCtrl"
+local DefaultMenuBuilder = require "Menu.model.menues.DefaultMenuBuilder"
 local ItemMenuBuilder = require("PauseMenu.model.menues.ItemMenuBuilder")
+local SingleActionMenuState = require "Menu.model.menuStates.SingleActionMenuState"
+
 local MenuManager = require("PauseMenu.ctrl.MenuManager")
 --------------------------------------------------------------------------------------------------------
 
@@ -31,6 +35,24 @@ function PauseMenuCtrl.getItemMenu(self, item_dict)
     self.view:addItemsView(item_menu)
     self.view:setItemsViewVisibility(false)
     return item_menu
+end
+
+-- getPartyMenu: None -> Menu
+-- Gets the items given, creates an item menu and returns it
+function PauseMenuCtrl.getPartyMenu(self)
+    local party_mbuild = DefaultMenuBuilder.new()
+    party_mbuild:addState(
+        SingleActionMenuState.new("Back", ACTION_BUTTON_2, function (_)
+            local ctrl = application:getCurrentCtrl()
+            ctrl:closePartyMenu()
+        end))
+
+    local party_menu = party_mbuild:getMenu()
+    -- TODO: create this methods in pause menu view
+    -- TODO: Check if this methods should be moved to setup
+    self.view:addPartyView(party_menu)
+    self.view:setPartyViewVisibility(false)
+    return party_menu
 end
 
 -- setup: None -> None
@@ -63,6 +85,13 @@ end
 -- Turns off the visibility of the item menu and returns to the default menu
 function PauseMenuCtrl.closeItemMenu(self)
     self.view:setItemsViewVisibility(false)
+    self.menu_manager:setSideMenuAsCurrent()
+end
+
+-- closePartyMenu: None -> None
+-- Turns off the visibility of the party menu and returns to the default menu
+function PauseMenuCtrl.closePartyMenu(self)
+    self.view:setPartyViewVisibility(false)
     self.menu_manager:setSideMenuAsCurrent()
 end
 

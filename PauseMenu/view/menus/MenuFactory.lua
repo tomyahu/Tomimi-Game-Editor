@@ -34,7 +34,7 @@ function MenuFactory.getPartyMenu(self, party_stats)
     -- Creates the character cards
     local character_cards = {}
 
-    -- create character cards and add them to character_cards
+    -- TODO: create character cards and add them to character_cards
     for index, player in pairs(party_stats) do
     end
 
