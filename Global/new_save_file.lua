@@ -15,8 +15,8 @@ save_file["Battle"] = {}
 save_file["Battle"]["PlayerPartyMetadata"] = {}
 
 save_file["Party"] = {}
-local party_slot_1 = playable_characters[2]
-save_file["Party"][1] = party_slot_1
+save_file["Party"][1] = playable_characters[2] -- Mac
+save_file["Party"][2] = playable_characters[1] -- Ken
 
 
 local player1 = {}
