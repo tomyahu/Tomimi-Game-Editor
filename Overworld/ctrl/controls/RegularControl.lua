@@ -26,10 +26,10 @@ function RegularControl.update(self)
         self.player:moveBothY()
     elseif love.keyboard.isDown(UP_BUTTON) then
         self.player:moveUp()
-        self.behavior:AllObjectsInteract()
+        self.behavior:allObjectsInteract()
     elseif love.keyboard.isDown(DOWN_BUTTON) then
         self.player:moveDown()
-        self.behavior:AllObjectsInteract()
+        self.behavior:allObjectsInteract()
     else
         self.player:stopY()
     end
@@ -39,10 +39,10 @@ function RegularControl.update(self)
         self.player:moveBothX()
     elseif love.keyboard.isDown(LEFT_BUTTON) then
         self.player:moveLeft()
-        self.behavior:AllObjectsInteract()
+        self.behavior:allObjectsInteract()
     elseif love.keyboard.isDown(RIGHT_BUTTON) then
         self.player:moveRight()
-        self.behavior:AllObjectsInteract()
+        self.behavior:allObjectsInteract()
     else
         self.player:stopX()
     end
@@ -65,7 +65,7 @@ function RegularControl.update(self)
   
 
     -- Make all interactuable objects interact
-    self.interactuable_behavior:AllObjectsInteract()
+    self.interactuable_behavior:allObjectsInteract()
 end
 
 return RegularControl

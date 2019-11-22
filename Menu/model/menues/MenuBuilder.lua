@@ -6,6 +6,7 @@ local Menu = require "Menu.model.menues.Menu"
 -- Builder class to create a menu
 local MenuBuilder = class(function(self)
     self.menu = Menu.new()
+    -- TODO: Change this to snake_case
     self.stateNumber = 0
 end)
 
@@ -13,6 +14,11 @@ end)
 -- Adds a menu state to the menu
 function MenuBuilder.addState(self,state)
     self.menu.options[self.stateNumber+1] = state
+
+    if self.stateNumber == 0 then
+        self:setCurrentState(0)
+    end
+
     self.stateNumber = self.stateNumber + 1
     return self
 end
@@ -25,9 +31,9 @@ function MenuBuilder.addTransition(self,i, j, key)
 end
 
 -- setCurrentState: int -> self
--- Sets the current option of the menu
-function MenuBuilder.setCurrentState(self,i)
-    self.menu:setCurrentState(self.menu.options[i+1])
+-- Sets the current option of the menu (if the option number exceeds the amount of options y corrects to the last option)
+function MenuBuilder.setCurrentState(self, i)
+    self.menu:setCurrentState(self.menu.options[math.min(i+1, self.menu:getOptionNumber())])
     return self
 end
 

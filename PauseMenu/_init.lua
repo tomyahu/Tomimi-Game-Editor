@@ -16,17 +16,36 @@ local font = DIALOG_FONT
 -- Define Menu
 local mBuild = DefaultMenuBuilder.new()
 local items_state = SingleActionMenuState.new("Items", ACTION_BUTTON_1, function (_)
-        -- TODO: Open Item Menu
+        local ctrl = application:getCurrentCtrl()
+        ctrl:openItemMenu()
     end)
+local party_state = SingleActionMenuState.new("Party", ACTION_BUTTON_1, function (_)
+    local ctrl = application:getCurrentCtrl()
+    ctrl:openPartyMenu()
+end)
 local save_state = SingleActionMenuState.new("Save", ACTION_BUTTON_1, function (_)
-        -- TODO: Play *saved* sound
+        -- Create sound
+        local src1 = love.audio.newSource(RESOURCES_PATH .. "/sounds/LotRM-Save-Game.wav", "static")
+        
+        -- Get configuration and adjust volume
+        local configuration = application:getFromGlobalContext("CONFIGURATION")
+        src1:setVolume(configuration["SOUND"]["Effects"])
+        
+        src1:play()
+        
+        -- Save game
         application:saveGlobalContext()
+        
+        -- Display "Game Saved" Notification
+        local view = application:getCurrentView()
+        view:displayNotification("Game Saved.")
     end)
 local back_state = SingleActionMenuState.new("Back", ACTION_BUTTON_1, function (_)
         application:appChange("Debug_Overworld")
     end)
 
 mBuild:addState(items_state)
+mBuild:addState(party_state)
 mBuild:addState(save_state)
 mBuild:addState(back_state)
 

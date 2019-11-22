@@ -19,7 +19,7 @@ end)
 -- AllObjectsInteract: None -> None
 -- Detects which objects collide with the player and if they collide it resets the position of the player and the
 -- object
-function OverworldBehavior.AllObjectsInteract(self)
+function OverworldBehavior.allObjectsInteract(self)
     local local_context_group = application:getFromLocalContext(self.group)
     local global_context = application:getGlobalContext()
 

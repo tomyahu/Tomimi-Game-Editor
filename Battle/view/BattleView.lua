@@ -5,7 +5,6 @@ require "Global.application.application"
 
 local View = require "Global.view.view"
 local Party = require("Battle.model.party.Party")
-
 local BackGroundView = require("Battle.view.background.BackgroundView")
 local PartyView = require("Battle.view.party.PartyView")
 local EnemyPartyView = require("Battle.view.party.EnemyPartyView")

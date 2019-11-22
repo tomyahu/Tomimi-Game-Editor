@@ -18,4 +18,8 @@ function MenuState.getName(self)
     return self.name
 end
 
+function MenuState.toString(self)
+    return self.name
+end
+
 return MenuState

@@ -13,7 +13,6 @@ local NullEntity = class(function(self)
     self.is_alive = true
     
     self.strength = 0
-    self.skill = 0
     self.agility = 0
     self.max_stamina = 1
     self.stamina = 1
@@ -39,15 +38,16 @@ local NullEntity = class(function(self)
     self.ether_prof = 0
     
     -- magic2
-    self.power_prof = 0
-    
+    self.b_aura_prof = 0
+    self.b_spirit_prof = 0
+    self.b_instinct_prof = 0
+
     -- Constants
     self.natural_resistence = 0
 
     -- Modifiers
     self.armor = 0
     self.temp_strength = 0
-    self.temp_skill = 0
     self.temp_agility = 0
     self.temp_speed = 0
 
@@ -63,7 +63,9 @@ local NullEntity = class(function(self)
     self.temp_health_prof = 0
     self.temp_ether_prof = 0
 
-    self.temp_power_prof = 0
+    self.temp_b_aura_prof = 0
+    self.temp_b_spirit_prof = 0
+    self.temp_b_instinct_prof = 0
 
     self.temp_resistence = 0
     
@@ -131,10 +133,6 @@ function NullEntity.getStrength(self)
   return self.strength + self.temp_strength
 end
 
-function NullEntity.getSkill(self)
-  return self.skill + self.temp_skill
-end
-
 function NullEntity.getAgility(self)
   return self.agility + self.temp_agility
 end
@@ -200,9 +198,18 @@ function NullEntity.getEtherProficiency(self)
   return self.ether_prof + self.temp_ether_prof
 end
 
-function NullEntity.getPowerProficiency(self)
-  return self.power_prof + self.temp_power_prof
+function NullEntity.getBAuraProficiency(self)
+  return self.b_aura_prof + self.temp_b_aura_prof
 end
+
+function NullEntity.getBSpiritProficiency(self)
+    return self.b_spirit_prof + self.temp_b_spirit_prof
+end
+
+function NullEntity.getBInstinctProficiency(self)
+    return self.b_instinct_prof + self.temp_b_instinct_prof
+end
+
 
 function NullEntity.getNaturalResistance(self)
   return self.natural_resistence
@@ -215,11 +222,12 @@ end
 function NullEntity.getMaxGuard(self)
     local stamina_modifier = (self.max_stamina - self.stamina)/self.max_stamina*0.8 + 0.2
     local strength = self:getStrength()
-    local skill = self:getSkill()
     local resistance = self:getResistance()
     -- TODO: Graph this
-    return (strength/4 + resistance/2 + skill*skill + 5) * stamina_modifier
+    return (strength/4 + resistance/2) * stamina_modifier
 end
+
+-- TODO: Implement getCurrentGuard based on current stamina
 
 function NullEntity.isAlive(self)
   return self.is_alive

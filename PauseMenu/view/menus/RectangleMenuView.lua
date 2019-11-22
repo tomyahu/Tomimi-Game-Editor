@@ -16,7 +16,7 @@ local RectangleMenuView = class(function(self, menu, menu_border, font, space_y)
 end)
 
 -- draw: None -> None
--- TODO: Document this
+-- Draws the menu's rectangle, borders and options
 function RectangleMenuView.draw(self)
   self.menu_border:draw()
   
@@ -30,10 +30,10 @@ function RectangleMenuView.draw(self)
   
   -- draws menu options
   for index, option in pairs(self.menu.options) do
-        if self.menu:getCurrentState():getName() == option:getName() then
-            love.graphics.print( option:getName(), getRelativePosX(start_x + 10), getRelativePosY(start_y + index*space_y), 0, getScale(), getScale())
+        if self.menu:getCurrentState():toString() == option:toString() then
+            love.graphics.print( option:toString(), getRelativePosX(start_x + 10), getRelativePosY(start_y + index*space_y), 0, getScale(), getScale())
         else
-            love.graphics.print( option:getName(), getRelativePosX(start_x), getRelativePosY(start_y + index*space_y), 0, getScale(), getScale())
+            love.graphics.print( option:toString(), getRelativePosX(start_x), getRelativePosY(start_y + index*space_y), 0, getScale(), getScale())
         end
     end
 end

@@ -6,6 +6,7 @@ require "Global.application.application"
 
 local BackgroundView = require("PauseMenu.view.background.BackgroundView")
 local MenuFactory = require("PauseMenu.view.menus.MenuFactory")
+local NotificationDisplayer = require("PauseMenu.view.notifications.NotificationDisplayer")
 --------------------------------------------------------------------------------------------------------
 
 -- class: PauseMenuView
@@ -13,7 +14,7 @@ local MenuFactory = require("PauseMenu.view.menus.MenuFactory")
 -- param: menu:Menu -> the menu to display
 -- param: font:Font -> the font of the leters in the menu
 -- The games view of the main menu
--- TODO: change menu variable
+-- TODO: change menu variable and add it in setup (might have to use controller for this)
 local PauseMenuView = extend(BasicMenuView, function(self, background_image_path, menu, font, menu_sprite_sheet_path)
     self.menu_factory = MenuFactory.new(menu_sprite_sheet_path, font)
     self.background = BackgroundView.new(background_image_path)
@@ -21,6 +22,7 @@ local PauseMenuView = extend(BasicMenuView, function(self, background_image_path
     self.aux_menus_views = {}
     self.aux_menus_views_visibility = {}
     self.font = font
+    self.notification_displayer = NotificationDisplayer.new(font)
 end,
 
 function(background_image_path, menu, font)
@@ -41,23 +43,52 @@ function PauseMenuView.draw(self)
       menu:draw()
     end
   end
+  
+  self.notification_displayer:draw()
 end
 
--- TODO: Document this
+-- update: int -> None
+-- Updates the internal time of the view components
+function PauseMenuView.update(self, dt)
+    self.notification_displayer:updateLastMessageTime(dt)
+end
+
+-- addItemsView: Menu -> None
+-- Adds the item's view to the auxiliary menues and visibility
 function PauseMenuView.addItemsView(self, menu)
   self.aux_menus_views["items"] = self.menu_factory:getItemMenu(menu)
   self.aux_menus_views_visibility["items"] = true
 end
 
--- TODO: Document this
+-- addPartyView: Menu -> None
+-- Adds the party view to the auxiliary menues and visibility
+function PauseMenuView.addPartyView(self, menu)
+    self.aux_menus_views["party"] = self.menu_factory:getPartyMenu(menu)
+    self.aux_menus_views_visibility["party"] = true
+end
+
+-- setItemsViewVisibility: bool -> None
+-- Sets the visibility of the items menu
 function PauseMenuView.setItemsViewVisibility(self, visibility)
   self.aux_menus_views_visibility["items"] = visibility
+end
+
+-- setPartyViewVisibility: bool -> None
+-- Sets the visibility of the party menu
+function PauseMenuView.setPartyViewVisibility(self, visibility)
+    self.aux_menus_views_visibility["party"] = visibility
 end
 
 function PauseMenuView.setup(self)
 end
 
 function PauseMenuView.stop(self)
+end
+
+-- displayNotification: str -> None
+-- displays the message passed in the bottom left corner of the screen
+function PauseMenuView.displayNotification(self, msg)
+    self.notification_displayer:displayMessage(msg)
 end
 
 return PauseMenuView

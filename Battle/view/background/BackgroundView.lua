@@ -1,5 +1,6 @@
 require "lib.classes.class"
 require "Global.consts"
+require "Global.LOVEWrapper.LOVEWrapper"
 local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 --------------------------------------------------------------------------------------------------------
 
@@ -15,7 +16,7 @@ end)
 -- draw: None -> None
 -- Draws the full background image
 function BackgroundView.draw(self)
-    self.sprite:draw(0, 0, 1, 1)
+    self.sprite:draw(getRelativePosX(0), getRelativePosY(0), getScale(), getScale())
 end
 
 return BackgroundView

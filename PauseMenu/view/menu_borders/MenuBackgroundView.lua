@@ -1,5 +1,6 @@
 require "lib.classes.class"
 require "Global.consts"
+require "Global.LOVEWrapper.LOVEWrapper"
 local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 --------------------------------------------------------------------------------------------------------
 
@@ -21,28 +22,28 @@ function MenuBackgroundView.draw(self)
   self.sprite:setCurrentFrame(15)
   for i = 0, self.width-1 do
     for j = 0, self.height-1 do
-      self.sprite:draw(self.offset_x + i*self.dimension, self.offset_y + j*self.dimension)
+      self.sprite:draw(getRelativePosX(self.offset_x + i*self.dimension), getRelativePosY(self.offset_y + j*self.dimension), getScale())
     end
   end
   
   self.sprite:setCurrentFrame(13)
   for i = 0, self.width-1 do
     for j = 1, self.height do
-      self.sprite:draw(self.offset_x + i*self.dimension, self.offset_y + j*self.dimension)
+      self.sprite:draw(getRelativePosX(self.offset_x + i*self.dimension), getRelativePosY(self.offset_y + j*self.dimension), getScale())
     end
   end
   
   self.sprite:setCurrentFrame(14)
   for i = 1, self.width do
     for j = 0, self.height-1 do
-      self.sprite:draw(self.offset_x + i*self.dimension, self.offset_y + j*self.dimension)
+      self.sprite:draw(getRelativePosX(self.offset_x + i*self.dimension), getRelativePosY(self.offset_y + j*self.dimension), getScale())
     end
   end
   
   self.sprite:setCurrentFrame(12)
   for i = 1, self.width do
     for j = 1, self.height do
-      self.sprite:draw(self.offset_x + i*self.dimension, self.offset_y + j*self.dimension)
+      self.sprite:draw(getRelativePosX(self.offset_x + i*self.dimension), getRelativePosY(self.offset_y + j*self.dimension), getScale())
     end
   end
 end
