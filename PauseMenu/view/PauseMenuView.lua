@@ -54,16 +54,29 @@ function PauseMenuView.update(self, dt)
 end
 
 -- addItemsView: Menu -> None
--- Adds the item's view to teh auxiliary menues and visibility
+-- Adds the item's view to the auxiliary menues and visibility
 function PauseMenuView.addItemsView(self, menu)
   self.aux_menus_views["items"] = self.menu_factory:getItemMenu(menu)
   self.aux_menus_views_visibility["items"] = true
+end
+
+-- addPartyView: Menu, table -> None
+-- Adds the party view to the auxiliary menues and visibility
+function PauseMenuView.addPartyView(self, menu, party_dict)
+    self.aux_menus_views["party"] = self.menu_factory:getPartyMenu(menu, party_dict)
+    self.aux_menus_views_visibility["party"] = true
 end
 
 -- setItemsViewVisibility: bool -> None
 -- Sets the visibility of the items menu
 function PauseMenuView.setItemsViewVisibility(self, visibility)
   self.aux_menus_views_visibility["items"] = visibility
+end
+
+-- setPartyViewVisibility: bool -> None
+-- Sets the visibility of the party menu
+function PauseMenuView.setPartyViewVisibility(self, visibility)
+    self.aux_menus_views_visibility["party"] = visibility
 end
 
 function PauseMenuView.setup(self)

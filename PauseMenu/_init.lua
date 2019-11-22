@@ -20,7 +20,8 @@ local items_state = SingleActionMenuState.new("Items", ACTION_BUTTON_1, function
         ctrl:openItemMenu()
     end)
 local party_state = SingleActionMenuState.new("Party", ACTION_BUTTON_1, function (_)
-
+    local ctrl = application:getCurrentCtrl()
+    ctrl:openPartyMenu()
 end)
 local save_state = SingleActionMenuState.new("Save", ACTION_BUTTON_1, function (_)
         -- Create sound

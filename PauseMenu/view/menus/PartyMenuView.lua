@@ -1,6 +1,7 @@
 require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
 -- TODO: Document this
+-- TODO: Generalize this for more tools
 local PartyMenuView = class(function(self, background_border, character_cards)
     self.background_border = background_border
     self.character_cards = character_cards

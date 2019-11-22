@@ -23,38 +23,38 @@ end)
 -- draw: None -> None
 -- Draws the full background image
 function MenuBorderView.draw(self)
-  -- top left
-  self.sprite:setCurrentFrame(1)
-  self.sprite:draw(getRelativePosX(self.offset_x), getRelativePosY(self.offset_y), getScale(), getScale())
-  
-  -- top right
-  self.sprite:setCurrentFrame(2)
-  self.sprite:draw(getRelativePosX(self.offset_x + self.dimension*self.width), getRelativePosY(self.offset_y), getScale(), getScale())
-  
-  -- bottom left
-  self.sprite:setCurrentFrame(4)
-  self.sprite:draw(getRelativePosX(self.offset_x), getRelativePosY(self.offset_y + self.dimension*self.height), getScale(), getScale())
-  
-  -- bottom right
-  self.sprite:setCurrentFrame(3)
-  self.sprite:draw(getRelativePosX(self.offset_x + self.dimension*self.width), getRelativePosY(self.offset_y + self.dimension*self.height), getScale(), getScale())
-  
-  -- horizontal borders
-  self.sprite:setCurrentFrame(9)
-  for i = 1, self.width-1 do
+    -- background
+    self.background_view:draw()
+
+    -- top left
+    self.sprite:setCurrentFrame(1)
+    self.sprite:draw(getRelativePosX(self.offset_x), getRelativePosY(self.offset_y), getScale(), getScale())
+
+    -- top right
+    self.sprite:setCurrentFrame(2)
+    self.sprite:draw(getRelativePosX(self.offset_x + self.dimension*self.width), getRelativePosY(self.offset_y), getScale(), getScale())
+
+    -- bottom left
+    self.sprite:setCurrentFrame(4)
+    self.sprite:draw(getRelativePosX(self.offset_x), getRelativePosY(self.offset_y + self.dimension*self.height), getScale(), getScale())
+
+    -- bottom right
+    self.sprite:setCurrentFrame(3)
+    self.sprite:draw(getRelativePosX(self.offset_x + self.dimension*self.width), getRelativePosY(self.offset_y + self.dimension*self.height), getScale(), getScale())
+
+    -- horizontal borders
+    self.sprite:setCurrentFrame(9)
+    for i = 1, self.width-1 do
     self.sprite:draw(getRelativePosX(self.offset_x + self.dimension*i), getRelativePosY(self.offset_y), getScale(), getScale())
     self.sprite:draw(getRelativePosX(self.offset_x + self.dimension*i), getRelativePosY(self.offset_y + self.dimension*self.height), getScale(), getScale())
-  end
-  
-  -- vertical borders
-  self.sprite:setCurrentFrame(10)
-  for i = 1, self.height-1 do
+    end
+
+    -- vertical borders
+    self.sprite:setCurrentFrame(10)
+    for i = 1, self.height-1 do
     self.sprite:draw(getRelativePosX(self.offset_x), getRelativePosY(self.offset_y + self.dimension*i), getScale(), getScale())
     self.sprite:draw(getRelativePosX(self.offset_x + self.dimension*self.width), getRelativePosY(self.offset_y + self.dimension*i), getScale(), getScale())
-  end
-  
-  -- background
-  self.background_view:draw()
+    end
 end
 
 -- getter

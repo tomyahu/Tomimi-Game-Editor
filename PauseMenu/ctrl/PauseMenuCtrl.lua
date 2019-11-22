@@ -39,7 +39,7 @@ end
 
 -- getPartyMenu: None -> Menu
 -- Gets the items given, creates an item menu and returns it
-function PauseMenuCtrl.getPartyMenu(self)
+function PauseMenuCtrl.getPartyMenu(self, party_dict)
     local party_mbuild = DefaultMenuBuilder.new()
     party_mbuild:addState(
         SingleActionMenuState.new("Back", ACTION_BUTTON_2, function (_)
@@ -48,9 +48,9 @@ function PauseMenuCtrl.getPartyMenu(self)
         end))
 
     local party_menu = party_mbuild:getMenu()
-    -- TODO: create this methods in pause menu view
-    -- TODO: Check if this methods should be moved to setup
-    self.view:addPartyView(party_menu)
+
+    -- TODO: Change this method so the menu has te party dict
+    self.view:addPartyView(party_menu, party_dict)
     self.view:setPartyViewVisibility(false)
     return party_menu
 end
@@ -61,9 +61,11 @@ function PauseMenuCtrl.setup(self)
     -- Get items from global context
     local save = application:getCurrentSave()
     local item_dict = save["Items"]
+    local party_dict = save["Party"]
 
     local item_menu = self:getItemMenu(item_dict)
-    self.menu_manager = MenuManager.new(self.menu_manager:getSideMenu(), item_menu)
+    local party_menu = self:getPartyMenu(party_dict)
+    self.menu_manager = MenuManager.new(self.menu_manager:getSideMenu(), item_menu, party_menu)
 end
 
 -- openItemMenu: None -> None
@@ -85,6 +87,20 @@ end
 -- Turns off the visibility of the item menu and returns to the default menu
 function PauseMenuCtrl.closeItemMenu(self)
     self.view:setItemsViewVisibility(false)
+    self.menu_manager:setSideMenuAsCurrent()
+end
+
+-- openPartyMenu: None -> None
+-- Sets the current menu to the party menu
+function PauseMenuCtrl.openPartyMenu(self)
+    self.view:setPartyViewVisibility(true)
+    self.menu_manager:setPartyMenuAsCurrent()
+end
+
+-- closePartyMenu: None -> None
+-- Turns off the visibility of the party menu and returns to the default menu
+function PauseMenuCtrl.closePartyMenu(self)
+    self.view:setPartyViewVisibility(false)
     self.menu_manager:setSideMenuAsCurrent()
 end
 
