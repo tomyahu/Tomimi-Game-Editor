@@ -1,3 +1,5 @@
+require "Global.consts"
+
 local playable_characters = {}
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -8,6 +10,7 @@ local mac = {}
 -- Constant
 mac["name"] = "Mac"
 mac["weapon"] = 1
+mac["icon_path"] = RESOURCES_PATH .. "/Overworld/CharacterPortraits/MacPortrait.png"
 mac["max_hp"] = 8
 mac["max_stamina"] = 10
 mac["strength"] = 5
@@ -30,6 +33,7 @@ local ken = {}
 -- Constant
 ken["name"] = "Ken"
 ken["weapon"] = 2
+ken["icon_path"] = RESOURCES_PATH .. "/Overworld/CharacterPortraits/KenPortrait.png"
 ken["max_hp"] = 15
 ken["max_mp"] = 13
 ken["max_stamina"] = 15
