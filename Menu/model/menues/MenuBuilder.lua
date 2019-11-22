@@ -6,6 +6,7 @@ local Menu = require "Menu.model.menues.Menu"
 -- Builder class to create a menu
 local MenuBuilder = class(function(self)
     self.menu = Menu.new()
+    -- TODO: Change this to snake_case
     self.stateNumber = 0
 end)
 
@@ -13,6 +14,11 @@ end)
 -- Adds a menu state to the menu
 function MenuBuilder.addState(self,state)
     self.menu.options[self.stateNumber+1] = state
+
+    if self.stateNumber == 0 then
+        self:setCurrentState(0)
+    end
+
     self.stateNumber = self.stateNumber + 1
     return self
 end

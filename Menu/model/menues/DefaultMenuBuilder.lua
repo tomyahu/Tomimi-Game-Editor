@@ -13,10 +13,8 @@ end)
 -- Adds an option to the menu
 function DefaultMenuBuilder.addState(self,state)
     self.menubuild:addState(state)
-
-    if self.optionNumber == 0 then
-        self.menubuild:setCurrentState(0)
-    else
+    
+    if self.optionNumber > 0 then
         self.menubuild:addTransition(self.optionNumber-1, self.optionNumber, "down")
         self.menubuild:addTransition(self.optionNumber, self.optionNumber-1, "up")
     end
