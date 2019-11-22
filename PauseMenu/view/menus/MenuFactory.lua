@@ -36,17 +36,15 @@ function MenuFactory.getPartyMenu(self, menu, party_stats)
     -- Creates the character cards
     local character_cards = {}
 
-    -- TODO: create character cards and add them to character_cards
+    -- Create character cards and add them to character_cards
     for index, character_stats in pairs(party_stats) do
         local card_border = MenuBorderView.new(self.sprite, GAME_WIDTH/80 + (9*(index-1) + 5)*32, GAME_HEIGHT/60, 9, 15, 32)
         local card = CharacterInfoCard.new(card_border, character_stats, self.font)
         table.insert(character_cards, card)
     end
 
-    -- TODO: Create party menu as a set of both characters views
     local party_menu_view = PartyMenuView.new(background_border, character_cards)
 
-    -- TODO: Put in case there are two characters and one character
     return party_menu_view
 end
 
