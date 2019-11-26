@@ -67,4 +67,37 @@ function RectangleUIComponent.getSegments(self)
     return self.segments
 end
 
+-- setters
+function RectangleUIComponent.setMode(self, new_mode)
+    self.mode = new_mode
+end
+
+function RectangleUIComponent.setX(self, new_x)
+    self.x = new_x
+end
+
+function RectangleUIComponent.setY(self, new_y)
+    self.y = new_y
+end
+
+function RectangleUIComponent.setWidth(self, new_width)
+    self.width = new_width
+end
+
+function RectangleUIComponent.setHeight(self, new_height)
+    self.height = new_height
+end
+
+function RectangleUIComponent.setRX(self, new_rx)
+    self.rx = new_rx
+end
+
+function RectangleUIComponent.setRY(self, new_ry)
+    self.ry = new_ry
+end
+
+function RectangleUIComponent.setSegments(self, new_segments)
+    self.segments = new_segments
+end
+
 return RectangleUIComponent
