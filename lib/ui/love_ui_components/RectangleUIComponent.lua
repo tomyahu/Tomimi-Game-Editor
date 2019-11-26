@@ -5,14 +5,14 @@ local LoveUIComponent = require("lib.ui.love_ui_components.LoveUIComponent")
 -- class: RectangleUIComponent
 -- param: mode:("fill" or "line") -> defines the way to define the rectangle, "fill" fills the rectangular area and
 --                                      "line" just draws the outline
--- param: x:int -> the x coordinate of the top left vertice of the rectangle
--- param: y:int -> the y coordinate of the top left vertice of the rectangle
--- param: width:int -> the width of the rectangle
--- param: height:int -> the height of the rectangle
--- param: rx:int -> the x-axis radius of each round corner. Cannot be greater than half the rectangle's width.
--- param: ry:int -> the y-axis radius of each round corner. Cannot be greater than half the rectangle's height.
+-- param: x:num -> the x coordinate of the top left vertice of the rectangle
+-- param: y:num -> the y coordinate of the top left vertice of the rectangle
+-- param: width:num -> the width of the rectangle
+-- param: height:num -> the height of the rectangle
+-- param: rx:num -> the x-axis radius of each round corner. Cannot be greater than half the rectangle's width.
+-- param: ry:num -> the y-axis radius of each round corner. Cannot be greater than half the rectangle's height.
 --                      (defaults to rx)
--- param: segments:int -> The number of segments used for drawing the round corners. A default amount will be chosen
+-- param: segments:num -> The number of segments used for drawing the round corners. A default amount will be chosen
 --                          if no number is given.
 -- A wrapper of love's rectangle drawable
 -- Disclaimer: some of this documentation was taken from love's website (https://love2d.org/wiki/love.graphics.rectangle)
