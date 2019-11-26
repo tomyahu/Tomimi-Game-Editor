@@ -1,4 +1,5 @@
 require "lib.classes.class"
+local LoveUIComponent = require("lib.ui.love_ui_components.LoveUIComponent")
 --------------------------------------------------------------------------------------------------------
 
 -- class: PolygonUIComponent
@@ -7,7 +8,7 @@ require "lib.classes.class"
 -- param: vertices:list(int) -> an array of intercalated x and y coordinates that represent the polygon's vertices
 -- param: x:int -> the offset x coordinate to move all vertices
 -- param: y:int -> the offset y coordinate to move all vertices
-local PolygonUIComponent = class(function(self, mode, vertices, x, y)
+local PolygonUIComponent = extend(LoveUIComponent, function(self, mode, vertices, x, y)
     self.mode = mode
     self.x = x
     self.y = y
