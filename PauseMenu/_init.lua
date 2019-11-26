@@ -24,23 +24,17 @@ local party_state = SingleActionMenuState.new("Party", ACTION_BUTTON_1, function
     ctrl:openPartyMenu()
 end)
 local save_state = SingleActionMenuState.new("Save", ACTION_BUTTON_1, function (_)
-        -- Create sound
-        local src1 = love.audio.newSource(RESOURCES_PATH .. "/sounds/LotRM-Save-Game.wav", "static")
-        
-        -- Get configuration and adjust volume
-        local configuration = application:getFromGlobalContext("CONFIGURATION")
-        src1:setVolume(configuration["SOUND"]["Effects"])
-        
-        src1:play()
-        
-        -- Save game
+     -- Save game
         application:saveGlobalContext()
         
         -- Display "Game Saved" Notification
         local view = application:getCurrentView()
         view:displayNotification("Game Saved.")
+        view:getSoundManager():playMenuSelectedSound()
     end)
 local back_state = SingleActionMenuState.new("Back", ACTION_BUTTON_1, function (_)
+        local view = application:getCurrentView()
+        view:getSoundManager():playMenuCanceledSound()
         application:appChange("Debug_Overworld")
     end)
 

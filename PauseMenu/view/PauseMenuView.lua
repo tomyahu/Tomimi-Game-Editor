@@ -4,6 +4,7 @@ require "Global.consts"
 local BasicMenuView = require "Menu.view.BasicMenuView"
 require "Global.application.application"
 
+local SoundManager = require("PauseMenu.view.SoundManager")
 local BackgroundView = require("PauseMenu.view.background.BackgroundView")
 local MenuFactory = require("PauseMenu.view.menus.MenuFactory")
 local NotificationDisplayer = require("PauseMenu.view.notifications.NotificationDisplayer")
@@ -22,6 +23,7 @@ local PauseMenuView = extend(BasicMenuView, function(self, background_image_path
     self.aux_menus_views = {}
     self.aux_menus_views_visibility = {}
     self.font = font
+    self.sound_manager = SoundManager.new()
     self.notification_displayer = NotificationDisplayer.new(font)
 end,
 
@@ -89,6 +91,11 @@ end
 -- displays the message passed in the bottom left corner of the screen
 function PauseMenuView.displayNotification(self, msg)
     self.notification_displayer:displayMessage(msg)
+end
+
+-- getter
+function PauseMenuView.getSoundManager(self)
+    return self.sound_manager
 end
 
 return PauseMenuView

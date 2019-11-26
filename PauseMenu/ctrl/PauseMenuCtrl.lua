@@ -75,11 +75,14 @@ function PauseMenuCtrl.openItemMenu(self)
     local no_items = item_menu:getOptionNumber() == 0
 
     if no_items then
-        -- TODO: Show no items notification
-        -- TODO: Play error sound
+        -- Show no items notification
+        self.view:displayNotification("No items to show")
+        -- Play error sound
+        self.view:getSoundManager():playMenuCanceledSound()
     else
         self.view:setItemsViewVisibility(true)
         self.menu_manager:setItemMenuAsCurrent()
+        self.view:getSoundManager():playMenuSelectedSound()
     end
 end
 
@@ -88,6 +91,7 @@ end
 function PauseMenuCtrl.closeItemMenu(self)
     self.view:setItemsViewVisibility(false)
     self.menu_manager:setSideMenuAsCurrent()
+    self.view:getSoundManager():playMenuCanceledSound()
 end
 
 -- openPartyMenu: None -> None
@@ -95,6 +99,7 @@ end
 function PauseMenuCtrl.openPartyMenu(self)
     self.view:setPartyViewVisibility(true)
     self.menu_manager:setPartyMenuAsCurrent()
+    self.view:getSoundManager():playMenuSelectedSound()
 end
 
 -- closePartyMenu: None -> None
@@ -102,19 +107,16 @@ end
 function PauseMenuCtrl.closePartyMenu(self)
     self.view:setPartyViewVisibility(false)
     self.menu_manager:setSideMenuAsCurrent()
-end
-
--- closePartyMenu: None -> None
--- Turns off the visibility of the party menu and returns to the default menu
-function PauseMenuCtrl.closePartyMenu(self)
-    self.view:setPartyViewVisibility(false)
-    self.menu_manager:setSideMenuAsCurrent()
+    self.view:getSoundManager():playMenuCanceledSound()
 end
 
 -- callbackPressedKey: str -> None
 -- Passes the pressed key to the menu manager
 function MenuCtrl.callbackPressedKey(self, key)
     self.menu_manager:callbackPressedKey(key)
+    if (key ~= ACTION_BUTTON_1) and (key ~= ACTION_BUTTON_2) and (key ~= PAUSE_BUTTON) then
+        self.view:getSoundManager():playMenuMoveSound()
+    end
 end
 
 return PauseMenuCtrl
