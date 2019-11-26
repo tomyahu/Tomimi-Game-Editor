@@ -1,0 +1,70 @@
+require "lib.classes.class"
+local LoveUIComponent = require("lib.ui.love_ui_components.LoveUIComponent")
+--------------------------------------------------------------------------------------------------------
+
+-- class: RectangleUIComponent
+-- param: mode:("fill" or "line") -> defines the way to define the rectangle, "fill" fills the rectangular area and
+--                                      "line" just draws the outline
+-- param: x:int -> the x coordinate of the top left vertice of the rectangle
+-- param: y:int -> the y coordinate of the top left vertice of the rectangle
+-- param: width:int -> the width of the rectangle
+-- param: height:int -> the height of the rectangle
+-- param: rx:int -> the x-axis radius of each round corner. Cannot be greater than half the rectangle's width.
+-- param: ry:int -> the y-axis radius of each round corner. Cannot be greater than half the rectangle's height.
+--                      (defaults to rx)
+-- param: segments:int -> The number of segments used for drawing the round corners. A default amount will be chosen
+--                          if no number is given.
+-- A wrapper of love's rectangle drawable
+-- Disclaimer: some of this documentation was taken from love's website (https://love2d.org/wiki/love.graphics.rectangle)
+-- the 25'th of november of 2019.
+local RectangleUIComponent = extend(LoveUIComponent, function(self, mode, x, y, width, height, rx, ry, segments)
+    self.mode = mode
+    self.x = x
+    self.y = y
+    self.width = width
+    self.height = height
+    self.rx = rx
+    self.ry = ry
+    self.segments = segments
+end)
+
+-- draw: None -> None
+-- draws a rectangle with the parameters specified by the object's variables
+function RectangleUIComponent.draw(self)
+    love.graphics.rectangle( self.mode, self.x, self.y, self.width, self.height, self.rx, self.ry, self.segments )
+end
+
+-- getters
+function RectangleUIComponent.getMode(self)
+    return self.mode
+end
+
+function RectangleUIComponent.getX(self)
+    return self.x
+end
+
+function RectangleUIComponent.getY(self)
+    return self.y
+end
+
+function RectangleUIComponent.getWidth(self)
+    return self.width
+end
+
+function RectangleUIComponent.getHeight(self)
+    return self.height
+end
+
+function RectangleUIComponent.getRX(self)
+    return self.rx
+end
+
+function RectangleUIComponent.getRY(self)
+    return self.ry
+end
+
+function RectangleUIComponent.getSegments(self)
+    return self.segments
+end
+
+return RectangleUIComponent
