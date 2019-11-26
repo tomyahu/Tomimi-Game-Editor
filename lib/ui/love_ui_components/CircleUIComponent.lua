@@ -14,7 +14,6 @@ local LoveUIComponent = require("lib.ui.love_ui_components.LoveUIComponent")
 -- Disclaimer: some of this documentation was taken from love's website (https://love2d.org/wiki/love.graphics.circle)
 -- the 25'th of november of 2019.
 local CircleUIComponent = extend(LoveUIComponent, function(self, mode, x, y, radius, segments)
-    self.mode = mode
     self.x = x
     self.y = y
     self.radius = radius
@@ -28,18 +27,6 @@ function CircleUIComponent.draw(self)
 end
 
 -- getters
-function CircleUIComponent.getMode(self)
-    return self.mode
-end
-
-function CircleUIComponent.getX(self)
-    return self.x
-end
-
-function CircleUIComponent.getY(self)
-    return self.y
-end
-
 function CircleUIComponent.getRadius(self)
     return self.radius
 end
@@ -49,18 +36,6 @@ function CircleUIComponent.getSegments(self)
 end
 
 -- setters
-function CircleUIComponent.setMode(self, new_mode)
-    self.mode = new_mode
-end
-
-function CircleUIComponent.setX(self, new_x)
-    self.x = new_x
-end
-
-function CircleUIComponent.setY(self, new_y)
-    self.y = new_y
-end
-
 function CircleUIComponent.setRadius(self, new_radius)
     self.radius = new_radius
 end

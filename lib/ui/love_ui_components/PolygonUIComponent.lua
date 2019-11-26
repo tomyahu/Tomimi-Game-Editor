@@ -9,8 +9,7 @@ local LoveUIComponent = require("lib.ui.love_ui_components.LoveUIComponent")
 -- param: x:num -> the offset x coordinate to move all vertices
 -- param: y:num -> the offset y coordinate to move all vertices
 -- A wrapper of love's polygon drawable
-local PolygonUIComponent = extend(LoveUIComponent, function(self, mode, vertices, x, y)
-    self.mode = mode
+local PolygonUIComponent = extend(LoveUIComponent, function(self, mode, x, y, vertices)
     self.x = x
     self.y = y
 
@@ -29,18 +28,6 @@ function PolygonUIComponent.draw(self)
 end
 
 -- getters
-function PolygonUIComponent.getMode(self)
-    return self.mode
-end
-
-function PolygonUIComponent.getX(self)
-    return self.x
-end
-
-function PolygonUIComponent.getY(self)
-    return self.y
-end
-
 function PolygonUIComponent.getRawVertices(self)
     return self.raw_vertices
 end
@@ -50,10 +37,6 @@ function PolygonUIComponent.getVertices(self)
 end
 
 -- setters
-function PolygonUIComponent.setMode(self, new_mode)
-    self.mode = new_mode
-end
-
 function PolygonUIComponent.setX(self, new_x)
     for i = 1,(# self.raw_vertices),2 do
         self.vertices[i] = self.raw_vertices[i] - self.x + new_x

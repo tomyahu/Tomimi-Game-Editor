@@ -18,7 +18,6 @@ local LoveUIComponent = require("lib.ui.love_ui_components.LoveUIComponent")
 -- Disclaimer: some of this documentation was taken from love's website (https://love2d.org/wiki/love.graphics.rectangle)
 -- the 25'th of november of 2019.
 local RectangleUIComponent = extend(LoveUIComponent, function(self, mode, x, y, width, height, rx, ry, segments)
-    self.mode = mode
     self.x = x
     self.y = y
     self.width = width
@@ -35,18 +34,6 @@ function RectangleUIComponent.draw(self)
 end
 
 -- getters
-function RectangleUIComponent.getMode(self)
-    return self.mode
-end
-
-function RectangleUIComponent.getX(self)
-    return self.x
-end
-
-function RectangleUIComponent.getY(self)
-    return self.y
-end
-
 function RectangleUIComponent.getWidth(self)
     return self.width
 end
@@ -68,18 +55,6 @@ function RectangleUIComponent.getSegments(self)
 end
 
 -- setters
-function RectangleUIComponent.setMode(self, new_mode)
-    self.mode = new_mode
-end
-
-function RectangleUIComponent.setX(self, new_x)
-    self.x = new_x
-end
-
-function RectangleUIComponent.setY(self, new_y)
-    self.y = new_y
-end
-
 function RectangleUIComponent.setWidth(self, new_width)
     self.width = new_width
 end
