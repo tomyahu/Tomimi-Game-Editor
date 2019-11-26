@@ -12,7 +12,8 @@ default_globals["CONFIGURATION"]["CONTROLS"]["PAUSE_BUTTON"] = "return"
 -- Sound Options
 default_globals["CONFIGURATION"]["SOUND"] = {}
 default_globals["CONFIGURATION"]["SOUND"]["Music"] = 1
-default_globals["CONFIGURATION"]["SOUND"]["Effects"] = 0.2
+default_globals["CONFIGURATION"]["SOUND"]["Effects"] = 1
+default_globals["CONFIGURATION"]["SOUND"]["Menu_Effects"] = 0.2
 
 -- Video Options
 default_globals["CONFIGURATION"]["VIDEO"] = {}
