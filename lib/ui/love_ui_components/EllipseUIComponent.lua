@@ -7,15 +7,14 @@ local LoveUIComponent = require("lib.ui.love_ui_components.LoveUIComponent")
 --                                      "line" just draws the outline
 -- param: x:num -> the x coordinate of the center of the ellipse
 -- param: y:num -> the y coordinate of the center of the ellipse
+-- param: color:{num, num, num, num} -> the color of the ellipse
 -- param: radiusx:num -> the radius of the ellipse along the x axis
 -- param: radiusy:num -> the radius of the ellipse along the y axis
 -- param: segments:num -> the number of segments used for drawing the ellipse.
 -- A wrapper of love's ellipse drawable
 -- Disclaimer: some of this documentation was taken from love's website (https://love2d.org/wiki/love.graphics.ellipse)
 -- the 25'th of november of 2019.
-local EllipseUIComponent = extend(LoveUIComponent, function(self, mode, x, y, radiusx, radiusy, segments)
-    self.x = x
-    self.y = y
+local EllipseUIComponent = extend(LoveUIComponent, function(self, mode, x, y, color, radiusx, radiusy, segments)
     self.radiusx = radiusx
     self.radiusy = radiusy
     self.segments = segments
@@ -24,6 +23,7 @@ end)
 -- draw: None -> None
 -- draws a ellipse with the parameters specified by the object's variables
 function EllipseUIComponent.draw(self)
+    LoveUIComponent.draw(self)
     love.graphics.ellipse( self.mode, self.x, self.y, self.radiusx, self.radiusy, self.segments )
 end
 

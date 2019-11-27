@@ -7,15 +7,14 @@ local LoveUIComponent = require("lib.ui.love_ui_components.LoveUIComponent")
 --                                      "line" just draws the outline
 -- param: x:num -> the x coordinate of the center of the circle
 -- param: y:num -> the y coordinate of the center of the circle
+-- param: color:{num, num, num, num} -> the color of the circle
 -- param: radius:num -> the radius of the circle
 -- param: segments:num -> the number of segments used for drawing the circle. Note: The default variable for the
 --                          segments parameter varies between different versions of LÖVE.
 -- A wrapper of love's circle drawable
 -- Disclaimer: some of this documentation was taken from love's website (https://love2d.org/wiki/love.graphics.circle)
 -- the 25'th of november of 2019.
-local CircleUIComponent = extend(LoveUIComponent, function(self, mode, x, y, radius, segments)
-    self.x = x
-    self.y = y
+local CircleUIComponent = extend(LoveUIComponent, function(self, mode, x, y, color, radius, segments)
     self.radius = radius
     self.segments = segments
 end)
@@ -23,6 +22,7 @@ end)
 -- draw: None -> None
 -- draws a circle with the parameters specified by the object's variables
 function CircleUIComponent.draw(self)
+    LoveUIComponent.draw(self)
     love.graphics.circle( self.mode, self.x, self.y, self.radius, self.segments )
 end
 

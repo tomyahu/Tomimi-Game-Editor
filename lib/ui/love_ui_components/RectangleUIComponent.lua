@@ -7,6 +7,7 @@ local LoveUIComponent = require("lib.ui.love_ui_components.LoveUIComponent")
 --                                      "line" just draws the outline
 -- param: x:num -> the x coordinate of the top left vertice of the rectangle
 -- param: y:num -> the y coordinate of the top left vertice of the rectangle
+-- param: color:{num, num, num, num} -> the color of the rectangle
 -- param: width:num -> the width of the rectangle
 -- param: height:num -> the height of the rectangle
 -- param: rx:num -> the x-axis radius of each round corner. Cannot be greater than half the rectangle's width.
@@ -17,9 +18,7 @@ local LoveUIComponent = require("lib.ui.love_ui_components.LoveUIComponent")
 -- A wrapper of love's rectangle drawable
 -- Disclaimer: some of this documentation was taken from love's website (https://love2d.org/wiki/love.graphics.rectangle)
 -- the 25'th of november of 2019.
-local RectangleUIComponent = extend(LoveUIComponent, function(self, mode, x, y, width, height, rx, ry, segments)
-    self.x = x
-    self.y = y
+local RectangleUIComponent = extend(LoveUIComponent, function(self, mode, x, y, color, width, height, rx, ry, segments)
     self.width = width
     self.height = height
     self.rx = rx
@@ -30,6 +29,7 @@ end)
 -- draw: None -> None
 -- draws a rectangle with the parameters specified by the object's variables
 function RectangleUIComponent.draw(self)
+    LoveUIComponent.draw(self)
     love.graphics.rectangle( self.mode, self.x, self.y, self.width, self.height, self.rx, self.ry, self.segments )
 end
 

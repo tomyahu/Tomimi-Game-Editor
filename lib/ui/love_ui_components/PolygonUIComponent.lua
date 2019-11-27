@@ -5,14 +5,12 @@ local LoveUIComponent = require("lib.ui.love_ui_components.LoveUIComponent")
 -- class: PolygonUIComponent
 -- param: mode:("fill" or "line") -> defines the way to define the polygon, "fill" fills the area and
 --                                      "line" just draws the outline
--- param: vertices:list(num) -> an array of intercalated x and y coordinates that represent the polygon's vertices
 -- param: x:num -> the offset x coordinate to move all vertices
 -- param: y:num -> the offset y coordinate to move all vertices
+-- param: color:{num, num, num, num} -> the color of the polygon
+-- param: vertices:list(num) -> an array of intercalated x and y coordinates that represent the polygon's vertices
 -- A wrapper of love's polygon drawable
-local PolygonUIComponent = extend(LoveUIComponent, function(self, mode, x, y, vertices)
-    self.x = x
-    self.y = y
-
+local PolygonUIComponent = extend(LoveUIComponent, function(self, mode, x, y, color, vertices)
     local offset = {self.x, self.y}
     self.raw_vertices = vertices
     self.vertices = {}
@@ -24,6 +22,7 @@ end)
 -- draw: None -> None
 -- Draws the polygon defined by the object's variables
 function PolygonUIComponent.draw(self)
+    LoveUIComponent.draw(self)
     love.graphics.polygon( self.mode, self.vertices )
 end
 
