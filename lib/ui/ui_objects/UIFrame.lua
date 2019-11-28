@@ -1,4 +1,5 @@
 require "lib.classes.class"
+local UIObject = require("lib.ui.ui_objects.UIObject")
 local RectangleUIComponent = require("lib.ui.love_ui_components.RectangleUIComponent")
 --------------------------------------------------------------------------------------------------------
 
@@ -11,9 +12,7 @@ local RectangleUIComponent = require("lib.ui.love_ui_components.RectangleUICompo
 -- param: vertical_border_thickness:num -> the vertical thickness of the border of the frame
 -- param: color1:{num, num, num, num} -> the color of the inside of the frame
 -- param: color2:{num, num, num, num} -> the color of the border of the frame
-local UIFrame = class(function(self, x, y, width, height, horizontal_border_thickness, vertical_border_thickness, color1, color2)
-    self.x = x
-    self.y = y
+local UIFrame = extend(UIObject, function(self, x, y, width, height, horizontal_border_thickness, vertical_border_thickness, color1, color2)
     self.width = width
     self.height = height
     self.horizontal_border_thickness = horizontal_border_thickness
@@ -33,14 +32,6 @@ function UIFrame.draw(self)
 end
 
 -- getters
-function UIFrame.getX(self)
-    return self.x
-end
-
-function UIFrame.getY(self)
-    return self.y
-end
-
 function UIFrame.getWidth(self)
     return self.width
 end
