@@ -46,6 +46,8 @@ function UILimitedText.setHeight(self, new_height)
     self:redefineCanvas()
 end
 
+-- redefineCanvas: None -> None
+-- redefines the contents of the canvas
 function UILimitedText.redefineCanvas(self)
     self.canvas = love.graphics.newCanvas( self.width, self.height )
     self.canvas:renderTo(function()
