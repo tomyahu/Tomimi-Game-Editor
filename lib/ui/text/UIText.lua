@@ -1,4 +1,5 @@
 require "lib.classes.class"
+require "Global.LOVEWrapper.LOVEWrapper"
 --------------------------------------------------------------------------------------------------------
 
 -- class: UIText
@@ -11,7 +12,15 @@ local UIText = class(function(self, msg, x, y, font)
     self.x = x
     self.y = y
     self.font = font
+    self.text = love.graphics.newText( font, msg )
 end)
+
+-- draw: None -> None
+-- draws the text in the screen according to the object's parameters
+function UIText.draw(self)
+    love.graphics.setColor(255, 255, 255)
+    love.graphics.draw(self.text, getRelativePosX(self.x), getRelativePosY(self.y), 0, getScale(), getScale())
+end
 
 -- getters
 function UIText.getMsg(self)
