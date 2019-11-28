@@ -16,20 +16,23 @@ local sprite_factory = SpriteFactory.new()
 -- param: dimension:int(1,) -> the number of pixels each cell in the image is
 -- A teselated Frame created from an image with 15 square cells where the first 11 are in the form of
 --      [╔╗╝╚╠╣╩╦═║╬] and the last 4 are the top left, top right, bottom left and bottom right parts of a background tile
--- TODO: Use love.canvas to draw this
 local UITeselatedFrame = extend(UIObject, function(self, x, y, image_path, width, height, dimension)
     self.image_path = image_path
     self.sprite = sprite_factory:getRegularRectSprite(image_path, dimension, dimension, 15)
     self.width = width
     self.height = height
     self.dimension = dimension
+    self.canvas = love.graphics.newCanvas()
+    self.canvas:renderTo(function()
+        self:drawBackground()
+        self:drawBorders()
+    end)
 end)
 
 -- draw: None -> None
 -- draws the background and borders of the frame
 function UITeselatedFrame.draw(self)
-    self:drawBackground()
-    self:drawBorders()
+    love.graphics.draw(self.canvas)
 end
 
 -- drawBorders: None -> None
@@ -122,19 +125,33 @@ end
 -- setters
 function UITeselatedFrame.setWidth(self, new_width)
     self.width = new_width
+    self:redefineCanvas()
 end
 
 function UITeselatedFrame.setHeight(self, new_height)
     self.height = new_height
+    self:redefineCanvas()
 end
 
 function UITeselatedFrame.setDimension(self, new_dimension)
     self.dimension = new_dimension
+    self:redefineCanvas()
 end
 
 function UITeselatedFrame.setImagePath(self, new_image_path)
     self.image_path = new_image_path
     self.sprite = sprite_factory:getRegularRectSprite(self.image_path, self.dimension, self.dimension, 15)
+    self:redefineCanvas()
+end
+
+-- redefineCanvas: None -> None
+-- redefines the contents of the canvas
+function UITeselatedFrame.redefineCanvas(self)
+    self.canvas = love.graphics.newCanvas()
+    self.canvas:renderTo(function()
+        self:drawBackground()
+        self:drawBorders()
+    end)
 end
 
 return UITeselatedFrame
