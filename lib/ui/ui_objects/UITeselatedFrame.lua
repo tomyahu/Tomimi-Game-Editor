@@ -16,6 +16,7 @@ local sprite_factory = SpriteFactory.new()
 -- param: dimension:int(1,) -> the number of pixels each cell in the image is
 -- A teselated Frame created from an image with 15 square cells where the first 11 are in the form of
 --      [╔╗╝╚╠╣╩╦═║╬] and the last 4 are the top left, top right, bottom left and bottom right parts of a background tile
+-- TODO: Use love.canvas to draw this
 local UITeselatedFrame = extend(UIObject, function(self, x, y, image_path, width, height, dimension)
     self.image_path = image_path
     self.sprite = sprite_factory:getRegularRectSprite(image_path, dimension, dimension, 15)
