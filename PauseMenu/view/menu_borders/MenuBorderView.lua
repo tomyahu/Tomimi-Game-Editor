@@ -1,5 +1,6 @@
 require "lib.classes.class"
 require "Global.consts"
+require "Global.LOVEWrapper.LOVEWrapper"
 local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 local MenuBackgroundView = require("PauseMenu.view.menu_borders.MenuBackgroundView")
 --------------------------------------------------------------------------------------------------------
