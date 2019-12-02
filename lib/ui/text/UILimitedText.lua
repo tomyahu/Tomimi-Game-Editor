@@ -1,6 +1,6 @@
 require "lib.classes.class"
 require "Global.LOVEWrapper.LOVEWrapper"
-local UIText = require("lib.ui.text.UIText")
+local UIText = require("lib.ui.love_ui_components.UITextComponent")
 --------------------------------------------------------------------------------------------------------
 
 -- class: UILimitedText
