@@ -3,7 +3,7 @@ require "lib.classes.class"
 
 -- class: UIObject
 -- param: x:num -> the x coordinate of the top left vertice of the object
--- param: y:num -> the y coordinate of the top left vertice of the frame
+-- param: y:num -> the y coordinate of the top left vertice of the object
 local UIObject = class(function(self, x, y)
     self.x = x
     self.y = y
