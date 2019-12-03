@@ -45,8 +45,8 @@ function RectangleIconMenuView.draw(self)
     -- set font
     love.graphics.setFont( self.font )
 
-    local start_x = self.menu_border:getOffsetX() + self.menu_border:getDimension() + 32
-    local start_y = self.menu_border:getOffsetY()
+    local start_x = self.menu_border:getX() + self.menu_border:getDimension() + 32
+    local start_y = self.menu_border:getY()
 
     local space_y = self.space_y
 
