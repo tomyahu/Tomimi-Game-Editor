@@ -10,7 +10,6 @@ local sprite_factory = SpriteFactory.new()
 -- class: CharacterInfoCard
 -- param: card_border:MenuBorderView -> the border of the character card
 -- param: character_stats:dict -> statistics of the character
--- TODO: create ui library
 -- TODO: create Factory for character cards
 local CharacterInfoCard = class(function(self, card_border, character_stats, font)
     self.character_stats = character_stats
@@ -29,8 +28,8 @@ function CharacterInfoCard.draw(self)
     -- Draw card border
     self.card_border:draw()
 
-    local border_offset_x = self.card_border:getOffsetX()
-    local border_offset_y = self.card_border:getOffsetY()
+    local border_offset_x = self.card_border:getX()
+    local border_offset_y = self.card_border:getY()
 
     local border_offset_width = self.card_border:getWidth()*self.card_border:getDimension()
     local border_offset_height = self.card_border:getHeight()*self.card_border:getDimension()
