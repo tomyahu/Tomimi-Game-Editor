@@ -20,8 +20,8 @@ local UIFrame = extend(UIObject, function(self, x, y, width, height, horizontal_
     self.color1 = color1
     self.color2 = color2
 
-    self.front_rectangle = RectangleUIComponent.new(x + horizontal_border_thickness, y + vertical_border_thickness, width - 2*horizontal_border_thickness, height - 2*vertical_border_thickness, color1)
-    self.back_rectangle = RectangleUIComponent.new(x, y, width, height, color2)
+    self.front_rectangle = RectangleUIComponent.new("fill", x + horizontal_border_thickness, y + vertical_border_thickness, color1, width - 2*horizontal_border_thickness, height - 2*vertical_border_thickness)
+    self.back_rectangle = RectangleUIComponent.new("fill", x, y, color2, width, height)
 end)
 
 -- draw: None -> None
