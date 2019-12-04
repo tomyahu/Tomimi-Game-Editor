@@ -3,6 +3,8 @@ require "lib.classes.class"
 require "Global.LOVEWrapper.LOVEWrapper"
 local MessageView = require "Overworld.view.messages.MessageView"
 local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
+local UIFrame = require("lib.ui.ui_objects.UIFrame")
+local TextUIComponent = require("lib.ui.love_ui_components.TextUIComponent")
 --------------------------------------------------------------------------------------------------------
 -- Sprite factory to generate the entity's sprite
 local sprite_factory = SpriteFactory.new()
@@ -13,6 +15,14 @@ local sprite_factory = SpriteFactory.new()
 local AvatarCharacterMessageView = extend(MessageView, function(self, message, font)
     self.portrait_sprite = sprite_factory:getRegularRectSprite(message:getAvatarPath(), 64, 64, 1)
     self.portrait_frame_sprite = sprite_factory:getRegularRectSprite(RESOURCES_PATH .. "/Overworld/CharacterPortraits/NormalPortraitFrame.png", 64, 64, 1)
+
+    -- Texts
+    self.ui_msg_text = TextUIComponent.new(self.message:getMessage(), 10, 5/6 * GAME_HEIGHT + 10, font, {1, 1, 1, 1})
+    self.ui_name_text = TextUIComponent.new(self.message:getCharacter(), 10, 46/60 * GAME_HEIGHT + 12, font, {1, 1, 1, 1})
+
+    -- Frames
+    self.ui_msg_frame = UIFrame.new(0, 5/6 * GAME_HEIGHT, GAME_WIDTH, 1/6*GAME_HEIGHT, 2, 2, {0, 0, 0, 1}, {1, 1, 1, 1})
+    self.ui_name_frame = UIFrame.new(0, 46/60 * GAME_HEIGHT + 2, 1/4 * GAME_WIDTH, 4/60*GAME_HEIGHT, 2, 2, {0, 0, 0, 1}, {1, 1, 1, 1})
 end,
 
 function(message, font)
@@ -28,23 +38,18 @@ function AvatarCharacterMessageView.draw(self)
     
     -- set font
     love.graphics.setFont( self.font )
-    
+
+    -- Character Name Frame
+    self.ui_name_frame:draw()
+
     -- Character Name
-    love.graphics.setColor(255,255,255)
-    love.graphics.rectangle("fill", getRelativePosX(0), getRelativePosY(460), 200*getScale(), 40*getScale() )
-    love.graphics.setColor(0,0,0)
-    love.graphics.rectangle("fill", getRelativePosX(2), getRelativePosY(462), 196*getScale(), 38*getScale() )
-    love.graphics.setColor(255,255,255)
-    love.graphics.print(self.message:getCharacter(), getRelativePosX(10), getRelativePosY(470), 0, getScale(), getScale())
-    
-    
-    -- Dialog
-    love.graphics.setColor(255,255,255)
-    love.graphics.rectangle("fill", getRelativePosX(0), getRelativePosY(500), 800*getScale(), 100*getScale() )
-    love.graphics.setColor(0,0,0)
-    love.graphics.rectangle("fill", getRelativePosX(2), getRelativePosY(502), 796*getScale(), 96*getScale() )
-    love.graphics.setColor(255,255,255)
-    love.graphics.print(self.message:getMessage(), getRelativePosX(10), getRelativePosY(510), 0, getScale(), getScale())
+    self.ui_name_text:draw()
+
+    -- Message Frame
+    self.ui_msg_frame:draw()
+
+    -- Message
+    self.ui_msg_text:draw()
 end
 
 return AvatarCharacterMessageView
