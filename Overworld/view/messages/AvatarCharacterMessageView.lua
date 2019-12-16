@@ -3,7 +3,7 @@ require "lib.classes.class"
 require "Global.LOVEWrapper.LOVEWrapper"
 local MessageView = require "Overworld.view.messages.MessageView"
 local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
-local UIFrame = require("lib.ui.ui_objects.UIFrame")
+local UIBorderFrame = require("lib.ui.ui_objects.UIBorderFrame")
 local TextUIComponent = require("lib.ui.love_ui_components.TextUIComponent")
 --------------------------------------------------------------------------------------------------------
 -- Sprite factory to generate the entity's sprite
@@ -21,8 +21,8 @@ local AvatarCharacterMessageView = extend(MessageView, function(self, message, f
     self.ui_name_text = TextUIComponent.new(self.message:getCharacter(), 10, 46/60 * GAME_HEIGHT + 12, font, {1, 1, 1, 1})
 
     -- Frames
-    self.ui_msg_frame = UIFrame.new(0, 5/6 * GAME_HEIGHT, GAME_WIDTH, 1/6*GAME_HEIGHT, 2, 2, {0, 0, 0, 1}, {1, 1, 1, 1})
-    self.ui_name_frame = UIFrame.new(0, 46/60 * GAME_HEIGHT + 2, 1/4 * GAME_WIDTH, 4/60*GAME_HEIGHT, 2, 2, {0, 0, 0, 1}, {1, 1, 1, 1})
+    self.ui_msg_frame = UIBorderFrame.new(0, 5/6 * GAME_HEIGHT, GAME_WIDTH, 1/6*GAME_HEIGHT, 2, 2, {1, 1, 1, 1}, {0, 0, 0, 0.5})
+    self.ui_name_frame = UIBorderFrame.new(0, 46/60 * GAME_HEIGHT + 2, 1/4 * GAME_WIDTH, 4/60*GAME_HEIGHT, 2, 2, {1, 1, 1, 1}, {0, 0, 0, 0.5})
 end,
 
 function(message, font)

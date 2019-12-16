@@ -1,7 +1,7 @@
 require "lib.classes.class"
 require "Global.LOVEWrapper.LOVEWrapper"
 local MessageView = require "Overworld.view.messages.MessageView"
-local UIFrame = require("lib.ui.ui_objects.UIFrame")
+local UIBorderFrame = require("lib.ui.ui_objects.UIBorderFrame")
 local TextUIComponent = require("lib.ui.love_ui_components.TextUIComponent")
 --------------------------------------------------------------------------------------------------------
 
@@ -13,7 +13,7 @@ local BasicMessageView = extend(MessageView, function(self, message, font)
     self.ui_msg_text = TextUIComponent.new(self.message:toString(), 10, 5/6 * GAME_HEIGHT + 10, font, {1, 1, 1, 1})
 
     -- Frame
-    self.ui_msg_frame = UIFrame.new(0, 5/6 * GAME_HEIGHT, GAME_WIDTH, 1/6*GAME_HEIGHT, 2, 2, {0, 0, 0, 1}, {1, 1, 1, 1})
+    self.ui_msg_frame = UIBorderFrame.new(0, 5/6 * GAME_HEIGHT, GAME_WIDTH, 1/6*GAME_HEIGHT, 2, 2, {1, 1, 1, 1}, {0, 0, 0, 0.5})
 end,
 
 function(message, font)
