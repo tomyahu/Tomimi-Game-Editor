@@ -3,7 +3,7 @@ local UIFrame = require("lib.ui.ui_objects.UIFrame")
 local RectangleUIComponent = require("lib.ui.love_ui_components.RectangleUIComponent")
 --------------------------------------------------------------------------------------------------------
 
--- class: UIFrame
+-- class: UIBorderFrame
 -- param: x:num -> the x coordinate of the top left vertice of the frame
 -- param: y:num -> the y coordinate of the top left vertice of the frame
 -- param: width:num -> the width of the frame
@@ -24,13 +24,14 @@ local UIBorderFrame = extend(UIFrame, function(self, x, y, width, height, horizo
 end)
 
 -- draw: None -> None
--- TODO: Document this
+-- Draws the background and borders of the frame
 function UIBorderFrame.draw(self)
+    -- background
     self.back_rectangle:draw()
 
+    -- borders
     self.top_border_rectangle:draw()
     self.bottom_border_rectangle:draw()
-
     self.left_border_rectangle:draw()
     self.right_border_rectangle:draw()
 end
