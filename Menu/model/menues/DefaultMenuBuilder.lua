@@ -14,7 +14,7 @@ end)
 function DefaultMenuBuilder.addState(self,state)
     self.menubuild:addState(state)
 
-    if self.optionNumber > 0 then
+    if self.option_number > 0 then
         self.menubuild:addTransition(self.option_number-1, self.option_number, "down")
         self.menubuild:addTransition(self.option_number, self.option_number-1, "up")
     end
