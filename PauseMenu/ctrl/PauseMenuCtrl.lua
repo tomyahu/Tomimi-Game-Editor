@@ -112,11 +112,16 @@ end
 
 -- callbackPressedKey: str -> None
 -- Passes the pressed key to the menu manager
-function MenuCtrl.callbackPressedKey(self, key)
+function PauseMenuCtrl.callbackPressedKey(self, key)
     self.menu_manager:callbackPressedKey(key)
     if (key ~= ACTION_BUTTON_1) and (key ~= ACTION_BUTTON_2) and (key ~= PAUSE_BUTTON) then
         self.view:getSoundManager():playMenuMoveSound()
     end
+end
+
+-- getters
+function PauseMenuCtrl.getMenuManager(self)
+    return self.menu_manager
 end
 
 return PauseMenuCtrl
