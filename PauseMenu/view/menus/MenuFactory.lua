@@ -10,6 +10,7 @@ local PartyMenuView = require("PauseMenu.view.menus.PartyMenuView")
 --------------------------------------------------------------------------------------------------------
 
 -- class: MenuFactory
+-- TODO: Document this
 local MenuFactory = class(function(self, sprite, font)
     self.sprite = sprite
     self.font = font
@@ -17,9 +18,7 @@ end)
 
 -- getSideMenu
 function MenuFactory.getSideMenu(self, menu)
-  local main_option_menu_view = UITeselatedFrame.new(GAME_WIDTH/80, GAME_HEIGHT/60, self.sprite, 5, 4, 32)
-  local rectangle_menu_view = RectangleMenuView.new(menu, main_option_menu_view, self.font, 25)
-  return rectangle_menu_view
+  return self:getBasicMenu(menu)
 end
 
 -- getItemMenu
@@ -49,6 +48,14 @@ function MenuFactory.getPartyMenu(self, menu)
     local party_menu_view = PartyMenuView.new(background_border, character_cards)
 
     return party_menu_view
+end
+
+-- getBasicMenu
+function MenuFactory.getBasicMenu(self, menu)
+    local menu_size = menu:getOptionNumber()
+    local main_option_menu_view = UITeselatedFrame.new(GAME_WIDTH/80, GAME_HEIGHT/60, self.sprite, 5, math.floor(menu_size * (25/32))+1, 32)
+    local rectangle_menu_view = RectangleMenuView.new(menu, main_option_menu_view, self.font, 25)
+    return rectangle_menu_view
 end
 
 return MenuFactory
