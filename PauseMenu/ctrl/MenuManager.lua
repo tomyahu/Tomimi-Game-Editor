@@ -37,6 +37,12 @@ function MenuManager.setPartyMenuAsCurrent(self)
     self.current_menu = self.party_menu
 end
 
+-- setCustomMenuAsCurrent: Menu -> None
+-- Sets a custom menu as the current menu
+function MenuManager.setCustomMenuAsCurrent(self, menu)
+    self.current_menu = menu
+end
+
 -- getter
 function MenuManager.getCurrentMenu(self)
     return self.current_menu
