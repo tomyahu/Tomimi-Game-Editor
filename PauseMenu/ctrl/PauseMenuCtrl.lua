@@ -110,6 +110,14 @@ function PauseMenuCtrl.closePartyMenu(self)
     self.view:getSoundManager():playMenuCanceledSound()
 end
 
+-- openAuxiliaryMenu: Menu -> None
+-- Sets the current menu to a given auxiliary menu
+function PauseMenuCtrl.openAuxiliaryMenu(self, menu)
+    self.view:addAuxiliaryView(menu)
+    self.menu_manager:setCustomMenuAsCurrent(menu)
+    self.view:getSoundManager():playMenuSelectedSound()
+end
+
 -- callbackPressedKey: str -> None
 -- Passes the pressed key to the menu manager
 function PauseMenuCtrl.callbackPressedKey(self, key)
