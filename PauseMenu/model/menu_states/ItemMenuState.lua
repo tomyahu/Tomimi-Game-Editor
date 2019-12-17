@@ -16,6 +16,10 @@ local ItemMenuState = extend(MenuState, function(self, item_data, item_count)
     self.abilities = item_data["abilities"]
     self.icon_path = item_data["icon"]
     self.item_count = item_count
+
+    self.item_action = item_data["action"]
+
+    -- TODO: Add transition action when pressed creates a new item menu and sets it to the controller
 end,
 
 function(item_data, item_count)
@@ -60,6 +64,10 @@ end
 
 function ItemMenuState.getItemCount(self)
     return self.item_count
+end
+
+function ItemMenuState.getItemAction(self)
+    return self.item_action
 end
 
 function ItemMenuState.toString(self)
