@@ -19,15 +19,22 @@ function SubItemMenuFactory.getSubItemMenu(item_state)
 
     -- Defines the back function
     local back_function = function(_)
-        -- TODO: Close current Menu (view)
+        local view = application:getCurrentView()
+
+        -- Close current Menu (view)
+        view:setAuxiliaryViewVisibility(false)
 
         -- Sets item menu as current menu
         ctrl.getMenuManager:setItemMenuAsCurrent()
+
+        -- Play back sound
+        view:getSoundManager():playMenuCanceledSound()
     end
 
     -- creates the use-state of the menu, it has a boolean that shows if the item function exists or not
     local use_state = ContentMenuState.new("Use", item_state:getItemAction() ~= nil)
     use_state:addTransitionAction(ACTION_BUTTON_1, function(_)
+        -- TODO: open character selection menu
         item_state:getItemAction()()
     end)
     use_state:addTransitionAction(ACTION_BUTTON_2, back_function)
