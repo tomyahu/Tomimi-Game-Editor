@@ -3,7 +3,7 @@ require "Global.application.application"
 require "Global.controls"
 
 local DefaultMenuBuilder = require "Menu.model.menues.DefaultMenuBuilder"
-local MenuState = require "Menu.model.menuStates.MenuState"
+local ContentMenuState = require "Menu.model.menuStates.ContentMenuState"
 --------------------------------------------------------------------------------------------------------
 
 -- class: SubItemMenuFactory
@@ -13,10 +13,11 @@ end)
 
 -- getSubItemMenu: None -> Menu
 -- creates a use-back submenu for a regular item
-function SubItemMenuFactory.getSubItemMenu(item)
+function SubItemMenuFactory.getSubItemMenu(item_state)
     local m_build = DefaultMenuBuilder.new()
     local ctrl = application:getCurrentCtrl()
 
+    -- Defines the back function
     local back_function = function(_)
         -- TODO: Close current Menu (view)
 
@@ -24,13 +25,15 @@ function SubItemMenuFactory.getSubItemMenu(item)
         ctrl.getMenuManager:setItemMenuAsCurrent()
     end
 
-    local use_state = MenuState.new("Use")
+    -- creates the use-state of the menu, it has a boolean that shows if the item function exists or not
+    local use_state = ContentMenuState.new("Use", item_state:getItemAction() ~= nil)
     use_state:addTransitionAction(ACTION_BUTTON_1, function(_)
-        -- TODO: Open menu to select between the characters
+        item_state:getItemAction()()
     end)
     use_state:addTransitionAction(ACTION_BUTTON_2, back_function)
 
-    local back_state = MenuState.new("Back")
+    -- creates the back-state of the menu
+    local back_state = ContentMenuState.new("Back", true)
     back_state:addTransitionAction(ACTION_BUTTON_1, back_function)
     back_state:addTransitionAction(ACTION_BUTTON_2, back_function)
 
