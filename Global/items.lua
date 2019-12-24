@@ -46,6 +46,8 @@ orange_segment["action"] = function(extra)
         character["hp"] = math.min(character["max_hp"], character["hp"] + 1)
         character["stamina"] = math.min(character["max_stamina"], character["stamina"] + 2)
     end
+
+
 end
 
 -- Item Insertion ------------------------------------------------------------------------------------------------------
@@ -53,5 +55,6 @@ end
 items[1] = pebble
 items[2] = rope
 items[3] = marbles
+items[7] = orange_segment
 
 return items
