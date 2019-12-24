@@ -7,19 +7,12 @@ require "Global.LOVEWrapper.LOVEWrapper"
 -- param: image_path:str -> the path of the image of the sprite
 -- The default sprite class
 local Sprite = class(function(self, frames, image_path)
-    self.loveSprite = nil
     self.image_path = image_path
+    self.loveSprite = love.graphics.newImage(self.image_path)
     self.frames = frames
     self.current_frame = 1
     self.current_frame_set = 1
 end)
-
--- initialize: None -> None
--- Initializes the unprepared attributes of the sprite, in this case initializes the variable loveSprite with the
--- sprite's image path
-function Sprite.initialize(self)
-    self.loveSprite = love.graphics.newImage(self.image_path)
-end
 
 -- draw: num, num, num, num -> None
 -- Draws the sprite on the screen on a given position x,y and with a given scale

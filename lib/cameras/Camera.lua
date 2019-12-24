@@ -28,9 +28,9 @@ function Camera.setZoom(self, zoom)
     self.zoom = zoom
 end
 
--- draw: Sprite, num, num, num, num -> None
+-- drawSprite: Sprite, num, num, num, num -> None
 -- Draws a sprite in the camera's perspective.
-function Camera.draw(self, sprite, x, y, sx, sy)
+function Camera.drawSprite(self, sprite, x, y, sx, sy)
     if sx == nil then sx = 1 end
     if sy == nil then sy = 1 end
 
