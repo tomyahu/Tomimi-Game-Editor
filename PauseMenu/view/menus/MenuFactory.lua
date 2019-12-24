@@ -4,6 +4,7 @@ require "Global.application.application"
 local UITeselatedFrame = require("lib.ui.ui_objects.UITeselatedFrame")
 
 local RectangleMenuView = require("PauseMenu.view.menus.RectangleMenuView")
+local RectangleMenuWithInactiveOptionsView = require("PauseMenu.view.menus.RectangleMenuWithInactiveOptionsView")
 local RectangleIconMenuView = require("PauseMenu.view.menus.RectangleIconMenuView")
 local CharacterInfoCard = require("PauseMenu.view.menus.party_menu_components.CharacterInfoCard")
 local PartyMenuView = require("PauseMenu.view.menus.PartyMenuView")
@@ -52,7 +53,13 @@ end
 
 -- getAuxiliaryMenu
 function MenuFactory.getAuxiliaryMenu(self, menu)
-    return self:getBasicMenu(menu, GAME_WIDTH*58.5/80, GAME_HEIGHT*49/60)
+    local x = GAME_WIDTH*58.5/80
+    local y = GAME_HEIGHT*49/60
+
+    local menu_size = menu:getOptionNumber()
+    local main_option_menu_view = UITeselatedFrame.new(x, y, self.sprite, 5, math.floor(menu_size * (25/32))+1, 32)
+    local rectangle_menu_view = RectangleMenuWithInactiveOptionsView.new(menu, main_option_menu_view, self.font, 25)
+    return rectangle_menu_view
 end
 
 -- getBasicMenu

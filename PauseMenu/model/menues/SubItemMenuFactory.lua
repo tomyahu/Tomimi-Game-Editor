@@ -42,7 +42,7 @@ function SubItemMenuFactory.getSubItemMenu(item_state)
             item_state:getItemAction()()
             view:getSoundManager():playMenuSelectedSound()
 
-            -- TODO: Decrease Items if consumable
+            -- Decrease Items if consumable
             if item_state:isConsumable() then
                 item.count = math.max(0, item.count - 1)
                 item_state:refresh()
@@ -51,7 +51,7 @@ function SubItemMenuFactory.getSubItemMenu(item_state)
             view:getSoundManager():playMenuCanceledSound()
         end
 
-        -- TODO: Check if there are 0 items
+        -- Check if there are 0 items
         if item.count <= 0 then
             -- Close current Menu (view)
             view:setAuxiliaryViewVisibility(false)
