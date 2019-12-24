@@ -72,7 +72,7 @@ end
 -- addAuxiliaryView: Menu -> None
 -- Adds the auxiliary view to the auxiliary menues and visibility
 function PauseMenuView.addAuxiliaryView(self, menu)
-    self.aux_menus_views["aux"] = self.menu_factory:getPartyMenu(menu)
+    self.aux_menus_views["aux"] = self.menu_factory:getAuxiliaryMenu(menu)
     self.aux_menus_views_visibility["aux"] = true
 end
 

@@ -18,7 +18,7 @@ end)
 
 -- getSideMenu
 function MenuFactory.getSideMenu(self, menu)
-  return self:getBasicMenu(menu)
+  return self:getBasicMenu(menu, GAME_WIDTH/80, GAME_HEIGHT/60)
 end
 
 -- getItemMenu
@@ -50,10 +50,15 @@ function MenuFactory.getPartyMenu(self, menu)
     return party_menu_view
 end
 
+-- getAuxiliaryMenu
+function MenuFactory.getAuxiliaryMenu(self, menu)
+    return self:getBasicMenu(menu, GAME_WIDTH*58.5/80, GAME_HEIGHT*49/60)
+end
+
 -- getBasicMenu
-function MenuFactory.getBasicMenu(self, menu)
+function MenuFactory.getBasicMenu(self, menu, x, y)
     local menu_size = menu:getOptionNumber()
-    local main_option_menu_view = UITeselatedFrame.new(GAME_WIDTH/80, GAME_HEIGHT/60, self.sprite, 5, math.floor(menu_size * (25/32))+1, 32)
+    local main_option_menu_view = UITeselatedFrame.new(x, y, self.sprite, 5, math.floor(menu_size * (25/32))+1, 32)
     local rectangle_menu_view = RectangleMenuView.new(menu, main_option_menu_view, self.font, 25)
     return rectangle_menu_view
 end

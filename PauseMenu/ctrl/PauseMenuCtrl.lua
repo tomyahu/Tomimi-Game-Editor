@@ -28,7 +28,9 @@ function PauseMenuCtrl.getItemMenu(self, item_dict)
     local item_mbuild = ItemMenuBuilder.new()
 
     for i, item in pairs(item_dict) do
-        item_mbuild:addItem(item.id, item.count)
+        if item.count > 0 then
+            item_mbuild:addItem(item)
+        end
     end
 
     local item_menu = item_mbuild:getMenu()
@@ -116,6 +118,17 @@ function PauseMenuCtrl.openAuxiliaryMenu(self, menu)
     self.view:addAuxiliaryView(menu)
     self.menu_manager:setCustomMenuAsCurrent(menu)
     self.view:getSoundManager():playMenuSelectedSound()
+end
+
+function PauseMenuCtrl.refreshItemMenu(self)
+    -- Get items from global context
+    local save = application:getCurrentSave()
+    local item_dict = save["Items"]
+
+    local item_menu = self:getItemMenu(item_dict)
+    self.menu_manager:setItemMenu(item_menu)
+
+    self.view:addItemsView(item_menu)
 end
 
 -- callbackPressedKey: str -> None

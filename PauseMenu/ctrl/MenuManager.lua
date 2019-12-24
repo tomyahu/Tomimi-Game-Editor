@@ -63,4 +63,15 @@ function MenuManager.getPartyMenu(self)
     return self.party_menu
 end
 
+-- setItemMenu
+-- TODO: Document this
+function MenuManager.setItemMenu(self, new_item_menu)
+    local old_item_menu = self.item_menu
+    self.item_menu = new_item_menu
+
+    if old_item_menu == self.current_menu then
+        self.current_menu = new_item_menu
+    end
+end
+
 return MenuManager

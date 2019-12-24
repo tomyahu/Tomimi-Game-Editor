@@ -11,12 +11,14 @@ local ItemMenuBuilder = class(function(self)
     self.default_menu_builder = DefaultMenuBuilder.new()
 end)
 
--- addItem: int, int -> None
+-- addItem: table -> None
 -- Adds an item to the menu using its id and count
-function ItemMenuBuilder.addItem(self, id, count)
+function ItemMenuBuilder.addItem(self, item_ptr)
+    local id = item_ptr.id
+
     local item = items[id]
 
-    local state = ItemMenuState.new(item, count)
+    local state = ItemMenuState.new(item, item_ptr)
 
     self.default_menu_builder:addState(state)
 end
