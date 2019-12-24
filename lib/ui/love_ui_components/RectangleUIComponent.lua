@@ -26,10 +26,9 @@ local RectangleUIComponent = extend(LoveUIComponent, function(self, mode, x, y, 
     self.segments = segments
 end)
 
--- draw: None -> None
+-- drawFigure: None -> None
 -- draws a rectangle with the parameters specified by the object's variables
-function RectangleUIComponent.draw(self)
-    LoveUIComponent.draw(self)
+function RectangleUIComponent.drawFigure(self)
     love.graphics.rectangle( self.mode, self.x, self.y, self.width, self.height, self.rx, self.ry, self.segments )
 end
 

@@ -19,10 +19,9 @@ function(msg, x, y, font, color)
     return LoveUIComponent.new(nil, x, y, color)
 end)
 
--- draw: None -> None
+-- drawFigure: None -> None
 -- draws the text in the screen according to the object's parameters
-function TextUIComponent.draw(self)
-    love.graphics.setColor( self.color )
+function TextUIComponent.drawFigure(self)
     love.graphics.draw(self.text, getRelativePosX(self.x), getRelativePosY(self.y), 0, getScale(), getScale())
 end
 

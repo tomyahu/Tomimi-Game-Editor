@@ -19,10 +19,9 @@ local PolygonUIComponent = extend(LoveUIComponent, function(self, mode, x, y, co
     end
 end)
 
--- draw: None -> None
+-- drawFigure: None -> None
 -- Draws the polygon defined by the object's variables
-function PolygonUIComponent.draw(self)
-    LoveUIComponent.draw(self)
+function PolygonUIComponent.drawFigure(self)
     love.graphics.polygon( self.mode, self.vertices )
 end
 

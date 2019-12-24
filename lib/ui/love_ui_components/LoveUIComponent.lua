@@ -19,7 +19,13 @@ end)
 -- Draws the UI component
 function LoveUIComponent.draw(self)
     love.graphics.setColor( self.color )
+    self:drawFigure()
+    love.graphics.setColor( {1,1,1,1} )
 end
+
+-- drawFigure: None -> None
+-- The function that will draw the component
+function LoveUIComponent.drawFigure(self) end
 
 -- getters
 function LoveUIComponent.getMode(self)
