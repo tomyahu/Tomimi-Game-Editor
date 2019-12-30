@@ -33,7 +33,6 @@ function(self, stats, sprite_path)
 
     ifNotNullAssign(self, stats, "max_mp")
     ifNotNullAssign(self, stats, "mp")
-    ifNotNullAssign(self, stats, "mana_strength")
     ifNotNullAssign(self, stats, "mana_control")
 
     ifNotNullAssign(self, stats, "fire_prof")
