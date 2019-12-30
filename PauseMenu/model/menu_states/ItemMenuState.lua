@@ -25,8 +25,15 @@ local ItemMenuState = extend(MenuState, function(self, item_data, item_ptr)
     local open_menu_action = function(_)
         local sub_item_menu = SubItemMenuFactory.getSubItemMenu(self)
         local ctrl = application:getCurrentCtrl()
+        local view = application:getCurrentView()
 
         ctrl:openAuxiliaryMenu(sub_item_menu)
+
+        -- Show party menu
+        view:setPartyViewVisibility(true)
+
+        -- Hide item menu
+        view:setItemsViewVisibility(false)
     end
 
     -- Calls the parent class to add a transition

@@ -23,8 +23,14 @@ function SubItemMenuFactory.getSubItemMenu(item_state)
         -- Close current Menu (view)
         view:setAuxiliaryViewVisibility(false)
 
+        -- Hide party menu
+        view:setPartyViewVisibility(false)
+
         -- Sets item menu as current menu
         ctrl:getMenuManager():setItemMenuAsCurrent()
+
+        -- Show item menu
+        view:setItemsViewVisibility(true)
 
         -- Play back sound
         view:getSoundManager():playMenuCanceledSound()
@@ -55,6 +61,9 @@ function SubItemMenuFactory.getSubItemMenu(item_state)
         if item.count <= 0 then
             -- Close current Menu (view)
             view:setAuxiliaryViewVisibility(false)
+
+            -- Hide party menu
+            view:setPartyViewVisibility(false)
 
             -- Sets item menu as current menu
             ctrl:getMenuManager():setItemMenuAsCurrent()

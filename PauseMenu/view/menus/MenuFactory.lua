@@ -54,7 +54,7 @@ end
 -- getAuxiliaryMenu
 function MenuFactory.getAuxiliaryMenu(self, menu)
     local x = GAME_WIDTH*58.5/80
-    local y = GAME_HEIGHT*49/60
+    local y = GAME_HEIGHT*52/60
 
     local menu_size = menu:getOptionNumber()
     local main_option_menu_view = UITeselatedFrame.new(x, y, self.sprite, 5, math.floor(menu_size * (25/32))+1, 32)
