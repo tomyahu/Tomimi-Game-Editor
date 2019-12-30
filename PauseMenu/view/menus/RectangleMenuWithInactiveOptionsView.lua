@@ -1,6 +1,7 @@
 require "lib.classes.class"
 require "Global.consts"
 require "Global.LOVEWrapper.LOVEWrapper"
+require "Global.application.application"
 local RectangleMenuView = require("PauseMenu.view.menus.RectangleMenuView")
 local TextUIComponent = require("lib.ui.love_ui_components.TextUIComponent")
 --------------------------------------------------------------------------------------------------------
@@ -27,7 +28,6 @@ local RectangleMenuWithInactiveOptionsView = extend(RectangleMenuView, function(
     end
 
     local currently_selected_option = self.menu:getCurrentState():toString()
-    self.last_selected_option_str = currently_selected_option
     self.menu_options[currently_selected_option]:setX(getRelativePosX(start_x + 10))
 end)
 
@@ -42,7 +42,8 @@ function RectangleMenuWithInactiveOptionsView.draw(self)
     local start_x = self.menu_border:getX() + self.menu_border:getDimension()
     self.menu_options[self.last_selected_option_str]:setX(getRelativePosX(start_x))
     self.menu_options[currently_selected_option]:setX(getRelativePosX(start_x + 10))
-    self.last_selected_option_str = currently_selected_option
+
+    self:updateCurrentlySelectedOption()
 
     -- draws menu options
     for _, option in pairs(self.menu_options) do

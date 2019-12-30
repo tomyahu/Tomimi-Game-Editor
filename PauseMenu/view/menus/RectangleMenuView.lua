@@ -1,6 +1,7 @@
 require "lib.classes.class"
 require "Global.consts"
 require "Global.LOVEWrapper.LOVEWrapper"
+require "Global.application.application"
 local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 --------------------------------------------------------------------------------------------------------
 
@@ -13,13 +14,28 @@ local RectangleMenuView = class(function(self, menu, menu_border, font, space_y)
     self.menu_border = menu_border
     self.font = font
     self.space_y = space_y
+    self.last_selected_option_str = self.menu:getCurrentState():toString()
 end)
+
+function RectangleMenuView.updateCurrentlySelectedOption(self)
+    -- Update last selected option
+    local currently_selected_option = self.menu:getCurrentState():toString()
+
+    if currently_selected_option ~= self.last_selected_option_str then
+        local view = application:getCurrentView()
+        view:getSoundManager():playMenuMoveSound()
+    end
+
+    self.last_selected_option_str = currently_selected_option
+end
 
 -- draw: None -> None
 -- Draws the menu's rectangle, borders and options
 function RectangleMenuView.draw(self)
   self.menu_border:draw()
-  
+
+  self:updateCurrentlySelectedOption()
+
   -- set font
   love.graphics.setFont( self.font )
   
