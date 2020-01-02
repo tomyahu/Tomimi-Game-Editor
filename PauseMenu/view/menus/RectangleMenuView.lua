@@ -2,7 +2,6 @@ require "lib.classes.class"
 require "Global.consts"
 require "Global.LOVEWrapper.LOVEWrapper"
 require "Global.application.application"
-local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 --------------------------------------------------------------------------------------------------------
 
 -- class: RectangleMenuView
