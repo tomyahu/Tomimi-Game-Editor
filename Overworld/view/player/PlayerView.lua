@@ -7,6 +7,17 @@ require "lib.classes.class"
 local PlayerView = class(function(self, player)
     self.player = player
     self.state = player:getState():toString()
+
+    self.actions = {
+        ["StillDownState"] = function() self:getSprite():setFrameSet(1) end,
+        ["StillUpState"] = function() self:getSprite():setFrameSet(2) end,
+        ["StillRightState"] = function() self:getSprite():setFrameSet(3) end,
+        ["StillLeftState"] = function() self:getSprite():setFrameSet(4) end,
+        ["WalkingDownState"] = function() self:getSprite():setFrameSet(5) end,
+        ["WalkingUpState"] = function() self:getSprite():setFrameSet(6) end,
+        ["WalkingRightState"] = function() self:getSprite():setFrameSet(7) end,
+        ["WalkingLeftState"] = function() self:getSprite():setFrameSet(8) end
+    }
 end)
 
 -- getSprite: None -> Sprite
@@ -35,23 +46,11 @@ end
 -- adjustAnimation: None -> None
 -- Sets the animation of the player according to the player's current state
 function PlayerView.adjustAnimation(self)
-    local action = {
-        ["StillDownState"] = function() self:getSprite():setFrameSet(1) end,
-        ["StillUpState"] = function() self:getSprite():setFrameSet(2) end,
-        ["StillRightState"] = function() self:getSprite():setFrameSet(3) end,
-        ["StillLeftState"] = function() self:getSprite():setFrameSet(4) end,
-        ["WalkingDownState"] = function() self:getSprite():setFrameSet(5) end,
-        ["WalkingUpState"] = function() self:getSprite():setFrameSet(6) end,
-        ["WalkingRightState"] = function() self:getSprite():setFrameSet(7) end,
-        ["WalkingLeftState"] = function() self:getSprite():setFrameSet(8) end
-    }
-
-    if type(action[self.state]) == "function" then
-        action[self.state]()
+    if type(self.actions[self.state]) == "function" then
+        self.actions[self.state]()
     else
         self:getSprite():setFrameSet(2)
     end
-
 end
 
 

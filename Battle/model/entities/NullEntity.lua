@@ -24,7 +24,6 @@ local NullEntity = class(function(self)
     -- magic
     self.max_mp = 0
     self.mp = 0
-    self.mana_strength = 0
     self.mana_control = 0
     
     -- magic proficiencies
@@ -51,7 +50,6 @@ local NullEntity = class(function(self)
     self.temp_agility = 0
     self.temp_speed = 0
 
-    self.temp_mana_strength = 0
     self.temp_mana_control = 0
 
     self.temp_fire_prof = 0
@@ -157,10 +155,6 @@ function NullEntity.getMaxMp(self)
   return self.max_mp
 end
 
-function NullEntity.getManaStrength(self)
-  return self.mana_strength + self.temp_mana_strength
-end
-
 function NullEntity.getManaControl(self)
   return self.mana_control + self.temp_mana_control
 end
@@ -216,7 +210,7 @@ function NullEntity.getNaturalResistance(self)
 end
 
 function NullEntity.getResistance(self)
-  return math.max(self:getNaturalResistance() + self.temp_resistance, self.armor)
+  return math.max(self:getNaturalResistance(), self.armor) + self.temp_resistance
 end
 
 function NullEntity.getMaxGuard(self)

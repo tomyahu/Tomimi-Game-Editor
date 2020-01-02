@@ -13,9 +13,6 @@ end)
 function RoomView.initialize(self, camera)
     self.background = love.graphics.newImage(self.room:getBackgroundPath())
     local objectArray = self.room:getObjects()
-    for _, object in pairs(objectArray) do
-        object:getSprite():initialize()
-    end
 
     if camera == nil then
         self.camera = Camera.new(GAME_WIDTH/2, GAME_HEIGHT/2, 1)
@@ -38,7 +35,7 @@ function RoomView.draw(self)
     local objectArray = self:returnSortedObjectArray()
     for _, object in pairs(objectArray) do
         local x, y = object:getPos()
-        self.camera:draw(object:getSprite(), x, y, 1, 1)
+        self.camera:drawSprite(object:getSprite(), x, y, 1, 1)
     end
 end
 

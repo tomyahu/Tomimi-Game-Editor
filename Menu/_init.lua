@@ -74,7 +74,7 @@ local back_state = MenuState.new("Back")
 
 local mBuild = DefaultMenuBuilder.new()
 mBuild:addState(volume_state)
---mBuild:addState(fullscreen_state)
+mBuild:addState(fullscreen_state)
 mBuild:addState(back_state)
 
 local confScreenMenu = mBuild:getMenu()

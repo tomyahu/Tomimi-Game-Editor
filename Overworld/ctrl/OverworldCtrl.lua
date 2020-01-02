@@ -40,8 +40,6 @@ function OverworldCtrl.setup(self)
     self.player:setPos(save["Overworld"]["Position"]["x"], save["Overworld"]["Position"]["y"])
 
     local new_room = self.room_manager:getCurrentRoom()
-    new_room:addObject(self.player, 1)
-
     new_room:registerObjects()
     self.view:setCurrentRoom(new_room)
 end
@@ -90,7 +88,6 @@ function OverworldCtrl.changeRoom(self, index)
     application:setInLocalContext('ContactInteractuables', {})
 
     local new_room = self.room_manager:getCurrentRoom()
-    new_room:addObject(self.player, 1)
 
     new_room:registerObjects()
     self.view:setCurrentRoom(new_room)

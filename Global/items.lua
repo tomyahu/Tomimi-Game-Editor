@@ -1,4 +1,5 @@
 require "Global.consts"
+require "Global.application.application"
 
 local icon_path = RESOURCES_PATH .. "/Menu/ObjectIcons/"
 
@@ -31,10 +32,29 @@ marbles["consumable"] = true
 marbles["stackable"] = 10
 marbles["abilities"] = {}
 
+local orange_segment = {}
+orange_segment["name"] = "Orange Segment"
+orange_segment["description"] = "Gives some health back."
+orange_segment["icon"] = icon_path .. "007-Orange-Segment.png"
+orange_segment["consumable"] = true
+orange_segment["stackable"] = 99
+orange_segment["abilities"] = {}
+orange_segment["action"] = function(extra)
+    local save = application:getCurrentSave()
+
+    for _, character in pairs(save["Party"]) do
+        character["hp"] = math.min(character["max_hp"], character["hp"] + 1)
+        character["stamina"] = math.min(character["max_stamina"], character["stamina"] + 2)
+    end
+
+
+end
+
 -- Item Insertion ------------------------------------------------------------------------------------------------------
 
 items[1] = pebble
 items[2] = rope
 items[3] = marbles
+items[7] = orange_segment
 
 return items

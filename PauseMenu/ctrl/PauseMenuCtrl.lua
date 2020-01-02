@@ -28,7 +28,9 @@ function PauseMenuCtrl.getItemMenu(self, item_dict)
     local item_mbuild = ItemMenuBuilder.new()
 
     for i, item in pairs(item_dict) do
-        item_mbuild:addItem(item.id, item.count)
+        if item.count > 0 then
+            item_mbuild:addItem(item)
+        end
     end
 
     local item_menu = item_mbuild:getMenu()
@@ -110,13 +112,34 @@ function PauseMenuCtrl.closePartyMenu(self)
     self.view:getSoundManager():playMenuCanceledSound()
 end
 
+-- openAuxiliaryMenu: Menu -> None
+-- Sets the current menu to a given auxiliary menu
+function PauseMenuCtrl.openAuxiliaryMenu(self, menu)
+    self.view:addAuxiliaryView(menu)
+    self.menu_manager:setCustomMenuAsCurrent(menu)
+    self.view:getSoundManager():playMenuSelectedSound()
+end
+
+function PauseMenuCtrl.refreshItemMenu(self)
+    -- Get items from global context
+    local save = application:getCurrentSave()
+    local item_dict = save["Items"]
+
+    local item_menu = self:getItemMenu(item_dict)
+    self.menu_manager:setItemMenu(item_menu)
+
+    self.view:addItemsView(item_menu)
+end
+
 -- callbackPressedKey: str -> None
 -- Passes the pressed key to the menu manager
-function MenuCtrl.callbackPressedKey(self, key)
+function PauseMenuCtrl.callbackPressedKey(self, key)
     self.menu_manager:callbackPressedKey(key)
-    if (key ~= ACTION_BUTTON_1) and (key ~= ACTION_BUTTON_2) and (key ~= PAUSE_BUTTON) then
-        self.view:getSoundManager():playMenuMoveSound()
-    end
+end
+
+-- getters
+function PauseMenuCtrl.getMenuManager(self)
+    return self.menu_manager
 end
 
 return PauseMenuCtrl

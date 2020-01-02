@@ -64,7 +64,9 @@ function OverworldView.draw(self, context)
 
     local px, py = self.player:getPos()
     self.camera:setCenter(px+32, py+32)
+
     self.current_room_view:draw()
+    self.camera:drawSprite(self.player:getSprite(), px, py, 1, 1)
     self.current_message:draw()
 end
 

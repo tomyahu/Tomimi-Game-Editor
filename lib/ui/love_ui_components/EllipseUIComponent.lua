@@ -20,10 +20,9 @@ local EllipseUIComponent = extend(LoveUIComponent, function(self, mode, x, y, co
     self.segments = segments
 end)
 
--- draw: None -> None
+-- drawFigure: None -> None
 -- draws a ellipse with the parameters specified by the object's variables
-function EllipseUIComponent.draw(self)
-    LoveUIComponent.draw(self)
+function EllipseUIComponent.drawFigure(self)
     love.graphics.ellipse( self.mode, self.x, self.y, self.radiusx, self.radiusy, self.segments )
 end
 

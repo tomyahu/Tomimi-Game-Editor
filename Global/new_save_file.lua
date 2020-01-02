@@ -47,9 +47,14 @@ local item_3 = {}
 item_3["id"] = 3
 item_3["count"] = 1
 
+local item_4 = {}
+item_4["id"] = 7
+item_4["count"] = 5
+
 table.insert(save_file["Items"], item_1)
 table.insert(save_file["Items"], item_2)
 table.insert(save_file["Items"], item_3)
+table.insert(save_file["Items"], item_4)
 
 
 local function getNewSaveFile()

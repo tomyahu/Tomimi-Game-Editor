@@ -26,6 +26,8 @@ end)
 -- draw: None -> None
 -- Draws the menu's rectangle, borders, options and the icons associated
 function RectangleIconMenuView.draw(self)
+    self:updateCurrentlySelectedOption()
+
     local selected_index = 0
 
     for index, option in pairs(self.menu.options) do

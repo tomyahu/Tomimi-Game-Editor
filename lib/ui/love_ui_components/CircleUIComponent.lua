@@ -19,10 +19,9 @@ local CircleUIComponent = extend(LoveUIComponent, function(self, mode, x, y, col
     self.segments = segments
 end)
 
--- draw: None -> None
+-- drawFigure: None -> None
 -- draws a circle with the parameters specified by the object's variables
-function CircleUIComponent.draw(self)
-    LoveUIComponent.draw(self)
+function CircleUIComponent.drawFigure(self)
     love.graphics.circle( self.mode, self.x, self.y, self.radius, self.segments )
 end
 
