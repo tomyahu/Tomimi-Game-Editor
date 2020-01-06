@@ -31,7 +31,7 @@ local NullEntity = class(function(self)
     self.fire_prof = 0
     self.cold_prof = 0
     self.wind_prof = 0
-    self.lightning_prof = 0
+    self.elec_prof = 0
     self.light_prof = 0
     self.energy_prof = 0
     self.health_prof = 0
@@ -146,8 +146,8 @@ function NullEntity.getWindProficiency(self)
   return self.wind_prof
 end
 
-function NullEntity.getLightningProficiency(self)
-  return self.lightning_prof
+function NullEntity.getElectricProficiency(self)
+  return self.elec_prof
 end
 
 function NullEntity.getLightProficiency(self)
