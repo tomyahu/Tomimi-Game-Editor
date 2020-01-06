@@ -24,11 +24,13 @@ player1["id"] = "Naranjarina"
 player1["meta"] = {}
 
 save_file["Battle"]["PlayerPartyMetadata"][1] = player1
+save_file["Battle"]["PlayerPartyMetadata"][2] = player1
 save_file["Battle"]["PlayerPartyMetadata"][3] = player1
 
 save_file["Battle"]["EnemyPartyMetadata"] = {}
 save_file["Battle"]["EnemyPartyMetadata"][1] = player1
 save_file["Battle"]["EnemyPartyMetadata"][2] = player1
+save_file["Battle"]["EnemyPartyMetadata"][3] = player1
 
 save_file["Battle"]["Ambient"] = "debug_ambient1"
 

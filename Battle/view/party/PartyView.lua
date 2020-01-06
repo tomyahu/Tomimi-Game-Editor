@@ -14,7 +14,7 @@ local PartyView = class(function(self, party)
     self.position1.y = 350/600*GAME_HEIGHT
 
     self.position2 = {}
-    self.position2.x = 40/800*GAME_WIDTH
+    self.position2.x = 100/800*GAME_WIDTH
     self.position2.y = 400/600*GAME_HEIGHT
 
     self.position3 = {}
