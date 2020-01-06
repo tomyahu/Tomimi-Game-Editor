@@ -63,7 +63,7 @@ function PauseMenuCtrl.setup(self)
     -- Get items from global context
     local save = application:getCurrentSave()
     local item_dict = save["Items"]
-    local party_dict = save["Party"]
+    local party_dict = save["Battle"]["PlayerPartyMetadata"]
 
     local item_menu = self:getItemMenu(item_dict)
     local party_menu = self:getPartyMenu(party_dict)

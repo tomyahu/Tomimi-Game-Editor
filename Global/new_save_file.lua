@@ -1,6 +1,4 @@
 local TablesMemoryLib = require("lib.memory.TablesMemoryLib")
-local entities = require("Global.entities")
-
 
 local save_file = {}
 
@@ -9,23 +7,26 @@ save_file["Overworld"]["Room"] = "Room1"
 save_file["Overworld"]["Position"] = {}
 save_file["Overworld"]["Position"]["x"] = 300
 save_file["Overworld"]["Position"]["y"] = 300
-save_file["Overworld"]["Position"]["y"] = 300
 
 save_file["Battle"] = {}
 save_file["Battle"]["PlayerPartyMetadata"] = {}
 
-save_file["Party"] = {}
-save_file["Party"][1] = entities[2] -- Mac
-save_file["Party"][2] = entities[1] -- Ken
-
-
 local player1 = {}
-player1["id"] = 3
+player1["id"] = 2
 player1["meta"] = {}
+player1["meta"]["hp"] = 3
+player1["meta"]["mp"] = 0
+player1["meta"]["stamina"] = 10
+
+local player2 = {}
+player2["id"] = 1
+player2["meta"] = {}
+player2["meta"]["hp"] = 12
+player2["meta"]["mp"] = 13
+player2["meta"]["stamina"] = 13
 
 save_file["Battle"]["PlayerPartyMetadata"][1] = player1
-save_file["Battle"]["PlayerPartyMetadata"][2] = player1
-save_file["Battle"]["PlayerPartyMetadata"][3] = player1
+save_file["Battle"]["PlayerPartyMetadata"][2] = player2
 
 save_file["Battle"]["EnemyPartyMetadata"] = {}
 save_file["Battle"]["EnemyPartyMetadata"][1] = player1

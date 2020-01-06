@@ -1,6 +1,7 @@
 require "lib.classes.class"
 local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 require "Global.LOVEWrapper.LOVEWrapper"
+local entities = require("Global.entities")
 
 local items = require("Global.items")
 --------------------------------------------------------------------------------------------------------
@@ -12,7 +13,8 @@ local sprite_factory = SpriteFactory.new()
 -- param: character_stats:dict -> statistics of the character
 -- TODO: create Factory for character cards
 local CharacterInfoCard = class(function(self, card_border, character_stats, font)
-    self.character_stats = character_stats
+    self.character_stats = entities[character_stats.id]
+    self.character_meta = character_stats.meta
     self.card_border = card_border
     self.font = font
 
@@ -20,7 +22,7 @@ local CharacterInfoCard = class(function(self, card_border, character_stats, fon
     self.weapon_name = love.graphics.newText( font, "Weapon: " .. "???" )
     self.weapon_sprite = nil
 
-    self.character_icon =  sprite_factory:getRegularRectSprite(character_stats["icon_path"], 64, 64, 1)
+    self.character_icon =  sprite_factory:getRegularRectSprite(self.character_stats["icon_path"], 64, 64, 1)
 end)
 
 -- TODO: Document this
@@ -56,9 +58,9 @@ function CharacterInfoCard.draw(self)
     local max_mp = self:getStrFromStat(self.character_stats["max_mp"])
     local max_sta = self:getStrFromStat(self.character_stats["max_stamina"])
 
-    local hp = self:getStrFromStat(self.character_stats["hp"])
-    local mp = self:getStrFromStat(self.character_stats["mp"])
-    local sta = self:getStrFromStat(self.character_stats["stamina"])
+    local hp = self:getStrFromStat(self.character_meta["hp"])
+    local mp = self:getStrFromStat(self.character_meta["mp"])
+    local sta = self:getStrFromStat(self.character_meta["stamina"])
 
     love.graphics.print( "HP: " .. hp .. "/" .. max_hp, getRelativePosX(text_offset_x_1), getRelativePosY(text_offset_y + text_vertical_space), 0, getScale(), getScale())
     love.graphics.print( "MP: " .. mp .. "/" .. max_mp, getRelativePosX(text_offset_x_2), getRelativePosY(text_offset_y + text_vertical_space), 0, getScale(), getScale())

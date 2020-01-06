@@ -14,6 +14,7 @@ entity["weapon"] = 1
 entity["icon_path"] = RESOURCES_PATH .. "/Overworld/CharacterPortraits/MacPortrait.png"
 entity["battle_sprite_sheet"] = RESOURCES_PATH .. "/Battle/Party/MAC_IDLE.png"
 entity["max_hp"] = 8
+entity["max_mp"] = 3
 entity["max_stamina"] = 10
 entity["strength"] = 5
 entity["natural_resistence"] = 4
@@ -23,10 +24,6 @@ entity["agility"] = 9
 entity["b_aura_prof"] = 1
 entity["b_spirit_prof"] = 1
 entity["b_instinct_prof"] = 4
-
--- Variable
-entity["hp"] = 3
-entity["stamina"] = 10
 
 local mac = entity
 ------------------------------------------------------------------------------------------------------------------------
