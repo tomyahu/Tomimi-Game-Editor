@@ -1,10 +1,11 @@
 require "lib.classes.class"
 require "Global.LOVEWrapper.LOVEWrapper"
 require "Global.application.application"
-local Ctrl = require "Global.ctrl.ctrl"
+local Entity = require("Battle.model.entities.Entity")
+local entities = require("Global.entities")
+local Ctrl = require("Global.ctrl.ctrl")
 local Party = require("Battle.model.party.Party")
 local ambient_dictionary = require("Battle.init.ambient_dictionary")
-local entity_factory = require("Battle.init.entity_factory")
 --------------------------------------------------------------------------------------------------------
 
 -- class: BattleCtrl
@@ -32,7 +33,7 @@ function BattleCtrl.setup(self)
     for i, _ in pairs(player_party_entities_metadata) do
         local id = player_party_entities_metadata[i]["id"]
         local meta = player_party_entities_metadata[i]["meta"]
-        player_party_entities[i] = entity_factory:getEntity(id, meta)
+        player_party_entities[i] = Entity.new(entities[id])
     end
 
     self.player_party = Party.new(player_party_entities, 3)
@@ -44,7 +45,7 @@ function BattleCtrl.setup(self)
     for i, _ in pairs(enemy_party_entities_metadata) do
         local id = enemy_party_entities_metadata[i]["id"]
         local meta = enemy_party_entities_metadata[i]["meta"]
-        enemy_party_entities[i] = entity_factory:getEntity(id, meta)
+        enemy_party_entities[i] = Entity.new(entities[id])
     end
 
     self.enemy_party = Party.new(enemy_party_entities, 3)

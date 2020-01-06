@@ -1,5 +1,5 @@
 local TablesMemoryLib = require("lib.memory.TablesMemoryLib")
-local playable_characters = require("Global.playable_characters")
+local entities = require("Global.entities")
 
 
 local save_file = {}
@@ -15,12 +15,12 @@ save_file["Battle"] = {}
 save_file["Battle"]["PlayerPartyMetadata"] = {}
 
 save_file["Party"] = {}
-save_file["Party"][1] = playable_characters[2] -- Mac
-save_file["Party"][2] = playable_characters[1] -- Ken
+save_file["Party"][1] = entities[2] -- Mac
+save_file["Party"][2] = entities[1] -- Ken
 
 
 local player1 = {}
-player1["id"] = "Naranjarina"
+player1["id"] = 3
 player1["meta"] = {}
 
 save_file["Battle"]["PlayerPartyMetadata"][1] = player1

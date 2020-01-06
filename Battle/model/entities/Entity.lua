@@ -15,8 +15,8 @@ end
 -- param: sprite_path:str -> the path of the entity's sprite
 -- An entity for a battle
 local Entity = extend(NullEntity,
-function(self, stats, sprite_path)
-    self.sprite_path = sprite_path
+function(self, stats)
+    self.sprite_path = stats["battle_sprite_sheet"]
 
     -- If stats are not null assign them
     ifNotNullAssign(self, stats, "name")

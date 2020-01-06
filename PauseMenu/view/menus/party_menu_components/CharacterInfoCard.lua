@@ -88,8 +88,6 @@ function CharacterInfoCard.draw(self)
     -- Draw Weapon
     love.graphics.draw( self.weapon_name, getRelativePosX(text_offset_x_1), getRelativePosY(text_offset_y + 6*text_vertical_space), 0, getScale(), getScale())
     self.weapon_sprite:draw(getRelativePosX(text_offset_x_1 + self.weapon_name:getWidth() + 5), getRelativePosY(text_offset_y + 6*text_vertical_space - 4), 2*getScale(), 2*getScale())
-
-
 end
 
 -- TODO: Document this
