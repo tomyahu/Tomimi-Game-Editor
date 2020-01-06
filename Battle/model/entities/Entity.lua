@@ -49,31 +49,7 @@ function(self, stats, sprite_path)
     ifNotNullAssign(self, stats, "b_instinct_prof")
 
     ifNotNullAssign(self, stats, "natural_resistence")
-
     ifNotNullAssign(self, stats, "armor")
-    ifNotNullAssign(self, stats, "temp_strength")
-    ifNotNullAssign(self, stats, "temp_skill")
-    ifNotNullAssign(self, stats, "temp_agility")
-    ifNotNullAssign(self, stats, "temp_speed")
-
-    ifNotNullAssign(self, stats, "temp_mana_strength")
-    ifNotNullAssign(self, stats, "temp_mana_control")
-
-    ifNotNullAssign(self, stats, "temp_fire_prof")
-    ifNotNullAssign(self, stats, "temp_cold_prof")
-    ifNotNullAssign(self, stats, "temp_wind_prof")
-    ifNotNullAssign(self, stats, "temp_lightning_prof")
-    ifNotNullAssign(self, stats, "temp_light_prof")
-    ifNotNullAssign(self, stats, "temp_dark_prof")
-    ifNotNullAssign(self, stats, "temp_health_prof")
-    ifNotNullAssign(self, stats, "temp_ether_prof")
-
-    ifNotNullAssign(self, stats, "temp_b_aura_prof")
-    ifNotNullAssign(self, stats, "temp_b_spirit_prof")
-    ifNotNullAssign(self, stats, "temp_b_instinct_prof")
-
-    ifNotNullAssign(self, stats, "temp_resistence")
-
 end,
 function(stats, sprite_path)
     return NullEntity.new()
