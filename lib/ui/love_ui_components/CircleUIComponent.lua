@@ -22,7 +22,7 @@ end)
 -- drawFigure: None -> None
 -- draws a circle with the parameters specified by the object's variables
 function CircleUIComponent.drawFigure(self)
-    love.graphics.circle( self.mode, getRelativePosX(self.x), getRelativePosY(self.y), self.radius * getScale, self.segments )
+    love.graphics.circle( self.mode, getRelativePosX(self.x), getRelativePosY(self.y), self.radius * getScale(), self.segments )
 end
 
 -- getters
