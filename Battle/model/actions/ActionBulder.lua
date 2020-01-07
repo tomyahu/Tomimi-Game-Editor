@@ -12,7 +12,8 @@ end)
 -- Resets the internnal parameters of the action builder
 function ActionBuilder.reset(self)
     self.id = 1
-    self.description = ""
+    self.name = "???"
+    self.description = "???"
     self.item_requirements = {}
     self.start_piece = "N"
     self.end_piece = "N"
@@ -25,6 +26,7 @@ end
 function ActionBuilder.getAction(self)
     return Action.new(
         self.id,
+        self.name,
         self.description,
         self.item_requirements,
         self.start_piece,
@@ -36,6 +38,11 @@ end
 -- setters
 function ActionBuilder.setId(self, new_id)
     self.id = new_id
+    return self
+end
+
+function ActionBuilder.setName(self, new_name)
+    self.name = new_name
     return self
 end
 
