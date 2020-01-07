@@ -22,7 +22,12 @@ end)
 -- drawFigure: None -> None
 -- Draws the polygon defined by the object's variables
 function PolygonUIComponent.drawFigure(self)
-    love.graphics.polygon( self.mode, self.vertices )
+    local vertices = {}
+    for i = 1,(# self.vertices),2 do
+        table.insert(vertices, getRelativePosX(self.vertices[i]))
+        table.insert(vertices, getRelativePosY(self.vertices[i+1]))
+    end
+    love.graphics.polygon( self.mode, vertices )
 end
 
 -- getters

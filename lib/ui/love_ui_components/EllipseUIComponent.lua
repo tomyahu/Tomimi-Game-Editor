@@ -23,7 +23,7 @@ end)
 -- drawFigure: None -> None
 -- draws a ellipse with the parameters specified by the object's variables
 function EllipseUIComponent.drawFigure(self)
-    love.graphics.ellipse( self.mode, self.x, self.y, self.radiusx, self.radiusy, self.segments )
+    love.graphics.ellipse( self.mode, getRelativePosX(self.x), getRelativePosY(self.y), self.radiusx * getScale(), self.radiusy * getScale(), self.segments )
 end
 
 -- getters

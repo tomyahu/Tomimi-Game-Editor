@@ -29,7 +29,7 @@ end)
 -- drawFigure: None -> None
 -- draws a rectangle with the parameters specified by the object's variables
 function RectangleUIComponent.drawFigure(self)
-    love.graphics.rectangle( self.mode, self.x, self.y, self.width, self.height, self.rx, self.ry, self.segments )
+    love.graphics.rectangle( self.mode, getRelativePosX(self.x), getRelativePosY(self.y), self.width*getScale(), self.height*getScale(), self.rx, self.ry, self.segments )
 end
 
 -- getters
