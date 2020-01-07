@@ -12,7 +12,6 @@ end
 
 -- class: Entity
 -- param: stats:dict -> a dictionary with all the entity's stats
--- param: sprite_path:str -> the path of the entity's sprite
 -- An entity for a battle
 local Entity = extend(NullEntity,
 function(self, stats)
