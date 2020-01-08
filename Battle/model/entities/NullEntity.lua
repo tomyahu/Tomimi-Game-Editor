@@ -10,12 +10,12 @@ local NullEntity = class(function(self)
     -- Stats
     self.max_hp = 1
     self.hp = 1
+    self.max_stamina = 1
+    self.stamina = 1
     self.is_alive = true
     
     self.strength = 0
     self.agility = 0
-    self.max_stamina = 1
-    self.stamina = 1
     self.speed = 0
     self.armor = 0
 
