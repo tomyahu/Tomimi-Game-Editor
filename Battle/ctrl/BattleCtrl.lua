@@ -54,7 +54,6 @@ function BattleCtrl.setup(self)
     local ambient_id = save["Battle"]["Ambient"]
 
     self.ambient = require(ambient_dictionary[ambient_id])
-    self.ambient:affectPartyAndEnemies(self.player_party, self.enemy_party)
     
     -- set views
     self.view:setPlayerParty(self.player_party)
