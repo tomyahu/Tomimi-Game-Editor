@@ -8,6 +8,7 @@ local Party = require("Battle.model.party.Party")
 local ambient_dictionary = require("Battle.init.ambient_dictionary")
 local TurnManager = require("Battle.ctrl.managers.TurnManager")
 local Turn = require("Battle.model.turns.Turn")
+local MenuManager = require("Battle.ctrl.managers.MenuManager")
 --------------------------------------------------------------------------------------------------------
 
 -- class: BattleCtrl
@@ -15,6 +16,8 @@ local Turn = require("Battle.model.turns.Turn")
 -- The controller of the battle app
 local BattleCtrl = extend(Ctrl, function(self, view)
     self.turn_manager = TurnManager.new({})
+    self.menu_manager = MenuManager.new()
+
     self.player_party = Party.new({}, 0)
     self.enemy_party = Party.new({}, 0)
     self.ambient = ambient_dictionary["debug_ambient1"]
@@ -59,6 +62,8 @@ end
 -- callbackPressedKey: str -> None
 -- Function called when user presses a key
 function BattleCtrl.callbackPressedKey(self, key)
+    self.menu_manager:callbackPressedKey(key)
+
     if love.keyboard.isDown(ACTION_BUTTON_1) then
         self.turn_manager:advanceTurn()
     end
@@ -85,6 +90,27 @@ end
 -- Function called at the end of the execution of an application
 function BattleCtrl.stop(self)
 
+end
+
+--getters
+function BattleCtrl.getTurnManager(self)
+    return self.turn_manager
+end
+
+function BattleCtrl.getMenuManager(self)
+    return self.menu_manager
+end
+
+function BattleCtrl.getPlayerParty(self)
+    return self.player_party
+end
+
+function BattleCtrl.getEnemyParty(self)
+    return self.enemy_party
+end
+
+function BattleCtrl.getAmbient(self)
+    return self.get_ambient
 end
 
 return BattleCtrl
