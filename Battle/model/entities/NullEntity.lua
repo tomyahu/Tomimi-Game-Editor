@@ -94,6 +94,10 @@ function NullEntity.revive(self)
 end
 
 -- getters
+function NullEntity.getName(self)
+    return self.name
+end
+
 function NullEntity.getMaxHp(self)
   return self.max_hp
 end
