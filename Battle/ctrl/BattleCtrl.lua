@@ -5,7 +5,7 @@ local Entity = require("Battle.model.entities.Entity")
 local entities = require("Global.entities")
 local Ctrl = require("Global.ctrl.ctrl")
 local Party = require("Battle.model.party.Party")
-local ambient_dictionary = require("Battle.init.ambient_dictionary")
+local AmbientFactory = require("Battle.init.ambients.AmbientFactory")
 local TurnManager = require("Battle.ctrl.managers.TurnManager")
 local Turn = require("Battle.model.turns.Turn")
 local MenuManager = require("Battle.ctrl.managers.MenuManager")
@@ -20,7 +20,7 @@ local BattleCtrl = extend(Ctrl, function(self, view)
 
     self.player_party = Party.new({}, 0)
     self.enemy_party = Party.new({}, 0)
-    self.ambient = ambient_dictionary["debug_ambient1"]
+    self.ambient = AmbientFactory.getAmbientWithKey("debug_ambient1")
 end,
 
 function(view)
@@ -42,7 +42,7 @@ function BattleCtrl.setup(self)
     
     -- Set the ambient of the battle
     local ambient_id = save["Battle"]["Ambient"]
-    self.ambient = require(ambient_dictionary[ambient_id])
+    self.ambient = AmbientFactory.getAmbientWithKey(ambient_id)
 
     -- Set turn manager
     local battle_turns = {}

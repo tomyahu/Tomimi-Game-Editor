@@ -9,7 +9,7 @@ end)
 
 -- getActionWithID: int -> Action
 -- gets an action from the action list
-function ActionFactory.getActionWithID(self, id)
+function ActionFactory.getActionWithID(id)
     return actions[id]
 end
 
