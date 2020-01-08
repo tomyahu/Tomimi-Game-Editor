@@ -9,15 +9,17 @@ require "lib.classes.class"
 --                                         performed and the cuantity of each of them
 -- param: start_piece:str -> The starting connection of this action
 -- param: end_piece:str -> The ending connection of this action
+-- param: target:str -> The targets this action can be used on
 -- param: action_fun:function -> the effect of this action
 -- An action in a battle that has an effect
-local Action = class(function(self, id, name, description, item_requirements, start_piece, end_piece, action_fun)
+local Action = class(function(self, id, name, description, item_requirements, start_piece, end_piece, target, action_fun)
     self.id = id
     self.name = name
     self.description = description
     self.item_requirements = item_requirements
     self.start_piece = start_piece
     self.end_piece = end_piece
+    self.target = target
     self.action_fun = action_fun
 end)
 
@@ -80,6 +82,10 @@ end
 
 function Action.getEndPiece(self)
     return self.end_piece
+end
+
+function Action.getTarget(self)
+    return self.target
 end
 
 return Action

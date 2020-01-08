@@ -1,4 +1,5 @@
 require "lib.classes.class"
+require "Battle.consts"
 local Action = require("Battle.model.actions.Action")
 --------------------------------------------------------------------------------------------------------
 
@@ -17,6 +18,7 @@ function ActionBuilder.reset(self)
     self.item_requirements = {}
     self.start_piece = "N"
     self.end_piece = "N"
+    self.target = BATTLE_TARGET_NONE
     self.action_fun = function(source_entity, target_entity) end
     return self
 end
@@ -31,6 +33,7 @@ function ActionBuilder.getAction(self)
         self.item_requirements,
         self.start_piece,
         self.end_piece,
+        self.target,
         self.action_fun
     )
 end
@@ -63,6 +66,11 @@ end
 
 function ActionBuilder.setEndPiece(self, new_end_piece)
     self.end_piece = new_end_piece
+    return self
+end
+
+function ActionBuilder.setTarget(self, new_target)
+    self.target = new_target
     return self
 end
 
