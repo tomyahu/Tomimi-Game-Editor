@@ -6,12 +6,15 @@ local entities = require("Global.entities")
 local Ctrl = require("Global.ctrl.ctrl")
 local Party = require("Battle.model.party.Party")
 local ambient_dictionary = require("Battle.init.ambient_dictionary")
+local TurnManager = require("Battle.ctrl.managers.TurnManager")
+local Turn = require("Battle.model.turns.Turn")
 --------------------------------------------------------------------------------------------------------
 
 -- class: BattleCtrl
 -- param: view:View -> the view of the menu app
 -- The controller of the battle app
 local BattleCtrl = extend(Ctrl, function(self, view)
+    self.turn_manager = TurnManager.new({})
     self.player_party = Party.new({}, 0)
     self.enemy_party = Party.new({}, 0)
     self.ambient = ambient_dictionary["debug_ambient1"]
@@ -28,50 +31,60 @@ function BattleCtrl.setup(self)
     
     -- Set the players party entities
     local player_party_entities_metadata = save["Battle"]["PlayerPartyMetadata"]
-    local player_party_entities = {}
-
-    for i, _ in pairs(player_party_entities_metadata) do
-        local id = player_party_entities_metadata[i]["id"]
-        local meta = player_party_entities_metadata[i]["meta"]
-        player_party_entities[i] = Entity.new(entities[id])
-    end
-
-    self.player_party = Party.new(player_party_entities, 3)
+    self.player_party = self:createPartyFromDict(player_party_entities_metadata)
 
     -- Set the enemy party entities
     local enemy_party_entities_metadata = save["Battle"]["EnemyPartyMetadata"]
-    local enemy_party_entities = {}
-    
-    for i, _ in pairs(enemy_party_entities_metadata) do
-        local id = enemy_party_entities_metadata[i]["id"]
-        local meta = enemy_party_entities_metadata[i]["meta"]
-        enemy_party_entities[i] = Entity.new(entities[id])
-    end
-
-    self.enemy_party = Party.new(enemy_party_entities, 3)
+    self.enemy_party = self:createPartyFromDict(enemy_party_entities_metadata)
     
     -- Set the ambient of the battle
     local ambient_id = save["Battle"]["Ambient"]
-
     self.ambient = require(ambient_dictionary[ambient_id])
+
+    -- Set turn manager
+    local battle_turns = {}
+    for _, entity in pairs(self.player_party:getMembers()) do
+        table.insert(battle_turns, Turn.new(entity))
+    end
+    for _, entity in pairs(self.enemy_party:getMembers()) do
+        table.insert(battle_turns, Turn.new(entity))
+    end
+    self.turn_manager = TurnManager.new(battle_turns)
     
     -- set views
     self.view:setPlayerParty(self.player_party)
     self.view:setEnemyParty(self.enemy_party)
     self.view:setBackground(self.ambient)
-    
-    -- Clean enemies and ambient from global context
-    save["Battle"]["EnemyPartyMetadata"] = nil
-    save["Battle"]["Ambient"] = nil
-    application:setCurrentSave(save)
-    application:saveGlobalContext()
+end
+-- callbackPressedKey: str -> None
+-- Function called when user presses a key
+function BattleCtrl.callbackPressedKey(self, key)
+    if love.keyboard.isDown(ACTION_BUTTON_1) then
+        self.turn_manager:advanceTurn()
+    end
+    if love.keyboard.isDown(ACTION_BUTTON_2) then
+        print(self.turn_manager:getCurrentTurn():toString())
+    end
+end
+
+-- createPartyFromDict: dict -> Party
+-- Takes a dictionary containing a party of 3 and creates a party object with its components
+function BattleCtrl.createPartyFromDict(self, entities_meta)
+    local party_entities = {}
+
+    for i, _ in pairs(entities_meta) do
+        local id = entities_meta[i]["id"]
+        local meta = entities_meta[i]["meta"]
+        party_entities[i] = Entity.new(entities[id])
+    end
+
+    return Party.new(party_entities, 3)
 end
 
 -- stop: None -> None
 -- Function called at the end of the execution of an application
 function BattleCtrl.stop(self)
-    -- TODO: Give experience to the player based in what they did
-    -- TODO: Update the player's items
+
 end
 
 return BattleCtrl

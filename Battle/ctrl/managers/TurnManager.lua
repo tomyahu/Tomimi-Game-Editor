@@ -6,7 +6,7 @@ require "lib.classes.class"
 -- The controler's turn manager that decides whose turn is to do actions
 local TurnManager = class(function(self, turns)
     self.turns = turns
-    self.current_turn = 1
+    self:resetCurrentTurn()
 end)
 
 -- advanceTurn: None -> None
@@ -25,6 +25,19 @@ function TurnManager.getCurrentTurn(self)
         error("Tried to get turn when turn manager has no turns.")
     end
     return self.turns[self.current_turn]
+end
+
+-- setTurns: list(Turn) -> None
+-- Sets a list of new turns as the turn manager turns
+function TurnManager.setTurns(self, new_turns)
+    self.turns = new_turns
+    self:resetCurrentTurn()
+end
+
+-- resetCurrentTurn: None -> None
+-- Resets the current turn to the first turn on the turn list
+function TurnManager.resetCurrentTurn(self)
+    self.current_turn = 1
 end
 
 return TurnManager
