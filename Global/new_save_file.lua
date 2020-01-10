@@ -33,11 +33,10 @@ player3["meta"]["mp"] = 0
 player3["meta"]["stamina"] = 5
 
 save_file["Battle"]["PlayerPartyMetadata"][1] = player1
-save_file["Battle"]["PlayerPartyMetadata"][2] = player2
+save_file["Battle"]["PlayerPartyMetadata"][3] = player2
 
 save_file["Battle"]["EnemyPartyMetadata"] = {}
 save_file["Battle"]["EnemyPartyMetadata"][1] = player3
-save_file["Battle"]["EnemyPartyMetadata"][2] = player3
 save_file["Battle"]["EnemyPartyMetadata"][3] = player3
 
 save_file["Battle"]["Ambient"] = "debug_ambient1"

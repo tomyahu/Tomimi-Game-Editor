@@ -42,6 +42,13 @@ end
 -- getPartyMenu: None -> Menu
 -- Gets the items given, creates an item menu and returns it
 function PauseMenuCtrl.getPartyMenu(self, party_dict)
+    local pure_party_dict = {}
+    for index, val in pairs(party_dict) do
+        if val ~= nil then
+            table.insert(pure_party_dict, val)
+        end
+    end
+
     local party_mbuild = ContentMenuBuilder.new()
     party_mbuild:addState(
         SingleActionMenuState.new("Back", ACTION_BUTTON_2, function (_)
@@ -49,7 +56,7 @@ function PauseMenuCtrl.getPartyMenu(self, party_dict)
             ctrl:closePartyMenu()
         end))
 
-    party_mbuild:setContent(party_dict)
+    party_mbuild:setContent(pure_party_dict)
     local party_menu = party_mbuild:getMenu()
 
     self.view:addPartyView(party_menu)
