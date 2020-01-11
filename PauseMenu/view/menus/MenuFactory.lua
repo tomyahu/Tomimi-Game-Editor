@@ -34,14 +34,14 @@ function MenuFactory.getPartyMenu(self, menu)
     local party_stats = menu:getContent()
 
     -- Create party menu background
-    local background_border = UITeselatedFrame.new(GAME_WIDTH/80 + 5*32, GAME_HEIGHT/60, self.sprite, 18, 16, 32)
+    local background_border = UITeselatedFrame.new(GAME_WIDTH/80 + 5*32, GAME_HEIGHT/60, self.sprite, 18, 15, 32)
 
     -- Creates the character cards
     local character_cards = {}
 
     -- Create character cards and add them to character_cards
     for index, character_stats in pairs(party_stats) do
-        local card_border = UITeselatedFrame.new(GAME_WIDTH/80 + (9*(index-1) + 5)*32, GAME_HEIGHT/60, self.sprite, 9, 16, 32)
+        local card_border = UITeselatedFrame.new(GAME_WIDTH/80 + (9*(index-1) + 5)*32, GAME_HEIGHT/60, self.sprite, 9, 15, 32)
         local card = CharacterInfoCard.new(card_border, character_stats, self.font)
         table.insert(character_cards, card)
     end
@@ -53,11 +53,11 @@ end
 
 -- getAuxiliaryMenu
 function MenuFactory.getAuxiliaryMenu(self, menu)
-    local x = GAME_WIDTH*58.5/80
-    local y = GAME_HEIGHT*52/60
+    local x = GAME_WIDTH*57.5/80
+    local y = GAME_HEIGHT*48/60
 
     local menu_size = menu:getOptionNumber()
-    local main_option_menu_view = UITeselatedFrame.new(x, y, self.sprite, 5, math.floor(menu_size * (25/32))+1, 32)
+    local main_option_menu_view = UITeselatedFrame.new(x, y, self.sprite, 6, math.floor(menu_size * (25/32))+1, 32)
     local rectangle_menu_view = RectangleMenuWithInactiveOptionsView.new(menu, main_option_menu_view, self.font, 25)
     return rectangle_menu_view
 end
