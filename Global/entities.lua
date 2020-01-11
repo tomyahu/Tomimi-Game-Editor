@@ -25,7 +25,7 @@ entity["b_aura_prof"] = 1
 entity["b_spirit_prof"] = 1
 entity["b_instinct_prof"] = 4
 
-entity["abilities"] = {1,2}
+entity["actions"] = {1,2}
 
 local mac = entity
 ------------------------------------------------------------------------------------------------------------------------
@@ -53,7 +53,7 @@ entity["fire_prof"] = 5
 entity["wind_prof"] = 1
 entity["ether_prof"] = 1
 
-entity["abilities"] = {1,2}
+entity["actions"] = {1,2}
 
 local ken = entity
 ------------------------------------------------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ entity["mana_control"] = 0
 
 entity["cold_prof"] = 2
 
-entity["abilities"] = {1}
+entity["actions"] = {1,3}
 
 local naranjarina = entity
 

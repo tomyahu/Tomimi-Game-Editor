@@ -47,6 +47,9 @@ local NullEntity = class(function(self)
     
     -- Equipped Items
     self.equipped_items = {}
+
+    --
+    self.actions = {}
 end)
 
 -- getHealed: int -> None
@@ -204,6 +207,10 @@ end
 
 function NullEntity.isAlive(self)
   return self.is_alive
+end
+
+function NullEntity.getActions(self)
+    return self.actions
 end
 
 return NullEntity

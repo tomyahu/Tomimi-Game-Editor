@@ -8,6 +8,7 @@ local Party = require("Battle.model.party.Party")
 local AmbientFactory = require("Battle.init.ambients.AmbientFactory")
 local TurnManager = require("Battle.ctrl.managers.TurnManager")
 local Turn = require("Battle.model.turns.Turn")
+local RandomActionTurn = require("Battle.model.turns.RandomActionTurn")
 local MenuManager = require("Battle.ctrl.managers.MenuManager")
 --------------------------------------------------------------------------------------------------------
 
@@ -50,10 +51,11 @@ function BattleCtrl.setup(self)
         table.insert(battle_turns, Turn.new(entity))
     end
     for _, entity in pairs(self.enemy_party:getMembers()) do
-        table.insert(battle_turns, Turn.new(entity))
+        table.insert(battle_turns, RandomActionTurn.new(entity))
     end
     self.turn_manager = TurnManager.new(battle_turns)
-    
+    print(self.turn_manager:getCurrentTurn():toString())
+
     -- set views
     self.view:setPlayerParty(self.player_party)
     self.view:setEnemyParty(self.enemy_party)
@@ -66,9 +68,6 @@ function BattleCtrl.callbackPressedKey(self, key)
 
     if love.keyboard.isDown(ACTION_BUTTON_1) then
         self.turn_manager:advanceTurn()
-    end
-    if love.keyboard.isDown(ACTION_BUTTON_2) then
-        print(self.turn_manager:getCurrentTurn():toString())
     end
 end
 

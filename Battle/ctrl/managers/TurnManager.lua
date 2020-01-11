@@ -16,6 +16,10 @@ function TurnManager.advanceTurn(self)
         error("Tried to advance when turn manager doesn't have turns.")
     end
     self.current_turn = ( self.current_turn % (# self.turns) ) + 1
+
+    print(self:getCurrentTurn():toString())
+
+    self:getCurrentTurn():start()
 end
 
 -- getCurrentTurn: None -> Turn
@@ -38,6 +42,24 @@ end
 -- Resets the current turn to the first turn on the turn list
 function TurnManager.resetCurrentTurn(self)
     self.current_turn = 1
+end
+
+-- turnEnded: list(Action), list(list(Entity)) -> None
+-- Activates the resultant actions of the turn on the respective targets
+function TurnManager.turnEnded(self, actions, entities)
+    local turn_entity = self:getCurrentTurn():getEntity()
+
+    -- Apply actions to entities
+    for i = 1,(# actions) do
+        local action = actions[i]
+        local affected_entities = entities[i]
+        for _, entity in pairs(affected_entities) do
+            action:activate(turn_entity, entity)
+        end
+    end
+
+    -- Advances a turn
+    self:advanceTurn()
 end
 
 return TurnManager
