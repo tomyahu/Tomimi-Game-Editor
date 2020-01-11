@@ -1,4 +1,3 @@
-BATTLE_TARGET_NONE = "none"
 BATTLE_TARGET_SELF = "self"
 BATTLE_TARGET_SINGLE_PARTY_MEMBER = "single_party_member"
 BATTLE_TARGET_ALL_PARTY_MEMBER = "all_party_members"

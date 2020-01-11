@@ -12,7 +12,6 @@ local RandomActionTurn = extend(Turn, function(self, entity)
 end)
 
 local target_behaviour = {}
-target_behaviour[BATTLE_TARGET_NONE] = function(self) return {} end
 target_behaviour[BATTLE_TARGET_SELF] = function(self) return {self.entity} end
 
 -- TODO: Complete the ones below

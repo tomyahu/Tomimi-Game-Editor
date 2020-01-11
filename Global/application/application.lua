@@ -142,13 +142,13 @@ function application.appChange(self,appName)
     -- Manages the local context of the next application
     application:resetLocalContext()
 
-    -- Calls the setup functions of the next application
-    new_ctrl:setup()
-    new_view:setup()
-
     -- Sets the current view and controller to those of the next application
     application:setView(new_view)
     application:setCtrl(new_ctrl)
+
+    -- Calls the setup functions of the next application
+    new_ctrl:setup()
+    new_view:setup()
 end
 
 -- registerApp: str str -> None
