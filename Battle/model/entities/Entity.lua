@@ -1,5 +1,6 @@
 require "lib.classes.class"
 local NullEntity = require("Battle.model.entities.NullEntity")
+local ActionFactory = require("Battle.init.actions.ActionFactory")
 --------------------------------------------------------------------------------------------------------
 
 -- ifNotNullAssign: Entity, dict, str -> None
@@ -49,6 +50,12 @@ function(self, stats)
 
     ifNotNullAssign(self, stats, "natural_resistence")
     ifNotNullAssign(self, stats, "armor")
+
+    if not (stats["actions"] == nil) then
+        for _, id in pairs(stats["actions"]) do
+            table.insert(self.actions, ActionFactory.getActionWithID(id))
+        end
+    end
 end,
 function(stats, sprite_path)
     return NullEntity.new()

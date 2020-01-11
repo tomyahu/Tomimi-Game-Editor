@@ -35,7 +35,7 @@ function Action.compatiblePrevious(self, other_action)
     if self:isStartAction() then
         return false
     end
-    return (self.start_piece == other_action:getEndPiece)
+    return (self.start_piece == other_action:getEndPiece())
 end
 
 -- compatibleNext: Action -> bool
@@ -44,7 +44,7 @@ function Action.compatibleNext(self, other_action)
     if self:isEndAction() then
         return false
     end
-    return (self.end_piece == other_action:getStartPiece)
+    return (self.end_piece == other_action:getStartPiece())
 end
 
 -- isStartAction: None -> None
