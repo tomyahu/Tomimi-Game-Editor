@@ -31,7 +31,7 @@ action_build:setActionFunction( function(source_entity, target_entity)
 end)
 table.insert(actions, action_build:getAction())
 
--- 2. Feel Proud -------------------------------------------------------------------------------------------------------
+-- 3. Feel Proud -------------------------------------------------------------------------------------------------------
 action_build:reset()
 action_build:setId(3)
 action_build:setName("Feel Proud")

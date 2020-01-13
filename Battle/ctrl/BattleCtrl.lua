@@ -7,10 +7,10 @@ local Ctrl = require("Global.ctrl.ctrl")
 local Party = require("Battle.model.party.Party")
 local AmbientFactory = require("Battle.init.ambients.AmbientFactory")
 local TurnManager = require("Battle.ctrl.managers.TurnManager")
-local Turn = require("Battle.model.turns.Turn")
 local PlayerTurn = require("Battle.model.turns.PlayerTurn")
 local RandomActionTurn = require("Battle.model.turns.RandomActionTurn")
 local MenuManager = require("Battle.ctrl.managers.MenuManager")
+local TargetGetter = require("Battle.model.entity_getter.TargetGetter")
 --------------------------------------------------------------------------------------------------------
 
 -- class: BattleCtrl
@@ -22,6 +22,9 @@ local BattleCtrl = extend(Ctrl, function(self, view)
 
     self.player_party = Party.new({}, 0)
     self.enemy_party = Party.new({}, 0)
+
+    self.target_getter = TargetGetter.new(self)
+
     self.ambient = AmbientFactory.getAmbientWithKey("debug_ambient1")
 end,
 
@@ -112,6 +115,10 @@ end
 
 function BattleCtrl.getAmbient(self)
     return self.get_ambient
+end
+
+function BattleCtrl.getTargetGetter(self)
+    return self.target_getter
 end
 
 return BattleCtrl

@@ -51,4 +51,27 @@ function Party.getMemberNum(self)
     return (# self:getMembers())
 end
 
+-- isEntityInParty: Entity -> bool
+-- Returns true if the entity passed is in the party and false otherwise
+function Party.isEntityInParty(self, entity)
+    for i, member in self:getMembers() do
+        if entity == member then
+            return true
+        end
+    end
+    return false
+end
+
+-- getMembersWithoutEntity: Entity -> list(Entity)
+-- gets the members of the party without the entity passed
+function Party.getMembersWithoutEntity(self, entity)
+    local members_without_entity = {}
+    for _, member in self:getMembers() do
+        if member ~= entity then
+            table.insert(members_without_entity, member)
+        end
+    end
+    return members_without_entity
+end
+
 return Party
