@@ -14,9 +14,33 @@ local ActionSequenceCreator = class(function(self, actions)
     self.action_sequence_size = 0
 end)
 
--- getStartActionsWithType: str -> list(Actions)
+-- getStartActions: str -> list(Actions)
+-- Gets a list of all the start actions available
+function ActionSequenceCreator.getStartActions(self)
+    local available_actions = {}
+    for action, state in self.used_actions do
+        if state and action:isStartAction() then
+            table.insert(available_actions, action)
+        end
+    end
+    return available_actions
+end
+
+-- getEndActions: str -> list(Actions)
+-- Gets a list of all the end actions available
+function ActionSequenceCreator.getEndActions(self)
+    local available_actions = {}
+    for action, state in self.used_actions do
+        if state and action:isEndAction() then
+            table.insert(available_actions, action)
+        end
+    end
+    return available_actions
+end
+
+-- getActionsWithStartType: str -> list(Actions)
 -- Gets a list of all the actions tha have not been used yet with the specified start piece type
-function ActionSequenceCreator.getStartActionsWithType(self, type)
+function ActionSequenceCreator.getActionsWithStartType(self, type)
     local available_actions = {}
     for action, state in self.used_actions do
         if state and (action:getStartPiece() == type) then
@@ -26,9 +50,9 @@ function ActionSequenceCreator.getStartActionsWithType(self, type)
     return available_actions
 end
 
--- getEndActionsWithType: str -> list(Actions)
+-- getActionsWithEndType: str -> list(Actions)
 -- Gets a list of all the actions tha have not been used yet with the specified end piece type
-function ActionSequenceCreator.getEndActionsWithType(self, type)
+function ActionSequenceCreator.getActionsWithEndType(self, type)
     local available_actions = {}
     for action, state in self.used_actions do
         if state and (action:getEndPiece() == type) then
