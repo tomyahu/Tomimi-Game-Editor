@@ -38,6 +38,18 @@ function ActionSequenceCreator.getEndActions(self)
     return available_actions
 end
 
+-- getActionsCompatibleWithLastAction: None -> list(Action)
+-- Gets a list with all actions compatible with last action
+-- TODO: Change this with compatible
+function ActionSequenceCreator.getActionsCompatibleWithLastAction(self)
+    if self:getLastAction() == nil then
+        return self:getStartActions()
+    end
+
+    local last_action_type = self:getLastAction():getEndPiece()
+    return self:getActionsWithStartType(last_action_type)
+end
+
 -- getActionsWithStartType: str -> list(Actions)
 -- Gets a list of all the actions tha have not been used yet with the specified start piece type
 function ActionSequenceCreator.getActionsWithStartType(self, type)
