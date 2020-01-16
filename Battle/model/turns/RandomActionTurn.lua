@@ -2,7 +2,7 @@ require "lib.classes.class"
 require "Global.application.application"
 require "Battle.consts"
 local Turn = require("Battle.model.turns.Turn")
-local ActionSequenceCreator = require("Battle.model.action_sequence.ActionSquenceCreator")
+local ActionSequenceCreator = require("Battle.model.action_sequence.ActionSequenceCreator")
 --------------------------------------------------------------------------------------------------------
 
 -- class: RandomActionTurn
@@ -24,7 +24,7 @@ function RandomActionTurn.start(self)
     local action_sequence_creator = ActionSequenceCreator.new(possible_actions)
     local start_actions = action_sequence_creator:getStartActions()
     action_sequence_creator:addAction(start_actions[math.random(1, (# start_actions))])
-    while action_sequence_creator:getLastAction():isEndAction() do
+    while not (action_sequence_creator:getLastAction():isEndAction()) do
         local last_action_type = action_sequence_creator:getLastAction():getEndPiece()
         local next_action = action_sequence_creator:getActionsWithStartType(last_action_type)
         local compatible_actions = action_sequence_creator:addAction(next_action)
@@ -37,7 +37,7 @@ function RandomActionTurn.start(self)
     -- Choose random targets depending on the first action
     local target_getter = ctrl:getTargetGetter()
     local enemy_target = target_getter:getEntityEnemyPartyMembers(self.entity)[math.random(1, (# target_getter:getEntityEnemyPartyMembers(self.entity)))]
-    local ally_target = target_getter:getEntityPartyMembers(self.entity)[math.random(1,target_getter:getEntityPartyMembers(self.entity))]
+    local ally_target = target_getter:getEntityPartyMembers(self.entity)[math.random(1,(# target_getter:getEntityPartyMembers(self.entity)))]
 
     local target_behaviour = {}
     target_behaviour[BATTLE_TARGET_SELF] = {self.entity}

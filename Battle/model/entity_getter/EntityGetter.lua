@@ -20,7 +20,7 @@ function EntityGetter.getEntityPartyMembers(self, entity)
         return party2:getMembers(entity)
     end
 
-    self:entityIsNotInAnyPartyError()
+    self:entityIsNotInAnyPartyError(entity)
 end
 
 -- getEntityEnemyPartyMembers: Entity -> list(Entity)
@@ -35,10 +35,10 @@ function EntityGetter.getEntityEnemyPartyMembers(self, entity)
         return party1:getMembers(entity)
     end
 
-    self:entityIsNotInAnyPartyError()
+    self:entityIsNotInAnyPartyError(entity)
 end
 
-function EntityGetter.entityIsNotInAnyPartyError(self)
+function EntityGetter.entityIsNotInAnyPartyError(self, entity)
     error("Tried to get entity" .. entity:getName() .. "'s party members but entity wasn't in any party.")
 end
 

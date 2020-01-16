@@ -54,7 +54,7 @@ end
 -- Returns the targets corresponding to all party member
 -- This includes the entity and the rest of its party in the same target group
 function TargetGetter.getTargetAllPartyMember(self, entity)
-    local party_members = self:getEntityPartyMembers(self, entity)
+    local party_members = self:getEntityPartyMembers(entity)
     return {party_members}
 end
 
@@ -62,7 +62,7 @@ end
 -- Returns the targets corresponding to all enemies
 -- This includes all the entities of the oposing enemy party in the same group
 function TargetGetter.getTargetAllEnemies(self, entity)
-    local enemies = self:getEntityEnemyPartyMembers(self, entity)
+    local enemies = self:getEntityEnemyPartyMembers(entity)
     return {enemies}
 end
 

@@ -54,7 +54,7 @@ end
 -- isEntityInParty: Entity -> bool
 -- Returns true if the entity passed is in the party and false otherwise
 function Party.isEntityInParty(self, entity)
-    for i, member in self:getMembers() do
+    for i, member in pairs(self:getMembers()) do
         if entity == member then
             return true
         end

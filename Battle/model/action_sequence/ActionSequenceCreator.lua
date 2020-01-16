@@ -6,7 +6,7 @@ require "lib.classes.class"
 -- An action sequence builder
 local ActionSequenceCreator = class(function(self, actions)
     self.used_actions = {}
-    for _, action in actions do
+    for _, action in pairs(actions) do
         self.used_actions[action] = false
     end
 
@@ -18,8 +18,8 @@ end)
 -- Gets a list of all the start actions available
 function ActionSequenceCreator.getStartActions(self)
     local available_actions = {}
-    for action, state in self.used_actions do
-        if state and action:isStartAction() then
+    for action, state in pairs(self.used_actions) do
+        if (not state) and action:isStartAction() then
             table.insert(available_actions, action)
         end
     end
@@ -30,8 +30,8 @@ end
 -- Gets a list of all the end actions available
 function ActionSequenceCreator.getEndActions(self)
     local available_actions = {}
-    for action, state in self.used_actions do
-        if state and action:isEndAction() then
+    for action, state in pairs(self.used_actions) do
+        if (not state) and action:isEndAction() then
             table.insert(available_actions, action)
         end
     end
@@ -42,8 +42,8 @@ end
 -- Gets a list of all the actions tha have not been used yet with the specified start piece type
 function ActionSequenceCreator.getActionsWithStartType(self, type)
     local available_actions = {}
-    for action, state in self.used_actions do
-        if state and (action:getStartPiece() == type) then
+    for action, state in pairs(self.used_actions) do
+        if (not state) and (action:getStartPiece() == type) then
             table.insert(available_actions, action)
         end
     end
@@ -55,7 +55,7 @@ end
 function ActionSequenceCreator.getActionsWithEndType(self, type)
     local available_actions = {}
     for action, state in self.used_actions do
-        if state and (action:getEndPiece() == type) then
+        if (not state) and (action:getEndPiece() == type) then
             table.insert(available_actions, action)
         end
     end
@@ -71,7 +71,20 @@ function ActionSequenceCreator.addAction(self, action)
 
     -- Check if it is compatible with last action (If there are no actions it is also compatible)
     local last_action = self:getLastAction()
+
+    if last_action == nil then
+        if action:isStartAction() then
+            self.action_sequence_size = self.action_sequence_size + 1
+            self.action_sequence[self.action_sequence_size] = action
+            self.used_actions[action] = true
+            return
+        else
+            error("Tried to add a non starting action to an empty action sequence.")
+        end
+    end
+
     if (not last_action:compatibleNext(action)) and (self.action_sequence_size > 0) then
+        print(last_action:compatibleNext(action))
         error("Tried to add an incompatible action to the action sequence.")
     end
     if (self.action_sequence_size == 0) and (not action:isStartAction()) then
@@ -79,7 +92,7 @@ function ActionSequenceCreator.addAction(self, action)
     end
 
     self.action_sequence_size = self.action_sequence_size + 1
-    self.action_sequence[self.action_stream_size] = action
+    self.action_sequence[self.action_sequence_size] = action
     self.used_actions[action] = true
 end
 
@@ -89,7 +102,7 @@ function ActionSequenceCreator.removeLastAction(self)
     end
 
     self.used_actions[self:getLastAction()] = false
-    self.action_sequence[self.action_stream_size] = nil
+    self.action_sequence[self.action_sequence_size] = nil
     self.action_sequence_size = self.action_sequence_size - 1
 end
 
