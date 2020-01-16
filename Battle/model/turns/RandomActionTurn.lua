@@ -18,10 +18,9 @@ function RandomActionTurn.start(self)
     local ctrl = application:getCurrentCtrl()
 
     -- Get Entity's possible actions
-    -- TODO: Check the case where there are non special actions
     local possible_actions = self.entity:getActions()
 
-    -- Choose one action at random
+    -- Choose a random action sequence with the possible actions
     local action_sequence_creator = ActionSequenceCreator.new(possible_actions)
     local start_actions = action_sequence_creator:getStartActions()
     action_sequence_creator:addAction(start_actions[math.random(1, (# start_actions))])
