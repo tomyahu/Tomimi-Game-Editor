@@ -115,7 +115,9 @@ function ActionSequenceCreator.addAction(self, action)
     self.used_actions[action] = true
 end
 
--- TODO: Document this
+-- removeLastAction: None -> None
+-- Removes the last action of the sequence
+-- Removes the last action of the sequence
 function ActionSequenceCreator.removeLastAction(self)
     if self.action_sequence_size == 0 then
         return
