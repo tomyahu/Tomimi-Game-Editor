@@ -8,7 +8,7 @@ local EntityGetter = require("Battle.model.entity_getter.EntityGetter")
 -- A helper class to get entities actions targets
 local TargetGetter = extend(EntityGetter, function(self, ctrl)
     self.target_function_dict = {}
-    self.target_function_dict[BATTLE_TARGET_SELF] = function(_, entity) return {entity} end
+    self.target_function_dict[BATTLE_TARGET_SELF] = function(_, entity) return {{entity}} end
     self.target_function_dict[BATTLE_TARGET_SINGLE_PARTY_MEMBER] = self.getTargetSinglePartyMember
     self.target_function_dict[BATTLE_TARGET_ALL_PARTY_MEMBER] = self.getTargetAllPartyMember
     self.target_function_dict[BATTLE_TARGET_SINGLE_ENEMY] = self.getTargetSingleEnemy
@@ -28,7 +28,7 @@ end
 -- This includes the entity and the rest of its party separately
 function TargetGetter.getTargetSinglePartyMember(self, entity)
     local party_members = self:getEntityPartyMembers(self, entity)
-    return self:getSingleTargetsFromPartyMembers(party_members)
+    return self:getSingleTargetsFromEntityList(party_members)
 end
 
 -- getTargetSingleEnemy: Entity -> list(list(Entity))
@@ -36,7 +36,7 @@ end
 -- This includes the every entity in the oposing party
 function TargetGetter.getTargetSingleEnemy(self, entity)
     local enemy_party_members = self:getEntityEnemyPartyMembers(self, entity)
-    return self:getSingleTargetsFromPartyMembers(enemy_party_members)
+    return self:getSingleTargetsFromEntityList(enemy_party_members)
 end
 
 -- getSingleTargetsFromParty: list(Entity) -> list(list(Entity))
