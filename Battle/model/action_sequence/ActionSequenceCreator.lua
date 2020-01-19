@@ -23,9 +23,17 @@ function ActionSequenceCreator.getStartActions(self)
 end
 
 -- getStartAttackActions: str -> list(Actions)
--- Gets a list of all the start actions with the tag attack
+-- Gets a list of all the start actions of the attack type
 function ActionSequenceCreator.getStartAttackActions(self)
     local condition_fun = function(action, state) return (not state) and action:isStartAction() and action:isAttackAction() end
+
+    return self:getActionsWithCondition(condition_fun)
+end
+
+-- getStartSupportActions: str -> list(Actions)
+-- Gets a list of all the start actions of the support type
+function ActionSequenceCreator.getStartSupportActions(self)
+    local condition_fun = function(action, state) return (not state) and action:isStartAction() and action:isSupportAction() end
 
     return self:getActionsWithCondition(condition_fun)
 end
@@ -128,15 +136,19 @@ function ActionSequenceCreator.removeLastAction(self)
     self.action_sequence_size = self.action_sequence_size - 1
 end
 
+-- getActionSequence: None -> list(Action)
+-- Returns the resulting action sequence of the creator
 function ActionSequenceCreator.getActionSequence(self)
     -- Check if it finishes with end action.
-    if self:getLastAction():getEndPiece() ~= "N" then
+    if self:getLastAction():isEndAction() then
         error("Tried to return action sequence where last action isnt an end action.")
     end
 
     return self.action_sequence
 end
 
+-- getLastAction: None -> Action
+-- Returns the last action of the action sequence of the creator
 function ActionSequenceCreator.getLastAction(self)
     return self.action_sequence[self.action_sequence_size]
 end
