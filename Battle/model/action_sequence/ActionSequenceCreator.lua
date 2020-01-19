@@ -140,7 +140,7 @@ end
 -- Returns the resulting action sequence of the creator
 function ActionSequenceCreator.getActionSequence(self)
     -- Check if it finishes with end action.
-    if self:getLastAction():isEndAction() then
+    if not self:getLastAction():isEndAction() then
         error("Tried to return action sequence where last action isnt an end action.")
     end
 
