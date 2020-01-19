@@ -36,7 +36,7 @@ function PlayerTurn.start(self)
 end
 
 -- makeMenues: None -> Menu
--- TODO: Document this
+-- Creates the menues associated to the player's turn
 function PlayerTurn.makeMenues(self)
     -- Create Basic Action Type Menu
     self:makeBasicActionMenu()
@@ -57,17 +57,39 @@ function PlayerTurn.makeBasicActionMenu(self)
 
     local m_build = DefaultMenuBuilder.new()
 
-    -- TODO: Check if player has starting attack moves, if not show this state as ??? with no action
-    local attack_state = SingleActionMenuState.new("Attack", ACTION_BUTTON_1, function (_)
-        print("Attack selected.")
-        menu_manager:setCurrentMenu(self.menues.start_attack_action_menu)
-    end)
+    -- Check if player has starting attack moves
+    -- if not, show this state with the name ??? with no action when activating it
+    local entity_actions = self.entity:getActions()
+    local action_sequence_creator = ActionSequenceCreator.new(entity_actions)
+    local start_attack_actions = action_sequence_creator:getStartAttackActions()
 
-    -- TODO: Check if player has starting support moves, if not show this state as ??? with no action
-    local support_state = SingleActionMenuState.new("Support", ACTION_BUTTON_1, function (_)
-        error("Support selected.")
-        menu_manager:setCurrentMenu(self.menues.start_support_action_menu)
-    end)
+    local attack_state
+    if (# start_attack_actions) > 0 then
+        attack_state = SingleActionMenuState.new("Attack", ACTION_BUTTON_1, function (_)
+            print("Attack selected.")
+            menu_manager:setCurrentMenu(self.menues.start_attack_action_menu)
+        end)
+    else
+        attack_state = SingleActionMenuState.new("???", ACTION_BUTTON_1, function (_)
+            print("There are no attack actions available.")
+        end)
+    end
+
+    -- Check if player has starting support moves
+    -- if not, show this state with the name ??? with no action when activating it
+    local start_support_actions = action_sequence_creator:getStartSupportActions()
+
+    local support_state
+    if (# start_support_actions) > 0 then
+        support_state = SingleActionMenuState.new("Support", ACTION_BUTTON_1, function (_)
+            error("Support selected.")
+            menu_manager:setCurrentMenu(self.menues.start_support_action_menu)
+        end)
+    else
+        support_state = SingleActionMenuState.new("Support", ACTION_BUTTON_1, function (_)
+            print("There are no support actions available.")
+        end)
+    end
 
     local flee_state = SingleActionMenuState.new("Run Away", ACTION_BUTTON_1, function (_)
         print("Run Away selected.")
@@ -94,7 +116,6 @@ function PlayerTurn.makeAttackStartActionMenu(self)
     -- Get starting attack actions
     local entity_actions = self.entity:getActions()
     local action_sequence_creator = ActionSequenceCreator.new(entity_actions)
-
     local start_actions = action_sequence_creator:getStartAttackActions()
 
     -- Create back funtion
