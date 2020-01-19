@@ -16,9 +16,10 @@ function ActionBuilder.reset(self)
     self.name = "???"
     self.description = "???"
     self.item_requirements = {}
-    self.start_piece = "N"
-    self.end_piece = "N"
+    self.start_piece = BATTLE_ACTION_PIECE_BORDER
+    self.end_piece = BATTLE_ACTION_PIECE_BORDER
     self.target = BATTLE_TARGET_NONE
+    self.type = BATTLE_ACTION_OTHER_TYPE
     self.action_fun = function(source_entity, target_entity) end
     return self
 end
@@ -34,6 +35,7 @@ function ActionBuilder.getAction(self)
         self.start_piece,
         self.end_piece,
         self.target,
+        self.type,
         self.action_fun
     )
 end
@@ -71,6 +73,11 @@ end
 
 function ActionBuilder.setTarget(self, new_target)
     self.target = new_target
+    return self
+end
+
+function ActionBuilder.setType(self, new_type)
+    self.type = new_type
     return self
 end
 

@@ -1,4 +1,5 @@
 require "lib.classes.class"
+require "Battle.consts"
 --------------------------------------------------------------------------------------------------------
 
 -- class: Action
@@ -10,9 +11,10 @@ require "lib.classes.class"
 -- param: start_piece:str -> The starting connection of this action
 -- param: end_piece:str -> The ending connection of this action
 -- param: target:str -> The targets this action can be used on
+-- param: type:str -> The action's type (can be attack, support and other)
 -- param: action_fun:function -> the effect of this action
 -- An action in a battle that has an effect
-local Action = class(function(self, id, name, description, item_requirements, start_piece, end_piece, target, action_fun)
+local Action = class(function(self, id, name, description, item_requirements, start_piece, end_piece, target, type, action_fun)
     self.id = id
     self.name = name
     self.description = description
@@ -20,6 +22,7 @@ local Action = class(function(self, id, name, description, item_requirements, st
     self.start_piece = start_piece
     self.end_piece = end_piece
     self.target = target
+    self.type = type
     self.action_fun = action_fun
 end)
 
@@ -47,16 +50,28 @@ function Action.compatibleNext(self, other_action)
     return (self.end_piece == other_action:getStartPiece())
 end
 
--- isStartAction: None -> None
--- Checks if an action corresponds to an action that can be used at the start of an action stream
+-- isStartAction: None -> bool
+-- Checks if the current action corresponds to an action that can be used at the start of an action sequence
 function Action.isStartAction(self)
-    return self.start_piece == "N"
+    return self.start_piece == BATTLE_ACTION_PIECE_BORDER
 end
 
--- isEndAction: None -> None
--- Checks if an action corresponds to an action that can be used at the end of an action stream
+-- isEndAction: None -> bool
+-- Checks if the current action corresponds to an action that can be used at the end of an action sequence
 function Action.isEndAction(self)
-    return self.end_piece == "N"
+    return self.end_piece == BATTLE_ACTION_PIECE_BORDER
+end
+
+-- isAttackAction: None -> bool
+-- Checks if the current actions corresponds to an attack action
+function Action.isAttackAction(self)
+    return self.type == BATTLE_ACTION_ATTACK_TYPE
+end
+
+-- isSupportAction: None -> bool
+-- Checks if the current actions corresponds to a support action
+function Action.isSupportAction(self)
+    return self.type == BATTLE_ACTION_SUPPORT_TYPE
 end
 
 -- getters
