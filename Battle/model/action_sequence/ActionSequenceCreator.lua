@@ -17,60 +17,67 @@ end)
 -- getStartActions: str -> list(Actions)
 -- Gets a list of all the start actions available
 function ActionSequenceCreator.getStartActions(self)
-    local available_actions = {}
-    for action, state in pairs(self.used_actions) do
-        if (not state) and action:isStartAction() then
-            table.insert(available_actions, action)
-        end
-    end
-    return available_actions
+    local condition_fun = function(action, state) return (not state) and action:isStartAction() end
+
+    return self:getActionsWithCondition(condition_fun)
+end
+
+-- getStartAttackActions: str -> list(Actions)
+-- Gets a list of all the start actions with the tag attack
+function ActionSequenceCreator.getStartAttackActions(self)
+    local condition_fun = function(action, state) return (not state) and action:isStartAction() and action:isAttackAction() end
+
+    return self:getActionsWithCondition(condition_fun)
 end
 
 -- getEndActions: str -> list(Actions)
 -- Gets a list of all the end actions available
 function ActionSequenceCreator.getEndActions(self)
-    local available_actions = {}
-    for action, state in pairs(self.used_actions) do
-        if (not state) and action:isEndAction() then
-            table.insert(available_actions, action)
-        end
-    end
-    return available_actions
+    local condition_fun = function(action, state) return (not state) and action:isEndAction() end
+
+    return self:getActionsWithCondition(condition_fun)
 end
 
 -- getActionsCompatibleWithLastAction: None -> list(Action)
 -- Gets a list with all actions compatible with last action
--- TODO: Change this with compatible
 function ActionSequenceCreator.getActionsCompatibleWithLastAction(self)
     if self:getLastAction() == nil then
         return self:getStartActions()
     end
 
-    local last_action_type = self:getLastAction():getEndPiece()
-    return self:getActionsWithStartType(last_action_type)
+    local last_action = self:getLastAction()
+    local condition_fun = function(action, state) return (not state) and (action:compatiblePrevious(last_action)) end
+
+    return self:getActionsWithCondition(condition_fun)
 end
 
 -- getActionsWithStartType: str -> list(Actions)
 -- Gets a list of all the actions tha have not been used yet with the specified start piece type
 function ActionSequenceCreator.getActionsWithStartType(self, type)
-    local available_actions = {}
-    for action, state in pairs(self.used_actions) do
-        if (not state) and (action:getStartPiece() == type) then
-            table.insert(available_actions, action)
-        end
-    end
-    return available_actions
+    local condition_fun = function(action, state) return (not state) and (action:getStartPiece() == type) end
+
+    return self:getActionsWithCondition(condition_fun)
 end
 
 -- getActionsWithEndType: str -> list(Actions)
 -- Gets a list of all the actions tha have not been used yet with the specified end piece type
 function ActionSequenceCreator.getActionsWithEndType(self, type)
+    local condition_fun = function(action, state) return (not state) and (action:getEndPiece() == type) end
+
+    return self:getActionsWithCondition(condition_fun)
+end
+
+-- getActionsWithCondition: function(Action, bool) -> list(Action)
+-- Gets a list of all the actions that passes the condition function
+function ActionSequenceCreator.getActionsWithCondition(self, condition_fun)
     local available_actions = {}
-    for action, state in self.used_actions do
-        if (not state) and (action:getEndPiece() == type) then
+
+    for action, state in pairs(self.used_actions) do
+        if condition_fun(action, state) then
             table.insert(available_actions, action)
         end
     end
+
     return available_actions
 end
 
@@ -108,6 +115,7 @@ function ActionSequenceCreator.addAction(self, action)
     self.used_actions[action] = true
 end
 
+-- TODO: Document this
 function ActionSequenceCreator.removeLastAction(self)
     if self.action_sequence_size == 0 then
         return
