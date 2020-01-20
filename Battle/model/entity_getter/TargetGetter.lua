@@ -35,7 +35,7 @@ end
 -- Returns the targets corresponding to single enemy
 -- This includes the every entity in the oposing party
 function TargetGetter.getTargetSingleEnemy(self, entity)
-    local enemy_party_members = self:getEntityEnemyPartyMembers(self, entity)
+    local enemy_party_members = self:getEntityEnemyPartyMembers(entity)
     return self:getSingleTargetsFromEntityList(enemy_party_members)
 end
 
@@ -43,7 +43,7 @@ end
 -- Gets a list of single target options using an entity list
 function TargetGetter.getSingleTargetsFromEntityList(self, entity_list)
     local targets = {}
-    for _, member in entity_list do
+    for _, member in pairs(entity_list) do
         table.insert(targets, {member})
     end
 
