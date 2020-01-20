@@ -44,7 +44,8 @@ function PlayerTurn.makeMenues(self)
     -- Create Attack Action Menu
     self:makeAttackStartActionMenu()
 
-    -- TODO: Create Support Action Menu
+    -- Create Support Action Menu
+    self:makeSupportStartActionMenu()
 end
 
 
@@ -110,7 +111,7 @@ function PlayerTurn.makeAttackStartActionMenu(self)
     local action_sequence_creator = ActionSequenceCreator.new(entity_actions)
     local start_actions = action_sequence_creator:getStartAttackActions()
 
-    local menu_pointer_table = self:makeActionSelectionMenu(action_sequence_creator, start_actions)
+    local menu_pointer_table = self:makeActionSelectionMenu(self.menues.action_menu, action_sequence_creator, start_actions)
     self.menues.start_attack_action_menu = menu_pointer_table.menu
 end
 
@@ -122,24 +123,23 @@ function PlayerTurn.makeSupportStartActionMenu(self)
     local action_sequence_creator = ActionSequenceCreator.new(entity_actions)
     local start_actions = action_sequence_creator:getStartSupportActions()
 
-    local menu_pointer_table = self:makeActionSelectionMenu(action_sequence_creator, start_actions)
+    local menu_pointer_table = self:makeActionSelectionMenu(self.menues.action_menu, action_sequence_creator, start_actions)
     self.menues.start_support_action_menu = menu_pointer_table.menu
 end
 
 -- makeComboActionMenu: None -> None
 -- Creates the menu that shows up abilities that are compatible with the previous abilities
-function PlayerTurn.makeComboActionMenu(self)
+function PlayerTurn.makeComboActionMenu(self, menu_pointer_table, action_sequence_creator)
     -- Get compatible attack actions
-    local entity_actions = self.entity:getActions()
-    local action_sequence_creator = ActionSequenceCreator.new(entity_actions)
-    local start_actions = action_sequence_creator:getActionsCompatibleWithLastAction()
+    local compatible_actions = action_sequence_creator:getActionsCompatibleWithLastAction()
 
-    local menu_pointer_table = self:makeActionSelectionMenu(action_sequence_creator, start_actions)
+    local menu_pointer_table = self:makeActionSelectionMenu(menu_pointer_table, action_sequence_creator, compatible_actions)
     self.menues.start_attack_action_menu = menu_pointer_table.menu
 end
 
--- TODO: Document this
-function PlayerTurn.makeActionSelectionMenu(self, action_sequence_creator, start_actions)
+-- makeActionSelectionMenu: {Menu}, ActionSequenceCreator, list(Action) -> {Menu}
+-- Creates a menu to select from a list of actions
+function PlayerTurn.makeActionSelectionMenu(self, menu_pointer_table, action_sequence_creator, start_actions)
     local ctrl = application:getCurrentCtrl()
     local menu_manager = ctrl:getMenuManager()
 
@@ -151,7 +151,7 @@ function PlayerTurn.makeActionSelectionMenu(self, action_sequence_creator, start
 
     -- Create funtion to go back to the first menu
     local back_funtion = function()
-        menu_manager:setCurrentMenu(self.menues.action_menu)
+        menu_manager:setCurrentMenu(menu_pointer_table.menu)
 
         -- TODO: Change this to audio queue
         print("back to previous menu")
@@ -191,7 +191,8 @@ function PlayerTurn.makeActionSelectionMenu(self, action_sequence_creator, start
     return menu_pointer_table
 end
 
--- TODO: Document this
+-- makeTargetMenu: {Menu}, list(Action) -> {Menu}
+-- Creates a menu to select from a list of targets
 function PlayerTurn.makeTargetMenu(self, menu_pointer_table, action_sequence)
     local action_sequence_type = action_sequence[(# action_sequence)]:getType()
 
@@ -266,6 +267,38 @@ function PlayerTurn.makeTargetMenuAux(self, menu_pointer_table, action_sequence,
 
         m_build:addState(target_state)
     end
+
+    return m_build:getMenu()
+end
+
+-- TODO: Document this
+function PlayerTurn.makeConfirmationMenu(self, menu_pointer_table, action_sequence)
+    local ctrl = application:getCurrentCtrl()
+    local menu_manager = ctrl:getMenuManager()
+    local turn_manager = ctrl:getTurnManager()
+    local target_getter = ctrl:getTargetGetter()
+
+    local m_build = DefaultMenuBuilder.new()
+
+    local previous_menu = menu_pointer_table.menu
+
+    local back_funtion = function()
+        menu_manager:setCurrentMenu(previous_menu)
+    end
+
+    local target_state = ContentMenuState.new("Go!")
+
+    target_state:addTransitionAction(ACTION_BUTTON_1, function(_)
+        local target_entities = {}
+        for _, action in pairs(action_sequence) do
+            table.insert(target_entities, target_getter:getTargets(self.entity, action:getTarget())[1])
+        end
+
+        menu_manager:setCurrentMenu(nil)
+        turn_manager:turnEnded(action_sequence, target_entities)
+    end)
+
+    target_state:addTransitionAction(ACTION_BUTTON_2, back_funtion)
 
     return m_build:getMenu()
 end
