@@ -9,6 +9,8 @@ local BackGroundView = require("Battle.view.background.BackgroundView")
 local PartyView = require("Battle.view.party.PartyView")
 local EnemyPartyView = require("Battle.view.party.EnemyPartyView")
 local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
+
+local MenuFactory = require("Battle.view.menues.MenuFactory")
 --------------------------------------------------------------------------------------------------------
 
 -- Sprite factory to generate the entity's sprite
@@ -16,10 +18,13 @@ local sprite_factory = SpriteFactory.new()
 
 -- class: BattleView
 -- The view of the battle app
-local BattleView = extend(View, function(self)
+local BattleView = extend(View, function(self, menu_sprite_sheet_path, font)
     self.party_view = nil
     self.enemy_party_view = nil
     self.background_view = nil
+
+    local menu_factory = MenuFactory.new(menu_sprite_sheet_path, font)
+    self.menu_view = menu_factory:getBasicMenu(nil, 40, 80)
 end,
 
 function()
@@ -32,6 +37,7 @@ function BattleView.draw(self)
     self.background_view:draw()
     self.party_view:draw()
     self.enemy_party_view:draw()
+    self.menu_view:draw()
 end
 
 -- setup: None -> None
@@ -65,6 +71,11 @@ end
 -- getter
 function BattleView.getEnemyPartyView(self)
     return self.enemy_party_view
+end
+
+-- getter
+function BattleView.getMenuView(self)
+    return self.menu_view
 end
 
 return BattleView
