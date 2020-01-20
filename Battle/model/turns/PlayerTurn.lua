@@ -165,18 +165,15 @@ function PlayerTurn.makeActionSelectionMenu(self, menu_pointer_table, action_seq
             -- TODO: Add audio queue for this
             action_sequence_creator:addAction(action)
 
+            -- TODO: Delete this
+            print(action:getName() .. " selected.")
 
             -- If action is an ending action go to the target selection menu
             if action:isEndAction() then
-                -- TODO: Delete this
-                print(action:getName() .. " selected.")
-
                 local target_menu = self:makeTargetMenu(menu_pointer_table, action_sequence_creator:getActionSequence())
                 menu_manager:setCurrentMenu(target_menu)
             else
-                error("Combo Menu is not implemented yet")
-
-                -- TODO: Otherwise create an attack combo menu with this menu as the previous menu and go to it
+                -- Otherwise create an attack combo menu with this menu as the previous menu and go to it
                 local combo_menu = self:makeComboActionMenu(menu_pointer_table, action_sequence_creator)
                 menu_manager:setCurrentMenu(combo_menu)
             end
@@ -210,7 +207,8 @@ function PlayerTurn.makeTargetMenu(self, menu_pointer_table, action_sequence)
     error("Unrecognized type of sequence: " .. action_sequence_type .. ".")
 end
 
--- TODO: Document this
+-- makeAttackTargetMenu: {Menu}, list(Action) -> Menu
+-- Makes a target menu to see which enemy is the target of the attack action sequence
 function PlayerTurn.makeAttackTargetMenu(self, menu_pointer_table, action_sequence)
     local ctrl = application:getCurrentCtrl()
     local target_getter = ctrl:getTargetGetter()
@@ -218,7 +216,8 @@ function PlayerTurn.makeAttackTargetMenu(self, menu_pointer_table, action_sequen
     return self:makeTargetMenuAux(menu_pointer_table, action_sequence, target_getter:getTargetSingleEnemy(self.entity), BATTLE_TARGET_SINGLE_ENEMY)
 end
 
--- TODO: Document this
+-- makeSupportTargetMenu: {Menu}, list(Action) -> Menu
+-- Makes a target menu to see which ally is the target of the support action sequence
 function PlayerTurn.makeSupportTargetMenu(self, menu_pointer_table, action_sequence)
     local ctrl = application:getCurrentCtrl()
     local target_getter = ctrl:getTargetGetter()
@@ -226,7 +225,8 @@ function PlayerTurn.makeSupportTargetMenu(self, menu_pointer_table, action_seque
     return self:makeTargetMenuAux(menu_pointer_table, action_sequence, target_getter:getTargetSinglePartyMember(self.entity), BATTLE_TARGET_SINGLE_PARTY_MEMBER)
 end
 
--- TODO: Document this
+-- makeTargetMenuAux: {Menu}, list(Action), list(list(Entity)), str -> Menu
+-- Auxiliary function on making a target menu
 function PlayerTurn.makeTargetMenuAux(self, menu_pointer_table, action_sequence, target_sets, target_type_decision)
     if (# target_sets) == 0 then
         return self:makeConfirmationMenu(menu_pointer_table, action_sequence)
@@ -271,7 +271,8 @@ function PlayerTurn.makeTargetMenuAux(self, menu_pointer_table, action_sequence,
     return m_build:getMenu()
 end
 
--- TODO: Document this
+-- makeConfirmationMenu: {Menu}, list(Action) -> Menu
+-- Creates a menu to confirm a sequence of actions
 function PlayerTurn.makeConfirmationMenu(self, menu_pointer_table, action_sequence)
     local ctrl = application:getCurrentCtrl()
     local menu_manager = ctrl:getMenuManager()
