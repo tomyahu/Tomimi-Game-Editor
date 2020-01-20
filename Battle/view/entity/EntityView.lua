@@ -1,5 +1,8 @@
 require "lib.classes.class"
+require "Global.consts"
+require "Global.application.application"
 require "Global.LOVEWrapper.LOVEWrapper"
+require "Battle.shaders"
 local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 --------------------------------------------------------------------------------------------------------
 
@@ -22,7 +25,22 @@ end)
 -- draw: int, int -> None
 -- Draws the entity's sprite on the screen
 function EntityView.draw(self)
-    self.sprite:draw(getRelativePosX(self.current_x), getRelativePosY(self.current_y), getScale(), getScale())
+    local ctrl = application:getCurrentCtrl()
+    local turn_manager = ctrl:getTurnManager()
+
+    local draw_x = self.current_x
+    if turn_manager:getCurrentTurn():getEntity() == self.entity then
+        draw_x = draw_x + 10
+        love.graphics.setShader(OUTLINE_SHADER)
+            OUTLINE_SHADER:send("outline_color", {1,1,1,1})
+            OUTLINE_SHADER:send("outline_size", getScale()*20/GAME_WIDTH)
+
+        self.sprite:draw(getRelativePosX(draw_x), getRelativePosY(self.current_y), getScale(), getScale())
+        love.graphics.setShader()
+    else
+        self.sprite:draw(getRelativePosX(draw_x), getRelativePosY(self.current_y), getScale(), getScale())
+    end
+
 end
 
 -- getCurrentPosition: None -> dict(x:int, y:int)
