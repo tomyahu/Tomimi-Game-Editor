@@ -1,4 +1,5 @@
 require "lib.classes.class"
+require "Global.application.application"
 --------------------------------------------------------------------------------------------------------
 
 -- class: MenuManager
@@ -18,6 +19,10 @@ end
 -- setter
 function MenuManager.setCurrentMenu(self, new_menu)
     self.current_menu = new_menu
+
+    local view = application:getCurrentView()
+    view:getMenuView():setMenu(self.current_menu)
+
 end
 
 return MenuManager
