@@ -82,11 +82,10 @@ function PlayerTurn.makeBasicActionMenu(self)
     local support_state
     if (# start_support_actions) > 0 then
         support_state = SingleActionMenuState.new("Support", ACTION_BUTTON_1, function (_)
-            error("Support selected.")
             menu_manager:setCurrentMenu(self.menues.start_support_action_menu)
         end)
     else
-        support_state = SingleActionMenuState.new("Support", ACTION_BUTTON_1, function (_)
+        support_state = SingleActionMenuState.new("???", ACTION_BUTTON_1, function (_)
             print("There are no support actions available.")
         end)
     end
@@ -106,40 +105,79 @@ end
 -- makeAttackStartActionMenu: None -> None
 -- Creates the menu that shows up when the attack option is selected in the first menu
 function PlayerTurn.makeAttackStartActionMenu(self)
-    local ctrl = application:getCurrentCtrl()
-    local menu_manager = ctrl:getMenuManager()
-
-    local menu_pointer_table = {}
-
-    local m_build = DefaultMenuBuilder.new()
-
     -- Get starting attack actions
     local entity_actions = self.entity:getActions()
     local action_sequence_creator = ActionSequenceCreator.new(entity_actions)
     local start_actions = action_sequence_creator:getStartAttackActions()
 
-    -- Create back funtion
+    local menu_pointer_table = self:makeActionSelectionMenu(action_sequence_creator, start_actions)
+    self.menues.start_attack_action_menu = menu_pointer_table.menu
+end
+
+-- makeSupportStartActionMenu: None -> None
+-- Creates the menu that shows up when the support option is selected in the first menu
+function PlayerTurn.makeSupportStartActionMenu(self)
+    -- Get starting attack actions
+    local entity_actions = self.entity:getActions()
+    local action_sequence_creator = ActionSequenceCreator.new(entity_actions)
+    local start_actions = action_sequence_creator:getStartSupportActions()
+
+    local menu_pointer_table = self:makeActionSelectionMenu(action_sequence_creator, start_actions)
+    self.menues.start_support_action_menu = menu_pointer_table.menu
+end
+
+-- makeComboActionMenu: None -> None
+-- Creates the menu that shows up abilities that are compatible with the previous abilities
+function PlayerTurn.makeComboActionMenu(self)
+    -- Get compatible attack actions
+    local entity_actions = self.entity:getActions()
+    local action_sequence_creator = ActionSequenceCreator.new(entity_actions)
+    local start_actions = action_sequence_creator:getActionsCompatibleWithLastAction()
+
+    local menu_pointer_table = self:makeActionSelectionMenu(action_sequence_creator, start_actions)
+    self.menues.start_attack_action_menu = menu_pointer_table.menu
+end
+
+-- TODO: Document this
+function PlayerTurn.makeActionSelectionMenu(self, action_sequence_creator, start_actions)
+    local ctrl = application:getCurrentCtrl()
+    local menu_manager = ctrl:getMenuManager()
+
+    -- Create pointer table to the menu that will be created
+    local menu_pointer_table = {}
+
+    -- Create menu builder
+    local m_build = DefaultMenuBuilder.new()
+
+    -- Create funtion to go back to the first menu
     local back_funtion = function()
         menu_manager:setCurrentMenu(self.menues.action_menu)
-        print("back to first menu")
+
+        -- TODO: Change this to audio queue
+        print("back to previous menu")
     end
 
-    -- TODO: Create menu for all starting actions
+    -- Create menu for all starting actions
     for _, action in pairs(start_actions) do
         local action_state = ContentMenuState.new(action:getName(), action)
 
         action_state:addTransitionAction(ACTION_BUTTON_1, function(_)
+            -- TODO: Add audio queue for this
             action_sequence_creator:addAction(action)
 
-            -- TODO: If action is an ending action go to the target selection menu
+
+            -- If action is an ending action go to the target selection menu
             if action:isEndAction() then
+                -- TODO: Delete this
                 print(action:getName() .. " selected.")
-                local target_menu = self:makeAttackTargetMenu(menu_pointer_table, action_sequence_creator:getActionSequence())
+
+                local target_menu = self:makeTargetMenu(menu_pointer_table, action_sequence_creator:getActionSequence())
                 menu_manager:setCurrentMenu(target_menu)
             else
                 error("Combo Menu is not implemented yet")
+
                 -- TODO: Otherwise create an attack combo menu with this menu as the previous menu and go to it
-                local combo_menu = self:makeAttackComboMenu(menu_pointer_table, action_sequence_creator)
+                local combo_menu = self:makeComboActionMenu(menu_pointer_table, action_sequence_creator)
                 menu_manager:setCurrentMenu(combo_menu)
             end
 
@@ -150,13 +188,53 @@ function PlayerTurn.makeAttackStartActionMenu(self)
     end
 
     menu_pointer_table.menu = m_build:getMenu()
-    self.menues.start_attack_action_menu = menu_pointer_table.menu
+    return menu_pointer_table
 end
 
+-- TODO: Document this
+function PlayerTurn.makeTargetMenu(self, menu_pointer_table, action_sequence)
+    local action_sequence_type = action_sequence[(# action_sequence)]:getType()
+
+    local is_attack_action_sequence = action_sequence_type == BATTLE_ACTION_ATTACK_TYPE
+    local is_support_action_sequence = action_sequence_type == BATTLE_ACTION_SUPPORT_TYPE
+
+    if is_attack_action_sequence then
+        return self:makeAttackTargetMenu(menu_pointer_table, action_sequence)
+    end
+
+    if is_support_action_sequence then
+        return self:makeSupportTargetMenu(menu_pointer_table, action_sequence)
+    end
+
+    error("Unrecognized type of sequence: " .. action_sequence_type .. ".")
+end
+
+-- TODO: Document this
 function PlayerTurn.makeAttackTargetMenu(self, menu_pointer_table, action_sequence)
+    local ctrl = application:getCurrentCtrl()
+    local target_getter = ctrl:getTargetGetter()
+
+    return self:makeTargetMenuAux(menu_pointer_table, action_sequence, target_getter:getTargetSingleEnemy(self.entity), BATTLE_TARGET_SINGLE_ENEMY)
+end
+
+-- TODO: Document this
+function PlayerTurn.makeSupportTargetMenu(self, menu_pointer_table, action_sequence)
+    local ctrl = application:getCurrentCtrl()
+    local target_getter = ctrl:getTargetGetter()
+
+    return self:makeTargetMenuAux(menu_pointer_table, action_sequence, target_getter:getTargetSinglePartyMember(self.entity), BATTLE_TARGET_SINGLE_PARTY_MEMBER)
+end
+
+-- TODO: Document this
+function PlayerTurn.makeTargetMenuAux(self, menu_pointer_table, action_sequence, target_sets, target_type_decision)
+    if (# target_sets) == 0 then
+        return self:makeConfirmationMenu(menu_pointer_table, action_sequence)
+    end
+
     local ctrl = application:getCurrentCtrl()
     local menu_manager = ctrl:getMenuManager()
     local turn_manager = ctrl:getTurnManager()
+    local target_getter = ctrl:getTargetGetter()
 
     local m_build = DefaultMenuBuilder.new()
 
@@ -166,35 +244,14 @@ function PlayerTurn.makeAttackTargetMenu(self, menu_pointer_table, action_sequen
         menu_manager:setCurrentMenu(previous_menu)
     end
 
-    local is_there_a_single_enemy_action = false
-    for _, action in pairs(action_sequence) do
-        if action:getTarget() == BATTLE_TARGET_SINGLE_ENEMY then
-            is_there_a_single_enemy_action = true
-        end
-    end
-
-    local target_getter = ctrl:getTargetGetter()
-    local target_options
-    if is_there_a_single_enemy_action then
-        target_options = target_getter:getTargetSingleEnemy(self.entity)
-    else
-        target_options = target_getter:getTargetAllEnemies(self.entity)
-    end
-
-    for _, target_set in pairs(target_options) do
-        local state_name
-        if (# target_set) == 1 then
-            state_name = target_set[1]:getName()
-        else
-            state_name = "All Enemies"
-        end
-
+    for _, target_set in pairs(target_sets) do
+        local state_name = target_set[1]:getName()
         local target_state = ContentMenuState.new(state_name, target_set)
 
         target_state:addTransitionAction(ACTION_BUTTON_1, function(_)
             local target_entities = {}
             for _, action in pairs(action_sequence) do
-                if action:getTarget() == BATTLE_TARGET_SINGLE_ENEMY then
+                if action:getTarget() == target_type_decision then
                     table.insert(target_entities, target_set)
                 else
                     table.insert(target_entities, target_getter:getTargets(self.entity, action:getTarget())[1])
