@@ -56,16 +56,16 @@ function RectangleIconMenuView.draw(self)
     for i = 1, math.min(self.menu_capacity, (#self.menu.options)) do
         local index = i
         local option = self.menu.options[i+self.current_option_delta]
-        if self.icon_image_dict[option:toString()] == nil then
-            self.icon_image_dict[option:toString()] = sprite_factory:getRegularRectSprite(option:getIconPath(), 16, 16, 1)
+        if self.icon_image_dict[option] == nil then
+            self.icon_image_dict[option] = sprite_factory:getRegularRectSprite(option:getIconPath(), 16, 16, 1)
         end
 
         if self.menu:getCurrentState() == option then
             love.graphics.print( option:toString(), getRelativePosX(start_x + 10), getRelativePosY(start_y + index*space_y), 0, getScale(), getScale())
-            self.icon_image_dict[option:toString()]:draw(getRelativePosX(start_x - 22), getRelativePosY(start_y + index*space_y - 4), 2*getScale(), 2*getScale())
+            self.icon_image_dict[option]:draw(getRelativePosX(start_x - 22), getRelativePosY(start_y + index*space_y - 4), 2*getScale(), 2*getScale())
         else
             love.graphics.print( option:toString(), getRelativePosX(start_x), getRelativePosY(start_y + index*space_y), 0, getScale(), getScale())
-            self.icon_image_dict[option:toString()]:draw(getRelativePosX(start_x - 32), getRelativePosY(start_y + index*space_y - 4), 2*getScale(), 2*getScale())
+            self.icon_image_dict[option]:draw(getRelativePosX(start_x - 32), getRelativePosY(start_y + index*space_y - 4), 2*getScale(), 2*getScale())
         end
     end
 end

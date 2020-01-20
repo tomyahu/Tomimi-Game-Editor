@@ -29,7 +29,7 @@ function BasicMenuView.draw(self, context)
     local backgroundpixelwidth, backgroundpixelheight = background:getPixelDimensions()
     love.graphics.draw(background,0,0,0, getScale() * GAME_WIDTH / backgroundpixelwidth, getScale()* GAME_HEIGHT / backgroundpixelheight)
     for index, option in pairs(self.menu.options) do
-        if self.menu:getCurrentState():getName() == option:getName() then
+        if self.menu:getCurrentState() == option then
             love.graphics.print( option:getName(), getRelativePosX(300 + 10), getRelativePosY(300 + index*50), 0, 2*getScale(), 2*getScale())
         else
             love.graphics.print( option:getName(), getRelativePosX(300), getRelativePosY(300 + index*50), 0, 2*getScale(), 2*getScale())
