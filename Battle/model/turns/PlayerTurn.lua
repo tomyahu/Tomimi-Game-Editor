@@ -67,12 +67,10 @@ function PlayerTurn.makeBasicActionMenu(self)
     local attack_state
     if (# start_attack_actions) > 0 then
         attack_state = SingleActionMenuState.new("Attack", ACTION_BUTTON_1, function (_)
-            print("Attack selected.")
             menu_manager:setCurrentMenu(self.menues.start_attack_action_menu)
         end)
     else
         attack_state = SingleActionMenuState.new("???", ACTION_BUTTON_1, function (_)
-            print("There are no attack actions available.")
         end)
     end
 
@@ -87,12 +85,10 @@ function PlayerTurn.makeBasicActionMenu(self)
         end)
     else
         support_state = SingleActionMenuState.new("???", ACTION_BUTTON_1, function (_)
-            print("There are no support actions available.")
         end)
     end
 
     local flee_state = SingleActionMenuState.new("Run Away", ACTION_BUTTON_1, function (_)
-        print("Run Away selected.")
         turn_manager:turnEnded({flee_action}, {{self.entity}})
     end)
 
@@ -154,7 +150,6 @@ function PlayerTurn.makeActionSelectionMenu(self, menu_pointer_table, action_seq
         menu_manager:setCurrentMenu(menu_pointer_table.menu)
 
         -- TODO: Change this to audio queue
-        print("back to previous menu")
     end
 
     -- Create pointer table to the menu that will be created
@@ -170,9 +165,6 @@ function PlayerTurn.makeActionSelectionMenu(self, menu_pointer_table, action_seq
         action_state:addTransitionAction(ACTION_BUTTON_1, function(_)
             -- TODO: Add audio queue for this
             action_sequence_creator:addAction(action)
-
-            -- TODO: Delete this
-            print(action:getName() .. " selected.")
 
             -- If action is an ending action go to the target selection menu
             if action:isEndAction() then
