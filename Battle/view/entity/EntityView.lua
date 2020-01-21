@@ -28,14 +28,21 @@ function EntityView.draw(self)
     local ctrl = application:getCurrentCtrl()
     local turn_manager = ctrl:getTurnManager()
 
+
     local draw_x = self.current_x
     if turn_manager:getCurrentTurn():getEntity() == self.entity then
         draw_x = draw_x + 10
+        local canvas = love.graphics.newCanvas(WINDOW_WIDTH, WINDOW_HEIGHT)
+
+        love.graphics.setCanvas(canvas)
+            self.sprite:draw(getRelativePosX(draw_x), getRelativePosY(self.current_y), getScale(), getScale())
+        love.graphics.setCanvas()
+
         love.graphics.setShader(OUTLINE_SHADER)
             OUTLINE_SHADER:send("outline_color", {1,1,1,1})
-            OUTLINE_SHADER:send("outline_size", getScale()*20/GAME_WIDTH)
+            OUTLINE_SHADER:send("outline_size", getScale()*4/GAME_WIDTH)
 
-        self.sprite:draw(getRelativePosX(draw_x), getRelativePosY(self.current_y), getScale(), getScale())
+            love.graphics.draw(canvas, 0, 0)
         love.graphics.setShader()
     else
         self.sprite:draw(getRelativePosX(draw_x), getRelativePosY(self.current_y), getScale(), getScale())
