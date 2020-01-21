@@ -22,8 +22,8 @@ function MenuFactory.getBasicMenu(self, menu, x, y)
         menu_size = menu:getOptionNumber()
     end
 
-    local main_option_menu_view = UITeselatedFrame.new(x, y, self.sprite, 10, math.floor(menu_size * (25/32))+1, 32)
-    local rectangle_menu_view = RectangleMenuView.new(menu, main_option_menu_view, self.font, 25)
+    local main_option_menu_view = UITeselatedFrame.new(x, y, self.sprite, 10, menu_size, 32)
+    local rectangle_menu_view = RectangleMenuView.new(menu, main_option_menu_view, self.font, 32)
     return rectangle_menu_view
 end
 
