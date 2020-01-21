@@ -111,7 +111,10 @@ function PlayerTurn.makeAttackStartActionMenu(self)
     local action_sequence_creator = ActionSequenceCreator.new(entity_actions)
     local start_actions = action_sequence_creator:getStartAttackActions()
 
-    local menu_pointer_table = self:makeActionSelectionMenu(self.menues.action_menu, action_sequence_creator, start_actions)
+    local aux = {}
+    aux.menu = self.menues.action_menu
+
+    local menu_pointer_table = self:makeActionSelectionMenu(aux, action_sequence_creator, start_actions)
     self.menues.start_attack_action_menu = menu_pointer_table.menu
 end
 
@@ -123,7 +126,10 @@ function PlayerTurn.makeSupportStartActionMenu(self)
     local action_sequence_creator = ActionSequenceCreator.new(entity_actions)
     local start_actions = action_sequence_creator:getStartSupportActions()
 
-    local menu_pointer_table = self:makeActionSelectionMenu(self.menues.action_menu, action_sequence_creator, start_actions)
+    local aux = {}
+    aux.menu = self.menues.action_menu
+
+    local menu_pointer_table = self:makeActionSelectionMenu(aux, action_sequence_creator, start_actions)
     self.menues.start_support_action_menu = menu_pointer_table.menu
 end
 
@@ -143,12 +149,6 @@ function PlayerTurn.makeActionSelectionMenu(self, menu_pointer_table, action_seq
     local ctrl = application:getCurrentCtrl()
     local menu_manager = ctrl:getMenuManager()
 
-    -- Create pointer table to the menu that will be created
-    local menu_pointer_table = {}
-
-    -- Create menu builder
-    local m_build = DefaultMenuBuilder.new()
-
     -- Create funtion to go back to the first menu
     local back_funtion = function()
         menu_manager:setCurrentMenu(menu_pointer_table.menu)
@@ -156,6 +156,12 @@ function PlayerTurn.makeActionSelectionMenu(self, menu_pointer_table, action_seq
         -- TODO: Change this to audio queue
         print("back to previous menu")
     end
+
+    -- Create pointer table to the menu that will be created
+    local menu_pointer_table = {}
+
+    -- Create menu builder
+    local m_build = DefaultMenuBuilder.new()
 
     -- Create menu for all starting actions
     for _, action in pairs(start_actions) do
@@ -170,7 +176,7 @@ function PlayerTurn.makeActionSelectionMenu(self, menu_pointer_table, action_seq
 
             -- If action is an ending action go to the target selection menu
             if action:isEndAction() then
-                local target_menu = self:makeTargetMenu(menu_pointer_table, action_sequence_creator:getActionSequence())
+                local target_menu = self:makeTargetMenu(menu_pointer_table, action_sequence_creator:getActionSequence(), action_sequence_creator)
                 menu_manager:setCurrentMenu(target_menu)
             else
                 -- Otherwise create an attack combo menu with this menu as the previous menu and go to it
@@ -190,18 +196,18 @@ end
 
 -- makeTargetMenu: {Menu}, list(Action) -> {Menu}
 -- Creates a menu to select from a list of targets
-function PlayerTurn.makeTargetMenu(self, menu_pointer_table, action_sequence)
+function PlayerTurn.makeTargetMenu(self, menu_pointer_table, action_sequence, action_sequence_creator)
     local action_sequence_type = action_sequence[(# action_sequence)]:getType()
 
     local is_attack_action_sequence = action_sequence_type == BATTLE_ACTION_ATTACK_TYPE
     local is_support_action_sequence = action_sequence_type == BATTLE_ACTION_SUPPORT_TYPE
 
     if is_attack_action_sequence then
-        return self:makeAttackTargetMenu(menu_pointer_table, action_sequence)
+        return self:makeAttackTargetMenu(menu_pointer_table, action_sequence, action_sequence_creator)
     end
 
     if is_support_action_sequence then
-        return self:makeSupportTargetMenu(menu_pointer_table, action_sequence)
+        return self:makeSupportTargetMenu(menu_pointer_table, action_sequence, action_sequence_creator)
     end
 
     error("Unrecognized type of sequence: " .. action_sequence_type .. ".")
@@ -209,27 +215,27 @@ end
 
 -- makeAttackTargetMenu: {Menu}, list(Action) -> Menu
 -- Makes a target menu to see which enemy is the target of the attack action sequence
-function PlayerTurn.makeAttackTargetMenu(self, menu_pointer_table, action_sequence)
+function PlayerTurn.makeAttackTargetMenu(self, menu_pointer_table, action_sequence, action_sequence_creator)
     local ctrl = application:getCurrentCtrl()
     local target_getter = ctrl:getTargetGetter()
 
-    return self:makeTargetMenuAux(menu_pointer_table, action_sequence, target_getter:getTargetSingleEnemy(self.entity), BATTLE_TARGET_SINGLE_ENEMY)
+    return self:makeTargetMenuAux(menu_pointer_table, action_sequence, action_sequence_creator, target_getter:getTargetSingleEnemy(self.entity), BATTLE_TARGET_SINGLE_ENEMY)
 end
 
 -- makeSupportTargetMenu: {Menu}, list(Action) -> Menu
 -- Makes a target menu to see which ally is the target of the support action sequence
-function PlayerTurn.makeSupportTargetMenu(self, menu_pointer_table, action_sequence)
+function PlayerTurn.makeSupportTargetMenu(self, menu_pointer_table, action_sequence, action_sequence_creator)
     local ctrl = application:getCurrentCtrl()
     local target_getter = ctrl:getTargetGetter()
 
-    return self:makeTargetMenuAux(menu_pointer_table, action_sequence, target_getter:getTargetSinglePartyMember(self.entity), BATTLE_TARGET_SINGLE_PARTY_MEMBER)
+    return self:makeTargetMenuAux(menu_pointer_table, action_sequence, action_sequence_creator, target_getter:getTargetSinglePartyMember(self.entity), BATTLE_TARGET_SINGLE_PARTY_MEMBER)
 end
 
 -- makeTargetMenuAux: {Menu}, list(Action), list(list(Entity)), str -> Menu
 -- Auxiliary function on making a target menu
-function PlayerTurn.makeTargetMenuAux(self, menu_pointer_table, action_sequence, target_sets, target_type_decision)
+function PlayerTurn.makeTargetMenuAux(self, menu_pointer_table, action_sequence, action_sequence_creator, target_sets, target_type_decision)
     if (# target_sets) == 0 then
-        return self:makeConfirmationMenu(menu_pointer_table, action_sequence)
+        return self:makeConfirmationMenu(menu_pointer_table, action_sequence, action_sequence_creator)
     end
 
     local ctrl = application:getCurrentCtrl()
@@ -242,6 +248,7 @@ function PlayerTurn.makeTargetMenuAux(self, menu_pointer_table, action_sequence,
     local previous_menu = menu_pointer_table.menu
 
     local back_funtion = function()
+        action_sequence_creator:removeLastAction()
         menu_manager:setCurrentMenu(previous_menu)
     end
 
@@ -273,7 +280,7 @@ end
 
 -- makeConfirmationMenu: {Menu}, list(Action) -> Menu
 -- Creates a menu to confirm a sequence of actions
-function PlayerTurn.makeConfirmationMenu(self, menu_pointer_table, action_sequence)
+function PlayerTurn.makeConfirmationMenu(self, menu_pointer_table, action_sequence, action_sequence_creator)
     local ctrl = application:getCurrentCtrl()
     local menu_manager = ctrl:getMenuManager()
     local turn_manager = ctrl:getTurnManager()
@@ -284,6 +291,7 @@ function PlayerTurn.makeConfirmationMenu(self, menu_pointer_table, action_sequen
     local previous_menu = menu_pointer_table.menu
 
     local back_funtion = function()
+        action_sequence_creator:removeLastAction()
         menu_manager:setCurrentMenu(previous_menu)
     end
 
