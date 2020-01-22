@@ -84,7 +84,14 @@ function BattleCtrl.createPartyFromDict(self, entities_meta)
     for i, _ in pairs(entities_meta) do
         local id = entities_meta[i]["id"]
         local meta = entities_meta[i]["meta"]
-        party_entities[i] = Entity.new(entities[id])
+
+        local stats = entities[id]
+
+        for name, val in pairs(meta) do
+            stats[name] = val
+        end
+
+        party_entities[i] = Entity.new(stats)
     end
 
     return Party.new(party_entities, 3)

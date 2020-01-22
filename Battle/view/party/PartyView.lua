@@ -1,13 +1,16 @@
 require "lib.classes.class"
 require "Global.consts"
 local EntityView = require("Battle.view.entity.EntityView")
+local PartyStats = require("Battle.view.party.party_stats.PartyStats")
 --------------------------------------------------------------------------------------------------------
 
 -- class: PartyView
--- param: entity_views:list(EntityView) -> A list of entity views
+-- param: party:Party -> The player party
 -- The view class of the party's entities
 local PartyView = class(function(self, party)
     self.party = party
+
+    self.party_stats = PartyStats.new(party:getMembers())
 
     self.position1 = {}
     self.position1.x = 60/800*GAME_WIDTH
@@ -42,6 +45,8 @@ end)
 -- draw: None -> None
 -- Draws the entities of the party
 function PartyView.draw(self)
+    self.party_stats:draw()
+
     for _, entity_view in pairs(self.entity_views) do
         entity_view:draw()
     end

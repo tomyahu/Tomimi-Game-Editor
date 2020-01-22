@@ -24,7 +24,7 @@ local BattleView = extend(View, function(self, menu_sprite_sheet_path, font)
     self.background_view = nil
 
     local menu_factory = MenuFactory.new(menu_sprite_sheet_path, font)
-    self.menu_view = menu_factory:getBasicMenu(nil, 40, 80)
+    self.menu_view = menu_factory:getBasicMenu(nil, 220, 380)
 end,
 
 function()
