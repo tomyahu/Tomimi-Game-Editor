@@ -7,10 +7,11 @@ require "lib.classes.class"
 local TurnManager = class(function(self, turns)
     self.turns = turns
     self:resetCurrentTurn()
+    self.battle_over = false
 end)
 
 -- advanceTurn: None -> None
--- Advences to the turn of the next entity
+-- Advances to the turn of the next entity
 function TurnManager.advanceTurn(self)
     if (# self.turns) == 0 then
         error("Tried to advance when turn manager doesn't have turns.")
@@ -58,8 +59,20 @@ function TurnManager.turnEnded(self, actions, entities)
         end
     end
 
-    -- Advances a turn
-    self:advanceTurn()
+    -- If the battle isn't over advances a turn
+    if not self:isBattleOver() then
+        self:advanceTurn()
+    end
+end
+
+-- getter
+function TurnManager.isBattleOver(self)
+    return self.battle_over
+end
+
+-- setter
+function TurnManager.setBattleOver(self, battle_over)
+    self.battle_over = battle_over
 end
 
 return TurnManager
