@@ -1,5 +1,5 @@
 vec4 effect( vec4 color, Image tex, vec2 texture_coords, vec2 screen_coords ){
-    float bar_amount = 5;
+    float bar_amount = 3;
 
     float effect_y = floor((texture_coords.y + 0.5) * bar_amount)/bar_amount;
     effect_y *= 3.14;
