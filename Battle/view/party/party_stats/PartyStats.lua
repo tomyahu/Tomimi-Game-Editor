@@ -1,4 +1,5 @@
 require "lib.classes.class"
+require "Battle.shaders"
 local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 --------------------------------------------------------------------------------------------------------
 
@@ -8,9 +9,9 @@ local sprite_factory = SpriteFactory.new()
 -- class: PartyStats
 -- param: entities:list(Entity) -> a list of entities to display stats
 local PartyStats = class(function(self, entities)
-    self.hp_color = {0,1,0,1}
-    self.mp_color = {0,0,1,1}
-    self.sta_color = {1,1,0,1}
+    self.hp_color = {0.1,0.9,0.1,1}
+    self.mp_color = {0.1,0.4,1.0,1}
+    self.sta_color = {0.9,0.8,0.1,1}
 
     self.entities = entities
     self.entities_portraits = {}
@@ -51,20 +52,30 @@ function PartyStats.drawEntityStats(self, entity, offset_y)
     local stamina = entity:getStamina()
 
 
+    -- create shader for stat bars
+    local screen = {love.graphics.getWidth( ), love.graphics.getHeight( ) }
+
     -- Draw Hp
     local width = hp*10
+
     love.graphics.setColor(self.hp_color)
     love.graphics.rectangle("fill", getRelativePosX(self.space_x), getRelativePosY(offset_y), width*getScale(), self.space_y*getScale())
 
     -- Draw Mp
+    offset_y = offset_y + self.space_y
     local width = mp*10
-    love.graphics.setColor(self.mp_color)
-    love.graphics.rectangle("fill", getRelativePosX(self.space_x), getRelativePosY(offset_y + self.space_y), width*getScale(), self.space_y*getScale())
 
-    -- Draw Mp
+
+    love.graphics.setColor(self.mp_color)
+    love.graphics.rectangle("fill", getRelativePosX(self.space_x), getRelativePosY(offset_y), width*getScale(), self.space_y*getScale())
+
+    -- Draw Stamina
+    offset_y = offset_y + self.space_y
     local width = stamina*10
+
     love.graphics.setColor(self.sta_color)
-    love.graphics.rectangle("fill", getRelativePosX(self.space_x), getRelativePosY(offset_y + self.space_y*2), width*getScale(), self.space_y*getScale())
+    love.graphics.rectangle("fill", getRelativePosX(self.space_x), getRelativePosY(offset_y), width*getScale(), self.space_y*getScale())
+
     love.graphics.setColor(1,1,1,1)
 end
 
