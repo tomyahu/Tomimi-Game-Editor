@@ -19,12 +19,20 @@ local EntityView = class(function(self, entity, default_x, default_y)
     self.current_x = default_x
     self.current_y = default_y
     self.entity = entity
-    self.sprite = sprite_factory:getRegularRectSprite(entity:getSpritePath(), 128, 128, 1)
+
+    local idle_path = entity:getSpriteFolderPath() .. "idle.png"
+
+    self.sprite = sprite_factory:getRegularRectSprite(idle_path, 128, 128, 1)
 end)
 
 -- draw: int, int -> None
 -- Draws the entity's sprite on the screen
 function EntityView.draw(self)
+    self:drawCharacter()
+end
+
+-- Draws the character of the entity view
+function EntityView.drawCharacter(self)
     local ctrl = application:getCurrentCtrl()
     local turn_manager = ctrl:getTurnManager()
 
@@ -35,19 +43,18 @@ function EntityView.draw(self)
         local canvas = love.graphics.newCanvas(WINDOW_WIDTH, WINDOW_HEIGHT)
 
         love.graphics.setCanvas(canvas)
-            self.sprite:draw(getRelativePosX(draw_x), getRelativePosY(self.current_y), getScale(), getScale())
+        self.sprite:draw(getRelativePosX(draw_x), getRelativePosY(self.current_y), getScale(), getScale())
         love.graphics.setCanvas()
 
         love.graphics.setShader(OUTLINE_SHADER)
-            OUTLINE_SHADER:send("outline_color", {1,1,1,1})
-            OUTLINE_SHADER:send("outline_size", getScale()*4/GAME_WIDTH)
+        OUTLINE_SHADER:send("outline_color", {1,1,1,1})
+        OUTLINE_SHADER:send("outline_size", getScale()*4/GAME_WIDTH)
 
-            love.graphics.draw(canvas, 0, 0)
+        love.graphics.draw(canvas, 0, 0)
         love.graphics.setShader()
     else
         self.sprite:draw(getRelativePosX(draw_x), getRelativePosY(self.current_y), getScale(), getScale())
     end
-
 end
 
 -- getCurrentPosition: None -> dict(x:int, y:int)

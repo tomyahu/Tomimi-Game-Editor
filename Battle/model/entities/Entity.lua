@@ -16,7 +16,7 @@ end
 -- An entity for a battle
 local Entity = extend(NullEntity,
 function(self, stats)
-    self.sprite_path = stats["battle_sprite_sheet"]
+    self.sprite_folder_path = stats["battle_sprite_folder"]
 
     -- If stats are not null assign them
     ifNotNullAssign(self, stats, "name")
@@ -62,8 +62,8 @@ function(stats, sprite_path)
 end)
 
 -- getter
-function Entity.getSpritePath(self)
-    return self.sprite_path
+function Entity.getSpriteFolderPath(self)
+    return self.sprite_folder_path
 end
 
 return Entity

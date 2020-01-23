@@ -47,6 +47,12 @@ end)
 function PartyView.draw(self)
     self.party_stats:draw()
 
+    self:drawEntities()
+end
+
+-- drawEntities: None -> None
+-- Draws the entities in the battle
+function PartyView.drawEntities(self)
     for _, entity_view in pairs(self.entity_views) do
         entity_view:draw()
     end
