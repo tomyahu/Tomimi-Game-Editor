@@ -9,9 +9,9 @@ local sprite_factory = SpriteFactory.new()
 -- class: PartyStats
 -- param: entities:list(Entity) -> a list of entities to display stats
 local PartyStats = class(function(self, entities)
-    self.hp_color = {0.1,0.9,0.1,1}
+    self.hp_color = {0.3,0.5,0.1,1}
     self.mp_color = {0.1,0.4,1.0,1}
-    self.sta_color = {0.9,0.8,0.1,1}
+    self.sta_color = {0.5,0.4,0.05,1}
 
     self.entities = entities
     self.entities_portraits = {}
@@ -20,7 +20,7 @@ local PartyStats = class(function(self, entities)
         table.insert(self.entities_portraits, sprite_factory:getRegularRectSprite(portrait_path, 128, 128, 1))
     end
 
-    self.space_x = 80
+    self.space_x = 102
     self.space_x_portraits = 10
     self.space_y = 15
     self.space_between_y = 30
@@ -51,32 +51,38 @@ function PartyStats.drawEntityStats(self, entity, offset_y)
     local mp = entity:getMp()
     local stamina = entity:getStamina()
 
-
     -- create shader for stat bars
+    love.graphics.setShader(STAT_BAR_SHADER)
     local screen = {love.graphics.getWidth( ), love.graphics.getHeight( ) }
+
+    local canvas = love.graphics.newCanvas( getScale(), self.space_y*getScale() )
+    love.graphics.setCanvas(canvas)
+        love.graphics.rectangle("fill", 0, 0, getScale(), self.space_y*getScale())
+    love.graphics.setCanvas()
+
 
     -- Draw Hp
     local width = hp*10
 
     love.graphics.setColor(self.hp_color)
-    love.graphics.rectangle("fill", getRelativePosX(self.space_x), getRelativePosY(offset_y), width*getScale(), self.space_y*getScale())
+    love.graphics.draw(canvas, getRelativePosX(self.space_x), getRelativePosY(offset_y), 0, width, 1)
 
     -- Draw Mp
     offset_y = offset_y + self.space_y
     local width = mp*10
 
-
     love.graphics.setColor(self.mp_color)
-    love.graphics.rectangle("fill", getRelativePosX(self.space_x), getRelativePosY(offset_y), width*getScale(), self.space_y*getScale())
+    love.graphics.draw(canvas, getRelativePosX(self.space_x), getRelativePosY(offset_y), 0, width, 1)
 
     -- Draw Stamina
     offset_y = offset_y + self.space_y
     local width = stamina*10
 
     love.graphics.setColor(self.sta_color)
-    love.graphics.rectangle("fill", getRelativePosX(self.space_x), getRelativePosY(offset_y), width*getScale(), self.space_y*getScale())
+    love.graphics.draw(canvas, getRelativePosX(self.space_x), getRelativePosY(offset_y), 0, width, 1)
 
     love.graphics.setColor(1,1,1,1)
+    love.graphics.setShader()
 end
 
 return PartyStats
