@@ -1,4 +1,5 @@
 require "lib.classes.class"
+require "Global.consts"
 require "Battle.shaders"
 local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 --------------------------------------------------------------------------------------------------------
@@ -13,6 +14,8 @@ local PartyStats = class(function(self, entities)
     self.mp_color = {0.1,0.4,1.0,1}
     self.sta_color = {0.5,0.4,0.05,1}
 
+    local portrait_background_path = RESOURCES_PATH .. "/Battle/Miscelaneous/PortraitContainers/PortraitStatContainer.png"
+    self.entity_portrait_background = sprite_factory:getRegularRectSprite(portrait_background_path, 128, 96, 1)
     self.entities = entities
     self.entities_portraits = {}
     for _, entity in pairs(self.entities) do
@@ -32,12 +35,13 @@ function PartyStats.draw(self)
     local initial_offset_y = 160
     local offset_y = initial_offset_y
     for i = 1, (# self.entities) do
-        -- Draw Portraits
-        self.entities_portraits[i]:draw(getRelativePosX(self.space_x_portraits), getRelativePosY(offset_y - self.space_y), self.space_y / 15 * getScale(), self.space_y / 15 * getScale())
-
         -- Draw Stats
         local entity = self.entities[i]
         self:drawEntityStats(entity, offset_y)
+
+        -- Draw Portraits
+        self.entity_portrait_background:draw(0, getRelativePosY(offset_y - 2*self.space_y), getScale(), getScale())
+        self.entities_portraits[i]:draw(getRelativePosX(self.space_x_portraits), getRelativePosY(offset_y - 1.3*self.space_y), self.space_y / 15 * getScale(), self.space_y / 15 * getScale())
 
 
         offset_y = offset_y + 3*self.space_y + self.space_between_y
