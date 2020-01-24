@@ -20,10 +20,6 @@ end)
 -- update: int -> None
 -- updates animation variables
 function LinearMoveAnimation.update(self, dt)
-    if self.current_time > self.time then
-        self.ended = true
-    end
-
     self.current_time = self.current_time + dt
 
     local total_time = math.min(self.current_time, self.time)

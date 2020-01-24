@@ -6,7 +6,6 @@ require "lib.classes.class"
 -- An animation corresponding to an entity doing something
 local Animation = class(function(self, entity_view)
     self.entity_view = entity_view
-    self.ended = false
 end)
 
 -- update: int -> None
@@ -18,12 +17,7 @@ end
 -- reset: None -> None
 -- resets the variables of the animation
 function Animation.reset(self)
-    self.ended = false
-end
 
--- getter
-function Animation.hasEnded(self)
-    return self.ended
 end
 
 return Animation
