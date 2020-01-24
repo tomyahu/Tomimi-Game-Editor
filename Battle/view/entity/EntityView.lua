@@ -21,8 +21,8 @@ local EntityView = class(function(self, entity, default_x, default_y)
     self.entity = entity
 
     local idle_path = entity:getSpriteFolderPath() .. "idle.png"
-
-    self.sprite = sprite_factory:getRegularRectSprite(idle_path, 128, 128, 1)
+    self.idle_sprite = sprite_factory:getRegularRectTimedSprite(idle_path, 128, 128, 1)
+    self.sprite = self.idle_sprite
 end)
 
 -- draw: int, int -> None
@@ -57,13 +57,38 @@ function EntityView.drawCharacter(self)
     end
 end
 
--- getCurrentPosition: None -> dict(x:int, y:int)
--- Gets the entity position as integers
-function EntityView.getCurrentPosition(self)
-    local position = {}
-    position.x = self.current_x
-    position.y = self.current_y
-    return position
+-- getters
+function EntityView.getCurrentX(self)
+    return self.current_x
+end
+
+function EntityView.getCurrentY(self)
+    return self.current_y
+end
+
+function EntityView.getDefaultX(self)
+    return self.default_x
+end
+
+function EntityView.getDefaultY(self)
+    return self.default_y
+end
+
+function EntityView.getIdleSprite(self)
+    return self.idle_sprite
+end
+
+-- setters
+function EntityView.setCurrentX(self, new_x)
+    self.current_x = new_x
+end
+
+function EntityView.setCurrentY(self, new_y)
+    self.current_x = new_y
+end
+
+function EntityView.setSprite(self, new_sprite)
+    self.sprite = new_sprite
 end
 
 return EntityView
