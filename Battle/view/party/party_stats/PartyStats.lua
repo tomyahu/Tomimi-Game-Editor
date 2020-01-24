@@ -40,7 +40,7 @@ function PartyStats.draw(self)
         self:drawEntityStats(entity, offset_y)
 
         -- Draw Portraits
-        self.entity_portrait_background:draw(0, getRelativePosY(offset_y - 2*self.space_y), getScale(), getScale())
+        self.entity_portrait_background:draw(getRelativePosX(0), getRelativePosY(offset_y - 2*self.space_y), getScale(), getScale())
         self.entities_portraits[i]:draw(getRelativePosX(self.space_x_portraits), getRelativePosY(offset_y - 1.3*self.space_y), self.space_y / 15 * getScale(), self.space_y / 15 * getScale())
 
 
@@ -58,12 +58,7 @@ function PartyStats.drawEntityStats(self, entity, offset_y)
     -- create shader for stat bars
     love.graphics.setShader(STAT_BAR_SHADER)
     local screen = {love.graphics.getWidth( ), love.graphics.getHeight( ) }
-
-    local canvas = love.graphics.newCanvas( getScale(), self.space_y*getScale() )
-    love.graphics.setCanvas(canvas)
-        love.graphics.rectangle("fill", 0, 0, getScale(), self.space_y*getScale())
-    love.graphics.setCanvas()
-
+    local canvas = love.graphics.newCanvas( getScale(), (self.space_y)*getScale() )
 
     -- Draw Hp
     local width = hp*10
