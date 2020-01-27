@@ -20,6 +20,8 @@ local AnimationSequence = class(function(self, animations)
     self:reset()
 end)
 
+-- update: num -> None
+-- updates the current animations playing
 function AnimationSequence.update(self, dt)
     -- Update current time
     self.current_time = self.current_time + dt
