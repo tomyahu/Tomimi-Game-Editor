@@ -2,19 +2,24 @@ require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
 
 -- class: AnimationSequence
--- param: animations:dict(Animation, {num, num}) a list of animations with start and end time
+-- param: animations:dict(Animation, {num, num, str}) a list of animations with start and end time and the id of the
+--                                                      actor entity to perform the animation
 -- A sequence of animations to be played
 local AnimationSequence = class(function(self, animations)
+    self.actors = {}
+
     self.start_time = 0
 
     self.animations = {}
     self.start_times = {}
     self.end_times = {}
+    self.actors_by_animation = {}
 
     for animation, times in pairs(animations) do
         table.insert(self.animations, animation)
         self.start_times[animation] = times[1]
         self.end_times[animation] = times[2]
+        self.actors_by_animation[animation] = times[3]
     end
 
     self:reset()
@@ -34,6 +39,10 @@ function AnimationSequence.update(self, dt)
 
     -- Update all animations
     for _, animation in pairs(self.current_animations) do
+        if not animation:isEntityViewSetted then
+            error("Actor " .. self.actors_by_animation[animation] .. " has not been setted.")
+        end
+
         animation:update(dt)
     end
 
@@ -103,6 +112,18 @@ function AnimationSequence.hasEnded(self)
     end
 
     return ended
+end
+
+-- setActor: str, EntityView -> None
+-- sets the actor to perform the animations specified by the key
+function AnimationSequence.setActor(self, key, actor)
+    self.actors[key] = actor
+
+    for _, animation in pairs(self.animations) do
+        if self.actors_by_animation[animation] == key then
+            animation:setEntityView(actor)
+        end
+    end
 end
 
 return AnimationSequence

@@ -3,12 +3,11 @@ local Animation = require("Battle.view.animations.Animation")
 --------------------------------------------------------------------------------------------------------
 
 -- class: LinearMoveAnimation
--- param: entity_view:EntityView -> The view of the entity to perform the animation
 -- param: end_x:num -> The end x position of the entity at the end of the animation
 -- param: end_y:num -> The end y position of the entity at the end of the animation
 -- param: time:num -> The amount of time the animation is going to take
 -- An animation where the entity moves from its current position to an end position
-local LinearMoveAnimation = extend(Animation, function(self, entity_view, end_x, end_y, time)
+local LinearMoveAnimation = extend(Animation, function(self, end_x, end_y, time)
     self.time = time
 
     self.end_x = end_x
@@ -20,6 +19,7 @@ end)
 -- update: int -> None
 -- updates animation variables
 function LinearMoveAnimation.update(self, dt)
+    Animation.update(self, dt)
     self.current_time = self.current_time + dt
 
     local total_time = math.min(self.current_time, self.time)
