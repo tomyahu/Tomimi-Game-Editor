@@ -2,7 +2,7 @@ require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
 
 -- class: AnimationSequence
--- param: animations:dict(Animation, {time, time}) a list of animations with start and end time
+-- param: animations:dict(Animation, {num, num}) a list of animations with start and end time
 -- A sequence of animations to be played
 local AnimationSequence = class(function(self, animations)
     self.start_time = 0
