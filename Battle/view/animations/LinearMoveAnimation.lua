@@ -21,14 +21,18 @@ end)
 function LinearMoveAnimation.update(self, dt)
     Animation.update(self, dt)
     self.current_time = self.current_time + dt
+end
 
+-- updateEntityView: EntityView -> None
+-- updates an entity view based on the stage of the animation
+function Animation.updateEntityView(self, entity_view)
     local total_time = math.min(self.current_time, self.time)
 
     local dx = (self.end_x - self.start_x)/self.time + self.start_x
     local dy = (self.end_y - self.start_y)/self.time + self.start_y
 
-    self.entity_view:setCurrentX(total_time*dx)
-    self.entity_view:setCurrentY(total_time*dy)
+    entity_view:setCurrentX(total_time*dx)
+    entity_view:setCurrentY(total_time*dy)
 end
 
 -- reset: None -> None
@@ -41,6 +45,24 @@ function LinearMoveAnimation.reset(self)
 
     self.start_x = self.entity_view:getCurrentX()
     self.start_y = self.entity_view:getCurrentY()
+end
+
+-- setters
+function LinearMoveAnimation.setEndX(self, new_end_x)
+    self.end_x = new_end_x
+end
+
+function LinearMoveAnimation.setEndY(self, new_end_y)
+    self.end_y = new_end_y
+end
+
+-- getters
+function LinearMoveAnimation.getEndX(self)
+    return self.end_x
+end
+
+function LinearMoveAnimation.getEndY(self)
+    return self.end_y
 end
 
 return LinearMoveAnimation
