@@ -9,9 +9,9 @@ local AnimationSequenceBuilder = class(function(self)
     self.animations = {}
 end)
 
--- addAnimation: Animation, num(0,), num(0,), str -> AnimationSequenceBuilder
--- Adds an animation with specific start, end time and actor name
-function AnimationSequenceBuilder.addAnimation(self, animation, start_time, end_time, actor_name)
+-- addAnimation: Animation, num(0,), num(0,) -> AnimationSequenceBuilder
+-- Adds an animation with specific start and end time
+function AnimationSequenceBuilder.addAnimation(self, animation, start_time, end_time)
     if animation == nil then
         error("Expected a table for animation, got null value.")
     end
@@ -24,14 +24,9 @@ function AnimationSequenceBuilder.addAnimation(self, animation, start_time, end_
         error("Expected a number for end_time, got null value.")
     end
 
-    if actor_name == nil then
-        error("Expected a string for actor_name, got null value.")
-    end
-
     local aux = {}
     table.insert(aux, start_time)
     table.insert(aux, end_time)
-    table.insert(aux, actor_name)
 
     self.animations[animation] = aux
     return self
