@@ -66,7 +66,7 @@ end
 function AnimationSequence.deleteCurrentFinishedAnimations(self)
     for i = (# self.current_animations), 1, -1 do
         local animation = self.current_animations[i]
-        local end_time = self.start_times[animation]
+        local end_time = self.end_times[animation]
 
         if (self.started_animations[animation]) and end_time < self.current_time then
             table.remove(self.current_animations, i)
@@ -77,7 +77,6 @@ end
 -- reset: None -> None
 -- Resets the animation sequence
 function AnimationSequence.reset(self)
-    self.ended = false
     self.current_time = self.start_time
 
     for _, animation in pairs(self.animations) do
@@ -92,9 +91,18 @@ function AnimationSequence.reset(self)
     self.current_animations = {}
 end
 
--- getter
+-- hasEnded: None -> bool
+-- Checks if all animations of the sequence have ended
 function AnimationSequence.hasEnded(self)
-    return self.ended
+    local ended = true
+
+    for _, animation in pairs(self.animations) do
+        local end_time = self.end_times[animation]
+
+        ended = ended and (end_time < self.current_time)
+    end
+
+    return ended
 end
 
 return AnimationSequence
