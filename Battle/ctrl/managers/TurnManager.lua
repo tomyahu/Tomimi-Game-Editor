@@ -45,11 +45,15 @@ function TurnManager.resetCurrentTurn(self)
     self.current_turn = 1
 end
 
--- turnEnded: list(Action), list(list(Entity)) -> None
+-- turnEnded: None -> None
 -- Activates the resultant actions of the turn on the respective targets
-function TurnManager.turnEnded(self, actions, entities)
-    local turn_entity = self:getCurrentTurn():getEntity()
+function TurnManager.turnEnded(self)
+    local turn = self:getCurrentTurn()
+    local actions = turn:getActions()
+    local entities = turn:getTargetActionEntities()
+    local turn_entity = turn:getEntity()
 
+    -- TODO: Pass actions and entities to ActionSceneManager before this function
     -- Apply actions to entities
     for i = 1,(# actions) do
         local action = actions[i]

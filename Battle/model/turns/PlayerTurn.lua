@@ -26,6 +26,7 @@ end)
 -- start: None -> None
 -- Starts a new edition of the turn of this entity
 function PlayerTurn.start(self)
+    Turn.start(self)
     local ctrl = application:getCurrentCtrl()
     self:makeMenues()
 
@@ -54,7 +55,6 @@ end
 function PlayerTurn.makeBasicActionMenu(self)
     local ctrl = application:getCurrentCtrl()
     local menu_manager = ctrl:getMenuManager()
-    local turn_manager = ctrl:getTurnManager()
 
     local m_build = DefaultMenuBuilder.new()
 
@@ -89,7 +89,7 @@ function PlayerTurn.makeBasicActionMenu(self)
     end
 
     local flee_state = SingleActionMenuState.new("Run Away", ACTION_BUTTON_1, function (_)
-        turn_manager:turnEnded({flee_action}, {{self.entity}})
+        self:chooseActions({flee_action}, {{self.entity}})
     end)
 
     m_build:addState(attack_state)
@@ -233,7 +233,6 @@ function PlayerTurn.makeTargetMenuAux(self, menu_pointer_table, action_sequence_
 
     local ctrl = application:getCurrentCtrl()
     local menu_manager = ctrl:getMenuManager()
-    local turn_manager = ctrl:getTurnManager()
     local target_getter = ctrl:getTargetGetter()
 
     local action_sequence = action_sequence_creator:getActionSequence()
@@ -262,7 +261,7 @@ function PlayerTurn.makeTargetMenuAux(self, menu_pointer_table, action_sequence_
             end
 
             menu_manager:setCurrentMenu(nil)
-            turn_manager:turnEnded(action_sequence, target_entities)
+            self:chooseActions(action_sequence, target_entities)
         end)
 
         target_state:addTransitionAction(ACTION_BUTTON_2, back_funtion)
@@ -278,7 +277,6 @@ end
 function PlayerTurn.makeConfirmationMenu(self, menu_pointer_table, action_sequence_creator)
     local ctrl = application:getCurrentCtrl()
     local menu_manager = ctrl:getMenuManager()
-    local turn_manager = ctrl:getTurnManager()
     local target_getter = ctrl:getTargetGetter()
 
     local action_sequence = action_sequence_creator:getActionSequence()
@@ -301,7 +299,7 @@ function PlayerTurn.makeConfirmationMenu(self, menu_pointer_table, action_sequen
         end
 
         menu_manager:setCurrentMenu(nil)
-        turn_manager:turnEnded(action_sequence, target_entities)
+        self:chooseActions(action_sequence, target_entities)
     end)
 
     target_state:addTransitionAction(ACTION_BUTTON_2, back_funtion)

@@ -15,6 +15,7 @@ end)
 -- start: None -> None
 -- Starts a new edition of the turn of this entity
 function RandomActionTurn.start(self)
+    Turn.start(self)
     local ctrl = application:getCurrentCtrl()
 
     -- Get Entity's possible actions
@@ -56,7 +57,7 @@ function RandomActionTurn.start(self)
     end
 
     -- Call the Turn manager with the new abilities
-    ctrl:getTurnManager():turnEnded(actions, entities)
+    self:chooseActions(actions, entities)
 end
 
 return RandomActionTurn
