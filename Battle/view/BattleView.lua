@@ -52,32 +52,39 @@ end
 function BattleView.stop(self)
 end
 
--- TODO: Document this methods
+-- setPlayerParty: Party -> None
+-- sets the party given as the player party in the view
 function BattleView.setPlayerParty(self, party)
   self.party_view = PartyView.new(party)
 end
 
+-- setEnemyParty: Party -> None
+-- sets the party given as the enemy party in the view
 function BattleView.setEnemyParty(self, party)
   self.enemy_party_view = EnemyPartyView.new(party)
 end
 
-function BattleView.setBackground(self, ambient)
-  self.background_view = BackGroundView.new(ambient:getSpritePath())
+-- setBackground: Environment -> None
+-- sets the environment given to the view´s background
+function BattleView.setBackground(self, environment)
+  self.background_view = BackGroundView.new(environment:getSpritePath())
 end
 
--- getter
+-- getters
 function BattleView.getPlayerPartyView(self)
     return self.party_view
 end
 
--- getter
 function BattleView.getEnemyPartyView(self)
     return self.enemy_party_view
 end
 
--- getter
 function BattleView.getMenuView(self)
     return self.menu_view
+end
+
+function BattleView.getActionSceneManager(self)
+    return self.action_scene_manager
 end
 
 return BattleView
