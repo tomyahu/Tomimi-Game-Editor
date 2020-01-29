@@ -1,5 +1,5 @@
 require "lib.classes.class"
-local AnimationSequence = require("Battle.view.animations.AnimationSequence")
+local AnimationSequence = require("Battle.view.animations.animation_sequence.AnimationSequence")
 --------------------------------------------------------------------------------------------------------
 
 -- class: AnimationSequenceBuilder
@@ -32,10 +32,10 @@ function AnimationSequenceBuilder.addAnimation(self, animation, start_time, end_
     return self
 end
 
--- getAnimations: None -> AnimationSequence
+-- getAnimationSequence: EntityView -> AnimationSequence
 -- Gets an Animation Sequence for a sequence of animations
-function AnimationSequenceBuilder.getAnimations(self)
-    return AnimationSequence.new(self.animations)
+function AnimationSequenceBuilder.getAnimationSequence(self, entity_view)
+    return AnimationSequence.new(self.animations, entity_view)
 end
 
 return AnimationSequenceBuilder

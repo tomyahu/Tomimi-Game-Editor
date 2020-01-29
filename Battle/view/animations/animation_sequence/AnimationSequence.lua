@@ -3,8 +3,9 @@ require "lib.classes.class"
 
 -- class: AnimationSequence
 -- param: animations:dict(Animation, {num, num}) a list of animations with start and end time
-local AnimationSequence = class(function(self, animations)
-    self.start_time = 0
+-- param: entity_view:EntityView the entity to perform the animation
+local AnimationSequence = class(function(self, animations, entity_view)
+    self:setEntityView(entity_view)
 
     self.animations = {}
     self.start_times = {}
@@ -31,12 +32,13 @@ function AnimationSequence.update(self, dt)
     -- Add all animations that haven't been started with start time less than current time
     local animations_to_play = self:getAnimationsToPlay()
     for _, animation in pairs(animations_to_play) do
+        animation:reset()
         table.insert(self.current_animations, animation)
     end
 
     -- Update all animations
     for _, animation in pairs(self.current_animations) do
-        animation:update(dt)
+        animation:update(math.min(self.current_time - self.start_times[animation], dt))
     end
 end
 
@@ -84,11 +86,7 @@ end
 -- reset: None -> None
 -- Resets the animation sequence
 function AnimationSequence.reset(self)
-    self.current_time = self.start_time
-
-    for _, animation in pairs(self.animations) do
-        animation:reset()
-    end
+    self.current_time = 0
 
     self.started_animations = {}
     for _, animation in pairs(self.animations) do
@@ -110,6 +108,15 @@ function AnimationSequence.hasEnded(self)
     end
 
     return ended
+end
+
+-- setter
+function AnimationSequence.setEntityView(self, entity_view)
+    self.entity_view = entity_view
+
+    for _, animation in pairs(self.animations) do
+        animation:setEntityView(self.entity_view)
+    end
 end
 
 return AnimationSequence
