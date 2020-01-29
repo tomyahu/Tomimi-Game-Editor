@@ -5,7 +5,7 @@ local Entity = require("Battle.model.entities.Entity")
 local entities = require("Global.entities")
 local Ctrl = require("Global.ctrl.ctrl")
 local Party = require("Battle.model.party.Party")
-local AmbientFactory = require("Battle.init.ambients.AmbientFactory")
+local EnvironmentFactory = require("Battle.init.environments.EnvironmentFactory")
 local TurnManager = require("Battle.ctrl.managers.TurnManager")
 local PlayerTurn = require("Battle.model.turns.PlayerTurn")
 local RandomActionTurn = require("Battle.model.turns.RandomActionTurn")
@@ -25,7 +25,7 @@ local BattleCtrl = extend(Ctrl, function(self, view)
 
     self.target_getter = TargetGetter.new(self)
 
-    self.ambient = AmbientFactory.getAmbientWithKey("debug_ambient1")
+    self.environment = EnvironmentFactory.getEnvironmentWithKey("debug_environment1")
 end,
 
 function(view)
@@ -45,9 +45,9 @@ function BattleCtrl.setup(self)
     local enemy_party_entities_metadata = save["Battle"]["EnemyPartyMetadata"]
     self.enemy_party = self:createPartyFromDict(enemy_party_entities_metadata)
     
-    -- Set the ambient of the battle
-    local ambient_id = save["Battle"]["Ambient"]
-    self.ambient = AmbientFactory.getAmbientWithKey(ambient_id)
+    -- Set the environment of the battle
+    local environment_id = save["Battle"]["Environment"]
+    self.environment = EnvironmentFactory.getEnvironmentWithKey(environment_id)
 
     -- Set turn manager
     local battle_turns = {}
@@ -73,7 +73,7 @@ function BattleCtrl.setup(self)
     -- set views
     self.view:setPlayerParty(self.player_party)
     self.view:setEnemyParty(self.enemy_party)
-    self.view:setBackground(self.ambient)
+    self.view:setBackground(self.environment)
 end
 -- callbackPressedKey: str -> None
 -- Function called when user presses a key
@@ -125,8 +125,8 @@ function BattleCtrl.getEnemyParty(self)
     return self.enemy_party
 end
 
-function BattleCtrl.getAmbient(self)
-    return self.get_ambient
+function BattleCtrl.getEnvironment(self)
+    return self.environment
 end
 
 function BattleCtrl.getTargetGetter(self)
