@@ -39,7 +39,7 @@ save_file["Battle"]["EnemyPartyMetadata"] = {}
 save_file["Battle"]["EnemyPartyMetadata"][1] = player3
 save_file["Battle"]["EnemyPartyMetadata"][3] = player3
 
-save_file["Battle"]["Ambient"] = "debug_ambient1"
+save_file["Battle"]["Environment"] = "debug_environment1"
 
 -- items
 save_file["Items"] = {}
