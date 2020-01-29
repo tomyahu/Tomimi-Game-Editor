@@ -3,12 +3,13 @@ require "Global.consts"
 require "Global.LOVEWrapper.LOVEWrapper"
 require "Global.application.application"
 
-local View = require "Global.view.view"
+local View = require ("Global.view.view")
 local Party = require("Battle.model.party.Party")
 local BackGroundView = require("Battle.view.background.BackgroundView")
 local PartyView = require("Battle.view.party.PartyView")
 local EnemyPartyView = require("Battle.view.party.EnemyPartyView")
 local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
+local ActionSceneManager = require("Battle.view.managers.ActionSceneManager")
 
 local MenuFactory = require("Battle.view.menues.MenuFactory")
 --------------------------------------------------------------------------------------------------------
@@ -22,6 +23,7 @@ local BattleView = extend(View, function(self, menu_sprite_sheet_path, font)
     self.party_view = nil
     self.enemy_party_view = nil
     self.background_view = nil
+    self.action_scene_manager = ActionSceneManager.new()
 
     local menu_factory = MenuFactory.new(menu_sprite_sheet_path, font)
     self.menu_view = menu_factory:getBasicMenu(nil, 220, 380)
