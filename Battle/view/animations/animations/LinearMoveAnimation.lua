@@ -9,15 +9,12 @@ local Animation = require("Battle.view.animations.animations.Animation")
 -- An animation where the entity moves from its current position to an end position
 local LinearMoveAnimation = extend(Animation, function(self, end_x, end_y, time)
     self.time = time
-    self.entity_view = nil
 
     self.start_x = 0
     self.start_y = 0
 
     self.end_x = end_x
     self.end_y = end_y
-
-    self:reset()
 end)
 
 -- update: int -> None
@@ -27,11 +24,11 @@ function LinearMoveAnimation.update(self, dt)
 
     local total_time = math.min(self.current_time, self.time)
 
-    local dx = (self.end_x - self.start_x)/self.time + self.start_x
-    local dy = (self.end_y - self.start_y)/self.time + self.start_y
+    local new_x = (self.end_x - self.start_x)/self.time*total_time + self.start_x
+    local new_y = (self.end_y - self.start_y)/self.time*total_time + self.start_y
 
-    self.entity_view:setCurrentX(total_time*dx)
-    self.entity_view:setCurrentY(total_time*dy)
+    self.entity_view:setCurrentX(new_x)
+    self.entity_view:setCurrentY(new_y)
 end
 
 -- reset: None -> None
@@ -44,10 +41,6 @@ function LinearMoveAnimation.reset(self)
 end
 
 -- setters
-function LinearMoveAnimation.setEntityView(self, entity_view)
-    self.entity_view = entity_view
-end
-
 function LinearMoveAnimation.setEndX(self, new_end_x)
     self.end_x = new_end_x
 end

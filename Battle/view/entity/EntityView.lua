@@ -78,13 +78,17 @@ function EntityView.getIdleSprite(self)
     return self.idle_sprite
 end
 
+function EntityView.getEntity(self)
+    return self.entity
+end
+
 -- setters
 function EntityView.setCurrentX(self, new_x)
     self.current_x = new_x
 end
 
 function EntityView.setCurrentY(self, new_y)
-    self.current_x = new_y
+    self.current_y = new_y
 end
 
 function EntityView.setSprite(self, new_sprite)

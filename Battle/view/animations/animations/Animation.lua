@@ -4,19 +4,16 @@ require "lib.classes.class"
 -- class: Animation
 -- An animation corresponding to an entity doing something
 local Animation = class(function(self)
-    self:reset()
+    self.entity_view = nil
+
+    self.start_time = 0
+    self.current_time = 0
 end)
 
 -- update: int -> None
 -- updates animation variables
 function Animation.update(self, dt)
     self.current_time = self.current_time + dt
-end
-
--- updateEntityView: EntityView -> None
--- updates an entity view based on the stage of the animation
-function Animation.updateEntityView(self, entity_view)
-
 end
 
 -- reset: None -> None
@@ -33,6 +30,11 @@ end
 
 function Animation.getCurrentTime(self)
     return self.current_time
+end
+
+-- setter
+function Animation.setEntityView(self, entity_view)
+    self.entity_view = entity_view
 end
 
 return Animation

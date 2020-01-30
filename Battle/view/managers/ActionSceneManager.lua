@@ -1,5 +1,7 @@
 require "lib.classes.class"
 require "Global.application.application"
+
+local animation_dict = require("Battle.init.action_animations.action_animations")
 --------------------------------------------------------------------------------------------------------
 
 -- class: ActionSceneManager
@@ -11,7 +13,7 @@ end)
 -- getCurrentScene: None -> Scene
 -- Gets the current scene to play
 function ActionSceneManager.getCurrentScene(self)
-    return self.actions_scenes[self.current_animation_scene_index]
+    return self.action_scenes[self.current_animation_scene_index]
 end
 
 -- updateAnimation: num -> None
@@ -42,7 +44,7 @@ end
 function ActionSceneManager.finishedDisplayingScenes(self)
     local ctrl = application:getCurrentCtrl()
     local turn_manager = ctrl:getTurnManager()
-    turn_manager:endTurn()
+    turn_manager:turnEnded()
 end
 
 -- reset: None -> None
@@ -56,6 +58,31 @@ end
 function ActionSceneManager.setActionScenes(self, action_scenes)
     self:reset()
     self.action_scenes = action_scenes
+end
+
+function ActionSceneManager.playScenesWithActionsAndEntities(self, actions, source_entity, target_entities)
+    local view = application:getCurrentView()
+    local entity_view_getter = view:getEntityViewGetter()
+
+    local scenes = {}
+    local source_entity_view = entity_view_getter:getEntityView(source_entity)
+
+    for i = 1, (# actions) do
+        local action = actions[i]
+        local targets = target_entities[i]
+
+        local targets_views = {}
+
+        for _, target in pairs(targets) do
+            table.insert(targets_views, entity_view_getter:getEntityView(target))
+        end
+
+        local action_animations = animation_dict[action]
+
+        table.insert(scenes, action_animations:makeScene(source_entity_view, targets_views))
+    end
+
+    self:setActionScenes(scenes)
 end
 
 return ActionSceneManager

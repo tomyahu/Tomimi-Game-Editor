@@ -5,8 +5,6 @@ require "lib.classes.class"
 -- param: animations:dict(Animation, {num, num}) a list of animations with start and end time
 -- param: entity_view:EntityView the entity to perform the animation
 local AnimationSequence = class(function(self, animations, entity_view)
-    self:setEntityView(entity_view)
-
     self.animations = {}
     self.start_times = {}
     self.end_times = {}
@@ -16,6 +14,8 @@ local AnimationSequence = class(function(self, animations, entity_view)
         self.start_times[animation] = times[1]
         self.end_times[animation] = times[2]
     end
+
+    self:setEntityView(entity_view)
 
     self:reset()
 end)
@@ -32,7 +32,6 @@ function AnimationSequence.update(self, dt)
     -- Add all animations that haven't been started with start time less than current time
     local animations_to_play = self:getAnimationsToPlay()
     for _, animation in pairs(animations_to_play) do
-        animation:reset()
         table.insert(self.current_animations, animation)
     end
 

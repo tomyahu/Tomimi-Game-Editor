@@ -307,4 +307,14 @@ function PlayerTurn.makeConfirmationMenu(self, menu_pointer_table, action_sequen
     return m_build:getMenu()
 end
 
+-- chooseActions: list(Action), list(list(Entity)) -> None
+-- Chooses the actions to be used for this turn
+function PlayerTurn.chooseActions(self, actions, target_entities)
+    Turn.chooseActions(self, actions, target_entities)
+
+    local ctrl = application:getCurrentCtrl()
+    local menu_manager = ctrl:getMenuManager()
+    menu_manager:setCurrentMenu(nil)
+end
+
 return PlayerTurn

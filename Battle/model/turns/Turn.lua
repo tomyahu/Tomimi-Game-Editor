@@ -24,10 +24,10 @@ function Turn.chooseActions(self, actions, target_entities)
     self:setActions(actions)
     self:setTargetActionEntities(target_entities)
 
-    local ctrl = application:getCurrentCtrl()
-    local turn_manager = ctrl:getTurnManager()
+    local view = application:getCurrentView()
+    local action_scene_manager = view:getActionSceneManager()
 
-    turn_manager:turnEnded()
+    action_scene_manager:playScenesWithActionsAndEntities(actions, self.entity, target_entities)
 end
 
 function Turn.toString(self)
