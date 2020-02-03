@@ -48,21 +48,6 @@ end
 -- turnEnded: None -> None
 -- Activates the resultant actions of the turn on the respective targets
 function TurnManager.turnEnded(self)
-    local turn = self:getCurrentTurn()
-    local actions = turn:getActions()
-    local entities = turn:getTargetActionEntities()
-    local turn_entity = turn:getEntity()
-
-    -- TODO: Pass actions and entities to ActionSceneManager before this function
-    -- Apply actions to entities
-    for i = 1,(# actions) do
-        local action = actions[i]
-        local affected_entities = entities[i]
-        for _, entity in pairs(affected_entities) do
-            action:activate(turn_entity, entity)
-        end
-    end
-
     -- If the battle isn't over advances a turn
     if not self:isBattleOver() then
         self:advanceTurn()

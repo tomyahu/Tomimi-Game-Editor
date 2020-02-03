@@ -7,6 +7,9 @@ local animation_dict = require("Battle.init.action_animations.action_animations"
 -- class: ActionSceneManager
 -- A manager class that controls the animation scenes when an ability is used in battle
 local ActionSceneManager = class(function(self)
+    self.actions = {}
+    self.source_entity = nil
+    self.target_entities = {}
     self:reset()
 end)
 
@@ -33,6 +36,7 @@ end
 -- advanceScene: None -> None
 -- Advances the scene of the action
 function ActionSceneManager.advanceScene(self)
+    self:applyAction(self.current_animation_scene_index)
     self.current_animation_scene_index = self.current_animation_scene_index + 1
     if self:getCurrentScene() == nil then
         self:finishedDisplayingScenes()
@@ -82,7 +86,20 @@ function ActionSceneManager.playScenesWithActionsAndEntities(self, actions, sour
         table.insert(scenes, action_animations:makeScene(source_entity_view, targets_views))
     end
 
+    self.actions = actions
+    self.source_entity = source_entity
+    self.target_entities = target_entities
+
     self:setActionScenes(scenes)
+end
+
+-- applyAction: int -> None
+-- Applies the saved action given an index
+function ActionSceneManager.applyAction(self, action_index)
+    local action = self.actions[action_index]
+    local source_entity = self.source_entity[action_index]
+    local target_entities = self.target_entities[action_index]
+    action:activate(source_entity, target_entities)
 end
 
 return ActionSceneManager
