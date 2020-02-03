@@ -29,7 +29,7 @@ action_build:setStartPiece(BATTLE_ACTION_PIECE_BORDER)
 action_build:setEndPiece(BATTLE_ACTION_PIECE_BORDER)
 action_build:setTarget(BATTLE_TARGET_SELF)
 action_build:setActionFunction( function(source_entity, target_entity)
-    
+
     if math.random() < 0.5 then
         local ctrl = application:getCurrentCtrl()
         ctrl:getTurnManager():setBattleOver(true)

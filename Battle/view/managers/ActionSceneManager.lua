@@ -36,11 +36,18 @@ end
 -- advanceScene: None -> None
 -- Advances the scene of the action
 function ActionSceneManager.advanceScene(self)
+    local view = application:getCurrentView()
+
     self:applyAction(self.current_animation_scene_index)
     self.current_animation_scene_index = self.current_animation_scene_index + 1
+
     if self:getCurrentScene() == nil then
+        view:getActionNameDisplayer():setText("")
         self:finishedDisplayingScenes()
+    else
+        view:getActionNameDisplayer():setText(self.actions[self.current_animation_scene_index]:getName())
     end
+
 end
 
 -- finishedDisplayingScenes: None -> None
@@ -89,6 +96,8 @@ function ActionSceneManager.playScenesWithActionsAndEntities(self, actions, sour
     self.actions = actions
     self.source_entity = source_entity
     self.target_entities = target_entities
+
+    view:getActionNameDisplayer():setText(self.actions[1]:getName())
 
     self:setActionScenes(scenes)
 end

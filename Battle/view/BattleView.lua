@@ -11,6 +11,7 @@ local EnemyPartyView = require("Battle.view.party.EnemyPartyView")
 local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 local ActionSceneManager = require("Battle.view.managers.ActionSceneManager")
 local EntityViewGetter = require("Battle.view.entity.EntityViewGetter")
+local ActionNameDisplayer = require("Battle.view.displayers.action_name_displayer.ActionNameDisplayer")
 
 local MenuFactory = require("Battle.view.menues.MenuFactory")
 --------------------------------------------------------------------------------------------------------
@@ -26,6 +27,8 @@ local BattleView = extend(View, function(self, menu_sprite_sheet_path, font)
     self.background_view = nil
     self.entity_view_getter = EntityViewGetter.new()
     self.action_scene_manager = ActionSceneManager.new()
+
+    self.action_name_displayer = ActionNameDisplayer.new()
 
     local menu_factory = MenuFactory.new(menu_sprite_sheet_path, font)
     self.menu_view = menu_factory:getBasicMenu(nil, 220, 380)
@@ -48,6 +51,8 @@ function BattleView.draw(self)
     self.party_view:draw()
     self.enemy_party_view:draw()
     self.menu_view:draw()
+
+    self.action_name_displayer:draw()
 end
 
 -- setup: None -> None
@@ -106,6 +111,10 @@ end
 
 function BattleView.getEntityViewGetter(self)
     return self.entity_view_getter
+end
+
+function BattleView.getActionNameDisplayer(self)
+    return self.action_name_displayer
 end
 
 return BattleView
