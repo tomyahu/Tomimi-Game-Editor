@@ -31,9 +31,6 @@ action_build:setTarget(BATTLE_TARGET_SELF)
 action_build:setActionFunction( function(source_entity, target_entity)
     local ctrl = application:getCurrentCtrl()
     ctrl:getTurnManager():setBattleOver(true)
-
-    application:appChange("Debug_Overworld")
-    -- TODO: get ctrl and call escape function
 end)
 table.insert(actions, action_build:getAction())
 

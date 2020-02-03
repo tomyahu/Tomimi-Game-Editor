@@ -48,10 +48,18 @@ end
 -- turnEnded: None -> None
 -- Activates the resultant actions of the turn on the respective targets
 function TurnManager.turnEnded(self)
-    -- If the battle isn't over advances a turn
+    -- If the battle isn't over advances a turn otherwise end the battle
     if not self:isBattleOver() then
         self:advanceTurn()
+    else
+        self:endBattle()
     end
+end
+
+-- endBattle: None -> None
+-- Ends the current battle
+function TurnManager.endBattle(self)
+    application:appChange("Debug_Overworld")
 end
 
 -- getter

@@ -97,7 +97,7 @@ end
 -- Applies the saved action given an index
 function ActionSceneManager.applyAction(self, action_index)
     local action = self.actions[action_index]
-    local source_entity = self.source_entity[action_index]
+    local source_entity = self.source_entity
     local target_entities = self.target_entities[action_index]
     action:activate(source_entity, target_entities)
 end
