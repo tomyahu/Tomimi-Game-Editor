@@ -2,9 +2,10 @@ require "lib.classes.class"
 --------------------------------------------------------------------------------------------------------
 
 -- class: AnimationSequence
--- param: animations:dict(Animation, {num, num}) a list of animations with start and end time
--- param: entity_view:EntityView the entity to perform the animation
-local AnimationSequence = class(function(self, animations, entity_view)
+-- param: animations:dict(Animation, {num, num}) -> a list of animations with start and end time
+-- param: entity_view:EntityView -> the entity to perform the animation
+-- param: target_views:list(EntityView -> the list of enemy entities to perform the animation
+local AnimationSequence = class(function(self, animations, entity_view, target_views)
     self.animations = {}
     self.start_times = {}
     self.end_times = {}
@@ -16,6 +17,7 @@ local AnimationSequence = class(function(self, animations, entity_view)
     end
 
     self:setEntityView(entity_view)
+    self:setTargetViews(target_views)
 
     self:reset()
 end)
@@ -115,6 +117,15 @@ function AnimationSequence.setEntityView(self, entity_view)
 
     for _, animation in pairs(self.animations) do
         animation:setEntityView(self.entity_view)
+    end
+end
+
+-- setter
+function AnimationSequence.setTargetViews(self, target_views)
+    self.target_views = target_views
+
+    for _, animation in pairs(self.animations) do
+        animation:setTargetViews(self.target_views)
     end
 end
 

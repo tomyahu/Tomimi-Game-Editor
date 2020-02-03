@@ -32,10 +32,10 @@ function AnimationSequenceBuilder.addAnimation(self, animation, start_time, end_
     return self
 end
 
--- getAnimationSequence: EntityView -> AnimationSequence
+-- getAnimationSequence: EntityView, list(EntityView) -> AnimationSequence
 -- Gets an Animation Sequence for a sequence of animations
-function AnimationSequenceBuilder.getAnimationSequence(self, entity_view)
-    return AnimationSequence.new(self.animations, entity_view)
+function AnimationSequenceBuilder.getAnimationSequence(self, entity_view, target_views)
+    return AnimationSequence.new(self.animations, entity_view, target_views)
 end
 
 return AnimationSequenceBuilder

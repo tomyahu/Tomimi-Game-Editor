@@ -5,6 +5,7 @@ require "lib.classes.class"
 -- An animation corresponding to an entity doing something
 local Animation = class(function(self)
     self.entity_view = nil
+    self.target_views = nil
 
     self.start_time = 0
     self.current_time = 0
@@ -32,9 +33,13 @@ function Animation.getCurrentTime(self)
     return self.current_time
 end
 
--- setter
+-- setters
 function Animation.setEntityView(self, entity_view)
     self.entity_view = entity_view
+end
+
+function Animation.setTargetViews(self, target_views)
+    self.target_views = target_views
 end
 
 return Animation
