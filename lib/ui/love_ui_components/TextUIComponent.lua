@@ -11,6 +11,10 @@ local LoveUIComponent = require("lib.ui.love_ui_components.LoveUIComponent")
 -- param: color:{num, num, num, num} -> the color of the text
 -- A component to show text on the screen
 local TextUIComponent = extend(LoveUIComponent, function(self, msg, x, y, font, color)
+    if color == nil then
+        self.color = {1,1,1,1}
+    end
+
     self.msg = msg
     self.font = font
     self.text = love.graphics.newText( font, msg )
