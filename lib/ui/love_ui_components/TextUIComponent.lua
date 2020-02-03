@@ -45,6 +45,8 @@ end
 -- setters
 function TextUIComponent.setMsg(self, new_msg)
     self.msg = new_msg
+    self.text:clear()
+    self.text:add(new_msg)
 end
 
 function TextUIComponent.getFont(self, new_font)
