@@ -13,7 +13,15 @@ end)
 -- draw: None -> None
 -- draws the action name on the screen
 function ActionNameDisplayer.draw(self)
-    self.text:draw()
+    if self.text ~= "" then
+        self.text:draw()
+    end
+end
+
+-- reset: None -> None
+-- resets the action name displayer so that it doesn't display anything
+function ActionNameDisplayer.reset(self)
+    self:setText("")
 end
 
 -- setter

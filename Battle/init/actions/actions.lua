@@ -29,12 +29,16 @@ action_build:setStartPiece(BATTLE_ACTION_PIECE_BORDER)
 action_build:setEndPiece(BATTLE_ACTION_PIECE_BORDER)
 action_build:setTarget(BATTLE_TARGET_SELF)
 action_build:setActionFunction( function(source_entity, target_entity)
+    local view = application:getCurrentView()
+    local message_displayer = view:getMessageDisplayer()
 
     if math.random() < 0.5 then
         local ctrl = application:getCurrentCtrl()
         ctrl:getTurnManager():setBattleOver(true)
+
+        message_displayer:displayMessage("Successfully ran away.", 2)
     else
-        print("Couldn't escape.")
+        message_displayer:displayMessage("Couldn't escape.", 2)
     end
 end)
 table.insert(actions, action_build:getAction())

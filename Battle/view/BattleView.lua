@@ -12,6 +12,7 @@ local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 local ActionSceneManager = require("Battle.view.managers.ActionSceneManager")
 local EntityViewGetter = require("Battle.view.entity.EntityViewGetter")
 local ActionNameDisplayer = require("Battle.view.displayers.action_name_displayer.ActionNameDisplayer")
+local MessageDisplayer = require("Battle.view.displayers.message_displayer.MessageDisplayer")
 
 local MenuFactory = require("Battle.view.menues.MenuFactory")
 --------------------------------------------------------------------------------------------------------
@@ -29,6 +30,7 @@ local BattleView = extend(View, function(self, menu_sprite_sheet_path, font)
     self.action_scene_manager = ActionSceneManager.new()
 
     self.action_name_displayer = ActionNameDisplayer.new()
+    self.message_displayer = MessageDisplayer.new(menu_sprite_sheet_path)
 
     local menu_factory = MenuFactory.new(menu_sprite_sheet_path, font)
     self.menu_view = menu_factory:getBasicMenu(nil, 220, 380)
@@ -41,7 +43,10 @@ end)
 -- update: num -> None
 -- updates the view internal values
 function BattleView.update(self, dt)
-    self.action_scene_manager:update(dt)
+    if not self.message_displayer:isDisplayingMessage() then
+        self.action_scene_manager:update(dt)
+    end
+    self.message_displayer:update(dt)
 end
 
 -- draw: context -> None
@@ -50,15 +55,18 @@ function BattleView.draw(self)
     self.background_view:draw()
     self.party_view:draw()
     self.enemy_party_view:draw()
-    self.menu_view:draw()
 
+    -- UI
+    self.message_displayer:draw()
+    self.menu_view:draw()
     self.action_name_displayer:draw()
 end
 
 -- setup: None -> None
 -- Sets up the local view vairables
 function BattleView.setup(self)
-    --self.entity_view_getter:empty()
+    self.message_displayer:reset()
+    self.action_name_displayer:reset()
 end
 
 -- setup: None -> None
@@ -115,6 +123,10 @@ end
 
 function BattleView.getActionNameDisplayer(self)
     return self.action_name_displayer
+end
+
+function BattleView.getMessageDisplayer(self)
+    return self.message_displayer
 end
 
 return BattleView

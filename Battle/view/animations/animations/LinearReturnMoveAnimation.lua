@@ -14,13 +14,6 @@ function (time)
     return LinearMoveAnimation.new(0,0,time)
 end)
 
---[[
-function LinearReturnMoveAnimation.update(self, dt)
-    LinearMoveAnimation.update(self, dt)
-    print(self.start_x, self.start_y)
-    print(self.end_x, self.end_y)
-end]]--
-
 -- reset: None -> None
 -- resets the variables of the animation
 function LinearReturnMoveAnimation.reset(self)
