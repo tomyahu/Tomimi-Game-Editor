@@ -147,7 +147,7 @@ end
 
 function UITeselatedFrame.setImagePath(self, new_image_path)
     self.image_path = new_image_path
-    self.sprite = sprite_factory:getRegularRectSprite(self.image_path, self.dimension, self.dimension, 15)
+    self.sprite = SpriteFactory.getRegularRectSprite(self.image_path, self.dimension, self.dimension, 15)
     self:redefineCanvas()
 end
 

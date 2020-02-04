@@ -14,7 +14,7 @@ function SpriteFactory.getRegularRectSprite(image_path, width, height, frame_num
     local width_per_frame = width
     local frames = {}
     frames[1] = {}
-    for i = 1,(frame_num) do
+    for i = 1,frame_num do
         frames[1][i] = RectFrame.new((i-1)*width_per_frame, 0, width, height)
     end
     local sprite = Sprite.new(frames, image_path)
@@ -27,7 +27,7 @@ function SpriteFactory.getRegularRectTimedSprite(image_path, width, height, fram
     local width_per_frame = width/frame_num
     local frames = {}
     frames[1] = {}
-    for i = 1,(frame_num) do
+    for i = 1,frame_num do
         frames[1][i] = RectFrame.new((i-1)*width_per_frame, 0, width, height)
     end
     local sprite = TimedSprite.new(frames, image_path, dt)

@@ -1,6 +1,7 @@
 require "lib.classes.class"
 require "Global.consts"
 require "Battle.shaders"
+local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 --------------------------------------------------------------------------------------------------------
 
 -- class: PartyStats
@@ -11,12 +12,12 @@ local PartyStats = class(function(self, entities)
     self.sta_color = {0.5,0.4,0.05,1}
 
     local portrait_background_path = RESOURCES_PATH .. "/Battle/Miscelaneous/PortraitContainers/PortraitStatContainer.png"
-    self.entity_portrait_background = sprite_factory:getRegularRectSprite(portrait_background_path, 128, 96, 1)
+    self.entity_portrait_background = SpriteFactory.getRegularRectSprite(portrait_background_path, 128, 96, 1)
     self.entities = entities
     self.entities_portraits = {}
     for _, entity in pairs(self.entities) do
         local portrait_path = entity:getSpriteFolderPath() .. "portrait.png"
-        table.insert(self.entities_portraits, sprite_factory:getRegularRectSprite(portrait_path, 128, 128, 1))
+        table.insert(self.entities_portraits, SpriteFactory.getRegularRectSprite(portrait_path, 128, 128, 1))
     end
 
     self.space_x = 102
