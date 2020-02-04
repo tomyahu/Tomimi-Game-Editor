@@ -2,6 +2,7 @@ require "lib.classes.class"
 require "Global.application.application"
 require "Global.controls"
 
+local entities = require("Global.entities")
 local DefaultMenuBuilder = require "Menu.model.menues.DefaultMenuBuilder"
 local ContentMenuState = require "Menu.model.menuStates.ContentMenuState"
 --------------------------------------------------------------------------------------------------------
@@ -36,50 +37,65 @@ function SubItemMenuFactory.getSubItemMenu(item_state)
         view:getSoundManager():playMenuCanceledSound()
     end
 
-    -- creates the use-state of the menu, it has a boolean that shows if the item function exists or not
-    local item_function_exists = (item_state:getItemAction() ~= nil)
-    local use_state = ContentMenuState.new("Use", item_function_exists)
-    use_state:addTransitionAction(ACTION_BUTTON_1, function(_)
-        -- TODO: open character selection menu
+    -- TODO: Get party
+    local save = application:getCurrentSave()
 
-        local item = item_state:getItemPtr()
+    -- Set the players party entities
+    local player_party_entities_metadata = save["Battle"]["PlayerPartyMetadata"]
 
-        if item_function_exists then
-            item_state:getItemAction()()
-            view:getSoundManager():playMenuSelectedSound()
+    local entities_data = {}
+    for i, _ in pairs(player_party_entities_metadata) do
+        local id = player_party_entities_metadata[i]["id"]
+        entities_data[i] = entities[id]
+    end
 
-            -- Decrease Items if consumable
-            if item_state:isConsumable() then
-                item.count = math.max(0, item.count - 1)
-                item_state:refresh()
+    for entity_index, entity in pairs(entities_data) do
+        -- creates the use-state of the menu, it has a boolean that shows if the item function exists or not
+        local item_function_exists = (item_state:getItemAction() ~= nil)
+        local use_state = ContentMenuState.new("Use on " .. entity["name"], item_function_exists)
+        use_state:addTransitionAction(ACTION_BUTTON_1, function(_)
+            local item = item_state:getItemPtr()
+
+            if item_function_exists then
+                local extra = {}
+                extra["character_id"] = entity_index
+
+                item_state:getItemAction()(extra)
+                view:getSoundManager():playMenuSelectedSound()
+
+                -- Decrease Items if consumable
+                if item_state:isConsumable() then
+                    item.count = math.max(0, item.count - 1)
+                    item_state:refresh()
+                end
+            else
+                view:getSoundManager():playMenuCanceledSound()
             end
-        else
-            view:getSoundManager():playMenuCanceledSound()
-        end
 
-        -- Check if there are 0 items
-        if item.count <= 0 then
-            -- Close current Menu (view)
-            view:setAuxiliaryViewVisibility(false)
+            -- Check if there are 0 items
+            if item.count <= 0 then
+                -- Close current Menu (view)
+                view:setAuxiliaryViewVisibility(false)
 
-            -- Hide party menu
-            view:setPartyViewVisibility(false)
+                -- Hide party menu
+                view:setPartyViewVisibility(false)
 
-            -- Sets item menu as current menu
-            ctrl:getMenuManager():setItemMenuAsCurrent()
+                -- Sets item menu as current menu
+                ctrl:getMenuManager():setItemMenuAsCurrent()
 
-            -- Refresh Item Menu
-            ctrl:refreshItemMenu()
-        end
-    end)
-    use_state:addTransitionAction(ACTION_BUTTON_2, back_function)
+                -- Refresh Item Menu
+                ctrl:refreshItemMenu()
+            end
+        end)
+        use_state:addTransitionAction(ACTION_BUTTON_2, back_function)
+        m_build:addState(use_state)
+    end
 
     -- creates the back-state of the menu
     local back_state = ContentMenuState.new("Back", true)
     back_state:addTransitionAction(ACTION_BUTTON_1, back_function)
     back_state:addTransitionAction(ACTION_BUTTON_2, back_function)
 
-    m_build:addState(use_state)
     m_build:addState(back_state)
 
     return m_build:getMenu()

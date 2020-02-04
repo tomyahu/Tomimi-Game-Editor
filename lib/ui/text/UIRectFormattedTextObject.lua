@@ -10,12 +10,17 @@ local TextUIComponent = require("lib.ui.love_ui_components.TextUIComponent")
 local UIRectFormattedTextObject = extend(UIObject, function(self, x, y, msg, font, width)
     self.msg = msg
     self.width = width
+    self.font = font
+    self.text_component = TextUIComponent.new("", x, y, font)
+
     self:_reformatMsg()
 end)
 
 -- draw: None -> None
 -- draws the UI object on the screen given the object parameters
-function UIRectFormattedTextObject.draw(self) end
+function UIRectFormattedTextObject.draw(self)
+    self.text_component:draw()
+end
 
 -- _reformatMsg: None -> None
 -- Reformats the mesage to add '\n' where the text surpasses the objects width
@@ -24,20 +29,20 @@ function UIRectFormattedTextObject._reformatMsg(self)
     local splited_msg = String.split(self.msg)
     local formatted_msg = ""
     self.text_component = TextUIComponent.new(formatted_msg, self.x, self.y, self.font)
-    for i, str in splited_msg do
-        if i > 1 then
-            self.text_component:set(str)
+    for i, str in pairs(splited_msg) do
+        if i == 1 then
+            formatted_msg = str
         else
-            self.text_component:set(formatted_msg .. " " .. str)
-        end
+            self.text_component:setMsg(formatted_msg .. " " .. str)
 
-        if self.text_component:getWidth() > self.width then
-            formatted_msg = formatted_msg .. "\n" .. str
-        else
-            formatted_msg = formatted_msg .. " " .. str
+            if self.text_component:getWidth() > self.width then
+                formatted_msg = formatted_msg .. "\n" .. str
+            else
+                formatted_msg = formatted_msg .. " " .. str
+            end
         end
     end
-    self.text_component:set(formatted_msg)
+    self.text_component:setMsg(formatted_msg)
     self.formatted_msg = formatted_msg
 end
 

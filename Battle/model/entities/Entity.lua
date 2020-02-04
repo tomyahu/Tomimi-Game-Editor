@@ -1,5 +1,6 @@
 require "lib.classes.class"
 local NullEntity = require("Battle.model.entities.NullEntity")
+local ActionFactory = require("Battle.init.actions.ActionFactory")
 --------------------------------------------------------------------------------------------------------
 
 -- ifNotNullAssign: Entity, dict, str -> None
@@ -12,11 +13,10 @@ end
 
 -- class: Entity
 -- param: stats:dict -> a dictionary with all the entity's stats
--- param: sprite_path:str -> the path of the entity's sprite
 -- An entity for a battle
 local Entity = extend(NullEntity,
-function(self, stats, sprite_path)
-    self.sprite_path = sprite_path
+function(self, stats)
+    self.sprite_folder_path = stats["battle_sprite_folder"]
 
     -- If stats are not null assign them
     ifNotNullAssign(self, stats, "name")
@@ -38,9 +38,9 @@ function(self, stats, sprite_path)
     ifNotNullAssign(self, stats, "fire_prof")
     ifNotNullAssign(self, stats, "cold_prof")
     ifNotNullAssign(self, stats, "wind_prof")
-    ifNotNullAssign(self, stats, "lightning_prof")
+    ifNotNullAssign(self, stats, "elec_prof")
     ifNotNullAssign(self, stats, "light_prof")
-    ifNotNullAssign(self, stats, "dark_prof")
+    ifNotNullAssign(self, stats, "energy_prof")
     ifNotNullAssign(self, stats, "health_prof")
     ifNotNullAssign(self, stats, "ether_prof")
 
@@ -49,39 +49,21 @@ function(self, stats, sprite_path)
     ifNotNullAssign(self, stats, "b_instinct_prof")
 
     ifNotNullAssign(self, stats, "natural_resistence")
-
     ifNotNullAssign(self, stats, "armor")
-    ifNotNullAssign(self, stats, "temp_strength")
-    ifNotNullAssign(self, stats, "temp_skill")
-    ifNotNullAssign(self, stats, "temp_agility")
-    ifNotNullAssign(self, stats, "temp_speed")
 
-    ifNotNullAssign(self, stats, "temp_mana_strength")
-    ifNotNullAssign(self, stats, "temp_mana_control")
-
-    ifNotNullAssign(self, stats, "temp_fire_prof")
-    ifNotNullAssign(self, stats, "temp_cold_prof")
-    ifNotNullAssign(self, stats, "temp_wind_prof")
-    ifNotNullAssign(self, stats, "temp_lightning_prof")
-    ifNotNullAssign(self, stats, "temp_light_prof")
-    ifNotNullAssign(self, stats, "temp_dark_prof")
-    ifNotNullAssign(self, stats, "temp_health_prof")
-    ifNotNullAssign(self, stats, "temp_ether_prof")
-
-    ifNotNullAssign(self, stats, "temp_b_aura_prof")
-    ifNotNullAssign(self, stats, "temp_b_spirit_prof")
-    ifNotNullAssign(self, stats, "temp_b_instinct_prof")
-
-    ifNotNullAssign(self, stats, "temp_resistence")
-
+    if not (stats["actions"] == nil) then
+        for _, id in pairs(stats["actions"]) do
+            table.insert(self.actions, ActionFactory.getActionWithID(id))
+        end
+    end
 end,
 function(stats, sprite_path)
     return NullEntity.new()
 end)
 
 -- getter
-function Entity.getSpritePath(self)
-    return self.sprite_path
+function Entity.getSpriteFolderPath(self)
+    return self.sprite_folder_path
 end
 
 return Entity

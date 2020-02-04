@@ -23,14 +23,14 @@ end
 
 -- getRegularRectTimedSprite: str, num, num, num -> Sprite
 -- Creates a new single-animation timed sprite
-function SpriteFactory.getRegularRectTimedSprite(self, image_path, width, height, frame_num)
+function SpriteFactory.getRegularRectTimedSprite(self, image_path, width, height, frame_num, dt)
     local width_per_frame = width/frame_num
     local frames = {}
     frames[1] = {}
     for i = 1,(frame_num) do
-        frames[1][i] = TimedSprite.new((i-1)*width_per_frame, 0, width, height)
+        frames[1][i] = RectFrame.new((i-1)*width_per_frame, 0, width, height)
     end
-    local sprite = Sprite.new(frames, image_path)
+    local sprite = TimedSprite.new(frames, image_path, dt)
     return sprite
 end
 

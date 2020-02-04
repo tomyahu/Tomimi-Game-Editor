@@ -15,7 +15,7 @@ local TextUIComponent = require("lib.ui.love_ui_components.TextUIComponent")
 local UILimitedText = extend(UICropWrapper, function(self, msg, x, y, font, width, height)
 end,
 function(msg, x, y, font, width, height)
-    local text = UITextComponent.new(msg, x, y, font)
+    local text = TextUIComponent.new(msg, x, y, font)
     return UICropWrapper.new(x,y,text,width,height)
 end)
 

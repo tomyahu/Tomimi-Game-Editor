@@ -2,7 +2,6 @@ require "lib.classes.class"
 require "Global.consts"
 require "Global.LOVEWrapper.LOVEWrapper"
 require "Global.application.application"
-local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 --------------------------------------------------------------------------------------------------------
 
 -- class: RectangleMenuView
@@ -17,6 +16,7 @@ local RectangleMenuView = class(function(self, menu, menu_border, font, space_y)
     self.last_selected_option_str = self.menu:getCurrentState():toString()
 end)
 
+-- TODO: Document this
 function RectangleMenuView.updateCurrentlySelectedOption(self)
     -- Update last selected option
     local currently_selected_option = self.menu:getCurrentState():toString()
@@ -46,7 +46,7 @@ function RectangleMenuView.draw(self)
   
   -- draws menu options
   for index, option in pairs(self.menu.options) do
-        if self.menu:getCurrentState():toString() == option:toString() then
+        if self.menu:getCurrentState() == option then
             love.graphics.print( option:toString(), getRelativePosX(start_x + 10), getRelativePosY(start_y + index*space_y), 0, getScale(), getScale())
         else
             love.graphics.print( option:toString(), getRelativePosX(start_x), getRelativePosY(start_y + index*space_y), 0, getScale(), getScale())

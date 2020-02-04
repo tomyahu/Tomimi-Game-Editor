@@ -1,6 +1,7 @@
 require "lib.classes.class"
 local PartyView = require("Battle.view.party.PartyView")
 local EnemyEntityView = require("Battle.view.entity.EnemyEntityView")
+local PartyStats = require("Battle.view.party.party_stats.PartyStats")
 --------------------------------------------------------------------------------------------------------
 
 -- class: EnemyPartyView
@@ -13,12 +14,15 @@ function(self, party)
     self.position1.y = 350/600*GAME_HEIGHT
 
     self.position2 = {}
-    self.position2.x = GAME_WIDTH - 40/800*GAME_WIDTH
+    self.position2.x = GAME_WIDTH - 100/800*GAME_WIDTH
     self.position2.y = 400/600*GAME_HEIGHT
 
     self.position3 = {}
     self.position3.x = GAME_WIDTH - 20/800*GAME_WIDTH
     self.position3.y = 450/600*GAME_HEIGHT
+
+    -- TODO: Change for EnemyPartyStats
+    self.party_stats = PartyStats.new({})
 
     local entity_number = party:getMemberNum()
     self.entity_views = {}

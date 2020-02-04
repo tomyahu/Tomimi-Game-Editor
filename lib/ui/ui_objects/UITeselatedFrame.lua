@@ -123,6 +123,16 @@ function UITeselatedFrame.getImagePath(self)
 end
 
 -- setters
+function UITeselatedFrame.setX(self, new_x)
+    UIObject.setX(self, new_x)
+    self:redefineCanvas()
+end
+
+function UITeselatedFrame.setY(self, new_y)
+    UIObject.setX(self, new_x)
+    self:redefineCanvas()
+end
+
 function UITeselatedFrame.setWidth(self, new_width)
     self.width = new_width
     self:redefineCanvas()

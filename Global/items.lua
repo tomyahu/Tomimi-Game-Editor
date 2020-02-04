@@ -1,5 +1,6 @@
 require "Global.consts"
 require "Global.application.application"
+local entities = require "Global.entities"
 
 local icon_path = RESOURCES_PATH .. "/Menu/ObjectIcons/"
 
@@ -42,10 +43,14 @@ orange_segment["abilities"] = {}
 orange_segment["action"] = function(extra)
     local save = application:getCurrentSave()
 
-    for _, character in pairs(save["Party"]) do
-        character["hp"] = math.min(character["max_hp"], character["hp"] + 1)
-        character["stamina"] = math.min(character["max_stamina"], character["stamina"] + 2)
-    end
+    local character_id = extra["character_id"]
+
+    local character = save["Battle"]["PlayerPartyMetadata"][character_id]
+
+    local character_meta = character.meta
+    local character_stats = entities[character.id]
+    character_meta["hp"] = math.min(character_stats["max_hp"], character_meta["hp"] + 1)
+    character_meta["stamina"] = math.min(character_stats["max_stamina"], character_meta["stamina"] + 2)
 
 
 end

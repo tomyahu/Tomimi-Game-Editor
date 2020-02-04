@@ -5,10 +5,15 @@ local Sprite = require "Global.LOVEWrapper.sprite.Sprite"
 -- class: TimedSprite
 -- param: frames:array(array(Frames)) -> the animation frames that display different animations
 -- param: image_path:str -> the path of the image of the sprite
+-- param: dt:num -> the ratio the sprites are changed
 -- A sprite class that has a method called advanceTime that takes a number and adds it to the current time, when the
 -- time has advanced one unit it changes frame
-local TimedSprite = extend(Sprite, function(self, frames, image_path)
-    self.dt = 1
+local TimedSprite = extend(Sprite, function(self, frames, image_path, dt)
+    if dt == nil then
+        dt = 1
+    end
+
+    self.dt = dt
     self.current_time = 0
 end,
 
@@ -32,17 +37,16 @@ function TimedSprite.advanceFrame(self)
     if self.current_frame > (# self.frames[self.current_frame_set]) then
         self.current_frame = 1
     end
-    self.current_time = self.current_frame - 1
 end
 
 -- advanceTime: num -> None
 -- Adds dt to the current time, if the current time surpasses one whole unit the current frame is updated
 function TimedSprite.advanceTime(self, dt)
     self.current_time = self.current_time + dt
-    if self.current_time >= (# self.frames[self.current_frame_set]) then
-        self.current_time = self.current_time - math.floor(self.current_time/self.dt)*self.dt
+    while self.current_time >= self.dt do
+        self.current_time = self.current_time - self.dt
+        self:advanceFrame()
     end
-    self.current_frame  = math.floor(self.current_time/self.dt) + 1
 end
 
 return TimedSprite

@@ -10,13 +10,14 @@ local NullEntity = class(function(self)
     -- Stats
     self.max_hp = 1
     self.hp = 1
+    self.max_stamina = 1
+    self.stamina = 1
     self.is_alive = true
     
     self.strength = 0
     self.agility = 0
-    self.max_stamina = 1
-    self.stamina = 1
     self.speed = 0
+    self.armor = 0
 
     -- In Combat
     self.guard = 0
@@ -30,9 +31,9 @@ local NullEntity = class(function(self)
     self.fire_prof = 0
     self.cold_prof = 0
     self.wind_prof = 0
-    self.lightning_prof = 0
+    self.elec_prof = 0
     self.light_prof = 0
-    self.dark_prof = 0
+    self.energy_prof = 0
     self.health_prof = 0
     self.ether_prof = 0
     
@@ -43,35 +44,12 @@ local NullEntity = class(function(self)
 
     -- Constants
     self.natural_resistence = 0
-
-    -- Modifiers
-    self.armor = 0
-    self.temp_strength = 0
-    self.temp_agility = 0
-    self.temp_speed = 0
-
-    self.temp_mana_control = 0
-
-    self.temp_fire_prof = 0
-    self.temp_cold_prof = 0
-    self.temp_wind_prof = 0
-    self.temp_lightning_prof = 0
-    self.temp_light_prof = 0
-    self.temp_dark_prof = 0
-    self.temp_health_prof = 0
-    self.temp_ether_prof = 0
-
-    self.temp_b_aura_prof = 0
-    self.temp_b_spirit_prof = 0
-    self.temp_b_instinct_prof = 0
-
-    self.temp_resistence = 0
     
     -- Equipped Items
     self.equipped_items = {}
-    
-    -- Buffs
-    self.buffs = {}
+
+    --
+    self.actions = {}
 end)
 
 -- getHealed: int -> None
@@ -119,6 +97,10 @@ function NullEntity.revive(self)
 end
 
 -- getters
+function NullEntity.getName(self)
+    return self.name
+end
+
 function NullEntity.getMaxHp(self)
   return self.max_hp
 end
@@ -128,11 +110,11 @@ function NullEntity.getHp(self)
 end
 
 function NullEntity.getStrength(self)
-  return self.strength + self.temp_strength
+  return self.strength
 end
 
 function NullEntity.getAgility(self)
-  return self.agility + self.temp_agility
+  return self.agility
 end
 
 function NullEntity.getMaxStamina(self)
@@ -144,7 +126,7 @@ function NullEntity.getStamina(self)
 end
 
 function NullEntity.getSpeed(self)
-  return self.speed + self.temp_speed
+  return self.speed
 end
 
 function NullEntity.getMp(self)
@@ -156,52 +138,52 @@ function NullEntity.getMaxMp(self)
 end
 
 function NullEntity.getManaControl(self)
-  return self.mana_control + self.temp_mana_control
+  return self.mana_control
 end
 
 function NullEntity.getFireProficiency(self)
-  return self.fire_prof + self.temp_fire_prof
+  return self.fire_prof
 end
 
 function NullEntity.getColdProficiency(self)
-  return self.cold_prof + self.temp_cold_prof
+  return self.cold_prof
 end
 
 function NullEntity.getWindProficiency(self)
-  return self.wind_prof + self.temp_wind_prof
+  return self.wind_prof
 end
 
-function NullEntity.getLightningProficiency(self)
-  return self.lightning_prof + self.temp_lightning_prof
+function NullEntity.getElectricProficiency(self)
+  return self.elec_prof
 end
 
 function NullEntity.getLightProficiency(self)
-  return self.light_prof + self.temp_light_prof
+  return self.light_prof
 end
 
-function NullEntity.getDarkProficiency(self)
-  return self.dark_prof + self.temp_dark_prof
+function NullEntity.getEnergyProficiency(self)
+  return self.energy_prof
 end
 
 function NullEntity.getHealthProficiency(self)
   -- TODO: Apply buff and equipped items modifiers 
-  return self.health_prof + self.temp_health_prof
+  return self.health_prof
 end
 
 function NullEntity.getEtherProficiency(self)
-  return self.ether_prof + self.temp_ether_prof
+  return self.ether_prof
 end
 
 function NullEntity.getBAuraProficiency(self)
-  return self.b_aura_prof + self.temp_b_aura_prof
+  return self.b_aura_prof
 end
 
 function NullEntity.getBSpiritProficiency(self)
-    return self.b_spirit_prof + self.temp_b_spirit_prof
+    return self.b_spirit_prof
 end
 
 function NullEntity.getBInstinctProficiency(self)
-    return self.b_instinct_prof + self.temp_b_instinct_prof
+    return self.b_instinct_prof
 end
 
 
@@ -210,7 +192,7 @@ function NullEntity.getNaturalResistance(self)
 end
 
 function NullEntity.getResistance(self)
-  return math.max(self:getNaturalResistance(), self.armor) + self.temp_resistance
+  return math.max(self:getNaturalResistance(), self.armor)
 end
 
 function NullEntity.getMaxGuard(self)
@@ -225,6 +207,10 @@ end
 
 function NullEntity.isAlive(self)
   return self.is_alive
+end
+
+function NullEntity.getActions(self)
+    return self.actions
 end
 
 return NullEntity
