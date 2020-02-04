@@ -1,11 +1,7 @@
 require "lib.classes.class"
 require "Global.consts"
 require "Battle.shaders"
-local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 --------------------------------------------------------------------------------------------------------
-
--- Sprite factory to generate the entity's sprite
-local sprite_factory = SpriteFactory.new()
 
 -- class: PartyStats
 -- param: entities:list(Entity) -> a list of entities to display stats

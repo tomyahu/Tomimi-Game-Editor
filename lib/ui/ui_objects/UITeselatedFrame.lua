@@ -4,9 +4,6 @@ local UIObject = require("lib.ui.ui_objects.UIObject")
 local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 --------------------------------------------------------------------------------------------------------
 
--- Sprite factory to generate the entity's sprite
-local sprite_factory = SpriteFactory.new()
-
 -- class: UITeselatedFrame
 -- param: x:num -> the x coordinate of the top left border tile of the frame
 -- param: y:num -> the y coordinate of the top left border tile of the frame
@@ -18,7 +15,7 @@ local sprite_factory = SpriteFactory.new()
 --      [╔╗╝╚╠╣╩╦═║╬] and the last 4 are the top left, top right, bottom left and bottom right parts of a background tile
 local UITeselatedFrame = extend(UIObject, function(self, x, y, image_path, width, height, dimension)
     self.image_path = image_path
-    self.sprite = sprite_factory:getRegularRectSprite(image_path, dimension, dimension, 15)
+    self.sprite = SpriteFactory.getRegularRectSprite(image_path, dimension, dimension, 15)
     self.width = width
     self.height = height
     self.dimension = dimension

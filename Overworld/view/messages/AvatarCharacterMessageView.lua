@@ -6,15 +6,12 @@ local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 local UIBorderFrame = require("lib.ui.ui_objects.UIBorderFrame")
 local TextUIComponent = require("lib.ui.love_ui_components.TextUIComponent")
 --------------------------------------------------------------------------------------------------------
--- Sprite factory to generate the entity's sprite
-local sprite_factory = SpriteFactory.new()
-
 -- class: AvatarCharacterMessage
 -- param: message:AvatarCharacterMessage -> The message to display in the dialog on the screen
 -- Object in charge of displaying the messages with a character and avatar associated in the view
 local AvatarCharacterMessageView = extend(MessageView, function(self, message, font)
-    self.portrait_sprite = sprite_factory:getRegularRectSprite(message:getAvatarPath(), 64, 64, 1)
-    self.portrait_frame_sprite = sprite_factory:getRegularRectSprite(RESOURCES_PATH .. "/Overworld/CharacterPortraits/NormalPortraitFrame.png", 64, 64, 1)
+    self.portrait_sprite = SpriteFactory.getRegularRectSprite(message:getAvatarPath(), 64, 64, 1)
+    self.portrait_frame_sprite = SpriteFactory.getRegularRectSprite(RESOURCES_PATH .. "/Overworld/CharacterPortraits/NormalPortraitFrame.png", 64, 64, 1)
 
     -- Texts
     self.ui_msg_text = TextUIComponent.new(self.message:getMessage(), 10, 5/6 * GAME_HEIGHT + 10, font, {1, 1, 1, 1})

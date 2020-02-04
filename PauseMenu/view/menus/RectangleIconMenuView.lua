@@ -1,11 +1,7 @@
 require "lib.classes.class"
 require "Global.LOVEWrapper.LOVEWrapper"
 local RectangleMenuView = require("PauseMenu.view.menus.RectangleMenuView")
-local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 --------------------------------------------------------------------------------------------------------
-
--- Sprite factory to generate the entity's sprite
-local sprite_factory = SpriteFactory.new()
 
 -- class: RectangleIconMenuView
 -- param: menu:Menu -> The menu to show in this rectangle Icon view

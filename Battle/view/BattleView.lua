@@ -8,7 +8,6 @@ local Party = require("Battle.model.party.Party")
 local BackGroundView = require("Battle.view.background.BackgroundView")
 local PartyView = require("Battle.view.party.PartyView")
 local EnemyPartyView = require("Battle.view.party.EnemyPartyView")
-local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 local ActionSceneManager = require("Battle.view.managers.ActionSceneManager")
 local EntityViewGetter = require("Battle.view.entity.EntityViewGetter")
 local ActionNameDisplayer = require("Battle.view.displayers.action_name_displayer.ActionNameDisplayer")
@@ -16,10 +15,6 @@ local MessageDisplayer = require("Battle.view.displayers.message_displayer.Messa
 
 local MenuFactory = require("Battle.view.menues.MenuFactory")
 --------------------------------------------------------------------------------------------------------
-
--- Sprite factory to generate the entity's sprite
-local sprite_factory = SpriteFactory.new()
-
 -- class: BattleView
 -- The view of the battle app
 local BattleView = extend(View, function(self, menu_sprite_sheet_path, font)

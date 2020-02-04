@@ -5,10 +5,6 @@ require "Global.LOVEWrapper.LOVEWrapper"
 require "Battle.shaders"
 local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 --------------------------------------------------------------------------------------------------------
-
--- Sprite factory to generate the entity's sprite
-local sprite_factory = SpriteFactory.new()
-
 -- class: EntityView
 -- param: entity:Entity -> The entity to visualize
 -- Class made to generate the entity view
@@ -21,7 +17,7 @@ local EntityView = class(function(self, entity, default_x, default_y)
     self.entity = entity
 
     local idle_path = entity:getSpriteFolderPath() .. "idle.png"
-    self.idle_sprite = sprite_factory:getRegularRectTimedSprite(idle_path, 128, 128, 1)
+    self.idle_sprite = SpriteFactory.getRegularRectTimedSprite(idle_path, 128, 128, 1)
     self.sprite = self.idle_sprite
 end)
 

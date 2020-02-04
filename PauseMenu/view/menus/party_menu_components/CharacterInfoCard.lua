@@ -1,13 +1,9 @@
 require "lib.classes.class"
-local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 require "Global.LOVEWrapper.LOVEWrapper"
 local entities = require("Global.entities")
 
 local items = require("Global.items")
 --------------------------------------------------------------------------------------------------------
--- Sprite factory to generate the entity's sprite
-local sprite_factory = SpriteFactory.new()
-
 -- class: CharacterInfoCard
 -- param: card_border:MenuBorderView -> the border of the character card
 -- param: character_stats:dict -> statistics of the character

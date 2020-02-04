@@ -10,7 +10,7 @@ local SpriteFactory = class(function(self) end)
 
 -- getRegularRectSprite: str, num, num, num -> Sprite
 -- Creates a new single-animation sprite
-function SpriteFactory.getRegularRectSprite(self, image_path, width, height, frame_num)
+function SpriteFactory.getRegularRectSprite(image_path, width, height, frame_num)
     local width_per_frame = width
     local frames = {}
     frames[1] = {}
@@ -23,7 +23,7 @@ end
 
 -- getRegularRectTimedSprite: str, num, num, num -> Sprite
 -- Creates a new single-animation timed sprite
-function SpriteFactory.getRegularRectTimedSprite(self, image_path, width, height, frame_num, dt)
+function SpriteFactory.getRegularRectTimedSprite(image_path, width, height, frame_num, dt)
     local width_per_frame = width/frame_num
     local frames = {}
     frames[1] = {}
