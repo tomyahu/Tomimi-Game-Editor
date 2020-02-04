@@ -1,14 +1,13 @@
 require "lib.classes.class"
+require "Menu.consts"
 --------------------------------------------------------------------------------------------------------
 
 -- class: SoundManager
 -- The sound manager of the pause menu view
--- TODO: Unhardcode variables
--- TODO: Moderate the volume of the sounds
 local SoundManager = class(function(self)
-    self.menu_move_sound = love.audio.newSource(RESOURCES_PATH .. "/sounds/menues/menu_move_sound.wav", "static")
-    self.menu_selected_sound = love.audio.newSource(RESOURCES_PATH .. "/sounds/menues/menu_selected_sound.wav", "static")
-    self.menu_canceled_sound = love.audio.newSource(RESOURCES_PATH .. "/sounds/menues/menu_canceled_sound.wav", "static")
+    self.menu_move_sound = MENU_MOVE_SOUND
+    self.menu_selected_sound = MENU_SELECTED_SOUND
+    self.menu_canceled_sound = MENU_CANCELED_SOUND
 end)
 
 function SoundManager.playMenuSelectedSound(self)
