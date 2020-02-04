@@ -19,6 +19,8 @@ local EntityView = class(function(self, entity, default_x, default_y)
     local idle_path = entity:getSpriteFolderPath() .. "idle.png"
     self.idle_sprite = SpriteFactory.getRegularRectTimedSprite(idle_path, 128, 128, 1)
     self.sprite = self.idle_sprite
+
+    self.canvas = love.graphics.newCanvas()
 end)
 
 -- draw: int, int -> None
@@ -36,17 +38,17 @@ function EntityView.drawCharacter(self)
     local draw_x = self.current_x
     if turn_manager:getCurrentTurn():getEntity() == self.entity then
         draw_x = draw_x + 10
-        local canvas = love.graphics.newCanvas(WINDOW_WIDTH, WINDOW_HEIGHT)
 
-        love.graphics.setCanvas(canvas)
-        self.sprite:draw(getRelativePosX(draw_x), getRelativePosY(self.current_y), getScale(), getScale())
-        love.graphics.setCanvas()
+        self.canvas:renderTo(function()
+            love.graphics.clear( )
+            self.sprite:draw(getRelativePosX(draw_x), getRelativePosY(self.current_y), getScale(), getScale())
+        end)
 
         love.graphics.setShader(OUTLINE_SHADER)
         OUTLINE_SHADER:send("outline_color", {1,1,1,1})
         OUTLINE_SHADER:send("outline_size", getScale()*4/GAME_WIDTH)
 
-        love.graphics.draw(canvas, 0, 0)
+        love.graphics.draw(self.canvas, 0, 0)
         love.graphics.setShader()
     else
         self.sprite:draw(getRelativePosX(draw_x), getRelativePosY(self.current_y), getScale(), getScale())

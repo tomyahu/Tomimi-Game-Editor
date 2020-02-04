@@ -15,6 +15,8 @@ local ActionIconsDisplayer = class(function(self)
 
     self.fade_start = 0.2
     self.fade_end = 0.05
+
+    self.canvas = love.graphics.newCanvas()
 end)
 
 -- draw: None -> None
@@ -22,9 +24,8 @@ end)
 -- TODO: Invert when there is an enemy attacking
 function ActionIconsDisplayer.draw(self)
     if (self.current_action > 0) and (self.current_action <= (# self.actions_icons)) then
-        local canvas = love.graphics.newCanvas(love.graphics.getWidth(), love.graphics.getHeight())
-
-        love.graphics.setCanvas(canvas)
+        self.canvas:renderTo(function()
+            love.graphics.clear( )
             for i, icon in pairs(self:getPreviousActionIcons()) do
                 local center_offset_x = self.current_action - i
                 local center_offset_x_factor = 96
@@ -35,13 +36,13 @@ function ActionIconsDisplayer.draw(self)
 
             -- Draw Current Action Icon
             self:getCurrentActionIcon():draw(self.x_pos, self.y_pos)
-        love.graphics.setCanvas()
+        end)
 
         -- Set shader to make older actions more transparent
         love.graphics.setShader(HORIZONTAL_FADE_SHADER)
             HORIZONTAL_FADE_SHADER:send("horizontal_fade_start", self.fade_start)
             HORIZONTAL_FADE_SHADER:send("horizontal_fade_end", self.fade_end)
-            love.graphics.draw(canvas, 0, 0)
+            love.graphics.draw(self.canvas, 0, 0)
         love.graphics.setShader()
     end
 end
