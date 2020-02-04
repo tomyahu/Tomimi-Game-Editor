@@ -7,6 +7,7 @@ local ActionAnimations = require("Battle.view.animations.action_animations.Actio
 local LinearMoveAnimation = require("Battle.view.animations.animations.LinearMoveAnimation")
 local LinearReturnMoveAnimation = require("Battle.view.animations.animations.LinearReturnMoveAnimation")
 local MessageDisplayAnimation = require("Battle.view.animations.animations.MessageDisplayAnimation")
+local ApplyActionAnimation = require("Battle.view.animations.animations.ApplyActionAnimation")
 --------------------------------------------------------------------------------------------------------
 
 local animation_dict = {}
@@ -18,14 +19,35 @@ local null_animation_builder = AnimationSequenceBuilder.new()
 local default_animation_builder = AnimationSequenceBuilder.new()
 default_animation_builder:addAnimation(LinearMoveAnimation.new(GAME_WIDTH/2, 400/600*GAME_HEIGHT, 0.5), 0, 0.5)
 default_animation_builder:addAnimation(LinearReturnMoveAnimation.new(0.5), 1.5, 2)
+default_animation_builder:addAnimation(ApplyActionAnimation.new(), 1.5, 2)
 
 -- Fill all actions with default animation
 for _, action in pairs(actions) do
+    local default_animation_builder = AnimationSequenceBuilder.new()
+    default_animation_builder:addAnimation(LinearMoveAnimation.new(GAME_WIDTH/2, 400/600*GAME_HEIGHT, 0.5), 0, 0.5)
+    default_animation_builder:addAnimation(LinearReturnMoveAnimation.new(0.5), 1.5, 2)
+    default_animation_builder:addAnimation(ApplyActionAnimation.new(action, {}), 1.5, 1.5)
     animation_dict[action] = ActionAnimations.new(default_animation_builder, null_animation_builder)
 end
 
 ------------------------------------------------------------------------------------------------------------------------
--- Feel Proud Animation ------------------------------------------------------------------------------------------------
+-- 2. Run Away Animation -----------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+local run_away_action = actions[2]
+local run_away_animation_builder = AnimationSequenceBuilder.new()
+run_away_animation_builder:addAnimation(LinearMoveAnimation.new(GAME_WIDTH/2, 350/600*GAME_HEIGHT, 0.5), 0, 0.5)
+run_away_animation_builder:addAnimation(
+    ApplyActionAnimation.new(run_away_action),
+    0.5,
+    1.5
+)
+run_away_animation_builder:addAnimation(LinearReturnMoveAnimation.new(0.5), 1.5, 2)
+
+animation_dict[run_away_action] = ActionAnimations.new(run_away_animation_builder, null_animation_builder)
+
+
+------------------------------------------------------------------------------------------------------------------------
+-- 3. Feel Proud Animation ---------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 local feel_proud_action = actions[3]
 local feel_proud_animation_builder = AnimationSequenceBuilder.new()
@@ -33,9 +55,9 @@ feel_proud_animation_builder:addAnimation(LinearMoveAnimation.new(GAME_WIDTH/2, 
 feel_proud_animation_builder:addAnimation(
     MessageDisplayAnimation.new("The Naranjarina is feeling proud of themself. Good for you Naranjarina.", 2),
     0.5,
-    0.6
+    2.5
 )
-feel_proud_animation_builder:addAnimation(LinearReturnMoveAnimation.new(0.5), 0.6, 1.1)
+feel_proud_animation_builder:addAnimation(LinearReturnMoveAnimation.new(0.5), 2.5, 3)
 
 animation_dict[feel_proud_action] = ActionAnimations.new(feel_proud_animation_builder, null_animation_builder)
 

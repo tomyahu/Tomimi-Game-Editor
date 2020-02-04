@@ -41,9 +41,7 @@ end)
 -- update: num -> None
 -- updates the view internal values
 function BattleView.update(self, dt)
-    if not self.message_displayer:isDisplayingMessage() then
-        self.action_scene_manager:update(dt)
-    end
+    self.action_scene_manager:update(dt)
     self.message_displayer:update(dt)
 end
 

@@ -18,7 +18,6 @@ end)
 -- TODO: Invert when there is an enemy attacking
 function ActionIconsDisplayer.draw(self)
     if (self.current_action > 0) and (self.current_action <= (# self.actions_icons)) then
-
         -- TODO: Create Shader to make older actions more transparent
         for i, icon in pairs(self:getPreviousActionIcons()) do
             local center_offset_x = self.current_action - i
@@ -58,7 +57,7 @@ function ActionIconsDisplayer.getPreviousActionIcons(self)
     local aux = {}
 
     for i = 1,(self.current_action - 1) do
-        table.insert(self.getActionIcon(i))
+        table.insert(aux, self:getActionIcon(i))
     end
 
     return aux
