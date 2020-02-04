@@ -6,7 +6,7 @@ local UITeselatedFrame = require("lib.ui.ui_objects.UITeselatedFrame")
 --------------------------------------------------------------------------------------------------------
 
 -- class: MessageDisplayer
--- param: sprite:str -> The sprite path of the frames of the message displayer
+-- param: sprite_path:str -> The sprite path of the frames of the message displayer
 -- The view displayer for messages in the bottom of the screen
 local MessageDisplayer = class(function(self, sprite_path)
     self.sprite_path = sprite_path

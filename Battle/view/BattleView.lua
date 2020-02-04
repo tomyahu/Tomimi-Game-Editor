@@ -29,7 +29,7 @@ local BattleView = extend(View, function(self, menu_sprite_sheet_path, font)
     self.entity_view_getter = EntityViewGetter.new()
     self.action_scene_manager = ActionSceneManager.new()
 
-    self.action_name_displayer = ActionNameDisplayer.new()
+    self.action_name_displayer = ActionNameDisplayer.new(menu_sprite_sheet_path)
     self.message_displayer = MessageDisplayer.new(menu_sprite_sheet_path)
 
     local menu_factory = MenuFactory.new(menu_sprite_sheet_path, font)
