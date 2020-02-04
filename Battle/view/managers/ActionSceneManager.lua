@@ -42,7 +42,11 @@ function ActionSceneManager.advanceScene(self)
     self.current_animation_scene_index = self.current_animation_scene_index + 1
 
     if self:getCurrentScene() == nil then
+        -- Update Action Name Displayer
         view:getActionNameDisplayer():setText("")
+
+        -- TODO: Update Action Visualizer
+
         self:finishedDisplayingScenes()
     else
         view:getActionNameDisplayer():setText(self.actions[self.current_animation_scene_index]:getName())
@@ -97,7 +101,10 @@ function ActionSceneManager.playScenesWithActionsAndEntities(self, actions, sour
     self.source_entity = source_entity
     self.target_entities = target_entities
 
+    -- Update Action Name Displayer
     view:getActionNameDisplayer():setText(self.actions[1]:getName())
+
+    -- TODO: Update ActionVisualizer
 
     self:setActionScenes(scenes)
 end
