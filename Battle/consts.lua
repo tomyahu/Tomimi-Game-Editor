@@ -15,3 +15,7 @@ BATTLE_ACTION_PIECE_T = "T"
 BATTLE_ACTION_PIECE_C = "C"
 
 BATTLE_ACTION_DEFAULT_ICON_DIR = RESOURCES_PATH .. "/Battle/AbilitiesIcons/"
+
+BATTLE_THEME_1 = love.audio.newSource(RESOURCES_PATH .. "/sounds/Battle/battle_musicv1.wav", "stream")
+BATTLE_THEME_1:setLooping(true)
+BATTLE_THEME_1:setVolume(0.5)

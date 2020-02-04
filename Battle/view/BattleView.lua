@@ -1,4 +1,5 @@
 require "lib.classes.class"
+require "Battle.consts"
 require "Global.consts"
 require "Global.LOVEWrapper.LOVEWrapper"
 require "Global.application.application"
@@ -13,18 +14,20 @@ local EntityViewGetter = require("Battle.view.entity.EntityViewGetter")
 local ActionNameDisplayer = require("Battle.view.displayers.action_name_displayer.ActionNameDisplayer")
 local MessageDisplayer = require("Battle.view.displayers.message_displayer.MessageDisplayer")
 local ActionIconsDisplayer = require("Battle.view.displayers.action_icon_displayer.ActionIconsDisplayer")
+local SoundManager = require("Battle.view.managers.SoundManager")
 
 local MenuFactory = require("Battle.view.menues.MenuFactory")
 --------------------------------------------------------------------------------------------------------
 
 -- class: BattleView
 -- The view of the battle app
-local BattleView = extend(View, function(self, menu_sprite_sheet_path, font)
+local BattleView = extend(View, function(self, menu_sprite_sheet_path, font, battle_music)
     self.party_view = nil
     self.enemy_party_view = nil
     self.background_view = nil
     self.entity_view_getter = EntityViewGetter.new()
     self.action_scene_manager = ActionSceneManager.new()
+    self.sound_manager = SoundManager.new(battle_music)
 
     self.action_name_displayer = ActionNameDisplayer.new(menu_sprite_sheet_path)
     self.message_displayer = MessageDisplayer.new(menu_sprite_sheet_path)
@@ -64,11 +67,13 @@ end
 function BattleView.setup(self)
     self.message_displayer:reset()
     self.action_name_displayer:reset()
+    self.sound_manager:playMusic()
 end
 
 -- setup: None -> None
 -- Tears up the local view vairables and cleans the contexts used
 function BattleView.stop(self)
+    self.sound_manager:stopMusic()
 end
 
 -- setPlayerParty: Party -> None

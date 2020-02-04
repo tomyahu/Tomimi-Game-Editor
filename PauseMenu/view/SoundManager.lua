@@ -11,18 +11,20 @@ local SoundManager = class(function(self)
 end)
 
 function SoundManager.playMenuSelectedSound(self)
-    self.menu_selected_sound:stop()
-    self.menu_selected_sound:play()
+    self:playSource(self.menu_selected_sound)
 end
 
 function SoundManager.playMenuMoveSound(self)
-    self.menu_move_sound:stop()
-    self.menu_move_sound:play()
+    self:playSource(self.menu_move_sound)
 end
 
 function SoundManager.playMenuCanceledSound(self)
-    self.menu_canceled_sound:stop()
-    self.menu_canceled_sound:play()
+    self:playSource(self.menu_canceled_sound)
+end
+
+function SoundManager.playSource(self, source)
+    source:stop()
+    source:play()
 end
 
 return SoundManager
