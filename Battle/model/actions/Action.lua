@@ -13,8 +13,9 @@ require "Battle.consts"
 -- param: target:str -> The targets this action can be used on
 -- param: type:str -> The action's type (can be attack, support and other)
 -- param: action_fun:function -> the effect of this action
+-- param: icon_path:str -> the path of the icon of this action
 -- An action in a battle that has an effect
-local Action = class(function(self, id, name, description, item_requirements, start_piece, end_piece, target, type, action_fun)
+local Action = class(function(self, id, name, description, item_requirements, start_piece, end_piece, target, type, action_fun, icon_path)
     self.id = id
     self.name = name
     self.description = description
@@ -24,6 +25,7 @@ local Action = class(function(self, id, name, description, item_requirements, st
     self.target = target
     self.type = type
     self.action_fun = action_fun
+    self.icon_path = icon_path
 end)
 
 -- activate: Entity, Entity -> None
@@ -105,6 +107,10 @@ end
 
 function Action.getType(self)
     return self.type
+end
+
+function Action.getIconPath(self)
+    return self.icon_path
 end
 
 return Action
