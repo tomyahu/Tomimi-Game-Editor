@@ -28,10 +28,10 @@ local Action = class(function(self, id, name, description, item_requirements, st
     self.icon_path = icon_path
 end)
 
--- activate: Entity, Entity -> None
+-- activate: Entity, Entity/list(Entity), any -> None
 -- Activates the effect of the skill from the source entity on a target entity
-function Action.activate(self, source_entity, target_entity)
-    self.action_fun(source_entity, target_entity)
+function Action.activate(self, source_entity, target_entity, extra)
+    self.action_fun(source_entity, target_entity, extra)
 end
 
 -- compatiblePrevious: Action -> bool

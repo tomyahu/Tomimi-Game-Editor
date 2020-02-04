@@ -136,7 +136,7 @@ function PlayerTurn.makeComboActionMenu(self, menu_pointer_table, action_sequenc
     local compatible_actions = action_sequence_creator:getActionsCompatibleWithLastAction()
 
     local menu_pointer_table = self:makeActionSelectionMenu(menu_pointer_table, action_sequence_creator, compatible_actions)
-    self.menues.start_attack_action_menu = menu_pointer_table.menu
+    return menu_pointer_table.menu
 end
 
 -- makeActionSelectionMenu: {Menu}, ActionSequenceCreator, list(Action) -> {Menu}
