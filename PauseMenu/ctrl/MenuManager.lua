@@ -64,7 +64,7 @@ function MenuManager.getPartyMenu(self)
 end
 
 -- setItemMenu
--- TODO: Document this
+-- Sets a new menu as the current item menu
 function MenuManager.setItemMenu(self, new_item_menu)
     local old_item_menu = self.item_menu
     self.item_menu = new_item_menu

@@ -8,7 +8,7 @@ local ContentMenuState = require "Menu.model.menuStates.ContentMenuState"
 --------------------------------------------------------------------------------------------------------
 
 -- class: SubItemMenuFactory
--- TODO: Document this
+-- A class dedicated for a menu that pops up in the item menu when an item is selected
 local SubItemMenuFactory = class(function(self)
 end)
 
@@ -37,7 +37,6 @@ function SubItemMenuFactory.getSubItemMenu(item_state)
         view:getSoundManager():playMenuCanceledSound()
     end
 
-    -- TODO: Get party
     local save = application:getCurrentSave()
 
     -- Set the players party entities
@@ -99,14 +98,6 @@ function SubItemMenuFactory.getSubItemMenu(item_state)
     m_build:addState(back_state)
 
     return m_build:getMenu()
-end
-
--- getCharacterSelectMenu: None -> Menu
--- creates a submenu to select a character
--- TODO: Implement this
-function SubItemMenuFactory.getCharacterSelectMenu()
-    local m_build = DefaultMenuBuilder.new()
-    return nil
 end
 
 return SubItemMenuFactory
