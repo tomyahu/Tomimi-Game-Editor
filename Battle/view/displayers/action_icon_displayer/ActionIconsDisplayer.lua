@@ -1,5 +1,6 @@
 require "lib.classes.class"
 require "Global.consts"
+require "Battle.shaders"
 local ActionIconView = require("Battle.view.displayers.action_icon_displayer.ActionIconView")
 --------------------------------------------------------------------------------------------------------
 
@@ -11,6 +12,9 @@ local ActionIconsDisplayer = class(function(self)
 
     self.x_pos = GAME_WIDTH/2 - 64
     self.y_pos = 20
+
+    self.fade_start = 0.2
+    self.fade_end = 0.05
 end)
 
 -- draw: None -> None
@@ -18,17 +22,27 @@ end)
 -- TODO: Invert when there is an enemy attacking
 function ActionIconsDisplayer.draw(self)
     if (self.current_action > 0) and (self.current_action <= (# self.actions_icons)) then
-        -- TODO: Create Shader to make older actions more transparent
-        for i, icon in pairs(self:getPreviousActionIcons()) do
-            local center_offset_x = self.current_action - i
-            local center_offset_x_factor = 96
+        local canvas = love.graphics.newCanvas(love.graphics.getWidth(), love.graphics.getHeight())
 
-            -- Draw Action Icon
-            icon:draw(self.x_pos - center_offset_x*center_offset_x_factor, self.y_pos)
-        end
+        love.graphics.setCanvas(canvas)
+            for i, icon in pairs(self:getPreviousActionIcons()) do
+                local center_offset_x = self.current_action - i
+                local center_offset_x_factor = 96
 
-        -- Draw Current Action Icon
-        self:getCurrentActionIcon():draw(self.x_pos, self.y_pos)
+                -- Draw Action Icon
+                icon:draw(self.x_pos - center_offset_x*center_offset_x_factor, self.y_pos)
+            end
+
+            -- Draw Current Action Icon
+            self:getCurrentActionIcon():draw(self.x_pos, self.y_pos)
+        love.graphics.setCanvas()
+
+        -- Set shader to make older actions more transparent
+        love.graphics.setShader(HORIZONTAL_FADE_SHADER)
+            HORIZONTAL_FADE_SHADER:send("horizontal_fade_start", self.fade_start)
+            HORIZONTAL_FADE_SHADER:send("horizontal_fade_end", self.fade_end)
+            love.graphics.draw(canvas, 0, 0)
+        love.graphics.setShader()
     end
 end
 
