@@ -12,9 +12,11 @@ local ActionSceneManager = require("Battle.view.managers.ActionSceneManager")
 local EntityViewGetter = require("Battle.view.entity.EntityViewGetter")
 local ActionNameDisplayer = require("Battle.view.displayers.action_name_displayer.ActionNameDisplayer")
 local MessageDisplayer = require("Battle.view.displayers.message_displayer.MessageDisplayer")
+local ActionIconsDisplayer = require("Battle.view.displayers.action_icon_displayer.ActionIconsDisplayer")
 
 local MenuFactory = require("Battle.view.menues.MenuFactory")
 --------------------------------------------------------------------------------------------------------
+
 -- class: BattleView
 -- The view of the battle app
 local BattleView = extend(View, function(self, menu_sprite_sheet_path, font)
@@ -26,6 +28,7 @@ local BattleView = extend(View, function(self, menu_sprite_sheet_path, font)
 
     self.action_name_displayer = ActionNameDisplayer.new(menu_sprite_sheet_path)
     self.message_displayer = MessageDisplayer.new(menu_sprite_sheet_path)
+    self.action_icons_displayer = ActionIconsDisplayer.new()
 
     local menu_factory = MenuFactory.new(menu_sprite_sheet_path, font)
     self.menu_view = menu_factory:getBasicMenu(nil, 220, 380)
@@ -55,6 +58,7 @@ function BattleView.draw(self)
     self.message_displayer:draw()
     self.menu_view:draw()
     self.action_name_displayer:draw()
+    self.action_icons_displayer:draw()
 end
 
 -- setup: None -> None
@@ -122,6 +126,10 @@ end
 
 function BattleView.getMessageDisplayer(self)
     return self.message_displayer
+end
+
+function BattleView.getActionIconsDisplayer(self)
+    return self.action_icons_displayer
 end
 
 return BattleView

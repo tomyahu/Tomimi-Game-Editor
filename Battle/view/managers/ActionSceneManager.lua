@@ -45,7 +45,8 @@ function ActionSceneManager.advanceScene(self)
         -- Update Action Name Displayer
         view:getActionNameDisplayer():setText("")
 
-        -- TODO: Update Action Visualizer
+        -- Update Action Icons Displayer
+        view:getActionIconsDisplayer():advanceAction()
 
         self:finishedDisplayingScenes()
     else
@@ -104,7 +105,8 @@ function ActionSceneManager.playScenesWithActionsAndEntities(self, actions, sour
     -- Update Action Name Displayer
     view:getActionNameDisplayer():setText(self.actions[1]:getName())
 
-    -- TODO: Update ActionVisualizer
+    -- Update Action Icons Displayer
+    view:getActionIconsDisplayer():setActions(actions)
 
     self:setActionScenes(scenes)
 end
