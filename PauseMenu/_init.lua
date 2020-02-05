@@ -35,7 +35,7 @@ local save_state = SingleActionMenuState.new("Save", ACTION_BUTTON_1, function (
 local back_state = SingleActionMenuState.new("Back", ACTION_BUTTON_1, function (_)
         local view = application:getCurrentView()
         view:getSoundManager():playMenuCanceledSound()
-        application:appChange("Debug_Overworld")
+        application:appChange("Overworld")
     end)
 
 mBuild:addState(items_state)

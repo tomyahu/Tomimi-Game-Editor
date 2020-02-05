@@ -59,7 +59,7 @@ end
 -- endBattle: None -> None
 -- Ends the current battle
 function TurnManager.endBattle(self)
-    application:appChange("Debug_Overworld")
+    application:appChange("Overworld")
 end
 
 -- getter

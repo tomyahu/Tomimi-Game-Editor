@@ -23,6 +23,6 @@ cutscene_admin:setCurrentCutscene("naranja")
 local view = CutscenesView.new(cutscene_admin:getCurrentCutscene():getCurrentScene(), cutscene_screen_font)
 local ctrl = CutscenesCtrl.new(view, cutscene_admin)
 
-ctrl:setNextApp("Debug_Overworld")
+ctrl:setNextApp("Overworld")
 
 return {["ctrl"] = ctrl, ["view"] = view}
