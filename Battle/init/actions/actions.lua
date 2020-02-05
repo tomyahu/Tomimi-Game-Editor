@@ -97,4 +97,25 @@ action_build:setActionFunction( function(source_entity, target_entity)
 end)
 table.insert(actions, action_build:getAction())
 
+-- 7. True Escape ------------------------------------------------------------------------------------------------------
+action_build:reset()
+action_build:setId(7)
+action_build:setName("True Escape")
+action_build:setDescription("Escapes from combat with a 100% chance.")
+action_build:setStartPiece(BATTLE_ACTION_PIECE_BORDER)
+action_build:setEndPiece(BATTLE_ACTION_PIECE_BORDER)
+action_build:setTarget(BATTLE_TARGET_SELF)
+action_build:setType(BATTLE_ACTION_SUPPORT_TYPE)
+action_build:setActionFunction( function(source_entity, target_entity)
+    local view = application:getCurrentView()
+    local message_displayer = view:getMessageDisplayer()
+
+    local ctrl = application:getCurrentCtrl()
+    ctrl:getTurnManager():setBattleOver(true)
+
+    print("True Escape")
+    message_displayer:displayMessage("Successfully ran away.", 1)
+end)
+table.insert(actions, action_build:getAction())
+
 return actions

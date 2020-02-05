@@ -61,4 +61,23 @@ feel_proud_animation_builder:addAnimation(LinearReturnMoveAnimation.new(0.5), 2.
 
 animation_dict[feel_proud_action] = ActionAnimations.new(feel_proud_animation_builder, null_animation_builder)
 
+------------------------------------------------------------------------------------------------------------------------
+-- 7. True Escape Animation --------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+local true_escape_action = actions[7]
+local true_escape_animation_builder = AnimationSequenceBuilder.new()
+true_escape_animation_builder:addAnimation(LinearMoveAnimation.new(GAME_WIDTH/2, 350/600*GAME_HEIGHT, 0.5), 0, 0.5)
+true_escape_animation_builder:addAnimation(
+ApplyActionAnimation.new(true_escape_action),
+0.5,
+1.5
+)
+true_escape_animation_builder:addAnimation(LinearReturnMoveAnimation.new(0.5), 1.5, 2)
+
+animation_dict[true_escape_action] = ActionAnimations.new(true_escape_animation_builder, null_animation_builder)
+
+
+
+
+----
 return animation_dict
