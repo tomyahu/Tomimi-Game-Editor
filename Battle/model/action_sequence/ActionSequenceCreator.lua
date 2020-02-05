@@ -5,12 +5,24 @@ require "lib.classes.class"
 -- param: actions:list(Action) -> A list of actions available for a character
 -- An action sequence builder
 local ActionSequenceCreator = class(function(self, actions)
-    self.actions = actions
+
+    -- Create new action list with the actions provided
+    self.actions = {}
+    for _, action in pairs(actions) do
+        table.insert(self.actions, action)
+    end
+
+    -- Order action list alphabetically
+    local order_function = function( a,b ) return a:getName() < b:getName() end
+    table.sort(self.actions, order_function)
+
+    -- Set up table to see which actions have been used
     self.used_actions = {}
     for _, action in pairs(actions) do
         self.used_actions[action] = false
     end
 
+    -- Set up action sequence parameters
     self.action_sequence = {}
     self.action_sequence_size = 0
 end)
