@@ -5,6 +5,7 @@ require "lib.classes.class"
 -- param: actions:list(Action) -> A list of actions available for a character
 -- An action sequence builder
 local ActionSequenceCreator = class(function(self, actions)
+    self.actions = actions
     self.used_actions = {}
     for _, action in pairs(actions) do
         self.used_actions[action] = false
@@ -80,7 +81,9 @@ end
 function ActionSequenceCreator.getActionsWithCondition(self, condition_fun)
     local available_actions = {}
 
-    for action, state in pairs(self.used_actions) do
+    for _, action in pairs(self.actions) do
+        local state = self.used_actions[action]
+
         if condition_fun(action, state) then
             table.insert(available_actions, action)
         end
