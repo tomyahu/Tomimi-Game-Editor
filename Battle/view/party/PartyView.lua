@@ -13,16 +13,16 @@ local PartyView = class(function(self, party)
     self.party_stats = PartyStats.new(party:getMembers())
 
     self.position1 = {}
-    self.position1.x = 60/800*GAME_WIDTH
-    self.position1.y = 350/600*GAME_HEIGHT
+    self.position1.x = 124/800*GAME_WIDTH
+    self.position1.y = 414/600*GAME_HEIGHT
 
     self.position2 = {}
-    self.position2.x = 100/800*GAME_WIDTH
-    self.position2.y = 400/600*GAME_HEIGHT
+    self.position2.x = 164/800*GAME_WIDTH
+    self.position2.y = 464/600*GAME_HEIGHT
 
     self.position3 = {}
-    self.position3.x = 20/800*GAME_WIDTH
-    self.position3.y = 450/600*GAME_HEIGHT
+    self.position3.x = 84/800*GAME_WIDTH
+    self.position3.y = 514/600*GAME_HEIGHT
 
     local entity_number = party:getMemberNum()
     self.entity_views = {}

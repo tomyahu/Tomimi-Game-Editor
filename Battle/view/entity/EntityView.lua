@@ -17,7 +17,11 @@ local EntityView = class(function(self, entity, default_x, default_y)
     self.entity = entity
 
     local idle_path = entity:getSpriteFolderPath() .. "idle.png"
-    self.idle_sprite = SpriteFactory.getRegularRectTimedSprite(idle_path, 128, 128, 1)
+
+    self.sprite_width = 128
+    self.sprite_height = 128
+
+    self.idle_sprite = SpriteFactory.getRegularRectTimedSprite(idle_path, self.sprite_width, self.sprite_height, 1)
     self.sprite = self.idle_sprite
 
     self.canvas = love.graphics.newCanvas()
@@ -41,7 +45,7 @@ function EntityView.drawCharacter(self)
 
         self.canvas:renderTo(function()
             love.graphics.clear( )
-            self.sprite:draw(getRelativePosX(draw_x), getRelativePosY(self.current_y), getScale(), getScale())
+            self.sprite:draw(getRelativePosX(draw_x - self.sprite_width/2), getRelativePosY(self.current_y - self.sprite_height/2), getScale(), getScale())
         end)
 
         love.graphics.setShader(OUTLINE_SHADER)
@@ -51,7 +55,7 @@ function EntityView.drawCharacter(self)
         love.graphics.draw(self.canvas, 0, 0)
         love.graphics.setShader()
     else
-        self.sprite:draw(getRelativePosX(draw_x), getRelativePosY(self.current_y), getScale(), getScale())
+        self.sprite:draw(getRelativePosX(draw_x - self.sprite_width/2), getRelativePosY(self.current_y - self.sprite_height/2), getScale(), getScale())
     end
 end
 
