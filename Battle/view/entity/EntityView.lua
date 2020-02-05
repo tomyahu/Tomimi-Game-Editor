@@ -2,6 +2,7 @@ require "lib.classes.class"
 require "Global.consts"
 require "Global.application.application"
 require "Global.LOVEWrapper.LOVEWrapper"
+require "Battle.consts"
 require "Battle.shaders"
 local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 --------------------------------------------------------------------------------------------------------
@@ -37,15 +38,17 @@ end
 function EntityView.drawCharacter(self)
     local ctrl = application:getCurrentCtrl()
     local turn_manager = ctrl:getTurnManager()
+    local menu_manager = ctrl:getMenuManager()
 
 
-    local draw_x = self.current_x
+    local draw_x = self.current_x - self.sprite_width/2
+    local draw_y = self.current_y - self.sprite_height/2
     if turn_manager:getCurrentTurn():getEntity() == self.entity then
         draw_x = draw_x + 10
 
         self.canvas:renderTo(function()
             love.graphics.clear( )
-            self.sprite:draw(getRelativePosX(draw_x - self.sprite_width/2), getRelativePosY(self.current_y - self.sprite_height/2), getScale(), getScale())
+            self.sprite:draw(getRelativePosX(draw_x), getRelativePosY(draw_y), getScale(), getScale())
         end)
 
         love.graphics.setShader(OUTLINE_SHADER)
@@ -55,7 +58,7 @@ function EntityView.drawCharacter(self)
         love.graphics.draw(self.canvas, 0, 0)
         love.graphics.setShader()
     else
-        self.sprite:draw(getRelativePosX(draw_x - self.sprite_width/2), getRelativePosY(self.current_y - self.sprite_height/2), getScale(), getScale())
+        self.sprite:draw(getRelativePosX(draw_x), getRelativePosY(draw_y), getScale(), getScale())
     end
 end
 
