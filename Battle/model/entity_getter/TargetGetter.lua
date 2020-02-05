@@ -27,7 +27,8 @@ end
 -- Returns the targets corresponding to a single party member
 -- This includes the entity and the rest of its party separately
 function TargetGetter.getTargetSinglePartyMember(self, entity)
-    local party_members = self:getEntityPartyMembers(self, entity)
+    local party_members = self:getEntityPartyMembers(entity)
+
     return self:getSingleTargetsFromEntityList(party_members)
 end
 
