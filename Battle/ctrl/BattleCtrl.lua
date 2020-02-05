@@ -58,15 +58,9 @@ function BattleCtrl.setup(self)
         table.insert(battle_turns, RandomActionTurn.new(entity))
     end
 
-    for _, turn in pairs(battle_turns) do
-        print(turn:toString())
-    end
-
     self.turn_manager:setTurns(battle_turns)
     self.turn_manager:resetCurrentTurn()
     self.turn_manager:setBattleOver(false)
-
-    print(self.turn_manager:getCurrentTurn():toString())
 
     self.turn_manager:getCurrentTurn():start()
 

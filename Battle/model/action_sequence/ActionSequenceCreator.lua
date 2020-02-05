@@ -126,7 +126,6 @@ function ActionSequenceCreator.addAction(self, action)
     end
 
     if (not last_action:compatibleNext(action)) and (self.action_sequence_size > 0) then
-        print(last_action:compatibleNext(action))
         error("Tried to add an incompatible action to the action sequence.")
     end
     if (self.action_sequence_size == 0) and (not action:isStartAction()) then
