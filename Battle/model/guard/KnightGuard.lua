@@ -1,5 +1,6 @@
 require "lib.classes.class"
 require "Battle.consts"
+
 --------------------------------------------------------------------------------------------------------
 
 -- class: KnightGuard

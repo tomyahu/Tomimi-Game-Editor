@@ -27,9 +27,8 @@ function(self, stats)
 
     ifNotNullAssign(self, stats, "strength")
     ifNotNullAssign(self, stats, "agility")
-    ifNotNullAssign(self, stats, "max_stamina")
-    ifNotNullAssign(self, stats, "stamina")
     ifNotNullAssign(self, stats, "speed")
+    ifNotNullAssign(self, stats, "reaction")
 
     ifNotNullAssign(self, stats, "max_mp")
     ifNotNullAssign(self, stats, "mp")
