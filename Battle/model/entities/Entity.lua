@@ -53,7 +53,9 @@ function(self, stats)
 
     if not (stats["actions"] == nil) then
         for _, id in pairs(stats["actions"]) do
-            table.insert(self.actions, ActionFactory.getActionWithID(id))
+            local action = ActionFactory.getActionWithID(id)
+
+            table.insert(self.actions, action)
         end
     end
 end,

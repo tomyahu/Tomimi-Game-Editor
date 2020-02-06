@@ -16,7 +16,7 @@ local RectangleMenuWithInactiveOptionsView = extend(RectangleMenuView, function(
 
     self.menu_options = {}
     for index, option in pairs(self.menu.options) do
-        -- TODO: Set option color
+        -- Set option color
         local option_color
         if option:getContent() then
             option_color = {1,1,1,1}

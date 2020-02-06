@@ -4,9 +4,6 @@ local RectangleMenuView = require("PauseMenu.view.menus.RectangleMenuView")
 local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 --------------------------------------------------------------------------------------------------------
 
--- Sprite factory to generate the entity's sprite
-local sprite_factory = SpriteFactory.new()
-
 -- class: RectangleIconMenuView
 -- param: menu:Menu -> The menu to show in this rectangle Icon view
 -- param: menu_border:MenuBorderView -> The borders of the menu
@@ -57,7 +54,7 @@ function RectangleIconMenuView.draw(self)
         local index = i
         local option = self.menu.options[i+self.current_option_delta]
         if self.icon_image_dict[option] == nil then
-            self.icon_image_dict[option] = sprite_factory:getRegularRectSprite(option:getIconPath(), 16, 16, 1)
+            self.icon_image_dict[option] = SpriteFactory.getRegularRectSprite(option:getIconPath(), 16, 16, 1)
         end
 
         if self.menu:getCurrentState() == option then

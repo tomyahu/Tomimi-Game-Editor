@@ -48,8 +48,11 @@ local NullEntity = class(function(self)
     -- Equipped Items
     self.equipped_items = {}
 
-    --
+    -- Entity actions
     self.actions = {}
+
+    -- Entity Status Modifiers
+    self.status_modifiers = {}
 end)
 
 -- getHealed: int -> None
@@ -76,17 +79,30 @@ function NullEntity.setRelativeMp(self, points)
   self.mp = math.max(0, self.mp + points)
 end
 
--- addBuff: Buff -> None
--- Adds a buff to the entity
-function NullEntity.addBuff(self, buff)
-  -- TODO: Check if buff was already added and just refresh the buff if it has
-  -- TODO: Insert the buff in the buff list
+-- addStatusModifier: StatusModifier -> None
+-- Adds a status modifier to the entity
+function NullEntity.addStatusModifier(self, status_modifier)
+    status_modifier:reset(self)
+    status_modifier:activate(self)
+    table.insert(self.status_modifiers, status_modifier)
 end
 
--- removeBuff: str -> None
--- Removes the buff of an entity
-function NullEntity.removeBuff(self, buff_id)
-  -- TODO: Remove a buff from the buff list
+-- removeStatusModifier: str -> None
+-- Removes the status modifier of an entity
+function NullEntity.removeStatusModifier(self, status_modifier_index)
+    -- deactivate all status modifiers in order
+    for i = (# self.status_modifiers),1,-1 do
+        local status_modifier = self.status_modifiers[i]
+        status_modifier:deactivate(self)
+    end
+
+    table.remove(self.status_modifiers, status_modifier_index)
+
+    -- activate all status modifiers in order
+    for i = 1,(# self.status_modifiers) do
+        local status_modifier = self.status_modifiers[i]
+        status_modifier:activate(self)
+    end
 end
 
 -- revive: None -> None
@@ -166,7 +182,6 @@ function NullEntity.getEnergyProficiency(self)
 end
 
 function NullEntity.getHealthProficiency(self)
-  -- TODO: Apply buff and equipped items modifiers 
   return self.health_prof
 end
 
@@ -193,6 +208,10 @@ end
 
 function NullEntity.getResistance(self)
   return math.max(self:getNaturalResistance(), self.armor)
+end
+
+function NullEntity.getStatusModifiers(self)
+    return self.status_modifiers
 end
 
 function NullEntity.getMaxGuard(self)

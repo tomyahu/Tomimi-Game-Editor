@@ -5,11 +5,24 @@ require "lib.classes.class"
 -- param: actions:list(Action) -> A list of actions available for a character
 -- An action sequence builder
 local ActionSequenceCreator = class(function(self, actions)
+
+    -- Create new action list with the actions provided
+    self.actions = {}
+    for _, action in pairs(actions) do
+        table.insert(self.actions, action)
+    end
+
+    -- Order action list alphabetically
+    local order_function = function( a,b ) return a:getName() < b:getName() end
+    table.sort(self.actions, order_function)
+
+    -- Set up table to see which actions have been used
     self.used_actions = {}
     for _, action in pairs(actions) do
         self.used_actions[action] = false
     end
 
+    -- Set up action sequence parameters
     self.action_sequence = {}
     self.action_sequence_size = 0
 end)
@@ -80,7 +93,9 @@ end
 function ActionSequenceCreator.getActionsWithCondition(self, condition_fun)
     local available_actions = {}
 
-    for action, state in pairs(self.used_actions) do
+    for _, action in pairs(self.actions) do
+        local state = self.used_actions[action]
+
         if condition_fun(action, state) then
             table.insert(available_actions, action)
         end
@@ -111,7 +126,6 @@ function ActionSequenceCreator.addAction(self, action)
     end
 
     if (not last_action:compatibleNext(action)) and (self.action_sequence_size > 0) then
-        print(last_action:compatibleNext(action))
         error("Tried to add an incompatible action to the action sequence.")
     end
     if (self.action_sequence_size == 0) and (not action:isStartAction()) then

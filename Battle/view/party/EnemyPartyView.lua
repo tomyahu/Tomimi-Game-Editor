@@ -10,16 +10,16 @@ local PartyStats = require("Battle.view.party.party_stats.PartyStats")
 local EnemyPartyView = extend(PartyView,
 function(self, party)
     self.position1 = {}
-    self.position1.x = GAME_WIDTH - 60/800*GAME_WIDTH
-    self.position1.y = 350/600*GAME_HEIGHT
+    self.position1.x = GAME_WIDTH - 124/800*GAME_WIDTH
+    self.position1.y = 414/600*GAME_HEIGHT
 
     self.position2 = {}
-    self.position2.x = GAME_WIDTH - 100/800*GAME_WIDTH
-    self.position2.y = 400/600*GAME_HEIGHT
+    self.position2.x = GAME_WIDTH - 164/800*GAME_WIDTH
+    self.position2.y = 464/600*GAME_HEIGHT
 
     self.position3 = {}
-    self.position3.x = GAME_WIDTH - 20/800*GAME_WIDTH
-    self.position3.y = 450/600*GAME_HEIGHT
+    self.position3.x = GAME_WIDTH - 84/800*GAME_WIDTH
+    self.position3.y = 514/600*GAME_HEIGHT
 
     -- TODO: Change for EnemyPartyStats
     self.party_stats = PartyStats.new({})

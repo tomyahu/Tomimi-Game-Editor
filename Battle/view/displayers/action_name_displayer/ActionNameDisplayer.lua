@@ -11,8 +11,10 @@ local UITeselatedFrame = require("lib.ui.ui_objects.UITeselatedFrame")
 local ActionNameDisplayer = class(function(self, sprite_path)
     self.sprite_path = sprite_path
 
-    self.text = UIHCenteredText.new("", GAME_WIDTH/2, 50, BATTLE_FONT, {1,1,1,1})
-    self.displayer_frame = UITeselatedFrame.new(GAME_WIDTH/2, 28, self.sprite_path, 1, 1, 32)
+    self.y_pos = 120
+
+    self.text = UIHCenteredText.new("", GAME_WIDTH/2, self.y_pos, BATTLE_FONT, {1,1,1,1})
+    self.displayer_frame = UITeselatedFrame.new(GAME_WIDTH/2, self.y_pos - 22, self.sprite_path, 1, 1, 32)
 end)
 
 -- draw: None -> None

@@ -11,25 +11,29 @@ local PartyMenuView = require("PauseMenu.view.menus.PartyMenuView")
 --------------------------------------------------------------------------------------------------------
 
 -- class: MenuFactory
--- TODO: Document this
+-- param: sprite:str -> the path of the sprite sheet to use for the frames of the menues
+-- param: font:love.Font -> the font of the text in the menues
 local MenuFactory = class(function(self, sprite, font)
     self.sprite = sprite
     self.font = font
 end)
 
--- getSideMenu
+-- getSideMenu: Menu -> RectangleMenuView
+-- gets the side menu of the pause menu
 function MenuFactory.getSideMenu(self, menu)
   return self:getBasicMenu(menu, GAME_WIDTH/80, GAME_HEIGHT/60)
 end
 
--- getItemMenu
+-- getItemMenu: Menu -> RectangleIconMenuView
+-- gets the item menu of the pause menu
 function MenuFactory.getItemMenu(self, menu)
   local item_menu_view = UITeselatedFrame.new(GAME_WIDTH/80 + 5*32, GAME_HEIGHT/60, self.sprite, 18, 17, 32)
   local rectangle_menu_view = RectangleIconMenuView.new(menu, item_menu_view, self.font, 25)
   return rectangle_menu_view
 end
 
--- getPartyMenu
+-- getPartyMenu: Menu -> RectangleIconMenuView
+-- gets the party menu of the pause menu
 function MenuFactory.getPartyMenu(self, menu)
     local party_stats = menu:getContent()
 
@@ -51,7 +55,9 @@ function MenuFactory.getPartyMenu(self, menu)
     return party_menu_view
 end
 
--- getAuxiliaryMenu
+-- getAuxiliaryMenu: Menu -> RectangleMenuWithInactiveOptionsView
+-- gets a menu with some options unavailable
+-- this is used when an item is selected in the item menu in the use functions
 function MenuFactory.getAuxiliaryMenu(self, menu)
     local x = GAME_WIDTH*57.5/80
     local y = GAME_HEIGHT*48/60
@@ -62,7 +68,8 @@ function MenuFactory.getAuxiliaryMenu(self, menu)
     return rectangle_menu_view
 end
 
--- getBasicMenu
+-- getBasicMenu: Menu, int, int -> RectangleMenuView
+-- gets a menu view based on a menu with a certain position
 function MenuFactory.getBasicMenu(self, menu, x, y)
     local menu_size = menu:getOptionNumber()
     local main_option_menu_view = UITeselatedFrame.new(x, y, self.sprite, 5, math.floor(menu_size * (25/32))+1, 32)

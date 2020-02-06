@@ -21,12 +21,17 @@ function ActionBuilder.reset(self)
     self.target = BATTLE_TARGET_NONE
     self.type = BATTLE_ACTION_OTHER_TYPE
     self.action_fun = function(source_entity, target_entity) end
+    self.icon_path = nil
     return self
 end
 
 -- getAction: None -> Action
 -- Returns the result action of the builder
 function ActionBuilder.getAction(self)
+    if self.icon_path == nil then
+        self.icon_path = BATTLE_ACTION_DEFAULT_ICON_DIR .. self.start_piece .. self.end_piece .. ".png"
+    end
+
     return Action.new(
         self.id,
         self.name,
@@ -36,7 +41,8 @@ function ActionBuilder.getAction(self)
         self.end_piece,
         self.target,
         self.type,
-        self.action_fun
+        self.action_fun,
+        self.icon_path
     )
 end
 
@@ -83,6 +89,11 @@ end
 
 function ActionBuilder.setActionFunction(self, new_action_fun)
     self.action_fun = new_action_fun
+    return self
+end
+
+function ActionBuilder.setIconPath(self, new_icon_path)
+    self.icon_path = new_icon_path
     return self
 end
 

@@ -136,7 +136,7 @@ function PlayerTurn.makeComboActionMenu(self, menu_pointer_table, action_sequenc
     local compatible_actions = action_sequence_creator:getActionsCompatibleWithLastAction()
 
     local menu_pointer_table = self:makeActionSelectionMenu(menu_pointer_table, action_sequence_creator, compatible_actions)
-    self.menues.start_attack_action_menu = menu_pointer_table.menu
+    return menu_pointer_table.menu
 end
 
 -- makeActionSelectionMenu: {Menu}, ActionSequenceCreator, list(Action) -> {Menu}
@@ -212,7 +212,16 @@ function PlayerTurn.makeAttackTargetMenu(self, menu_pointer_table, action_sequen
     local ctrl = application:getCurrentCtrl()
     local target_getter = ctrl:getTargetGetter()
 
-    return self:makeTargetMenuAux(menu_pointer_table, action_sequence_creator, target_getter:getTargetSingleEnemy(self.entity), BATTLE_TARGET_SINGLE_ENEMY)
+    local has_target_entity = false
+    for _, action in pairs(action_sequence_creator:getActionSequence()) do
+        has_target_entity = has_target_entity or (action:getTarget() == BATTLE_TARGET_SINGLE_ENEMY)
+    end
+
+    if has_target_entity then
+        return self:makeTargetMenuAux(menu_pointer_table, action_sequence_creator, target_getter:getTargetSingleEnemy(self.entity), BATTLE_TARGET_SINGLE_ENEMY)
+    else
+        return self:makeConfirmationMenu(menu_pointer_table, action_sequence_creator)
+    end
 end
 
 -- makeSupportTargetMenu: {Menu}, ActionSequenceCreator -> Menu
@@ -221,7 +230,17 @@ function PlayerTurn.makeSupportTargetMenu(self, menu_pointer_table, action_seque
     local ctrl = application:getCurrentCtrl()
     local target_getter = ctrl:getTargetGetter()
 
-    return self:makeTargetMenuAux(menu_pointer_table, action_sequence_creator, target_getter:getTargetSinglePartyMember(self.entity), BATTLE_TARGET_SINGLE_PARTY_MEMBER)
+    local has_target_entity = false
+
+    for _, action in pairs(action_sequence_creator:getActionSequence()) do
+        has_target_entity = has_target_entity or (action:getTarget() == BATTLE_TARGET_SINGLE_PARTY_MEMBER)
+    end
+
+    if has_target_entity then
+        return self:makeTargetMenuAux(menu_pointer_table, action_sequence_creator, target_getter:getTargetSinglePartyMember(self.entity), BATTLE_TARGET_SINGLE_PARTY_MEMBER)
+    else
+        return self:makeConfirmationMenu(menu_pointer_table, action_sequence_creator)
+    end
 end
 
 -- makeTargetMenuAux: {Menu}, ActionSequenceCreator, list(list(Entity)), str -> Menu
@@ -303,6 +322,8 @@ function PlayerTurn.makeConfirmationMenu(self, menu_pointer_table, action_sequen
     end)
 
     target_state:addTransitionAction(ACTION_BUTTON_2, back_funtion)
+
+    m_build:addState(target_state)
 
     return m_build:getMenu()
 end

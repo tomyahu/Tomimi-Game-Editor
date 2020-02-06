@@ -18,8 +18,6 @@ function TurnManager.advanceTurn(self)
     end
     self.current_turn = ( self.current_turn % (# self.turns) ) + 1
 
-    print(self:getCurrentTurn():toString())
-
     self:getCurrentTurn():start()
 end
 
@@ -59,7 +57,7 @@ end
 -- endBattle: None -> None
 -- Ends the current battle
 function TurnManager.endBattle(self)
-    application:appChange("Debug_Overworld")
+    application:appChange("Overworld")
 end
 
 -- getter

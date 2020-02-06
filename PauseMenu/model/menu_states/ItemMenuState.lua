@@ -9,7 +9,6 @@ local SubItemMenuFactory = require("PauseMenu.model.menues.SubItemMenuFactory")
 -- param: item_data:dict -> a dictionary with the item's data
 -- param: item_ptr:table -> a pointer to the item that the item state refers to
 -- Creates a new Item Menu state that represents an item
--- TODO: Create a base class for this that extends MenuState called IconMenuState
 local ItemMenuState = extend(MenuState, function(self, item_data, item_ptr)
     self.item_name = item_data["name"]
     self.item_description = item_data["description"]

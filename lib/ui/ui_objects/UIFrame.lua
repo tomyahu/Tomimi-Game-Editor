@@ -13,7 +13,6 @@ local RectangleUIComponent = require("lib.ui.love_ui_components.RectangleUICompo
 -- param: color1:{num, num, num, num} -> the color of the inside of the frame
 -- param: color2:{num, num, num, num} -> the color of the border of the frame
 -- A frame created by two rectangles
--- TODO: Create Frame that uses many rectangles to generate the borders
 local UIFrame = extend(UIObject, function(self, x, y, width, height, horizontal_border_thickness, vertical_border_thickness, color1, color2)
     self.width = width
     self.height = height

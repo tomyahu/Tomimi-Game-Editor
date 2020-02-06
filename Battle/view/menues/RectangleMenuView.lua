@@ -20,7 +20,8 @@ local RectangleMenuView = class(function(self, menu, menu_border, font, space_y)
     end
 end)
 
--- TODO: Document this
+-- updateCurrentlySelectedOption: None -> None
+-- Updates in the view, the option that is currently selected in the menu
 function RectangleMenuView.updateCurrentlySelectedOption(self)
     -- Update last selected option
     local currently_selected_option = self.menu:getCurrentState():toString()
@@ -48,15 +49,15 @@ function RectangleMenuView.draw(self)
 
     local space_y = self.space_y
 
-    local start_x = self.menu_border:getX() + self.menu_border:getDimension()
+    local start_x = self.menu_border:getX() + self.menu_border:getDimension()/2
     local start_y = self.menu_border:getY()+ space_y*0.66
 
     -- draws menu options
     for index, option in pairs(self.menu.options) do
         if self.menu:getCurrentState() == option then
-            love.graphics.print( option:toString(), getRelativePosX(start_x + 10), getRelativePosY(start_y + (index-1)*space_y), 0, getScale(), getScale())
+            love.graphics.print( "¾ " .. option:toString(), getRelativePosX(start_x + 10), getRelativePosY(start_y + (index-1)*space_y), 0, getScale(), getScale())
         else
-            love.graphics.print( option:toString(), getRelativePosX(start_x), getRelativePosY(start_y + (index-1)*space_y), 0, getScale(), getScale())
+            love.graphics.print( "  " .. option:toString(), getRelativePosX(start_x), getRelativePosY(start_y + (index-1)*space_y), 0, getScale(), getScale())
         end
     end
 end

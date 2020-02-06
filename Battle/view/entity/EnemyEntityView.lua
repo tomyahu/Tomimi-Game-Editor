@@ -8,8 +8,7 @@ local EntityView = require("Battle.view.entity.EntityView")
 -- class: EntityView
 -- param: entity:Entity -> The entity to visualize
 -- Class made to generate the entity view
-local EnemyEntityView = extend(EntityView,
-function(self, entity, default_x, default_y)
+local EnemyEntityView = extend(EntityView, function(self, entity, default_x, default_y)
 end,
 
 function(entity, default_x, default_y)
@@ -17,7 +16,7 @@ function(entity, default_x, default_y)
 end)
 
 function EnemyEntityView.draw(self)
-  self.sprite:draw(getRelativePosX(self.current_x), getRelativePosY(self.current_y), -getScale(), getScale())
+  self.sprite:draw(getRelativePosX(self.current_x + self.sprite_width/2), getRelativePosY(self.current_y - self.sprite_height/2), -getScale(), getScale())
 end
 
 return EnemyEntityView

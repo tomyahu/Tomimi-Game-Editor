@@ -89,7 +89,7 @@ debug_room_state:addTransitionAction(ACTION_BUTTON_1, function (_)
 
     application:setCurrentSave(getNewSaveFile())
 
-    application:appChange("Debug_Overworld")
+    application:appChange("Overworld")
 end)
 
 conf_state:addTransitionAction(ACTION_BUTTON_1, function (_)

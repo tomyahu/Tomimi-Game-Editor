@@ -1,13 +1,11 @@
 require "lib.classes.class"
-local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 require "Global.LOVEWrapper.LOVEWrapper"
+local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
+
 local entities = require("Global.entities")
 
 local items = require("Global.items")
 --------------------------------------------------------------------------------------------------------
--- Sprite factory to generate the entity's sprite
-local sprite_factory = SpriteFactory.new()
-
 -- class: CharacterInfoCard
 -- param: card_border:MenuBorderView -> the border of the character card
 -- param: character_stats:dict -> statistics of the character
@@ -22,7 +20,7 @@ local CharacterInfoCard = class(function(self, card_border, character_stats, fon
     self.weapon_name = love.graphics.newText( font, "Weapon: " .. "???" )
     self.weapon_sprite = nil
 
-    self.character_icon =  sprite_factory:getRegularRectSprite(self.character_stats["icon_path"], 64, 64, 1)
+    self.character_icon =  SpriteFactory.getRegularRectSprite(self.character_stats["icon_path"], 64, 64, 1)
 end)
 
 -- TODO: Document this
@@ -84,7 +82,7 @@ function CharacterInfoCard.draw(self)
     if not (self.weapon_id == weapon_id) then
         local weapon = items[weapon_id]
         self.weapon_name = love.graphics.newText( self.font, "Weapon: " .. weapon["name"])
-        self.weapon_sprite = sprite_factory:getRegularRectSprite(weapon["icon"], 16, 16, 1)
+        self.weapon_sprite = SpriteFactory.getRegularRectSprite(weapon["icon"], 16, 16, 1)
     end
 
     -- Draw Weapon
