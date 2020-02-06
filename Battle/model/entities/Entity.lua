@@ -1,4 +1,5 @@
 require "lib.classes.class"
+local guards = require("Battle.model.guard.guard_dict")
 local NullEntity = require("Battle.model.entities.NullEntity")
 local ActionFactory = require("Battle.init.actions.ActionFactory")
 --------------------------------------------------------------------------------------------------------
@@ -57,9 +58,10 @@ function(self, stats)
             table.insert(self.actions, action)
         end
     end
-end,
-function(stats, sprite_path)
-    return NullEntity.new()
+
+    if not (stats["guard_type"] == nil) then
+        self.guard = guards[stats["guard_type"]].new(self)
+    end
 end)
 
 -- getter

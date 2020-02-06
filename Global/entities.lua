@@ -1,4 +1,5 @@
 require "Global.consts"
+require "Global.guard_types"
 
 local entities = {}
 local entity
@@ -15,11 +16,12 @@ entity["icon_path"] = RESOURCES_PATH .. "/Overworld/CharacterPortraits/MacPortra
 entity["battle_sprite_folder"] = RESOURCES_PATH .. "/Battle/Entities/mac/"
 entity["max_hp"] = 8
 entity["max_mp"] = 3
-entity["max_stamina"] = 10
-entity["strength"] = 5
+entity["strength"] = 7
 entity["natural_resistence"] = 4
 entity["speed"] = 7
 entity["agility"] = 9
+entity["reaction"] = 60
+entity["guard_type"] = ROGUE_GUARD_TYPE
 
 entity["b_aura_prof"] = 1
 entity["b_spirit_prof"] = 1
@@ -40,11 +42,12 @@ entity["icon_path"] = RESOURCES_PATH .. "/Overworld/CharacterPortraits/KenPortra
 entity["battle_sprite_folder"] = RESOURCES_PATH .. "/Battle/Entities/ken/"
 entity["max_hp"] = 15
 entity["max_mp"] = 13
-entity["max_stamina"] = 15
 entity["strength"] = 10
-entity["natural_resistence"] = 7
+entity["natural_resistence"] = 6
 entity["speed"] = 6
 entity["agility"] = 5
+entity["reaction"] = 60
+entity["guard_type"] = KNIGHT_GUARD_TYPE
 
 entity["mana_strength"] = 8
 entity["mana_control"] = 5
@@ -68,11 +71,12 @@ entity["icon_path"] = RESOURCES_PATH .. "/Overworld/CharacterPortraits/NonePortr
 entity["battle_sprite_folder"] = RESOURCES_PATH .. "/Battle/Entities/naranjarina/"
 entity["max_hp"] = 3
 entity["max_mp"] = 0
-entity["max_stamina"] = 2
-entity["strength"] = 2
-entity["natural_resistence"] = 2
-entity["speed"] = 8
-entity["agility"] = 8
+entity["reaction"] = 55
+entity["strength"] = 4
+entity["natural_resistence"] = 3
+entity["speed"] = 4
+entity["agility"] = 15
+entity["guard_type"] = ROGUE_GUARD_TYPE
 
 entity["mana_strength"] = 0
 entity["mana_control"] = 0
