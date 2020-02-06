@@ -54,15 +54,12 @@ function CharacterInfoCard.draw(self)
     -- Draw HP, MP and STA
     local max_hp = self:getStrFromStat(self.character_stats["max_hp"])
     local max_mp = self:getStrFromStat(self.character_stats["max_mp"])
-    local max_sta = self:getStrFromStat(self.character_stats["max_stamina"])
 
     local hp = self:getStrFromStat(self.character_meta["hp"])
     local mp = self:getStrFromStat(self.character_meta["mp"])
-    local sta = self:getStrFromStat(self.character_meta["stamina"])
 
     love.graphics.print( "HP: " .. hp .. "/" .. max_hp, getRelativePosX(text_offset_x_1), getRelativePosY(text_offset_y + text_vertical_space), 0, getScale(), getScale())
     love.graphics.print( "MP: " .. mp .. "/" .. max_mp, getRelativePosX(text_offset_x_2), getRelativePosY(text_offset_y + text_vertical_space), 0, getScale(), getScale())
-    love.graphics.print( "STA: " .. sta .. "/" .. max_sta, getRelativePosX(text_offset_x_1), getRelativePosY(text_offset_y + 2*text_vertical_space), 0, getScale(), getScale())
 
 
     -- Draw STR, RES, SPD and AGI
@@ -71,10 +68,10 @@ function CharacterInfoCard.draw(self)
     local spd = self:getStrFromStat(self.character_stats["speed"])
     local agi = self:getStrFromStat(self.character_stats["agility"])
 
-    love.graphics.print( "STR: " .. str, getRelativePosX(text_offset_x_1), getRelativePosY(text_offset_y + 3*text_vertical_space), 0, getScale(), getScale())
-    love.graphics.print( "RES: " .. res, getRelativePosX(text_offset_x_2), getRelativePosY(text_offset_y + 3*text_vertical_space), 0, getScale(), getScale())
-    love.graphics.print( "SPD: " .. spd, getRelativePosX(text_offset_x_1), getRelativePosY(text_offset_y + 4*text_vertical_space), 0, getScale(), getScale())
-    love.graphics.print( "AGI: " .. agi, getRelativePosX(text_offset_x_2), getRelativePosY(text_offset_y + 4*text_vertical_space), 0, getScale(), getScale())
+    love.graphics.print( "STR: " .. str, getRelativePosX(text_offset_x_1), getRelativePosY(text_offset_y + 2*text_vertical_space), 0, getScale(), getScale())
+    love.graphics.print( "RES: " .. res, getRelativePosX(text_offset_x_2), getRelativePosY(text_offset_y + 2*text_vertical_space), 0, getScale(), getScale())
+    love.graphics.print( "SPD: " .. spd, getRelativePosX(text_offset_x_1), getRelativePosY(text_offset_y + 3*text_vertical_space), 0, getScale(), getScale())
+    love.graphics.print( "AGI: " .. agi, getRelativePosX(text_offset_x_2), getRelativePosY(text_offset_y + 3*text_vertical_space), 0, getScale(), getScale())
 
     -- Check if weapon has changed Weapon
     -- TODO: Put this in its own method

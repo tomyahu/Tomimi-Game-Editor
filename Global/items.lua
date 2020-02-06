@@ -50,7 +50,6 @@ orange_segment["action"] = function(extra)
     local character_meta = character.meta
     local character_stats = entities[character.id]
     character_meta["hp"] = math.min(character_stats["max_hp"], character_meta["hp"] + 1)
-    character_meta["stamina"] = math.min(character_stats["max_stamina"], character_meta["stamina"] + 2)
 
 
 end
