@@ -1,10 +1,12 @@
 require "Global.application.application"
 local ActionBuilder = require("Battle.model.actions.ActionBuilder")
+local RegularAttackActionBuilder = require("Battle.model.actions.RegularAttackActionBuilder")
 require ("Battle.consts")
 --------------------------------------------------------------------------------------------------------
 
 local actions = {}
 local action_build = ActionBuilder.new()
+local regular_attack_action_build = RegularAttackActionBuilder.new()
 
 -- 1. Do Nothing -------------------------------------------------------------------------------------------------------
 action_build:reset()
@@ -70,32 +72,28 @@ end)
 table.insert(actions, action_build:getAction())
 
 -- 5. Sinister Slash (Mac Ability) -------------------------------------------------------------------------------------
-action_build:reset()
-action_build:setId(5)
-action_build:setName("Sinister Slash")
-action_build:setDescription("A mysterious strike that comes from the left.")
-action_build:setStartPiece(BATTLE_ACTION_PIECE_T)
-action_build:setEndPiece(BATTLE_ACTION_PIECE_C)
-action_build:setTarget(BATTLE_TARGET_SINGLE_ENEMY)
-action_build:setType(BATTLE_ACTION_ATTACK_TYPE)
-action_build:setActionFunction( function(source_entity, target_entity)
-    print("misterious...")
-end)
-table.insert(actions, action_build:getAction())
+regular_attack_action_build:reset()
+regular_attack_action_build:setId(5)
+regular_attack_action_build:setName("Sinister Slash")
+regular_attack_action_build:setDescription("A mysterious strike that comes from the left.")
+regular_attack_action_build:setStartPiece(BATTLE_ACTION_PIECE_T)
+regular_attack_action_build:setEndPiece(BATTLE_ACTION_PIECE_C)
+regular_attack_action_build:setTarget(BATTLE_TARGET_SINGLE_ENEMY)
+regular_attack_action_build:setGuardDamage(100)
+regular_attack_action_build:setDirectDamage(100)
+table.insert(actions, regular_attack_action_build:getAction())
 
 -- 6. Dragon Horn (Mac Ability) ----------------------------------------------------------------------------------------
-action_build:reset()
-action_build:setId(6)
-action_build:setName("Dragon Horn")
-action_build:setDescription("A direct strike from the center tilted a little up like a horn.")
-action_build:setStartPiece(BATTLE_ACTION_PIECE_C)
-action_build:setEndPiece(BATTLE_ACTION_PIECE_BORDER)
-action_build:setTarget(BATTLE_TARGET_SINGLE_ENEMY)
-action_build:setType(BATTLE_ACTION_ATTACK_TYPE)
-action_build:setActionFunction( function(source_entity, target_entity)
-    print("roar!")
-end)
-table.insert(actions, action_build:getAction())
+regular_attack_action_build:reset()
+regular_attack_action_build:setId(6)
+regular_attack_action_build:setName("Dragon Horn")
+regular_attack_action_build:setDescription("A direct strike from the center tilted a little up like a horn.")
+regular_attack_action_build:setStartPiece(BATTLE_ACTION_PIECE_C)
+regular_attack_action_build:setEndPiece(BATTLE_ACTION_PIECE_BORDER)
+regular_attack_action_build:setTarget(BATTLE_TARGET_SINGLE_ENEMY)
+regular_attack_action_build:setGuardDamage(100)
+regular_attack_action_build:setDirectDamage(100)
+table.insert(actions, regular_attack_action_build:getAction())
 
 -- 7. True Escape ------------------------------------------------------------------------------------------------------
 action_build:reset()

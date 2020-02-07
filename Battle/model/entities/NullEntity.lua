@@ -63,17 +63,19 @@ function NullEntity.getHealed(self, points)
   end
 end
 
--- getAttacked: int -> None
+-- getAttackedDirectly: int -> None
 -- The entity loses hp equal to damage
-function NullEntity.getAttacked(self, damage)
-    if self.guard:isGuardBroken() then
-        if (self.hp - damage) <= 0 then
-          self.is_alive = false
-        end
-        self.hp = math.max(0, self.hp - damage)
-    else
-        self.guard:damageGuard(damage)
+function NullEntity.getAttackedDirectly(self, damage)
+    if (self.hp - damage) <= 0 then
+      self.is_alive = false
     end
+    self.hp = math.max(0, self.hp - damage)
+end
+
+-- getAttackedGuard: int -> None
+-- The entity loses guard points equal to damage
+function NullEntity.getAttackedGuard(self, damage)
+    self.guard:damageGuard(damage)
 end
 
 -- setRelativeMp: int -> None
@@ -114,6 +116,12 @@ end
 function NullEntity.revive(self)
     self.is_alive = true
     self.hp = math.max(1, self.hp)
+end
+
+-- isGuardBroken: None -> bool
+-- Checks if guard is broken
+function NullEntity.isGuardBroken(self)
+    return self.guard:isGuardBroken()
 end
 
 -- getters
