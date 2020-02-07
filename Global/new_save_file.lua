@@ -16,21 +16,18 @@ player1["id"] = 2
 player1["meta"] = {}
 player1["meta"]["hp"] = 3
 player1["meta"]["mp"] = 0
-player1["meta"]["stamina"] = 10
 
 local player2 = {}
 player2["id"] = 1
 player2["meta"] = {}
 player2["meta"]["hp"] = 12
 player2["meta"]["mp"] = 13
-player2["meta"]["stamina"] = 13
 
 local player3 = {}
 player3["id"] = 3
 player3["meta"] = {}
 player3["meta"]["hp"] = 3
 player3["meta"]["mp"] = 0
-player3["meta"]["stamina"] = 5
 
 save_file["Battle"]["PlayerPartyMetadata"][1] = player1
 save_file["Battle"]["PlayerPartyMetadata"][3] = player2

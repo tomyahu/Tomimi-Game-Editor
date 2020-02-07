@@ -9,7 +9,7 @@ local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 local PartyStats = class(function(self, entities)
     self.hp_color = {0.3,0.5,0.1,1}
     self.mp_color = {0.1,0.4,1.0,1}
-    self.sta_color = {0.5,0.4,0.05,1}
+    self.guard_color = {0.5,0.5,0.5,1}
 
     local portrait_background_path = RESOURCES_PATH .. "/Battle/Miscelaneous/PortraitContainers/PortraitStatContainer.png"
     self.entity_portrait_background = SpriteFactory.getRegularRectSprite(portrait_background_path, 128, 96, 1)
@@ -20,15 +20,16 @@ local PartyStats = class(function(self, entities)
         table.insert(self.entities_portraits, SpriteFactory.getRegularRectSprite(portrait_path, 128, 128, 1))
     end
 
-    self.scale_factor = 1.3
+    self.scale_factor = 1.25
     self.initial_offset_y = 150
+    self.offset_stat_bars = 31*self.scale_factor
 
     self.space_x = 102*self.scale_factor
     self.space_x_portraits = 10*self.scale_factor
     self.space_y = 15*self.scale_factor
     self.space_between_y = 30*self.scale_factor
 
-    self.canvas = love.graphics.newCanvas( getScale()*self.scale_factor, (self.space_y)*getScale())
+    self.canvas = love.graphics.newCanvas( getScale()*self.scale_factor, 14*getScale()*self.scale_factor)
 end)
 
 -- draw: None -> None
@@ -40,11 +41,11 @@ function PartyStats.draw(self)
     for i = 1, (# self.entities) do
         -- Draw Stats
         local entity = self.entities[i]
-        self:drawEntityStats(entity, offset_y)
+        self:drawEntityStats(entity, offset_y + self.offset_stat_bars)
 
         -- Draw Portraits
-        self.entity_portrait_background:draw(getRelativePosX(0), getRelativePosY(offset_y - 2*self.space_y), getScale()*self.scale_factor, getScale()*self.scale_factor)
-        self.entities_portraits[i]:draw(getRelativePosX(self.space_x_portraits), getRelativePosY(offset_y - 1.3*self.space_y), self.space_y / 15 * getScale(), self.space_y / 15 * getScale())
+        self.entity_portrait_background:draw(getRelativePosX(0), getRelativePosY(offset_y), getScale()*self.scale_factor, getScale()*self.scale_factor)
+        self.entities_portraits[i]:draw(getRelativePosX(self.space_x_portraits), getRelativePosY(offset_y + 0.7*self.space_y), getScale()*self.scale_factor, getScale()*self.scale_factor)
 
         offset_y = offset_y + 3*self.space_y + self.space_between_y
     end
@@ -55,7 +56,7 @@ end
 function PartyStats.drawEntityStats(self, entity, offset_y)
     local hp = entity:getHp()
     local mp = entity:getMp()
-    local stamina = entity:getStamina()
+    local guard = entity:getCurrentGuard()
 
     -- create shader for stat bars
     love.graphics.setShader(STAT_BAR_SHADER)
@@ -74,11 +75,11 @@ function PartyStats.drawEntityStats(self, entity, offset_y)
     love.graphics.setColor(self.mp_color)
     love.graphics.draw(self.canvas, getRelativePosX(self.space_x), getRelativePosY(offset_y), 0, width, 1)
 
-    -- Draw Stamina
+    -- Draw Guard
     offset_y = offset_y + self.space_y
-    local width = stamina*10
+    local width = guard*5
 
-    love.graphics.setColor(self.sta_color)
+    love.graphics.setColor(self.guard_color)
     love.graphics.draw(self.canvas, getRelativePosX(self.space_x), getRelativePosY(offset_y), 0, width, 1)
 
     love.graphics.setColor(1,1,1,1)

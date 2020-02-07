@@ -1,4 +1,5 @@
 require "lib.classes.class"
+local NullGuard = require("Battle.model.guard.NullGuard")
 -------------------------------------------------------------------------------------------------------
 
 -- class: NullEntity
@@ -10,17 +11,16 @@ local NullEntity = class(function(self)
     -- Stats
     self.max_hp = 1
     self.hp = 1
-    self.max_stamina = 1
-    self.stamina = 1
     self.is_alive = true
     
     self.strength = 0
     self.agility = 0
     self.speed = 0
     self.armor = 0
+    self.reaction = 0
 
     -- In Combat
-    self.guard = 0
+    self.guard = NullGuard.new(self)
     
     -- magic
     self.max_mp = 0
@@ -66,15 +66,19 @@ end
 -- getAttacked: int -> None
 -- The entity loses hp equal to damage
 function NullEntity.getAttacked(self, damage)
-    if (self.hp - damage) <= 0 then
-      self.is_alive = false
+    if self.guard:isGuardBroken() then
+        if (self.hp - damage) <= 0 then
+          self.is_alive = false
+        end
+        self.hp = math.max(0, self.hp - damage)
+    else
+        self.guard:damageGuard(damage)
     end
-    self.hp = math.max(0, self.hp - damage)
 end
 
 -- setRelativeMp: int -> None
--- Adds or substracts an amount of points to the entity's mp
-function NullEntity.setRelativeMp(self, points)
+-- Adds an amount of points to the entity's mp
+function NullEntity.addMp(self, points)
   self.mp = math.min(self.max_mp, self.mp + points)
   self.mp = math.max(0, self.mp + points)
 end
@@ -133,12 +137,8 @@ function NullEntity.getAgility(self)
   return self.agility
 end
 
-function NullEntity.getMaxStamina(self)
-    return self.max_stamina
-end
-
-function NullEntity.getStamina(self)
-  return self.stamina
+function NullEntity.getReaction(self)
+    return self.reaction
 end
 
 function NullEntity.getSpeed(self)
@@ -201,7 +201,6 @@ function NullEntity.getBInstinctProficiency(self)
     return self.b_instinct_prof
 end
 
-
 function NullEntity.getNaturalResistance(self)
   return self.natural_resistence
 end
@@ -215,14 +214,16 @@ function NullEntity.getStatusModifiers(self)
 end
 
 function NullEntity.getMaxGuard(self)
-    local stamina_modifier = (self.max_stamina - self.stamina)/self.max_stamina*0.8 + 0.2
-    local strength = self:getStrength()
-    local resistance = self:getResistance()
-    -- TODO: Graph this
-    return (strength/4 + resistance/2) * stamina_modifier
+    return self.guard:getMaxGuard()
 end
 
--- TODO: Implement getCurrentGuard based on current stamina
+function NullEntity.getCurrentGuard(self)
+    return self.guard:getCurrentGuard()
+end
+
+function NullEntity.getGuard(self)
+    return self.guard
+end
 
 function NullEntity.isAlive(self)
   return self.is_alive
