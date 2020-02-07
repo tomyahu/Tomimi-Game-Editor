@@ -14,14 +14,13 @@ function(self, party)
     self.position1.y = 414/600*GAME_HEIGHT
 
     self.position2 = {}
-    self.position2.x = GAME_WIDTH - 164/800*GAME_WIDTH
+    self.position2.x = GAME_WIDTH - 196/800*GAME_WIDTH
     self.position2.y = 464/600*GAME_HEIGHT
 
     self.position3 = {}
     self.position3.x = GAME_WIDTH - 84/800*GAME_WIDTH
     self.position3.y = 514/600*GAME_HEIGHT
 
-    -- TODO: Change for EnemyPartyStats
     self.party_stats = PartyStats.new({})
 
     local entity_number = party:getMemberNum()

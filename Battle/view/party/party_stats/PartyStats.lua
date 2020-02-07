@@ -21,6 +21,7 @@ local PartyStats = class(function(self, entities)
     end
 
     self.initial_offset_y = 150
+    self.initial_offset_x = 0
 
     self.offset_x_stat_bars = 132
     self.offset_y_stat_bars = 37
@@ -61,7 +62,6 @@ function PartyStats.drawEntityStats(self, entity, offset_y)
 
     -- create shader for stat bars
     love.graphics.setShader(STAT_BAR_SHADER)
-    local screen = {love.graphics.getWidth( ), love.graphics.getHeight( ) }
 
     -- Draw Hp
     local width = hp*10
