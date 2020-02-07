@@ -6,8 +6,6 @@ if TEST then
     love.event.quit()
 end
 
-love.audio.setVolume( 0 )
-
 -- Love Default Conf
 love.graphics.setDefaultFilter('nearest', 'nearest')
 
