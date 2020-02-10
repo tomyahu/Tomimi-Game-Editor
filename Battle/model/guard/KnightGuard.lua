@@ -25,4 +25,22 @@ function KnightGuard.getMaxGuard(self)
     return math.floor(0.3*aux + 0.7 * math.pow(aux, math.sqrt(rct/95)))
 end
 
+-- smallRecovery: None -> None
+-- recovers a small amount of guard
+function KnightGuard.smallRecovery(self)
+    self:restoreGuard(math.floor(0.05*self:getMaxGuard()))
+end
+
+-- mediumRecovery: None -> None
+-- recovers half of its guard
+function KnightGuard.mediumRecovery(self)
+    self:restoreGuard(math.floor(0.5*self:getMaxGuard()))
+end
+
+-- fullRecovery: None -> None
+-- recovers maximum guard
+function KnightGuard.fullRecovery(self)
+    self:restoreGuard(self:getMaxGuard())
+end
+
 return KnightGuard

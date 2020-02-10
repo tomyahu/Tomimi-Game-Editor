@@ -16,6 +16,7 @@ end)
 function Turn.start(self)
     self.actions = {}
     self.target_action_entities = {}
+    self.entity:restOneTurn()
 end
 
 -- chooseActions: list(Action), list(list(Entity)) -> None
