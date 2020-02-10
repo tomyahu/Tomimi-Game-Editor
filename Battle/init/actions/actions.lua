@@ -115,4 +115,16 @@ action_build:setActionFunction( function(source_entity, target_entity)
 end)
 table.insert(actions, action_build:getAction())
 
+-- 8. Guard Breaker ----------------------------------------------------------------------------------------------------
+regular_attack_action_build:reset()
+regular_attack_action_build:setId(8)
+regular_attack_action_build:setName("Guard Breaker")
+regular_attack_action_build:setDescription("Breaks a single target's guard, used for debug.")
+regular_attack_action_build:setStartPiece(BATTLE_ACTION_PIECE_BORDER)
+regular_attack_action_build:setEndPiece(BATTLE_ACTION_PIECE_BORDER)
+regular_attack_action_build:setTarget(BATTLE_TARGET_SINGLE_ENEMY)
+regular_attack_action_build:setGuardDamage(9999999)
+regular_attack_action_build:setDirectDamage(0)
+table.insert(actions, regular_attack_action_build:getAction())
+
 return actions
