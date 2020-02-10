@@ -26,9 +26,7 @@ function RandomActionTurn.start(self)
     local start_actions = action_sequence_creator:getStartActions()
     action_sequence_creator:addAction(start_actions[math.random(1, (# start_actions))])
     while not (action_sequence_creator:getLastAction():isEndAction()) do
-        local last_action_type = action_sequence_creator:getLastAction():getEndPiece()
-        local next_action = action_sequence_creator:getActionsWithStartType(last_action_type)
-        local compatible_actions = action_sequence_creator:addAction(next_action)
+        local compatible_actions = action_sequence_creator:getActionsCompatibleWithLastAction()
         action_sequence_creator:addAction(compatible_actions[math.random(1, (# compatible_actions))])
     end
 
@@ -42,9 +40,9 @@ function RandomActionTurn.start(self)
 
     local target_behaviour = {}
     target_behaviour[BATTLE_TARGET_SELF] = {self.entity}
-    target_behaviour[BATTLE_TARGET_SINGLE_PARTY_MEMBER] = ally_target
+    target_behaviour[BATTLE_TARGET_SINGLE_PARTY_MEMBER] = {ally_target}
     target_behaviour[BATTLE_TARGET_ALL_PARTY_MEMBER] = target_getter:getTargets(self.entity, BATTLE_TARGET_ALL_PARTY_MEMBER)[1]
-    target_behaviour[BATTLE_TARGET_SINGLE_ENEMY] = enemy_target
+    target_behaviour[BATTLE_TARGET_SINGLE_ENEMY] = {enemy_target}
     target_behaviour[BATTLE_TARGET_ALL_ENEMIES] = target_getter:getTargets(self.entity, BATTLE_TARGET_ALL_ENEMIES)[1]
 
     local entities = {}
