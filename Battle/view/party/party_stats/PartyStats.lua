@@ -135,7 +135,7 @@ function PartyStats.drawStatText(self, entity, offset_y)
         love.graphics.clear()
 
         -- Set font
-        love.graphics.setFont(BATTLE_GUARD_FONT)
+        love.graphics.setFont(BATTLE_STATBAR_FONT)
 
         -- Draw Hp
         love.graphics.setColor(self.hp_text_color)
