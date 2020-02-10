@@ -20,3 +20,5 @@ BATTLE_TARGET_SELECTED_ICON = RESOURCES_PATH .. "/Battle/Miscelaneous/Icons/Targ
 BATTLE_THEME_1 = love.audio.newSource(RESOURCES_PATH .. "/sounds/Battle/battle_musicv1.wav", "stream")
 BATTLE_THEME_1:setLooping(true)
 BATTLE_THEME_1:setVolume(0.5)
+
+BATTLE_GUARD_ICON = RESOURCES_PATH .. "/Battle/Miscelaneous/Icons/GuardShield.png"

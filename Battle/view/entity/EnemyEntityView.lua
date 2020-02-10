@@ -2,6 +2,7 @@ require "lib.classes.class"
 require "Global.LOVEWrapper.LOVEWrapper"
 require "Global.fonts"
 require "Battle.shaders"
+require "Battle.consts"
 local SpriteFactory = require("Global.LOVEWrapper.sprite.SpriteFactory")
 local EntityView = require("Battle.view.entity.EntityView")
 --------------------------------------------------------------------------------------------------------
@@ -11,7 +12,7 @@ local EntityView = require("Battle.view.entity.EntityView")
 -- param: entity:Entity -> The entity to visualize
 -- Class made to generate the entity view
 local EnemyEntityView = extend(EntityView, function(self, entity, default_x, default_y)
-  self.guard_canvas = love.graphics.newCanvas()
+  self.guard_icon = SpriteFactory.getRegularRectSprite(BATTLE_GUARD_ICON, 32, 32, 1)
 end,
 
 function(entity, default_x, default_y)
@@ -29,22 +30,11 @@ end
 function EnemyEntityView.drawGuard(self)
   local guard = self.entity:getCurrentGuard()
 
-  local width = guard
-
-  self.guard_canvas:renderTo(function()
-    love.graphics.clear()
-    love.graphics.setColor(1,1,1,1)
-    love.graphics.setFont(BATTLE_GUARD_FONT)
-    love.graphics.printf(guard, getRelativePosX(self.current_x - self.sprite_width/2), getRelativePosY(self.current_y + self.sprite_height*(1/2) + 2), self.sprite_width, "center")
-  end)
-
-  love.graphics.setShader(OUTLINE_SHADER)
-  OUTLINE_SHADER:send("outline_color", {0,0,0,1})
-  OUTLINE_SHADER:send("outline_size", 2)
-
-  love.graphics.draw(self.guard_canvas, 0, 0)
-
-  love.graphics.setShader()
+  self.guard_icon:draw(getRelativePosX(self.current_x - self.sprite_width/4 + 15), getRelativePosY(self.current_y + self.sprite_height*(1/2) - 4), getScale(), getScale())
+  love.graphics.setFont(BATTLE_GUARD_FONT)
+  love.graphics.setColor(51/255,77/255,96/255,1)
+  love.graphics.printf(guard, getRelativePosX(self.current_x - self.sprite_width/2), getRelativePosY(self.current_y + self.sprite_height*(1/2) + 8), self.sprite_width, "center", 0, getScale(), getScale())
+  love.graphics.setColor(1,1,1,1)
 end
 
 
