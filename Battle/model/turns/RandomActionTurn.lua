@@ -40,9 +40,9 @@ function RandomActionTurn.start(self)
 
     local target_behaviour = {}
     target_behaviour[BATTLE_TARGET_SELF] = {self.entity}
-    target_behaviour[BATTLE_TARGET_SINGLE_PARTY_MEMBER] = ally_target
+    target_behaviour[BATTLE_TARGET_SINGLE_PARTY_MEMBER] = {ally_target}
     target_behaviour[BATTLE_TARGET_ALL_PARTY_MEMBER] = target_getter:getTargets(self.entity, BATTLE_TARGET_ALL_PARTY_MEMBER)[1]
-    target_behaviour[BATTLE_TARGET_SINGLE_ENEMY] = enemy_target
+    target_behaviour[BATTLE_TARGET_SINGLE_ENEMY] = {enemy_target}
     target_behaviour[BATTLE_TARGET_ALL_ENEMIES] = target_getter:getTargets(self.entity, BATTLE_TARGET_ALL_ENEMIES)[1]
 
     local entities = {}
