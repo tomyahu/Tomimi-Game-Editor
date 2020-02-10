@@ -60,6 +60,27 @@ function NullGuard.readjustGuard(self)
     self.current_guard = (old_guard/old_max_guard)*self.max_guard
 end
 
+-- smallRecovery: None -> None
+-- does nothing
+function NullGuard.smallRecovery(self)
+end
+
+-- mediumRecovery: None -> None
+-- does nothing
+function NullGuard.mediumRecovery(self)
+end
+
+-- mediumRecovery: None -> None
+-- does nothing
+function NullGuard.fullRecovery(self)
+end
+
+
+-- smallRecover: None -> None
+-- does nothing
+function NullGuard.smallRecover(self)
+end
+
 -- getter
 function NullGuard.getCurrentGuard(self)
     return self.current_guard

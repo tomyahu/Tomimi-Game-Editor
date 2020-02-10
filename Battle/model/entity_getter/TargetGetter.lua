@@ -37,6 +37,7 @@ end
 -- This includes the every entity in the oposing party
 function TargetGetter.getTargetSingleEnemy(self, entity)
     local enemy_party_members = self:getEntityEnemyPartyMembers(entity)
+    enemy_party_members = self:_getNonDeadEntitiesFromEntityList(enemy_party_members)
     return self:getSingleTargetsFromEntityList(enemy_party_members)
 end
 
@@ -67,6 +68,17 @@ function TargetGetter.getTargetAllEnemies(self, entity)
     return {enemies}
 end
 
+-- _getNonDeadEntitiesFromEntityList: list(Entity) -> list(Entity)
+-- takes a list of entities and returns a list with the entities of that list that are not dead
+function TargetGetter._getNonDeadEntitiesFromEntityList(self, entity_list)
+    local aux = {}
+    for _, entity in pairs(entity_list) do
+        if entity:isAlive() then
+            table.insert(aux, entity)
+        end
+    end
+    return aux
+end
 
 
 return TargetGetter

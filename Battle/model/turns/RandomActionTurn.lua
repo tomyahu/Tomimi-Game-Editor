@@ -35,14 +35,16 @@ function RandomActionTurn.start(self)
 
     -- Choose random targets depending on the first action
     local target_getter = ctrl:getTargetGetter()
-    local enemy_target = target_getter:getEntityEnemyPartyMembers(self.entity)[math.random(1, (# target_getter:getEntityEnemyPartyMembers(self.entity)))]
-    local ally_target = target_getter:getEntityPartyMembers(self.entity)[math.random(1,(# target_getter:getEntityPartyMembers(self.entity)))]
+    local possible_enemy_targets = target_getter:getTargetSingleEnemy(self.entity)
+    local enemy_target = possible_enemy_targets[math.random(1, (# possible_enemy_targets))]
+    local possible_ally_targets = target_getter:getTargetSinglePartyMember(self.entity)
+    local ally_target = possible_ally_targets[math.random(1,(# possible_ally_targets))]
 
     local target_behaviour = {}
     target_behaviour[BATTLE_TARGET_SELF] = {self.entity}
-    target_behaviour[BATTLE_TARGET_SINGLE_PARTY_MEMBER] = {ally_target}
+    target_behaviour[BATTLE_TARGET_SINGLE_PARTY_MEMBER] = ally_target
     target_behaviour[BATTLE_TARGET_ALL_PARTY_MEMBER] = target_getter:getTargets(self.entity, BATTLE_TARGET_ALL_PARTY_MEMBER)[1]
-    target_behaviour[BATTLE_TARGET_SINGLE_ENEMY] = {enemy_target}
+    target_behaviour[BATTLE_TARGET_SINGLE_ENEMY] = enemy_target
     target_behaviour[BATTLE_TARGET_ALL_ENEMIES] = target_getter:getTargets(self.entity, BATTLE_TARGET_ALL_ENEMIES)[1]
 
     local entities = {}
