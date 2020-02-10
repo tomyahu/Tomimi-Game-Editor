@@ -26,9 +26,7 @@ function RandomActionTurn.start(self)
     local start_actions = action_sequence_creator:getStartActions()
     action_sequence_creator:addAction(start_actions[math.random(1, (# start_actions))])
     while not (action_sequence_creator:getLastAction():isEndAction()) do
-        local last_action_type = action_sequence_creator:getLastAction():getEndPiece()
-        local next_action = action_sequence_creator:getActionsWithStartType(last_action_type)
-        local compatible_actions = action_sequence_creator:addAction(next_action)
+        local compatible_actions = action_sequence_creator:getActionsCompatibleWithLastAction()
         action_sequence_creator:addAction(compatible_actions[math.random(1, (# compatible_actions))])
     end
 
