@@ -9,6 +9,8 @@ end
 -- Love Default Conf
 love.graphics.setDefaultFilter('nearest', 'nearest')
 
+love.audio.setVolume(0)
+
 
 local initial_app = require( APPS[INITIAL_APP] )
 

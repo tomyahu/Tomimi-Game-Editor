@@ -11,6 +11,14 @@ local PartyStats = class(function(self, entities)
     self.mp_color = {0.1,0.4,1.0,1}
     self.guard_color = {0.5,0.5,0.5,1}
 
+    self.max_hp_color = {0.2,0.3,0.06,1}
+    self.max_mp_color = {0.08,0.25,0.35,1}
+    self.max_guard_color = {0.25,0.25,0.25,1}
+
+    self.hp_text_color = {0.15,0.3,0.03,1}
+    self.mp_text_color = {0.02,0.15,0.6,1}
+    self.guard_text_color = {0.25,0.25,0.25,1}
+
     local portrait_background_path = RESOURCES_PATH .. "/Battle/Miscelaneous/PortraitContainers/PortraitStatContainer.png"
     self.entity_portrait_background = SpriteFactory.getRegularRectSprite(portrait_background_path, 200, 100, 1)
     self.entities = entities
@@ -24,7 +32,7 @@ local PartyStats = class(function(self, entities)
     self.initial_offset_x = 0
 
     self.offset_x_stat_bars = 132
-    self.offset_y_stat_bars = 37
+    self.offset_y_stat_bars = 36
     self.offset_x_portraits = 10
     self.offset_y_portraits = 16
 
@@ -32,6 +40,7 @@ local PartyStats = class(function(self, entities)
     self.space_y = 19
 
     self.canvas = love.graphics.newCanvas( getScale(), 18*getScale())
+    self.aux_canvas = love.graphics.newCanvas()
 end)
 
 -- draw: None -> None
@@ -39,6 +48,7 @@ end)
 function PartyStats.draw(self)
     local initial_offset_y = self.initial_offset_y
     local offset_y = initial_offset_y
+
 
     for i = 1, (# self.entities) do
         -- Draw Stats
@@ -56,35 +66,98 @@ end
 -- drawEntityStats: Entity, int -> None
 -- draws the entity stats
 function PartyStats.drawEntityStats(self, entity, offset_y)
+    self:drawStatBars(entity, offset_y)
+    self:drawStatText(entity, offset_y)
+end
+
+function PartyStats.drawStatBars(self, entity, offset_y)
     local hp = entity:getHp()
     local mp = entity:getMp()
     local guard = entity:getCurrentGuard()
 
+    local max_hp = entity:getMaxHp()
+    local max_mp = entity:getMaxMp()
+    local max_guard = entity:getMaxGuard()
+
     -- create shader for stat bars
     love.graphics.setShader(STAT_BAR_SHADER)
 
+    -- Draw Bars
     -- Draw Hp
-    local width = hp*10
+    local width = max_hp*10
 
+    love.graphics.setColor(self.max_hp_color)
+    love.graphics.draw(self.canvas, getRelativePosX(self.offset_x_stat_bars), getRelativePosY(offset_y), 0, width, 1)
+
+    width = hp*10
     love.graphics.setColor(self.hp_color)
     love.graphics.draw(self.canvas, getRelativePosX(self.offset_x_stat_bars), getRelativePosY(offset_y), 0, width, 1)
 
     -- Draw Mp
     offset_y = offset_y + self.space_y
-    local width = mp*10
 
+    width = max_mp*10
+    love.graphics.setColor(self.max_mp_color)
+    love.graphics.draw(self.canvas, getRelativePosX(self.offset_x_stat_bars), getRelativePosY(offset_y), 0, width, 1)
+
+    width = mp*10
     love.graphics.setColor(self.mp_color)
     love.graphics.draw(self.canvas, getRelativePosX(self.offset_x_stat_bars), getRelativePosY(offset_y), 0, width, 1)
 
     -- Draw Guard
     offset_y = offset_y + self.space_y
-    local width = guard*5
 
+    width = max_guard*5
+    love.graphics.setColor(self.max_guard_color)
+    love.graphics.draw(self.canvas, getRelativePosX(self.offset_x_stat_bars), getRelativePosY(offset_y), 0, width, 1)
+
+    width = guard*5
     love.graphics.setColor(self.guard_color)
     love.graphics.draw(self.canvas, getRelativePosX(self.offset_x_stat_bars), getRelativePosY(offset_y), 0, width, 1)
 
     love.graphics.setColor(1,1,1,1)
     love.graphics.setShader()
+end
+
+function PartyStats.drawStatText(self, entity, offset_y)
+    local hp = entity:getHp()
+    local mp = entity:getMp()
+    local guard = entity:getCurrentGuard()
+
+    local max_hp = entity:getMaxHp()
+    local max_mp = entity:getMaxMp()
+    local max_guard = entity:getMaxGuard()
+
+    local draw_x = self.offset_x_stat_bars + 3
+    offset_y = offset_y + 2
+
+    self.aux_canvas:renderTo(function()
+        love.graphics.clear()
+
+        -- Set font
+        love.graphics.setFont(BATTLE_GUARD_FONT)
+
+        -- Draw Hp
+        love.graphics.setColor(self.hp_text_color)
+        love.graphics.printf(hp .. "/" .. max_hp, getRelativePosX(draw_x), getRelativePosY(offset_y), 100*getScale(), "left", 0, getScale())
+
+        -- Draw Mp
+        offset_y = offset_y + self.space_y
+        love.graphics.setColor(self.mp_text_color)
+        love.graphics.printf(mp .. "/" .. max_mp, getRelativePosX(draw_x), getRelativePosY(offset_y), 100*getScale(), "left", 0, getScale())
+
+        -- Draw Guard
+        offset_y = offset_y + self.space_y
+        love.graphics.setColor(self.guard_text_color)
+        love.graphics.printf(guard .. "/" .. max_guard, getRelativePosX(draw_x), getRelativePosY(offset_y), 100*getScale(), "left", 0, getScale())
+        love.graphics.setColor(1,1,1,1)
+
+        love.graphics.setShader()
+    end)
+
+    love.graphics.draw(self.aux_canvas, 0, 0)
+
+
 end
 
 return PartyStats
