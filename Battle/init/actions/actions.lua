@@ -58,18 +58,17 @@ end)
 table.insert(actions, action_build:getAction())
 
 -- 4. Lets Go! (Mac Ability) -------------------------------------------------------------------------------------------
-action_build:reset()
-action_build:setId(4)
-action_build:setName("Lets Go!")
-action_build:setDescription("Jumps at the target and atempts a vetical slash.")
-action_build:setStartPiece(BATTLE_ACTION_PIECE_BORDER)
-action_build:setEndPiece(BATTLE_ACTION_PIECE_T)
-action_build:setTarget(BATTLE_TARGET_SINGLE_ENEMY)
-action_build:setType(BATTLE_ACTION_ATTACK_TYPE)
-action_build:setActionFunction( function(source_entity, target_entity)
-    print("Lets Go!")
-end)
-table.insert(actions, action_build:getAction())
+regular_attack_action_build:reset()
+regular_attack_action_build:setId(4)
+regular_attack_action_build:setName("Lets Go!")
+regular_attack_action_build:setDescription("Jumps at the target and atempts a vetical slash.")
+regular_attack_action_build:setStartPiece(BATTLE_ACTION_PIECE_BORDER)
+regular_attack_action_build:setEndPiece(BATTLE_ACTION_PIECE_T)
+regular_attack_action_build:setTarget(BATTLE_TARGET_SINGLE_ENEMY)
+regular_attack_action_build:setGuardDamage(2)
+regular_attack_action_build:setDirectDamage(5)
+
+table.insert(actions, regular_attack_action_build:getAction())
 
 -- 5. Sinister Slash (Mac Ability) -------------------------------------------------------------------------------------
 regular_attack_action_build:reset()
@@ -79,8 +78,8 @@ regular_attack_action_build:setDescription("A mysterious strike that comes from 
 regular_attack_action_build:setStartPiece(BATTLE_ACTION_PIECE_T)
 regular_attack_action_build:setEndPiece(BATTLE_ACTION_PIECE_C)
 regular_attack_action_build:setTarget(BATTLE_TARGET_SINGLE_ENEMY)
-regular_attack_action_build:setGuardDamage(100)
-regular_attack_action_build:setDirectDamage(100)
+regular_attack_action_build:setGuardDamage(1)
+regular_attack_action_build:setDirectDamage(5)
 table.insert(actions, regular_attack_action_build:getAction())
 
 -- 6. Dragon Horn (Mac Ability) ----------------------------------------------------------------------------------------
@@ -91,8 +90,8 @@ regular_attack_action_build:setDescription("A direct strike from the center tilt
 regular_attack_action_build:setStartPiece(BATTLE_ACTION_PIECE_C)
 regular_attack_action_build:setEndPiece(BATTLE_ACTION_PIECE_BORDER)
 regular_attack_action_build:setTarget(BATTLE_TARGET_SINGLE_ENEMY)
-regular_attack_action_build:setGuardDamage(100)
-regular_attack_action_build:setDirectDamage(100)
+regular_attack_action_build:setGuardDamage(3)
+regular_attack_action_build:setDirectDamage(5)
 table.insert(actions, regular_attack_action_build:getAction())
 
 -- 7. True Escape ------------------------------------------------------------------------------------------------------

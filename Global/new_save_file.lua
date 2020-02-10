@@ -33,9 +33,9 @@ save_file["Battle"]["PlayerPartyMetadata"][1] = player1
 save_file["Battle"]["PlayerPartyMetadata"][3] = player2
 
 save_file["Battle"]["EnemyPartyMetadata"] = {}
-save_file["Battle"]["EnemyPartyMetadata"][1] = player1
-save_file["Battle"]["EnemyPartyMetadata"][2] = player1
-save_file["Battle"]["EnemyPartyMetadata"][3] = player1
+save_file["Battle"]["EnemyPartyMetadata"][1] = player3
+save_file["Battle"]["EnemyPartyMetadata"][2] = player3
+save_file["Battle"]["EnemyPartyMetadata"][3] = player3
 
 save_file["Battle"]["Environment"] = "debug_environment1"
 
