@@ -17,6 +17,9 @@ vec4 effect( vec4 color, Image tex, vec2 texture_coords, vec2 screen_coords ){
     if (texture_color.w == 0){
         texture_color = outline_color* vec4(1,1,1,max_outline_alpha);
     }
+    else {
+        texture_color = texture_color*color;
+    }
 
-    return color*texture_color;
+    return texture_color;
 }

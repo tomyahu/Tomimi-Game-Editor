@@ -15,7 +15,7 @@ local player1 = {}
 player1["id"] = 2
 player1["meta"] = {}
 player1["meta"]["hp"] = 3
-player1["meta"]["mp"] = 0
+player1["meta"]["mp"] = 5
 
 local player2 = {}
 player2["id"] = 1

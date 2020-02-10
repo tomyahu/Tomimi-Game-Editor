@@ -22,7 +22,7 @@ function KnightGuard.getMaxGuard(self)
 
     local aux = math.pow(str,2) * res / 10
 
-    return 0.3*aux + 0.7 * math.pow(aux, math.sqrt(rct/95))
+    return math.floor(0.3*aux + 0.7 * math.pow(aux, math.sqrt(rct/95)))
 end
 
 return KnightGuard
