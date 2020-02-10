@@ -37,7 +37,6 @@ function RegularAttackAction.activate(self, source_entity, target_entity, extra)
         else
             entity:getAttackedGuard(self.guard_damage)
         end
-        print(entity:getHp())
     end
 end
 
