@@ -18,7 +18,11 @@ function TurnManager.advanceTurn(self)
     end
     self.current_turn = ( self.current_turn % (# self.turns) ) + 1
 
-    self:getCurrentTurn():start()
+    if self:getCurrentTurn():getEntity():isAlive() then
+        self:getCurrentTurn():start()
+    else
+        self:advanceTurn()
+    end
 end
 
 -- getCurrentTurn: None -> Turn
