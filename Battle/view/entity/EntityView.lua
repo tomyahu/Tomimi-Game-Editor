@@ -53,7 +53,7 @@ function EntityView.drawCharacter(self)
 
         love.graphics.setShader(OUTLINE_SHADER)
         OUTLINE_SHADER:send("outline_color", {1,1,1,1})
-        OUTLINE_SHADER:send("outline_size", getScale()*4/GAME_WIDTH)
+        OUTLINE_SHADER:send("outline_size", 4)
 
         love.graphics.draw(self.canvas, 0, 0)
         love.graphics.setShader()
