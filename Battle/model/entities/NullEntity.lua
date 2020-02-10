@@ -11,7 +11,6 @@ local NullEntity = class(function(self)
     -- Stats
     self.max_hp = 1
     self.hp = 1
-    self.is_alive = true
     
     self.strength = 0
     self.agility = 0
@@ -58,7 +57,7 @@ end)
 -- getHealed: int -> None
 -- The entity recovers points to their hp if its alive
 function NullEntity.getHealed(self, points)
-  if self.is_alive then
+  if self:isAlive() then
     self.hp = math.min(self.max_hp, self.hp + points)
   end
 end
@@ -66,9 +65,6 @@ end
 -- getAttackedDirectly: int -> None
 -- The entity loses hp equal to damage
 function NullEntity.getAttackedDirectly(self, damage)
-    if (self.hp - damage) <= 0 then
-      self.is_alive = false
-    end
     self.hp = math.max(0, self.hp - damage)
 end
 
@@ -114,7 +110,6 @@ end
 -- revive: None -> None
 -- The entity is revived and their hp is setted to 1 if it was less than one
 function NullEntity.revive(self)
-    self.is_alive = true
     self.hp = math.max(1, self.hp)
 end
 
@@ -122,6 +117,16 @@ end
 -- Checks if guard is broken
 function NullEntity.isGuardBroken(self)
     return self.guard:isGuardBroken()
+end
+
+-- restOneTurn: None -> None
+-- Recovers a small amount of stats for the turn
+function NullEntity.restOneTurn(self)
+    if self.guard:isGuardBroken() then
+        self.guard:mediumRecovery()
+    else
+        self.guard:smallRecovery()
+    end
 end
 
 -- getters
@@ -234,7 +239,7 @@ function NullEntity.getGuard(self)
 end
 
 function NullEntity.isAlive(self)
-  return self.is_alive
+  return self.hp ~= 0
 end
 
 function NullEntity.getActions(self)
