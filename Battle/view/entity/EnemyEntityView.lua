@@ -19,6 +19,8 @@ function(entity, default_x, default_y)
   return EntityView.new(entity, default_x, default_y)
 end)
 
+-- draw: None -> None
+-- Draws the enemy entity and their guard at their feet
 function EnemyEntityView.draw(self)
   self.sprite:draw(getRelativePosX(self.current_x + self.sprite_width/2), getRelativePosY(self.current_y - self.sprite_height/2), -getScale(), getScale())
 
