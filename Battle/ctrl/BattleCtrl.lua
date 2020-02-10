@@ -102,6 +102,18 @@ function BattleCtrl.stop(self)
 
 end
 
+-- doGameOverSequence: None -> None
+-- Shows the game over screen and returns to the main menu
+-- TODO: Implement this
+function BattleCtrl.doGameOverSequence(self)
+end
+
+-- doVictorySequence: None -> None
+-- Shows the victory screen, awards the party with some battle rewards and returns to the Overworld App
+-- TODO: Implement this
+function BattleCtrl.doVictorySequence(self)
+end
+
 --getters
 function BattleCtrl.getTurnManager(self)
     return self.turn_manager
