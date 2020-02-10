@@ -11,13 +11,15 @@ local PartyStats = class(function(self, entities)
     self.mp_color = {0.1,0.4,1.0,1}
     self.guard_color = {0.5,0.5,0.5,1}
 
-    self.max_hp_color = {0.2,0.3,0.06,1}
-    self.max_mp_color = {0.08,0.25,0.35,1}
-    self.max_guard_color = {0.25,0.25,0.25,1}
+    self.max_hp_color = {0.2,0.3,0.06,0.8}
+    self.max_mp_color = {0.08,0.25,0.35,0.8}
+    self.max_guard_color = {0.25,0.25,0.25,0.8}
 
     self.hp_text_color = {0.15,0.3,0.03,1}
     self.mp_text_color = {0.02,0.15,0.6,1}
     self.guard_text_color = {0.25,0.25,0.25,1}
+
+    self.bar_max_width = 150
 
     local portrait_background_path = RESOURCES_PATH .. "/Battle/Miscelaneous/PortraitContainers/PortraitStatContainer.png"
     self.entity_portrait_background = SpriteFactory.getRegularRectSprite(portrait_background_path, 200, 100, 1)
@@ -64,12 +66,14 @@ function PartyStats.draw(self)
 end
 
 -- drawEntityStats: Entity, int -> None
--- draws the entity stats
+-- draws the entity stats (stat bars and numbers)
 function PartyStats.drawEntityStats(self, entity, offset_y)
     self:drawStatBars(entity, offset_y)
     self:drawStatText(entity, offset_y)
 end
 
+-- drawStatBars: Entity, int -> None
+-- draws the entity's hp, max hp, mp, max mp, guard and max guard as bars next to the portrait container
 function PartyStats.drawStatBars(self, entity, offset_y)
     local hp = entity:getHp()
     local mp = entity:getMp()
@@ -84,34 +88,34 @@ function PartyStats.drawStatBars(self, entity, offset_y)
 
     -- Draw Bars
     -- Draw Hp
-    local width = max_hp*10
+    local width = self.bar_max_width
 
     love.graphics.setColor(self.max_hp_color)
     love.graphics.draw(self.canvas, getRelativePosX(self.offset_x_stat_bars), getRelativePosY(offset_y), 0, width, 1)
 
-    width = hp*10
+    width = hp/max_hp*self.bar_max_width
     love.graphics.setColor(self.hp_color)
     love.graphics.draw(self.canvas, getRelativePosX(self.offset_x_stat_bars), getRelativePosY(offset_y), 0, width, 1)
 
     -- Draw Mp
     offset_y = offset_y + self.space_y
 
-    width = max_mp*10
+    width = self.bar_max_width
     love.graphics.setColor(self.max_mp_color)
     love.graphics.draw(self.canvas, getRelativePosX(self.offset_x_stat_bars), getRelativePosY(offset_y), 0, width, 1)
 
-    width = mp*10
+    width = mp/max_mp*self.bar_max_width
     love.graphics.setColor(self.mp_color)
     love.graphics.draw(self.canvas, getRelativePosX(self.offset_x_stat_bars), getRelativePosY(offset_y), 0, width, 1)
 
     -- Draw Guard
     offset_y = offset_y + self.space_y
 
-    width = max_guard*5
+    width = self.bar_max_width
     love.graphics.setColor(self.max_guard_color)
     love.graphics.draw(self.canvas, getRelativePosX(self.offset_x_stat_bars), getRelativePosY(offset_y), 0, width, 1)
 
-    width = guard*5
+    width = guard/max_guard*self.bar_max_width
     love.graphics.setColor(self.guard_color)
     love.graphics.draw(self.canvas, getRelativePosX(self.offset_x_stat_bars), getRelativePosY(offset_y), 0, width, 1)
 
@@ -119,6 +123,8 @@ function PartyStats.drawStatBars(self, entity, offset_y)
     love.graphics.setShader()
 end
 
+-- drawStatBars: Entity, int -> None
+-- draws the entity's hp, max hp, mp, max mp, guard and max guard as text next to the portrait container
 function PartyStats.drawStatText(self, entity, offset_y)
     local hp = entity:getHp()
     local mp = entity:getMp()
