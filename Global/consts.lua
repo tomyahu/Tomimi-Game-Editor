@@ -23,6 +23,7 @@ APPS = {
 INITIAL_APP = "TitleMenu"
 
 TEST = false
+SILENCE_DEV_MODE = true
 
 GLOBAL_CONTEXT_PATH = "globals.json"
 
