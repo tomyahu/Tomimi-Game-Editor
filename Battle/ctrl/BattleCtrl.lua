@@ -104,8 +104,8 @@ end
 
 -- doGameOverSequence: None -> None
 -- Shows the game over screen and returns to the main menu
--- TODO: Implement this
 function BattleCtrl.doGameOverSequence(self)
+    application:appChange("GameOverMenu")
 end
 
 -- doVictorySequence: None -> None
