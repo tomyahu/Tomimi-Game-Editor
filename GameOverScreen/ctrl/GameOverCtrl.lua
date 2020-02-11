@@ -1,9 +1,9 @@
 require "lib.classes.class"
 require "Global.controls"
 require "Global.application.application"
-local MenuCtrl = require "Menu.ctrl.MenuCtrl"
-local DefaultMenuBuilder = require "Menu.model.menues.DefaultMenuBuilder"
-local SingleActionMenuState = require "Menu.model.menuStates.SingleActionMenuState"
+local MenuCtrl = require("Menu.ctrl.MenuCtrl")
+local DefaultMenuBuilder = require("Menu.model.menues.DefaultMenuBuilder")
+local SingleActionMenuState = require("Menu.model.menuStates.SingleActionMenuState")
 --------------------------------------------------------------------------------------------------------
 
 -- class: GameOverCtrl
