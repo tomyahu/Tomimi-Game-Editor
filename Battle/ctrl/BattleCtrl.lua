@@ -11,6 +11,8 @@ local PlayerTurn = require("Battle.model.turns.PlayerTurn")
 local RandomActionTurn = require("Battle.model.turns.RandomActionTurn")
 local MenuManager = require("Battle.ctrl.managers.MenuManager")
 local TargetGetter = require("Battle.model.entity_getter.TargetGetter")
+local DefaultMenuBuilder = require("Menu.model.menues.DefaultMenuBuilder")
+local SingleActionMenuState = require("Menu.model.menuStates.SingleActionMenuState")
 --------------------------------------------------------------------------------------------------------
 
 -- class: BattleCtrl
@@ -29,6 +31,13 @@ local BattleCtrl = extend(Ctrl, function(self, view)
     self.item_rewards = {}
 
     self.can_escape = true
+
+    local menu_build = DefaultMenuBuilder.new()
+    menu_build:addState(
+        SingleActionMenuState.new("Exit", ACTION_BUTTON_1, function (_)
+            application:appChange("Overworld")
+        end))
+    self.victory_menu = menu_build:getMenu()
 end,
 
 function(view)
@@ -120,11 +129,24 @@ end
 
 -- doVictorySequence: None -> None
 -- Shows the victory screen, awards the party with some battle rewards and returns to the Overworld App
--- TODO: Implement this
+
 function BattleCtrl.doVictorySequence(self)
-    -- TODO: Set menu with only accept state to go to the next app
-    -- TODO: Add rewards to items
-    application:appChange("Overworld")
+    local save = application:getCurrentSave()
+    local inventory = save["Items"]
+
+    -- Set menu with only accept state to go to the overworld app
+    self:getMenuManager():setCurrentMenu(self.victory_menu)
+
+    -- Add item rewards to items
+    for _, reward in pairs(self.item_rewards) do
+        if inventory[reward.id] == nil then
+            inventory[reward.id] = 0
+        end
+
+        inventory[reward.id] = inventory[reward.id] + reward.count
+    end
+
+    self.view:setVictoryScreen(self, true)
 end
 
 -- escape: None -> None

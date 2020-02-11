@@ -35,6 +35,8 @@ local BattleView = extend(View, function(self, menu_sprite_sheet_path, font, bat
 
     local menu_factory = MenuFactory.new(menu_sprite_sheet_path, font)
     self.menu_view = menu_factory:getBasicMenu(nil, 220, 380)
+
+    self.victory_screen = false
 end,
 
 function()
@@ -48,9 +50,20 @@ function BattleView.update(self, dt)
     self.message_displayer:update(dt)
 end
 
--- draw: context -> None
+-- draw: None -> None
 -- Draws the current scene
 function BattleView.draw(self)
+    -- TODO: If this scales refactor it to a state pattern
+    if self.victory_screen then
+        self:drawVictoryScreen()
+    else
+        self:drawBattle()
+    end
+end
+
+-- drawBattle: None -> None
+-- draws the entities during a battle
+function BattleView.drawBattle(self)
     self.background_view:draw()
     self.party_view:draw()
     self.enemy_party_view:draw()
@@ -62,12 +75,23 @@ function BattleView.draw(self)
     self.action_icons_displayer:draw()
 end
 
+-- drawVictoryScreen: None -> None
+-- Draws the victory screen
+function BattleView.drawVictoryScreen(self)
+    self.background_view:draw()
+    self.party_view:draw()
+
+    -- UI
+    -- TODO: Draw item rewards
+end
+
 -- setup: None -> None
 -- Sets up the local view vairables
 function BattleView.setup(self)
     self.message_displayer:reset()
     self.action_name_displayer:reset()
     self.sound_manager:playMusic()
+    self.victory_screen = false
 end
 
 -- setup: None -> None
@@ -100,6 +124,11 @@ end
 -- sets the environment given to the view´s background
 function BattleView.setBackground(self, environment)
   self.background_view = BackGroundView.new(environment:getSpritePath())
+end
+
+-- setter
+function BattleView.setVictoryScreen(self, victory_screen)
+    self.victory_screen = victory_screen
 end
 
 -- getters
