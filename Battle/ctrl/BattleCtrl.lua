@@ -26,6 +26,9 @@ local BattleCtrl = extend(Ctrl, function(self, view)
     self.target_getter = TargetGetter.new(self)
 
     self.environment = EnvironmentFactory.getEnvironmentWithKey("debug_environment1")
+    self.item_rewards = {}
+
+    self.can_escape = true
 end,
 
 function(view)
@@ -44,6 +47,12 @@ function BattleCtrl.setup(self)
     -- Set the enemy party entities
     local enemy_party_entities_metadata = save["Battle"]["EnemyPartyMetadata"]
     self.enemy_party = self:createPartyFromDict(enemy_party_entities_metadata)
+
+    -- Set the rewards when the battle is won
+    self.item_rewards = save["Battle"]["Rewards"]["Items"]
+
+    -- Set the values if the battle is escapable
+    self.can_escape = save["Battle"]["CanEscape"]
     
     -- Set the environment of the battle
     local environment_id = save["Battle"]["Environment"]
@@ -69,6 +78,7 @@ function BattleCtrl.setup(self)
     self.view:setEnemyParty(self.enemy_party)
     self.view:setBackground(self.environment)
 end
+
 -- callbackPressedKey: str -> None
 -- Function called when user presses a key
 function BattleCtrl.callbackPressedKey(self, key)
@@ -112,6 +122,17 @@ end
 -- Shows the victory screen, awards the party with some battle rewards and returns to the Overworld App
 -- TODO: Implement this
 function BattleCtrl.doVictorySequence(self)
+    -- TODO: Set menu with only accept state to go to the next app
+    -- TODO: Add rewards to items
+    application:appChange("Overworld")
+end
+
+-- escape: None -> None
+-- escapes the battle if the battle is escapable
+function BattleCtrl.escape(self)
+    if self.canEscape then
+        self:getTurnManager():setBattleOver(true)
+    end
 end
 
 --getters
@@ -137,6 +158,10 @@ end
 
 function BattleCtrl.getTargetGetter(self)
     return self.target_getter
+end
+
+function BattleCtrl.canEscape(self)
+    return self.canEscape
 end
 
 return BattleCtrl
