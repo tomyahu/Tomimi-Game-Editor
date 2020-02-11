@@ -186,4 +186,9 @@ function BattleCtrl.canEscape(self)
     return self.canEscape
 end
 
+function BattleCtrl.getItemRewards(self)
+    return self.item_rewards
+end
+
+
 return BattleCtrl

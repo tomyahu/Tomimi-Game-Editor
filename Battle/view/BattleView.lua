@@ -14,6 +14,7 @@ local EntityViewGetter = require("Battle.view.entity.EntityViewGetter")
 local ActionNameDisplayer = require("Battle.view.displayers.action_name_displayer.ActionNameDisplayer")
 local MessageDisplayer = require("Battle.view.displayers.message_displayer.MessageDisplayer")
 local ActionIconsDisplayer = require("Battle.view.displayers.action_icon_displayer.ActionIconsDisplayer")
+local ItemRewardDisplayer = require("Battle.view.displayers.reward_displayers.ItemRewardDisplayer")
 local SoundManager = require("Battle.view.managers.SoundManager")
 
 local MenuFactory = require("Battle.view.menues.MenuFactory")
@@ -32,6 +33,7 @@ local BattleView = extend(View, function(self, menu_sprite_sheet_path, font, bat
     self.action_name_displayer = ActionNameDisplayer.new(menu_sprite_sheet_path)
     self.message_displayer = MessageDisplayer.new(menu_sprite_sheet_path)
     self.action_icons_displayer = ActionIconsDisplayer.new()
+    self.item_reward_displayer = ItemRewardDisplayer.new(menu_sprite_sheet_path)
 
     local menu_factory = MenuFactory.new(menu_sprite_sheet_path, font)
     self.menu_view = menu_factory:getBasicMenu(nil, 220, 380)
@@ -82,7 +84,7 @@ function BattleView.drawVictoryScreen(self)
     self.party_view:draw()
 
     -- UI
-    -- TODO: Draw item rewards
+    self.item_reward_displayer:draw()
 end
 
 -- setup: None -> None
@@ -128,7 +130,10 @@ end
 
 -- setter
 function BattleView.setVictoryScreen(self, victory_screen)
+    local ctrl = application:getCurrentCtrl()
+
     self.victory_screen = victory_screen
+    self.item_reward_displayer:setItems(ctrl:getItemRewards())
 end
 
 -- getters
