@@ -74,4 +74,14 @@ function Party.getMembersWithoutEntity(self, entity)
     return members_without_entity
 end
 
+-- areThereAliveMembers: None -> Bool
+-- checks if every member is alive
+function Party.areThereAliveMembers(self)
+    local aux = false
+    for _, entity in pairs(self:getMembers()) do
+        aux = aux or entity:isAlive()
+    end
+    return aux
+end
+
 return Party

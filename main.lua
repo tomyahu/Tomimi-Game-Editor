@@ -1,6 +1,10 @@
 require "Global.consts"
 require "Global.application.application"
 ---------------------------------------------------------------------------
+if SILENCE_DEV_MODE then
+    love.audio.setVolume(0)
+end
+
 if TEST then
     require("test")
     love.event.quit()

@@ -11,6 +11,7 @@ local PartyView = class(function(self, party)
     self.party = party
 
     self.party_stats = PartyStats.new(party:getMembers())
+    self.hide_party_stats = false
 
     self.position1 = {}
     self.position1.x = 124/800*GAME_WIDTH
@@ -45,7 +46,9 @@ end)
 -- draw: None -> None
 -- Draws the entities of the party
 function PartyView.draw(self)
-    self.party_stats:draw()
+    if not self.hide_party_stats then
+        self.party_stats:draw()
+    end
 
     self:drawEntities()
 end
@@ -77,6 +80,11 @@ function PartyView.getEntityPositions(self)
         entity_positions[index] = entity_view:getCurrentPosition()
     end
     return entity_positions
+end
+
+-- setter
+function PartyView.setHidePartyStats(self, hide_party_stats)
+    self.hide_party_stats = hide_party_stats
 end
 
 return PartyView

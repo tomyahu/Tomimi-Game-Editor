@@ -27,8 +27,12 @@ end)
 function PauseMenuCtrl.getItemMenu(self, item_dict)
     local item_mbuild = ItemMenuBuilder.new()
 
-    for i, item in pairs(item_dict) do
-        if item.count > 0 then
+    for i, count in pairs(item_dict) do
+        local item = {}
+        item.id = i
+        item.count = count
+
+        if (count > 0) and (count ~= nil) then
             item_mbuild:addItem(item)
         end
     end

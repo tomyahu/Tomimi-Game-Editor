@@ -61,12 +61,28 @@ end
 -- endBattle: None -> None
 -- Ends the current battle
 function TurnManager.endBattle(self)
-    application:appChange("Overworld")
+    local ctrl = application:getCurrentCtrl()
+    local player_party = ctrl:getPlayerParty()
+    local enemy_party = ctrl:getEnemyParty()
+
+    if (not player_party:areThereAliveMembers()) then
+        -- Game Over Sequence
+        ctrl:doGameOverSequence()
+    elseif (not enemy_party:areThereAliveMembers()) then
+        -- Victory Sequence
+        ctrl:doVictorySequence()
+    else
+        application:appChange("Overworld")
+    end
 end
 
 -- getter
 function TurnManager.isBattleOver(self)
-    return self.battle_over
+    local ctrl = application:getCurrentCtrl()
+    local player_party = ctrl:getPlayerParty()
+    local enemy_party = ctrl:getEnemyParty()
+
+    return self.battle_over or (not player_party:areThereAliveMembers()) or (not enemy_party:areThereAliveMembers())
 end
 
 -- setter

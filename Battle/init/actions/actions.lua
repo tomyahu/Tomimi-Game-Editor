@@ -30,13 +30,12 @@ action_build:setStartPiece(BATTLE_ACTION_PIECE_BORDER)
 action_build:setEndPiece(BATTLE_ACTION_PIECE_BORDER)
 action_build:setTarget(BATTLE_TARGET_SELF)
 action_build:setActionFunction( function(source_entity, target_entity)
+    local ctrl = application:getCurrentCtrl()
     local view = application:getCurrentView()
     local message_displayer = view:getMessageDisplayer()
 
-    if math.random() < 0.25 then
-        local ctrl = application:getCurrentCtrl()
-        ctrl:getTurnManager():setBattleOver(true)
-
+    if math.random() < 0.25 and ctrl:canEscape() then
+        ctrl:escape()
         message_displayer:displayMessage("Successfully ran away.", 1)
     else
         message_displayer:displayMessage("Couldn't escape.", 1)
@@ -108,10 +107,12 @@ action_build:setActionFunction( function(source_entity, target_entity)
     local message_displayer = view:getMessageDisplayer()
 
     local ctrl = application:getCurrentCtrl()
-    ctrl:getTurnManager():setBattleOver(true)
-
-    print("True Escape")
-    message_displayer:displayMessage("Successfully ran away.", 1)
+    if ctrl:canEscape() then
+        ctrl:escape()
+        message_displayer:displayMessage("Successfully ran away.", 1)
+    else
+        message_displayer:displayMessage("This battle is un-escapable.", 1)
+    end
 end)
 table.insert(actions, action_build:getAction())
 
@@ -125,6 +126,18 @@ regular_attack_action_build:setEndPiece(BATTLE_ACTION_PIECE_BORDER)
 regular_attack_action_build:setTarget(BATTLE_TARGET_SINGLE_ENEMY)
 regular_attack_action_build:setGuardDamage(9999999)
 regular_attack_action_build:setDirectDamage(0)
+table.insert(actions, regular_attack_action_build:getAction())
+
+-- 9. Insta Killer ----------------------------------------------------------------------------------------------------
+regular_attack_action_build:reset()
+regular_attack_action_build:setId(9)
+regular_attack_action_build:setName("Insta Killer")
+regular_attack_action_build:setDescription("Defeats single target but does nothing to the target's guard, used for debug.")
+regular_attack_action_build:setStartPiece(BATTLE_ACTION_PIECE_BORDER)
+regular_attack_action_build:setEndPiece(BATTLE_ACTION_PIECE_BORDER)
+regular_attack_action_build:setTarget(BATTLE_TARGET_SINGLE_ENEMY)
+regular_attack_action_build:setGuardDamage(0)
+regular_attack_action_build:setDirectDamage(9999999)
 table.insert(actions, regular_attack_action_build:getAction())
 
 return actions

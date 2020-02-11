@@ -11,6 +11,8 @@ local PlayerTurn = require("Battle.model.turns.PlayerTurn")
 local RandomActionTurn = require("Battle.model.turns.RandomActionTurn")
 local MenuManager = require("Battle.ctrl.managers.MenuManager")
 local TargetGetter = require("Battle.model.entity_getter.TargetGetter")
+local DefaultMenuBuilder = require("Menu.model.menues.DefaultMenuBuilder")
+local SingleActionMenuState = require("Menu.model.menuStates.SingleActionMenuState")
 --------------------------------------------------------------------------------------------------------
 
 -- class: BattleCtrl
@@ -26,6 +28,16 @@ local BattleCtrl = extend(Ctrl, function(self, view)
     self.target_getter = TargetGetter.new(self)
 
     self.environment = EnvironmentFactory.getEnvironmentWithKey("debug_environment1")
+    self.item_rewards = {}
+
+    self.can_escape = true
+
+    local menu_build = DefaultMenuBuilder.new()
+    menu_build:addState(
+        SingleActionMenuState.new("Exit", ACTION_BUTTON_1, function (_)
+            application:appChange("Overworld")
+        end))
+    self.victory_menu = menu_build:getMenu()
 end,
 
 function(view)
@@ -44,6 +56,12 @@ function BattleCtrl.setup(self)
     -- Set the enemy party entities
     local enemy_party_entities_metadata = save["Battle"]["EnemyPartyMetadata"]
     self.enemy_party = self:createPartyFromDict(enemy_party_entities_metadata)
+
+    -- Set the rewards when the battle is won
+    self.item_rewards = save["Battle"]["Rewards"]["Items"]
+
+    -- Set the values if the battle is escapable
+    self.can_escape = save["Battle"]["CanEscape"]
     
     -- Set the environment of the battle
     local environment_id = save["Battle"]["Environment"]
@@ -69,6 +87,7 @@ function BattleCtrl.setup(self)
     self.view:setEnemyParty(self.enemy_party)
     self.view:setBackground(self.environment)
 end
+
 -- callbackPressedKey: str -> None
 -- Function called when user presses a key
 function BattleCtrl.callbackPressedKey(self, key)
@@ -102,6 +121,42 @@ function BattleCtrl.stop(self)
 
 end
 
+-- doGameOverSequence: None -> None
+-- Shows the game over screen and returns to the main menu
+function BattleCtrl.doGameOverSequence(self)
+    application:appChange("GameOverMenu")
+end
+
+-- doVictorySequence: None -> None
+-- Shows the victory screen, awards the party with some battle rewards and returns to the Overworld App
+
+function BattleCtrl.doVictorySequence(self)
+    local save = application:getCurrentSave()
+    local inventory = save["Items"]
+
+    -- Set menu with only accept state to go to the overworld app
+    self:getMenuManager():setCurrentMenu(self.victory_menu)
+
+    -- Add item rewards to items
+    for _, reward in pairs(self.item_rewards) do
+        if inventory[reward.id] == nil then
+            inventory[reward.id] = 0
+        end
+
+        inventory[reward.id] = inventory[reward.id] + reward.count
+    end
+
+    self.view:setVictoryScreen(self, true)
+end
+
+-- escape: None -> None
+-- escapes the battle if the battle is escapable
+function BattleCtrl.escape(self)
+    if self.canEscape then
+        self:getTurnManager():setBattleOver(true)
+    end
+end
+
 --getters
 function BattleCtrl.getTurnManager(self)
     return self.turn_manager
@@ -126,5 +181,14 @@ end
 function BattleCtrl.getTargetGetter(self)
     return self.target_getter
 end
+
+function BattleCtrl.canEscape(self)
+    return self.canEscape
+end
+
+function BattleCtrl.getItemRewards(self)
+    return self.item_rewards
+end
+
 
 return BattleCtrl

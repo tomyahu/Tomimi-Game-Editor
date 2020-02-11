@@ -1,5 +1,6 @@
 require "lib.classes.class"
 require "Global.controls"
+require "Global.application.application"
 
 local MenuState = require("Menu.model.menuStates.MenuState")
 local SubItemMenuFactory = require("PauseMenu.model.menues.SubItemMenuFactory")
@@ -7,16 +8,16 @@ local SubItemMenuFactory = require("PauseMenu.model.menues.SubItemMenuFactory")
 
 -- class: ItemMenuState
 -- param: item_data:dict -> a dictionary with the item's data
--- param: item_ptr:table -> a pointer to the item that the item state refers to
+-- param: item:table -> a table that represents the item that the item state refers to
 -- Creates a new Item Menu state that represents an item
-local ItemMenuState = extend(MenuState, function(self, item_data, item_ptr)
+local ItemMenuState = extend(MenuState, function(self, item_data, item)
     self.item_name = item_data["name"]
     self.item_description = item_data["description"]
     self.consumable = item_data["consumable"]
     self.abilities = item_data["abilities"]
     self.icon_path = item_data["icon"]
-    self.item_count = item_ptr.count
-    self.item_ptr = item_ptr
+    self.item_count = item.count
+    self.item_id = item.id
 
     self.item_action = item_data["action"]
 
@@ -61,7 +62,9 @@ end
 -- refresh: None -> None
 -- Refresh the items info on the inventory
 function ItemMenuState.refresh(self)
-    self.item_count = self.item_ptr.count
+    local save = application:getCurrentSave()
+    local inventory = save["Items"]
+    self.item_count = inventory[self.item_id]
 end
 
 -- getters
@@ -93,8 +96,8 @@ function ItemMenuState.getItemAction(self)
     return self.item_action
 end
 
-function ItemMenuState.getItemPtr(self)
-    return self.item_ptr
+function ItemMenuState.getItemId(self)
+    return self.item_id
 end
 
 function ItemMenuState.toString(self)

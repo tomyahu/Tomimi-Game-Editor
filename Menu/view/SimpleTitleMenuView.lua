@@ -28,9 +28,7 @@ end)
 -- Draws the menu options
 function SimpleTitleMenuView.draw(self)
     love.graphics.setFont( self.font )
-    local background = application:getFromLocalContext('background')
-    local backgroundpixelwidth, backgroundpixelheight = background:getPixelDimensions()
-    love.graphics.draw(background,getRelativePosX(0),getRelativePosY(0),0, getScale()/backgroundpixelwidth*GAME_WIDTH, getScale()/backgroundpixelheight*GAME_HEIGHT)
+    self:drawBackground()
     for index, option in pairs(self.menu.options) do
         if self.menu:getCurrentState() == option then
             love.graphics.print( "¾ " .. option:getName(), getRelativePosX(self.start_x), getRelativePosY(self.start_y + index*self.space_y), 0, getScale(), getScale())

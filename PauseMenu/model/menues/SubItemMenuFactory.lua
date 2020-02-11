@@ -53,7 +53,9 @@ function SubItemMenuFactory.getSubItemMenu(item_state)
         local item_function_exists = (item_state:getItemAction() ~= nil)
         local use_state = ContentMenuState.new("Use on " .. entity["name"], item_function_exists)
         use_state:addTransitionAction(ACTION_BUTTON_1, function(_)
-            local item = item_state:getItemPtr()
+            local save = application:getCurrentSave()
+            local inventory = save["Items"]
+            local item_id = item_state:getItemId()
 
             if item_function_exists then
                 local extra = {}
@@ -64,15 +66,17 @@ function SubItemMenuFactory.getSubItemMenu(item_state)
 
                 -- Decrease Items if consumable
                 if item_state:isConsumable() then
-                    item.count = math.max(0, item.count - 1)
+                    inventory[item_id] = math.max(0, inventory[item_id] - 1)
                     item_state:refresh()
                 end
             else
                 view:getSoundManager():playMenuCanceledSound()
             end
 
+            local item_count = item_state:getItemCount()
+
             -- Check if there are 0 items
-            if item.count <= 0 then
+            if item_count <= 0 then
                 -- Close current Menu (view)
                 view:setAuxiliaryViewVisibility(false)
 

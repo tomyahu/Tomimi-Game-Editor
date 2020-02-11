@@ -17,11 +17,13 @@ APPS = {
     ["PauseMenu"] = "PauseMenu._init",
     ["Overworld"] = "Overworld._debug_init",
     ["Movie"] = "Cutscenes.debug._debug_init",
-    ["Battle"] = "Battle.init._debug_init"
+    ["Battle"] = "Battle.init._debug_init",
+    ["GameOverMenu"] = "GameOverScreen._init"
 }
 INITIAL_APP = "TitleMenu"
 
 TEST = false
+SILENCE_DEV_MODE = true
 
 GLOBAL_CONTEXT_PATH = "globals.json"
 

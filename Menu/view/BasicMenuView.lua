@@ -11,10 +11,6 @@ require "Global.application.application"
 local BasicMenuView = extend(View, function(self, background_image_path, menu)
     self.background_path = background_image_path
     self.menu = menu
-end,
-
-function(background_image_path, menu)
-    return View:new()
 end)
 
 -- menu setter
@@ -25,9 +21,7 @@ end
 -- draw: context -> None
 -- Draws the menu options
 function BasicMenuView.draw(self, context)
-    local background = context['background']
-    local backgroundpixelwidth, backgroundpixelheight = background:getPixelDimensions()
-    love.graphics.draw(background,0,0,0, getScale() * GAME_WIDTH / backgroundpixelwidth, getScale()* GAME_HEIGHT / backgroundpixelheight)
+    self:drawBackground()
     for index, option in pairs(self.menu.options) do
         if self.menu:getCurrentState() == option then
             love.graphics.print( "¾ " .. option:getName(), getRelativePosX(300), getRelativePosY(300 + index*50), 0, 2*getScale(), 2*getScale())
@@ -41,6 +35,14 @@ end
 -- Saves the background path image in the local context
 function BasicMenuView.setup(self)
     application:setInLocalContext('background', love.graphics.newImage(self.background_path))
+end
+
+-- drawBackground: None -> None
+-- draws the application background
+function BasicMenuView.drawBackground(self)
+    local background = application:getFromLocalContext('background')
+    local backgroundpixelwidth, backgroundpixelheight = background:getPixelDimensions()
+    love.graphics.draw(background,0,0,0, getScale() * GAME_WIDTH / backgroundpixelwidth, getScale()* GAME_HEIGHT / backgroundpixelheight)
 end
 
 return BasicMenuView
