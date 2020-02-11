@@ -128,4 +128,16 @@ regular_attack_action_build:setGuardDamage(9999999)
 regular_attack_action_build:setDirectDamage(0)
 table.insert(actions, regular_attack_action_build:getAction())
 
+-- 9. Insta Killer ----------------------------------------------------------------------------------------------------
+regular_attack_action_build:reset()
+regular_attack_action_build:setId(9)
+regular_attack_action_build:setName("Insta Killer")
+regular_attack_action_build:setDescription("Defeats single target but does nothing to the target's guard, used for debug.")
+regular_attack_action_build:setStartPiece(BATTLE_ACTION_PIECE_BORDER)
+regular_attack_action_build:setEndPiece(BATTLE_ACTION_PIECE_BORDER)
+regular_attack_action_build:setTarget(BATTLE_TARGET_SINGLE_ENEMY)
+regular_attack_action_build:setGuardDamage(0)
+regular_attack_action_build:setDirectDamage(9999999)
+table.insert(actions, regular_attack_action_build:getAction())
+
 return actions
